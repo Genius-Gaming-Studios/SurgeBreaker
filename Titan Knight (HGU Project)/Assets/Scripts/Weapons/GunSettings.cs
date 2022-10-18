@@ -3,7 +3,7 @@
 
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Gun", menuName = "Weapons/Basic Gun", order = 1)]
+[CreateAssetMenu(fileName = "Gun", menuName = "Offensive/Basic Gun", order = 1)]
 public class GunSettings : ScriptableObject
 {
 

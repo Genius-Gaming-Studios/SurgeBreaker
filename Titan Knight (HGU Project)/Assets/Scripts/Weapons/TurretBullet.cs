@@ -9,16 +9,13 @@ using UnityEngine;
 
 public class TurretBullet : MonoBehaviour
 {
-    [Tooltip("Damage that the bullet deals.")] [SerializeField] [Range(1, 99)] public int damage = 5;
-    public Transform target;
-    [SerializeField] GameObject impactEffect;
+
+    private Transform target;
 
 
     [Header("Attributes")]
-
-    [SerializeField] [Range(10, 150)] float speed = 70f;
-    [SerializeField] [Range(2, 1000)] int power = 50;
-    [SerializeField] [Range(0, 20)] float explosionRadius = 0;
+    [Tooltip("The speed that the bullet travels.")] [SerializeField] [Range(10, 150)] float speed = 70f;
+    [Tooltip("The damage that the bullet does.")] [SerializeField] [Range(2, 1000)] int power = 50;
 
     public void Seek(Transform _target)
     {
@@ -44,18 +41,8 @@ public class TurretBullet : MonoBehaviour
 
     private void HitTarget()
     {
-        GameObject effectInst = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
+        Damage(target);
 
-        if (explosionRadius > 0f)
-        {
-            Explode();
-        }
-        else
-        {
-            Damage(target);
-        }
-
-        Destroy(effectInst, 5f);
         Destroy(gameObject);
     }
 
@@ -74,22 +61,4 @@ public class TurretBullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void Explode()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
-
-        foreach (Collider collider in colliders)
-        {
-            if (collider.tag == "Enemy")
-            {
-                Damage(collider.transform);
-            }
-        }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, explosionRadius);
-    }
 }

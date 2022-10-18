@@ -30,17 +30,32 @@ public class GameManager : MonoBehaviour
                 CombatCanvas.SetActive(false);
                 BuildCanvas.SetActive(true);
                 WeaponsParent.SetActive(false);
+
+                foreach (BuildNode node in FindObjectsOfType<BuildNode>())
+                {
+
+                    node.Enable(); // Show all node mesh renderes
+                } 
+
+
                 break;
+
             case GameMode.Combat:
                 CombatCanvas.SetActive(true);
                 BuildCanvas.SetActive(false);
                 WeaponsParent.SetActive(true);
 
+                foreach (BuildNode node in FindObjectsOfType<BuildNode>()) node.Disable(); // Hide all node mesh renderers
+
                 break;
+
             default: 
                 CombatCanvas.SetActive(false);
                 BuildCanvas.SetActive(false);
                 WeaponsParent.SetActive(false);
+
+
+                foreach (BuildNode node in FindObjectsOfType<BuildNode>()) node.Disable(); // Hide all node mesh renderers
 
                 break;
         }

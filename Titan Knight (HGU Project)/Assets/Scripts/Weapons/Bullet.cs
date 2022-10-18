@@ -45,6 +45,9 @@ public class Bullet : MonoBehaviour
         if (col.GetComponent<Enemy>())
         {
             col.GetComponent<Enemy>().TakeDamage(damage);
+            Destroy(this.gameObject);
         }
     }
+
+
 }
