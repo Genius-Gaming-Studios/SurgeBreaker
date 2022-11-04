@@ -49,6 +49,8 @@ public class PlayerManager : MonoBehaviour
     float verticalSpeed;
 
 
+    private bool isDead;
+
     //public static int playerHealth; // The active player health (always updating)
 
     [HideInInspector] public Vector3 movementDirection;
@@ -65,7 +67,10 @@ public class PlayerManager : MonoBehaviour
     {
         Debug.Log($"<color=\"red\"><b>Player has died!</b></color>");
 
-        Destroy(pModelRotation.gameObject);
+        isDead = true;
+
+
+        //Destroy(pModelRotation.gameObject); Discontinued
     }
 
 
@@ -77,6 +82,15 @@ public class PlayerManager : MonoBehaviour
         HandleSprinting();
 
         HandleJumping();
+
+
+        if (isDead)
+        {
+            pModelRotation.gameObject.SetActive(false);
+
+            controller.enabled = false;
+            this.enabled = false;
+        }
     }
 
 
@@ -138,6 +152,13 @@ public class PlayerManager : MonoBehaviour
         movementDirection = new Vector3(horizontalInput, 0, verticalInput); // WASD/Aw.Keys control
         movementDirection.Normalize();
 
+
+        if (movementDirection != Vector3.zero) // Handle the Player Model Rotion, which rotates the player model in the direction that the Player is moving in
+        {
+            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+            pModelRotation.transform.rotation = Quaternion.RotateTowards(pModelRotation.transform.rotation, toRotation, pModelRotSpeed * Time.deltaTime);
+        }
+
     }
 
     private void HandleVisuals()
@@ -147,13 +168,13 @@ public class PlayerManager : MonoBehaviour
         pCamera.transform.rotation = pCamera_Position.transform.rotation;
 
         
-        // Handle the Player Model Rotion, which rotates the player model in the direction that the Player is moving in
-        if (movementDirection != Vector3.zero) 
-        {
-            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-            pModelRotation.transform.rotation = Quaternion.RotateTowards(pModelRotation.transform.rotation, toRotation, pModelRotSpeed * Time.deltaTime);
+        //// Handle the Player Model Rotion, which rotates the player model in the direction that the Player is moving in
+        //if (movementDirection != Vector3.zero) 
+        //{
+        //    Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+        //    pModelRotation.transform.rotation = Quaternion.RotateTowards(pModelRotation.transform.rotation, toRotation, pModelRotSpeed * Time.deltaTime);
 
-        }
+        //}
 
 
         
