@@ -6,6 +6,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(Health))]
 [RequireComponent(typeof(CharacterController))]
 public class PlayerManager : MonoBehaviour
 {
@@ -17,8 +19,8 @@ public class PlayerManager : MonoBehaviour
     [Tooltip("Gravity's influence on the player")] [Range(10.0f, 50.0f)] public float gravity = 20.0f;
     [Tooltip("The speed in which the player rotates when input is recieved")] [SerializeField] [Range(300,1000)] float pModelRotSpeed = 800;
     [Space(5)]
-    [Tooltip("The amount of health that the player starts with. (default: 100)")] [SerializeField] private int startPlayerHealth; // Do not use this to reference current player health.
-    [Tooltip("A non-static reference for the current Player Health. (read values only!)")] public int currentPlayerHealth;
+    //[Tooltip("The amount of health that the player starts with. (default: 100)")] [SerializeField] private int startPlayerHealth = 100; // Do not use this to reference current player health.
+    //[Tooltip("A non-static reference for the current Player Health. (read values only!)")] public int currentPlayerHealth;
 
 
     [Space(10)]
@@ -40,69 +42,64 @@ public class PlayerManager : MonoBehaviour
     //private Vector3 moveDirection = Vector3.zero;
 
     private CharacterController controller;
+
+    private Health playerHealth; // This manages all player health.
+
     private bool isRunning;
     float verticalSpeed;
 
 
-    public static int playerHealth; // The active player health (always updating)
+    //public static int playerHealth; // The active player health (always updating)
 
     [HideInInspector] public Vector3 movementDirection;
 
-    private void Awake()
+    private void Awake() // Assign defaults
     {
         controller = GetComponent<CharacterController>();
+        playerHealth = GetComponent<Health>();
+
         Camera.main.fieldOfView = normalFOV;
-
-
-        playerHealth = startPlayerHealth; // Set the player health to the initial health value
-        Debug.Log($"<color=\"green\">Player health is: {playerHealth}%</color>");
     }
+
+    public void Die() // Automatically called when the player dies. This is just for the proto-stage of Titan Knights.
+    {
+        Debug.Log($"<color=\"red\"><b>Player has died!</b></color>");
+
+        Destroy(pModelRotation.gameObject);
+    }
+
 
     private void FixedUpdate()
     {
+        HandleVisuals();
 
-        #region Player Movement
+        HandleMovement();
+        HandleSprinting();
 
-        // Update position of player's "isometric" camera
-        pCamera.transform.position = pCamera_Position.transform.position;
-        pCamera.transform.rotation = pCamera_Position.transform.rotation;
-
-
-
-        if (Input.GetKey(KeyCode.LeftShift)) isRunning = true; else isRunning = false; // Handle sprinting with left shift
+        HandleJumping();
+    }
 
 
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
-        movementDirection = new Vector3(horizontalInput, 0, verticalInput); // WASD/Aw.Keys control
-        movementDirection.Normalize();
-
-
-
-       
-        if (movementDirection != Vector3.zero) // Handle the Player Model Rotion, which rotates the player model in the direction that the Player is moving in
-        {
-            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-            pModelRotation.transform.rotation = Quaternion.RotateTowards(pModelRotation.transform.rotation, toRotation, pModelRotSpeed * Time.deltaTime);
-        }
-
-
+    private void HandleJumping()
+    {
         // Check for standing on the ground
         if (controller.isGrounded)
         {
             verticalSpeed = -1; // Vertical speed is used to make the jumping smooth, instead of instantly teleporting player upwards
 
-            //Jumping
-            if (Input.GetButton("Jump"))
-                verticalSpeed = jumpPower;
-            
+            //Jumping has been discontinued.
+            //if (Input.GetButton("Jump"))
+            //    verticalSpeed = jumpPower;
+
         }
 
         verticalSpeed -= gravity * Time.deltaTime; // Apply gravity
         movementDirection.y = verticalSpeed;
 
+    }
 
+    private void HandleSprinting()
+    {
         // Handle sprinting 
         if (!isRunning) // Not sprinting
         {
@@ -117,30 +114,49 @@ public class PlayerManager : MonoBehaviour
                 Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, sprintingFOV, smoothFOVSpeed * Time.deltaTime);
 
 
-                controller.Move(new Vector3(
-                movementDirection.x * (speed * runSpeedMultiplier),
-                movementDirection.y * speed, /* Prevent the jump power from multiplying! */
-                movementDirection.z * (speed * runSpeedMultiplier)) * Time.deltaTime);
+            controller.Move(new Vector3(
+            movementDirection.x * (speed * runSpeedMultiplier),
+            movementDirection.y * speed, /* Prevent the jump power from multiplying! */
+            movementDirection.z * (speed * runSpeedMultiplier)) * Time.deltaTime);
         }
 
-        #endregion
-
-
-        #region Player Health
-
-        currentPlayerHealth = playerHealth;
-
-        if (playerHealth <= 0) Die();
-
-
-        #endregion
     }
 
 
-    private void Die() // Automatically called when the player dies. This is just for the proto-stage of Titan Knights.
-    {
-        Debug.Log($"<color=\"red\"><b>Player has died!</b></color>");
+    //private float horizontalInput, verticalInput;
 
-        Destroy(pModelRotation.gameObject); 
+    private void HandleMovement() // The movement will be completely rescripted in order to rotate movement grid by 45°
+    {
+
+        if (Input.GetKey(KeyCode.LeftShift)) isRunning = true; else isRunning = false; // Handle sprinting with left shift
+
+       
+        // Will be modified later
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        movementDirection = new Vector3(horizontalInput, 0, verticalInput); // WASD/Aw.Keys control
+        movementDirection.Normalize();
+
+    }
+
+    private void HandleVisuals()
+    {
+        // Update position of player's "isometric" camera
+        pCamera.transform.position = pCamera_Position.transform.position;
+        pCamera.transform.rotation = pCamera_Position.transform.rotation;
+
+        
+        // Handle the Player Model Rotion, which rotates the player model in the direction that the Player is moving in
+        if (movementDirection != Vector3.zero) 
+        {
+            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+            pModelRotation.transform.rotation = Quaternion.RotateTowards(pModelRotation.transform.rotation, toRotation, pModelRotSpeed * Time.deltaTime);
+
+        }
+
+
+        
+
     }
 }
