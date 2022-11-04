@@ -5,7 +5,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(CharacterController))]
@@ -38,6 +39,12 @@ public class PlayerManager : MonoBehaviour
     [Header("Camera References")]
     [Tooltip("This is the player camera. It has a Fixed Position!")] [SerializeField] GameObject pCamera; // The pos/rot of this will update with the pCamera_Position.
     [Tooltip("This is the game object that updates the position and rotation of the pCamera.")] [SerializeField] GameObject pCamera_Position;
+
+
+    [Space(5)]
+    [Header("Misc. References")]
+    [Tooltip("This is currently a Screen Space canvas, but later it should be modified to be a World Space canvas near the player.")][SerializeField] Slider healthDisplay;
+    [SerializeField] TextMeshProUGUI healthText;
 
     //private Vector3 moveDirection = Vector3.zero;
 
@@ -91,6 +98,12 @@ public class PlayerManager : MonoBehaviour
             controller.enabled = false;
             this.enabled = false;
         }
+
+
+        // Update temporary health display (shown for debug reasons)
+        healthDisplay.value = playerHealth.currentHealth;
+        healthDisplay.maxValue = playerHealth.startHealth;
+        healthText.text = $"{playerHealth.currentHealth}%";
     }
 
 

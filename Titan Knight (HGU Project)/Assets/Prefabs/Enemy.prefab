@@ -178,19 +178,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f71e650b5e5754895b1a439fd479b6ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 0
-  attackDamage: 5
-  attackRate: 1
-  sightRange: 0
-  attackRange: 0
-  patrolRange: 0
+  attackDamage: 1
+  attackRate: 0.5
+  sightRange: 20
+  attackRange: 1
+  patrolRange: 40
   GroundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   PlayerLayer:
     serializedVersion: 2
-    m_Bits: 0
-  agent: {fileID: 8113799589385001452}
+    m_Bits: 64
+  agent: {fileID: 0}
 --- !u!114 &3593406194526822721
 MonoBehaviour:
   m_ObjectHideFlags: 0

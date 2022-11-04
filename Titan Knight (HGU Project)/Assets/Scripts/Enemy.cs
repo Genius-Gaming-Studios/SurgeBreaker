@@ -14,10 +14,11 @@ public class Enemy : MonoBehaviour
 {
     [Header("Options")]
     //[SerializeField] int walkSpeed;
-    [Tooltip("The attack damage that this enemy does")] [SerializeField] int attackDamage = 5;
-    [Tooltip("This is the time between her attacks")] [SerializeField] [Range(0.0f, 3.0f)] float attackRate = 1;
-    [Tooltip("The sight range is how close a player must be for an enemy to see her. The attack range is how close the player must be for the enemy to attack her.")] [SerializeField] [Range(0.0f, 100.0f)] float sightRange, attackRange;
-    [Tooltip("The range of how far this enemy will patrol when no player is in range.")] [SerializeField] [Range(2,15)] float patrolRange;
+    [Tooltip("The attack damage that this enemy does.")] [SerializeField] int attackDamage = 5;
+    [Tooltip("This is the time between her attacks.")] [SerializeField] [Range(0.0f, 3.0f)] float attackRate = 1;
+    [Tooltip("The sight range is how close a player must be for an enemy to see her.")] [SerializeField] [Range(0.0f, 100.0f)] float sightRange;
+    [Tooltip("The attack range is how close the player must be for the enemy to attack her. \nEnsure that this isn't too low- so the Enemy doesn't go INTO the player when attacking.")] [SerializeField][Range(0.0f, 100.0f)] float attackRange;
+    [Tooltip("The range of how far this enemy will patrol when no player is in range. \nEnsure this value isn't too high- So the enemy doesn't wander away.")] [SerializeField] [Range(2,100)] float patrolRange;
 
 
 
@@ -128,6 +129,6 @@ public class Enemy : MonoBehaviour
 
     private void Attack()   /* This is the attack function. Currently, it just hits the player, but later, it can be more complex-- (projectiles, self-destruction, etc..) */
     {
-        player.GetComponent<Health>().Damage(attackDamage); // (Only hurt the player)
+        player.GetComponent<Health>().Damage(attackDamage); // Basic Hit method that will attack the player, dealing attackDamage damage. 
     }
 }
