@@ -69,6 +69,8 @@ public class TurretManager : MonoBehaviour
             return;
         }
 
+        if (FindObjectOfType<GameManager>().currentMode != GameMode.Combat) return; // Ensure that it's in combat mode fire
+
         LockOnTarget();
 
 

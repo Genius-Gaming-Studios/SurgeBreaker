@@ -52,7 +52,7 @@ public class TurretBullet : MonoBehaviour
 
         if (e != null)
         {
-            e.TakeDamage(power);
+            e.GetComponent<Health>().Damage(power);
         }
         else
         {

@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
             Destroy(target.gameObject); // Destroy the target to remove heirarchy clutter
 
 
-            Destroy(this.gameObject);
+            Destroy(this.gameObject); // Don't do this if different bullet types are added, (boomerangs, zig zags, etc..)
             return;
         }
 
@@ -44,7 +44,7 @@ public class Bullet : MonoBehaviour
 
         if (col.GetComponent<Enemy>())
         {
-            col.GetComponent<Enemy>().TakeDamage(damage);
+            col.GetComponent<Health>().Damage(damage);
             Destroy(this.gameObject);
         }
     }
