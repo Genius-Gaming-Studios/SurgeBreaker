@@ -40,13 +40,21 @@ public class PlayerManager : MonoBehaviour
     [Tooltip("This is the player camera. It has a Fixed Position!")] [SerializeField] GameObject pCamera; // The pos/rot of this will update with the pCamera_Position.
     [Tooltip("This is the game object that updates the position and rotation of the pCamera.")] [SerializeField] GameObject pCamera_Position;
 
+    [Space(20)]
+    [Header("Cursor References")] // Handle the crosshair switching in a canvas to support animation of the crosshair.
+    [Tooltip("Should the game use the dynamic cursors?\n This hides the default cursor and replaces it with one determined by the current mode.")] [SerializeField] public bool doDynamicCursors;
+    [Space(8)]
+    [Tooltip("Parent of the dynamic cursors.")] [SerializeField] RectTransform CursorsParent;
+    [Tooltip("The default cursor. Appears in idle mode.")] [SerializeField] GameObject DefaultCursor; // (Default Cursor)
+    [Tooltip("The build cursor. Appears in build mode.")] [SerializeField] GameObject BuildCursor; // (Build mode)
+    [Tooltip("The crosshair cursor. Appears in combat mode.")] [SerializeField] GameObject CrosshairCursor; // (Combat mode)
 
-    [Space(5)]
+    [Space(20)]
     [Header("Misc. References")]
     [Tooltip("This is currently a Screen Space canvas, but later it should be modified to be a World Space canvas near the player.")][SerializeField] Slider healthDisplay;
     [SerializeField] TextMeshProUGUI healthText;
 
-    //private Vector3 moveDirection = Vector3.zero;
+    [Space(5)]
 
     private CharacterController controller;
 
@@ -55,10 +63,9 @@ public class PlayerManager : MonoBehaviour
     private bool isRunning;
     float verticalSpeed;
 
+    private GameManager gm;
 
     private bool isDead;
-
-    //public static int playerHealth; // The active player health (always updating)
 
     [HideInInspector] public Vector3 movementDirection;
 
@@ -66,6 +73,7 @@ public class PlayerManager : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         playerHealth = GetComponent<Health>();
+        gm = FindObjectOfType<GameManager>();
 
         Camera.main.fieldOfView = normalFOV;
     }
@@ -75,9 +83,6 @@ public class PlayerManager : MonoBehaviour
         Debug.Log($"<color=\"red\"><b>Player has died!</b></color>");
 
         isDead = true;
-
-
-        //Destroy(pModelRotation.gameObject); Discontinued
     }
 
 
@@ -90,6 +95,15 @@ public class PlayerManager : MonoBehaviour
 
         // HandleJumping();
 
+        if (doDynamicCursors) HandleDynamicCursor();
+        else // Hide the dynamic cursor if doDynamicCursors is false.
+        {
+            BuildCursor.SetActive(false);
+            DefaultCursor.SetActive(false);
+            CrosshairCursor.SetActive(false);
+
+            Cursor.visible = true;
+        }
 
         if (isDead)
         {
@@ -97,6 +111,8 @@ public class PlayerManager : MonoBehaviour
 
             controller.enabled = false;
             this.enabled = false;
+
+            StartCoroutine(ReloadScene()); // Reload the scene.
         }
 
 
@@ -106,6 +122,40 @@ public class PlayerManager : MonoBehaviour
         healthText.text = $"{playerHealth.currentHealth}%";
     }
 
+    private IEnumerator ReloadScene()  // Reloads the scene if and when the player dies.
+    {
+        yield return new WaitForSeconds(3);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
+
+    private void HandleDynamicCursor() // Handle the crosshair switching in a canvas to support animation of the crosshair.
+    {
+        Cursor.visible = false;
+
+        CursorsParent.position = Input.mousePosition;
+
+        if (gm.currentMode == GameMode.Build) // Show the build crosshair if the current mode is build mode
+        {
+            BuildCursor.SetActive(true);
+
+            DefaultCursor.SetActive(false);
+            CrosshairCursor.SetActive(false);
+        }
+        else if (gm.currentMode == GameMode.Idle)  // Show the default (idle) crosshair if the current mode is idle mode
+        {
+            DefaultCursor.SetActive(true);
+
+            BuildCursor.SetActive(false);
+            CrosshairCursor.SetActive(false);
+        }
+        else if (gm.currentMode == GameMode.Combat)  // Show the combat crosshair if the current mode is combat mode
+        {
+            CrosshairCursor.SetActive(true);
+
+            DefaultCursor.SetActive(false);
+            BuildCursor.SetActive(false);
+        }
+    }
 
     private void HandleJumping()
     {
@@ -181,10 +231,5 @@ public class PlayerManager : MonoBehaviour
         // Update position of player's "isometric" camera
         pCamera.transform.position = pCamera_Position.transform.position;
         pCamera.transform.rotation = pCamera_Position.transform.rotation;
-
-
-
-        
-
     }
 }
