@@ -88,7 +88,7 @@ public class PlayerManager : MonoBehaviour
         HandleMovement();
         HandleSprinting();
 
-        HandleJumping();
+        // HandleJumping();
 
 
         if (isDead)
@@ -133,7 +133,7 @@ public class PlayerManager : MonoBehaviour
             if (doSprintingFOV && Camera.main.fieldOfView > normalFOV) // Smoothly transition back to normal FOV, at smoothFOVSpeed speed
                 Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, normalFOV, smoothFOVSpeed * Time.deltaTime);
 
-            controller.Move(movementDirection * speed * Time.deltaTime);
+            controller.Move(movementVelocity * Time.deltaTime);
         }
         else // Sprinting 
         {
@@ -150,27 +150,29 @@ public class PlayerManager : MonoBehaviour
     }
 
 
-    //private float horizontalInput, verticalInput;
-
+    private Vector3 movementVelocity;
     private void HandleMovement() // The movement will be completely rescripted in order to rotate movement grid by 45°
     {
 
         if (Input.GetKey(KeyCode.LeftShift)) isRunning = true; else isRunning = false; // Handle sprinting with left shift
 
-       
-        // Will be modified later
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
 
-        movementDirection = new Vector3(horizontalInput, 0, verticalInput); // WASD/Aw.Keys control
-        movementDirection.Normalize();
+        // Make the player face the quadrant of the screen that the mouse is in
+        Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        float rayLength;
 
-
-        if (movementDirection != Vector3.zero) // Handle the Player Model Rotion, which rotates the player model in the direction that the Player is moving in
+        if (groundPlane.Raycast(cameraRay, out rayLength))
         {
-            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-            pModelRotation.transform.rotation = Quaternion.RotateTowards(pModelRotation.transform.rotation, toRotation, pModelRotSpeed * Time.deltaTime);
+            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
+            Debug.DrawLine(cameraRay.origin, pointToLook, Color.cyan);
+
+            pModelRotation.transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
         }
+
+        // Make the player move in the direction of the pModelRotation.
+        movementDirection = new Vector3(pModelRotation.transform.forward.x, pModelRotation.transform.forward.y, pModelRotation.transform.forward.z) * Input.GetAxis("Vertical");
+        movementVelocity = movementDirection * speed;
 
     }
 
@@ -180,14 +182,6 @@ public class PlayerManager : MonoBehaviour
         pCamera.transform.position = pCamera_Position.transform.position;
         pCamera.transform.rotation = pCamera_Position.transform.rotation;
 
-        
-        //// Handle the Player Model Rotion, which rotates the player model in the direction that the Player is moving in
-        //if (movementDirection != Vector3.zero) 
-        //{
-        //    Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-        //    pModelRotation.transform.rotation = Quaternion.RotateTowards(pModelRotation.transform.rotation, toRotation, pModelRotSpeed * Time.deltaTime);
-
-        //}
 
 
         
