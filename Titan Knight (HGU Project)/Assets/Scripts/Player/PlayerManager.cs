@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(CharacterController))]
@@ -88,6 +89,8 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         HandleVisuals();
 
         HandleMovement();
