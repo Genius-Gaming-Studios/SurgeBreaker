@@ -1,90 +1,20 @@
 fileFormatVersion: 2
-guid: ec09de7cdfe81c34f9f8b76413ac9837
+guid: 2b1862255cc88bb418e64ba040379dcc
 ModelImporter:
-  serializedVersion: 22
-  fileIDToRecycleName:
-    100000: Antenna_Long
-    100002: Antenna_Long 1
-    100004: Antenna_Short
-    100006: Antenna_Short 1
-    100008: Backpack_Hussar_Lt
-    100010: Backpack_Hussar_Lt 1
-    100012: Backpack_Hussar_Med
-    100014: Backpack_Hussar_Med 1
-    100016: Backpack_Tank_Hvy
-    100018: Backpack_Tank_Hvy 1
-    100020: Backpack_Tank_Lt
-    100022: Backpack_Tank_Lt 1
-    100024: Backpack_Tank_Med
-    100026: Backpack_Tank_Med 1
-    100028: //RootNode
-    100030: Mount_Antenna
-    100032: Mount_Antenna 1
-    100034: Mount_Antenna 2
-    100036: Mount_Antenna 3
-    100038: Mount_Antenna 4
-    100040: Mount_Weapon_top
-    100042: Top_Weapon_Platform
-    100044: Top_Weapon_Platform_Geom
-    400000: Antenna_Long
-    400002: Antenna_Long 1
-    400004: Antenna_Short
-    400006: Antenna_Short 1
-    400008: Backpack_Hussar_Lt
-    400010: Backpack_Hussar_Lt 1
-    400012: Backpack_Hussar_Med
-    400014: Backpack_Hussar_Med 1
-    400016: Backpack_Tank_Hvy
-    400018: Backpack_Tank_Hvy 1
-    400020: Backpack_Tank_Lt
-    400022: Backpack_Tank_Lt 1
-    400024: Backpack_Tank_Med
-    400026: Backpack_Tank_Med 1
-    400028: //RootNode
-    400030: Mount_Antenna
-    400032: Mount_Antenna 1
-    400034: Mount_Antenna 2
-    400036: Mount_Antenna 3
-    400038: Mount_Antenna 4
-    400040: Mount_Weapon_top
-    400042: Top_Weapon_Platform
-    400044: Top_Weapon_Platform_Geom
-    2300000: Antenna_Long 1
-    2300002: Antenna_Short 1
-    2300004: Backpack_Hussar_Lt 1
-    2300006: Backpack_Hussar_Med 1
-    2300008: Backpack_Tank_Hvy 1
-    2300010: Backpack_Tank_Lt 1
-    2300012: Backpack_Tank_Med 1
-    2300014: Top_Weapon_Platform_Geom
-    3300000: Antenna_Long 1
-    3300002: Antenna_Short 1
-    3300004: Backpack_Hussar_Lt 1
-    3300006: Backpack_Hussar_Med 1
-    3300008: Backpack_Tank_Hvy 1
-    3300010: Backpack_Tank_Lt 1
-    3300012: Backpack_Tank_Med 1
-    3300014: Top_Weapon_Platform_Geom
-    4300000: Top_Weapon_Platform_Geom
-    4300002: Antenna_Long
-    4300004: Antenna_Short
-    4300006: Backpack_Hussar_Lt
-    4300008: Backpack_Tank_Lt
-    4300010: Backpack_Hussar_Med
-    4300012: Backpack_Tank_Med
-    4300014: Backpack_Tank_Hvy
-    9500000: //RootNode
+  serializedVersion: 21300
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
-    importMaterials: 0
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -93,6 +23,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -101,38 +32,53 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.01
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importVisibility: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
-    indexFormat: 1
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 4
-    normalCalculationMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -142,14 +88,18 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
-    skeletonHasParents: 0
+    skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

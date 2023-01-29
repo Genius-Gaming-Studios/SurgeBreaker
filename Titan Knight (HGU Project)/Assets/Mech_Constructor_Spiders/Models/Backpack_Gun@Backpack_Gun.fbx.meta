@@ -1,48 +1,23 @@
 fileFormatVersion: 2
-guid: 9842b345aecfbd94887d868a68a05b19
+guid: 67ce79d138ef9f84a95bcc34a0fb3d24
 ModelImporter:
-  serializedVersion: 22
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: Backpack_gun_body_Geom
-    100004: Backpack_gun_joint
-    100006: Backpack_gun_joint_geom
-    100008: Backpack_gun_platform
-    100010: Backpack_gun_platform_geom
-    100012: Mount_Weapon_Top
-    400000: //RootNode
-    400002: Backpack_gun_body_Geom
-    400004: Backpack_gun_joint
-    400006: Backpack_gun_joint_geom
-    400008: Backpack_gun_platform
-    400010: Backpack_gun_platform_geom
-    400012: Mount_Weapon_Top
-    2300000: Backpack_gun_body_Geom
-    2300002: Backpack_gun_joint_geom
-    2300004: Backpack_gun_platform_geom
-    3300000: Backpack_gun_body_Geom
-    3300002: Backpack_gun_joint_geom
-    3300004: Backpack_gun_platform_geom
-    4300000: Backpack_gun_platform_geom
-    4300002: Backpack_gun_joint_geom
-    4300004: Backpack_gun_body_Geom
-    7400000: Backpack_Gun
-    7400002: Backpack_Gun_Fold
-    7400004: Backpack_Gun_Unfold
-    7400006: Backpack_Gun_Unfold_Halfway
-    7400008: Backpack_Gun_Fold_Halfway
-    9500000: //RootNode
+  serializedVersion: 21300
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: Take 001
   externalObjects: {}
   materials:
-    importMaterials: 0
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -51,6 +26,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -58,207 +34,54 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Backpack_Gun_Fold
-      takeName: Take 001
-      firstFrame: 1
-      lastFrame: 36
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Backpack_gun_body_Geom
-        weight: 1
-      - path: Backpack_gun_joint
-        weight: 1
-      - path: Backpack_gun_joint/Backpack_gun_joint_geom
-        weight: 1
-      - path: Backpack_gun_joint/Backpack_gun_platform
-        weight: 1
-      - path: Backpack_gun_joint/Backpack_gun_platform/Backpack_gun_platform_geom
-        weight: 1
-      - path: Backpack_gun_joint/Backpack_gun_platform/Mount_Weapon_Top
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Backpack_Gun_Unfold
-      takeName: Take 001
-      firstFrame: 50
-      lastFrame: 85
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Backpack_gun_body_Geom
-        weight: 1
-      - path: Backpack_gun_joint
-        weight: 1
-      - path: Backpack_gun_joint/Backpack_gun_joint_geom
-        weight: 1
-      - path: Backpack_gun_joint/Backpack_gun_platform
-        weight: 1
-      - path: Backpack_gun_joint/Backpack_gun_platform/Backpack_gun_platform_geom
-        weight: 1
-      - path: Backpack_gun_joint/Backpack_gun_platform/Mount_Weapon_Top
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Backpack_Gun_Unfold_Halfway
-      takeName: Take 001
-      firstFrame: 130
-      lastFrame: 155
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Backpack_gun_body_Geom
-        weight: 1
-      - path: Backpack_gun_joint
-        weight: 1
-      - path: Backpack_gun_joint/Backpack_gun_joint_geom
-        weight: 1
-      - path: Backpack_gun_joint/Backpack_gun_platform
-        weight: 1
-      - path: Backpack_gun_joint/Backpack_gun_platform/Backpack_gun_platform_geom
-        weight: 1
-      - path: Backpack_gun_joint/Backpack_gun_platform/Mount_Weapon_Top
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Backpack_Gun_Fold_Halfway
-      takeName: Take 001
-      firstFrame: 100
-      lastFrame: 125
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Backpack_gun_body_Geom
-        weight: 1
-      - path: Backpack_gun_joint
-        weight: 1
-      - path: Backpack_gun_joint/Backpack_gun_joint_geom
-        weight: 1
-      - path: Backpack_gun_joint/Backpack_gun_platform
-        weight: 1
-      - path: Backpack_gun_joint/Backpack_gun_platform/Backpack_gun_platform_geom
-        weight: 1
-      - path: Backpack_gun_joint/Backpack_gun_platform/Mount_Weapon_Top
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    isReadable: 1
+    clipAnimations: []
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.01
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importVisibility: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
-    indexFormat: 1
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 4
-    normalCalculationMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -268,14 +91,18 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
-    skeletonHasParents: 0
+    skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

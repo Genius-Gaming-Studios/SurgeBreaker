@@ -1,116 +1,23 @@
 fileFormatVersion: 2
-guid: 0033654adb22c7f4db3b931143dbe26e
+guid: cc91fd9adcb55364cb517fb6305ba15c
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
-      1: 100000
-    second: Antenna
-  - first:
-      1: 100002
-    second: Arm_L
-  - first:
-      1: 100004
-    second: Arm_R
-  - first:
-      1: 100006
-    second: Body
-  - first:
-      1: 100008
-    second: //RootNode
-  - first:
-      1: 100010
-    second: Drone_Worker_Geom
-  - first:
-      1: 100012
-    second: Forearm_L
-  - first:
-      1: 100014
-    second: Forearm_R
-  - first:
-      1: 100016
-    second: Hand_L
-  - first:
-      1: 100018
-    second: Hand_R
-  - first:
-      1: 100020
-    second: Head
-  - first:
-      1: 100022
-    second: Nozzle_Back
-  - first:
-      1: 100024
-    second: Nozzle_Bottom
-  - first:
-      1: 100026
-    second: ROOT
-  - first:
-      4: 400000
-    second: Antenna
-  - first:
-      4: 400002
-    second: Arm_L
-  - first:
-      4: 400004
-    second: Arm_R
-  - first:
-      4: 400006
-    second: Body
-  - first:
-      4: 400008
-    second: //RootNode
-  - first:
-      4: 400010
-    second: Drone_Worker_Geom
-  - first:
-      4: 400012
-    second: Forearm_L
-  - first:
-      4: 400014
-    second: Forearm_R
-  - first:
-      4: 400016
-    second: Hand_L
-  - first:
-      4: 400018
-    second: Hand_R
-  - first:
-      4: 400020
-    second: Head
-  - first:
-      4: 400022
-    second: Nozzle_Back
-  - first:
-      4: 400024
-    second: Nozzle_Bottom
-  - first:
-      4: 400026
-    second: ROOT
-  - first:
-      43: 4300000
-    second: Drone_Worker_Geom
-  - first:
-      74: 7400000
+      74: 1827226128182048838
     second: Take 001
-  - first:
-      95: 9500000
-    second: //RootNode
-  - first:
-      137: 13700000
-    second: Drone_Worker_Geom
   externalObjects: {}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    removeConstantScaleCurves: 0
+    removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -128,20 +35,20 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.01
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    importVisibility: 0
+    importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
-    nodeNameCollisionStrategy: 0
-    fileIdsGeneration: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -154,21 +61,21 @@ ModelImporter:
     minBoneWeight: 0.001
     optimizeBones: 1
     meshOptimizationFlags: -1
-    indexFormat: 1
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
-    secondaryUVMarginMethod: 0
+    secondaryUVMarginMethod: 1
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 4
-    normalCalculationMode: 0
-    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
@@ -184,19 +91,18 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.01
-    rootMotionBoneName: ROOT
+    globalScale: 1
+    rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
-    skeletonHasParents: 0
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: ee9eb19862f950b48911c50dcff19856,
-    type: 3}
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 2
-  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
-  remapMaterialsIfMaterialImportModeIsNone: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

@@ -1,74 +1,20 @@
 fileFormatVersion: 2
-guid: 03902104067102746b3bd58bcc4def4d
+guid: 238822265b832364bb8e7f6388df485b
 ModelImporter:
-  serializedVersion: 22
-  fileIDToRecycleName:
-    100000: Ammo
-    100002: Ammo_Geom
-    100004: Back
-    100006: Back_Geom
-    100008: Barrel_Base_Geom
-    100010: Barrel_end_1
-    100012: Barrel_end_2
-    100014: Barrels
-    100016: Barrels_Geom
-    100018: GLauncher
-    100020: Grenade_Launcher_lvl2_Geom
-    100022: Half_1
-    100024: Half_1_Geom
-    100026: Half_2
-    100028: Half_2_Geom
-    100030: Lid
-    100032: Lid_Geom
-    100034: Mount_Weapon
-    100036: transform10
-    100038: transform11
-    100040: transform12
-    100042: transform13
-    100044: transform14
-    100046: transform15
-    100048: transform16
-    100050: //RootNode
-    400000: Ammo
-    400002: Ammo_Geom
-    400004: Back
-    400006: Back_Geom
-    400008: Barrel_Base_Geom
-    400010: Barrel_end_1
-    400012: Barrel_end_2
-    400014: Barrels
-    400016: Barrels_Geom
-    400018: GLauncher
-    400020: Grenade_Launcher_lvl2_Geom
-    400022: Half_1
-    400024: Half_1_Geom
-    400026: Half_2
-    400028: Half_2_Geom
-    400030: Lid
-    400032: Lid_Geom
-    400034: Mount_Weapon
-    400036: transform10
-    400038: transform11
-    400040: transform12
-    400042: transform13
-    400044: transform14
-    400046: transform15
-    400048: transform16
-    400050: //RootNode
-    4300000: Grenade_Launcher_lvl2_Geom
-    9500000: //RootNode
-    13700000: Grenade_Launcher_lvl2_Geom
+  serializedVersion: 21300
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
-    importMaterials: 0
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -77,6 +23,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -85,38 +32,53 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.01
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importVisibility: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
-    indexFormat: 1
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 4
-    normalCalculationMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -126,14 +88,18 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
-    skeletonHasParents: 0
+    skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

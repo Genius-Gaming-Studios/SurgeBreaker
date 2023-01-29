@@ -9,10 +9,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum EnemyFollowMode 
+{
+    FollowPath, // Follows predetermined pathing. This requires the enemy to havebeen spawned in by an EnemySpawner.
+    FollowPlayer // Follows player. This can be manually placed, or spawned by an EnemySpawner.
+}
+
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
     [Header("Options")]
+    [Tooltip("Should the enemy follow a path or follow the player?\n There should be two prefab isotopes of this enemy with either mode enabled.")] [SerializeField] public EnemyFollowMode FollowMode = EnemyFollowMode.FollowPath; // Very important stuff
+
     //[SerializeField] int walkSpeed;
     [Tooltip("The attack damage that this enemy does.")] [SerializeField] int attackDamage = 5;
     [Tooltip("This is the time between her attacks.")] [SerializeField] [Range(0.0f, 3.0f)] float attackRate = 1;
@@ -37,32 +45,43 @@ public class Enemy : MonoBehaviour
 
     private bool hasAttacked, pInAttackRange, pInSightRange;
 
-    private void Awake()
+
+    private void Awake() // Initialize all vaues
     {
         gm = FindObjectOfType<GameManager>();
         player = FindObjectOfType<PlayerManager>().transform;
         agent = GetComponent<NavMeshAgent>();
+        // if (FollowMode == EnemyFollowMode.FollowPath) target = assignedPath.points[0];  // If the enemy prefab does not start with 'enabled' to false, a bug will come from this line of code.
     }
 
 
+    #region Follow Player Mechanics
     private void FixedUpdate()
     {
-        if (gm.currentMode == GameMode.Build) agent.enabled = false; else agent.enabled = true;
+        if (gm.currentMode == GameMode.Build) return;
 
 
-        // This checks to see if the player is in sight and attack range.
-        pInSightRange = Physics.CheckSphere(transform.position, sightRange, PlayerLayer); // She is in the general range of sight 
-        pInAttackRange = Physics.CheckSphere(transform.position, attackRange, PlayerLayer); // She is in general range of being atkd  
+        // The script will now determine whether or not this enemy should follow the player or follow a path's waypoints.
+        if (FollowMode == EnemyFollowMode.FollowPlayer) 
+        {
+
+            if (gm.currentMode == GameMode.Build) agent.enabled = false; else agent.enabled = true;
 
 
-        if (!pInSightRange && !pInAttackRange) Patrolling();
-        if (pInSightRange && !pInAttackRange) ChasePlayer();
-        if (pInSightRange && pInAttackRange) AttackPlayer();
+            // This checks to see if the player is in sight and attack range.
+            pInSightRange = Physics.CheckSphere(transform.position, sightRange, PlayerLayer); // She is in the general range of sight 
+            pInAttackRange = Physics.CheckSphere(transform.position, attackRange, PlayerLayer); // She is in general range of being atkd  
+
+
+            if (!pInSightRange && !pInAttackRange) Patrolling();
+            if (pInSightRange && !pInAttackRange) ChasePlayer();
+            if (pInSightRange && pInAttackRange) AttackPlayer();
 
 
 
-        // Looks at the player 
-        Transform playerPos = FindObjectOfType<PlayerManager>().transform;
+            // Looks at the player 
+            Transform playerPos = FindObjectOfType<PlayerManager>().transform;
+        }
 
     }
 
@@ -143,4 +162,61 @@ public class Enemy : MonoBehaviour
     {
         player.GetComponent<Health>().Damage(attackDamage); // Basic Hit method that will attack the player, dealing attackDamage damage. 
     }
+    #endregion
+
+    #region Follow Predetermined Path (waypoints)
+    
+    // Speed is determined by the speed of the Navmesh Agent.
+
+     
+
+    [HideInInspector] public Transform target;
+    public Waypoints assignedPath;
+
+    private int waypointIndex = 0;
+
+    private void Update()
+    {
+        if (FollowMode == EnemyFollowMode.FollowPlayer) return; // Only allow for this region to function when the follow mode is FollowPlayer.
+        
+        if (PlayerManager.isDead) return; // Pause enemies if the player is dead
+
+        if (target == null) target = assignedPath.points[0];
+
+
+        Vector3 nextWaypoint = target.position - transform.position; // Set the next waypoint that the enemy will walk to.
+
+        transform.Translate(nextWaypoint.normalized * agent.speed * Time.deltaTime, Space.World);
+
+        if (Vector3.Distance(transform.position, target.position) <= 2.5f) // The enemy will know to go to the next waypoint when it is 1.2 meters away from the current waypoint (target).
+        {
+            GetNextWaypoint();
+        }
+
+
+
+    }
+
+    private void GetNextWaypoint() // Update to tell the enemy where the next waypoint is, and set it to be the next "target".
+    {
+        if (waypointIndex >= assignedPath.points.Length - 1)
+        {
+
+            EndPath();
+            return;
+        }
+       //  Debug.Log("<color=green>Next waypoint</color>");
+
+        waypointIndex++;
+        target = assignedPath.points[waypointIndex];
+    }
+
+    void EndPath() // If this is the final waypoint, the enemy will destroy itself, and cause damage to the generator.
+    {
+        // Debug.Log("<color=blue>End path</color>");
+        Destroy(gameObject);
+    }
+
+
+    #endregion
 }
