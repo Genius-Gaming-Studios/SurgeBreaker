@@ -130,6 +130,7 @@ public class PlayerManager : MonoBehaviour
     private IEnumerator ReloadScene()  // Reloads the scene if and when the player dies.
     {
         yield return new WaitForSeconds(3);
+        isDead = false;
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 

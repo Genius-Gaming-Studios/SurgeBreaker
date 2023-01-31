@@ -15,9 +15,12 @@ public class EnemySpawner : MonoBehaviour
     [Tooltip("This is REQUIRED. It must be attached to its corresponding Waypoints script AT ALL TIMES.")] [SerializeField] Waypoints CorrespondingPathway;
     [Tooltip("Enemy prefabs to spawn in. Uses RNG to choose which one to spawn, but that can/will be modified later.")] [SerializeField] List<GameObject> EnemyPrefabs; // RNG determines which one of the enemies in this List will spawn in..
 
+    GameManager gm;
 
     private void OnEnable()
     {
+        gm = FindObjectOfType<GameManager>(); // Assign the build mode
+
         StartCoroutine(SpawnWave());
     }
 
@@ -37,7 +40,18 @@ public class EnemySpawner : MonoBehaviour
 
             thisEnemy.GetComponent<Enemy>().enabled = true;
 
-            yield return new WaitForSeconds(1 / spawnRate); // Waits before spawning in another enemy
+            // WaitForSeconds() is prohibited in the spawning of waves. WaitForSeconds() disregards the necessity of pausing the spawning of waves while in build mode. 
+            float timer = 0f; 
+            while (timer < 1f)
+            {
+                while (gm.currentMode == GameMode.Build) // Pause the spawning of waves while in build mode
+                {
+                    yield return null;
+                }
+
+                timer += Time.deltaTime;
+                yield return null;
+            }
         }
     }
 }

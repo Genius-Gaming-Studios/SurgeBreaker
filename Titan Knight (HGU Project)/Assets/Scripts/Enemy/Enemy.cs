@@ -58,14 +58,11 @@ public class Enemy : MonoBehaviour
     #region Follow Player Mechanics
     private void FixedUpdate()
     {
-        if (gm.currentMode == GameMode.Build) return;
-
-
         // The script will now determine whether or not this enemy should follow the player or follow a path's waypoints.
         if (FollowMode == EnemyFollowMode.FollowPlayer) 
         {
 
-            if (gm.currentMode == GameMode.Build) agent.enabled = false; else agent.enabled = true;
+            if (gm.currentMode == GameMode.Build) { agent.enabled = false; return;  } else agent.enabled = true; // Completely pause the enemy when the current mode is Build Mode.
 
 
             // This checks to see if the player is in sight and attack range.
@@ -175,14 +172,17 @@ public class Enemy : MonoBehaviour
 
     private int waypointIndex = 0;
 
-    private void Update()
+    private void Update() // This update method should only be active while the EnemyFollowMode is FollowPath
     {
         if (FollowMode == EnemyFollowMode.FollowPlayer) return; // Only allow for this region to function when the follow mode is FollowPlayer.
         
         if (PlayerManager.isDead) return; // Pause enemies if the player is dead
 
+        if (gm.currentMode == GameMode.Build) return; // Pause enemies if the player is in build mode
+
         if (target == null) target = assignedPath.points[0];
 
+        agent.enabled = false;
 
         Vector3 nextWaypoint = target.position - transform.position; // Set the next waypoint that the enemy will walk to.
 
