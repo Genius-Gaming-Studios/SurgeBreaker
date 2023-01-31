@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
 
+
+
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             SwitchGamemode();
@@ -61,6 +63,14 @@ public class GameManager : MonoBehaviour
 
                 break;
         }
+
+        // Surge Breaker (1.5p)
+        // This will stop all coroutines, and pause the game. This means, animations will need to be animators and mustn't rely on TimeScale if an animation is to be seen within Build Mode. 
+        // This is primarily used for pausing the spawning of waves while in build mode.
+        // This method may be deprecated in the future due to all of the problems that may come from pausing time itself while in build mode. Try not to take this off of your radar.
+
+        // if (currentMode == GameMode.Build) Time.timeScale = 0;
+        // else Time.timeScale = 1; // Normalize Time Scale. This may need more TLC if there is a pause menu that is implemented.
     }
 
 

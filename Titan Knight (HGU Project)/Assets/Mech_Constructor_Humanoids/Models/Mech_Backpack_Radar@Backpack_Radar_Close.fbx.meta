@@ -1,86 +1,23 @@
 fileFormatVersion: 2
-guid: d1df822113f361b4782bb50604010590
+guid: 0449f3fbf856ece48b94e21832d8ba81
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
-      1: 100000
-    second: Backpack_Radar_Antenna
-  - first:
-      1: 100002
-    second: Backpack_Radar_Body
-  - first:
-      1: 100004
-    second: Backpack_Radar_Geom
-  - first:
-      1: 100006
-    second: Backpack_Radar_Left
-  - first:
-      1: 100008
-    second: Backpack_Radar_Lid
-  - first:
-      1: 100010
-    second: Backpack_Radar_Pivot
-  - first:
-      1: 100012
-    second: Backpack_Radar_Right
-  - first:
-      1: 100014
-    second: //RootNode
-  - first:
-      4: 400000
-    second: Backpack_Radar_Antenna
-  - first:
-      4: 400002
-    second: Backpack_Radar_Body
-  - first:
-      4: 400004
-    second: Backpack_Radar_Geom
-  - first:
-      4: 400006
-    second: Backpack_Radar_Left
-  - first:
-      4: 400008
-    second: Backpack_Radar_Lid
-  - first:
-      4: 400010
-    second: Backpack_Radar_Pivot
-  - first:
-      4: 400012
-    second: Backpack_Radar_Right
-  - first:
-      4: 400014
-    second: //RootNode
-  - first:
-      43: 4300000
-    second: Backpack_Radar_Geom
-  - first:
-      74: 7400000
-    second: Backpack_Radar_Pack
-  - first:
-      74: 7400002
-    second: Backpack_Radar_Unpack
-  - first:
-      74: 7400004
-    second: Backpack_Radar_Search
-  - first:
-      95: 9500000
-    second: //RootNode
-  - first:
-      137: 13700000
-    second: Backpack_Radar_Geom
+      74: 1827226128182048838
+    second: Take 001
   externalObjects: {}
   materials:
-    materialImportMode: 0
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    removeConstantScaleCurves: 0
+    removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -97,156 +34,21 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Backpack_Radar_Pack
-      takeName: Take 001
-      internalID: 0
-      firstFrame: 1
-      lastFrame: 18
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Backpack_Radar_Body
-        weight: 1
-      - path: Backpack_Radar_Body/Backpack_Radar_Pivot
-        weight: 1
-      - path: Backpack_Radar_Body/Backpack_Radar_Pivot/Backpack_Radar_Lid
-        weight: 1
-      - path: Backpack_Radar_Body/Backpack_Radar_Pivot/Backpack_Radar_Lid/Backpack_Radar_Antenna
-        weight: 1
-      - path: Backpack_Radar_Body/Backpack_Radar_Pivot/Backpack_Radar_Lid/Backpack_Radar_Left
-        weight: 1
-      - path: Backpack_Radar_Body/Backpack_Radar_Pivot/Backpack_Radar_Lid/Backpack_Radar_Right
-        weight: 1
-      - path: Backpack_Radar_Geom
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Backpack_Radar_Unpack
-      takeName: Take 001
-      internalID: 0
-      firstFrame: 30
-      lastFrame: 52
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Backpack_Radar_Body
-        weight: 1
-      - path: Backpack_Radar_Body/Backpack_Radar_Pivot
-        weight: 1
-      - path: Backpack_Radar_Body/Backpack_Radar_Pivot/Backpack_Radar_Lid
-        weight: 1
-      - path: Backpack_Radar_Body/Backpack_Radar_Pivot/Backpack_Radar_Lid/Backpack_Radar_Antenna
-        weight: 1
-      - path: Backpack_Radar_Body/Backpack_Radar_Pivot/Backpack_Radar_Lid/Backpack_Radar_Left
-        weight: 1
-      - path: Backpack_Radar_Body/Backpack_Radar_Pivot/Backpack_Radar_Lid/Backpack_Radar_Right
-        weight: 1
-      - path: Backpack_Radar_Geom
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Backpack_Radar_Search
-      takeName: Take 001
-      internalID: 0
-      firstFrame: 60
-      lastFrame: 250
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Backpack_Radar_Body
-        weight: 1
-      - path: Backpack_Radar_Body/Backpack_Radar_Pivot
-        weight: 1
-      - path: Backpack_Radar_Body/Backpack_Radar_Pivot/Backpack_Radar_Lid
-        weight: 1
-      - path: Backpack_Radar_Body/Backpack_Radar_Pivot/Backpack_Radar_Lid/Backpack_Radar_Antenna
-        weight: 1
-      - path: Backpack_Radar_Body/Backpack_Radar_Pivot/Backpack_Radar_Lid/Backpack_Radar_Left
-        weight: 1
-      - path: Backpack_Radar_Body/Backpack_Radar_Pivot/Backpack_Radar_Lid/Backpack_Radar_Right
-        weight: 1
-      - path: Backpack_Radar_Geom
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    isReadable: 1
+    clipAnimations: []
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.01
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    importVisibility: 0
+    importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
-    nodeNameCollisionStrategy: 0
-    fileIdsGeneration: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -259,21 +61,21 @@ ModelImporter:
     minBoneWeight: 0.001
     optimizeBones: 1
     meshOptimizationFlags: -1
-    indexFormat: 1
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
-    secondaryUVMarginMethod: 0
+    secondaryUVMarginMethod: 1
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 4
-    normalCalculationMode: 0
-    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
@@ -289,18 +91,18 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.01
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
-    skeletonHasParents: 0
+    skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
-  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
-  remapMaterialsIfMaterialImportModeIsNone: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

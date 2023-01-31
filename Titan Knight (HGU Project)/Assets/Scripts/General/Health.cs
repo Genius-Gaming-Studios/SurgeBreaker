@@ -14,7 +14,8 @@ public enum ObjectType
 [Tooltip("This class is to be put onto any object that has health.")]
 public class Health : MonoBehaviour 
 {
-    [Tooltip("This will turn RED when this instance takes damage!")][SerializeField] MeshRenderer modelMaterial;
+    [Tooltip("This will turn RED when this instance takes damage!")] [SerializeField] SkinnedMeshRenderer modelMaterial;
+
     [Space(10)]
     [Tooltip("The start player health. (Not used to change/read current health!)")] [SerializeField] public int startHealth = 100;
     [Tooltip("The current health of the player. (Read only!)")] public int currentHealth = 1;

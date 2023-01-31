@@ -1,80 +1,20 @@
 fileFormatVersion: 2
-guid: 302277d513a883b4b8aaac8a08325b6f
+guid: 193cca52b70539d44a59946f4384bbfc
 ModelImporter:
   serializedVersion: 21300
-  internalIDToNameTable:
-  - first:
-      1: 100000
-    second: Mech_Walker_Arm_R_Hvy_Base_Geom
-  - first:
-      1: 100002
-    second: Mech_Walker_Arm_R_Hvy_Geom
-  - first:
-      1: 100004
-    second: //RootNode
-  - first:
-      1: 100006
-    second: Mech_Walker_RightArm
-  - first:
-      1: 100008
-    second: Mech_Walker_RightForeArm
-  - first:
-      1: 100010
-    second: Mech_Walker_RightShoulder
-  - first:
-      1: 100012
-    second: Mount_Hand_R
-  - first:
-      4: 400000
-    second: Mech_Walker_Arm_R_Hvy_Base_Geom
-  - first:
-      4: 400002
-    second: Mech_Walker_Arm_R_Hvy_Geom
-  - first:
-      4: 400004
-    second: //RootNode
-  - first:
-      4: 400006
-    second: Mech_Walker_RightArm
-  - first:
-      4: 400008
-    second: Mech_Walker_RightForeArm
-  - first:
-      4: 400010
-    second: Mech_Walker_RightShoulder
-  - first:
-      4: 400012
-    second: Mount_Hand_R
-  - first:
-      23: 2300000
-    second: Mech_Walker_Arm_R_Hvy_Base_Geom
-  - first:
-      33: 3300000
-    second: Mech_Walker_Arm_R_Hvy_Base_Geom
-  - first:
-      43: 4300000
-    second: Mech_Walker_Arm_R_Hvy_Base_Geom
-  - first:
-      43: 4300002
-    second: Mech_Walker_Arm_R_Hvy_Geom
-  - first:
-      95: 9500000
-    second: //RootNode
-  - first:
-      137: 13700000
-    second: Mech_Walker_Arm_R_Hvy_Geom
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
-    materialImportMode: 0
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    removeConstantScaleCurves: 0
+    removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -92,20 +32,20 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.01
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    importVisibility: 0
+    importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
-    nodeNameCollisionStrategy: 0
-    fileIdsGeneration: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -118,25 +58,25 @@ ModelImporter:
     minBoneWeight: 0.001
     optimizeBones: 1
     meshOptimizationFlags: -1
-    indexFormat: 1
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
-    secondaryUVMarginMethod: 0
+    secondaryUVMarginMethod: 1
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 4
-    normalCalculationMode: 0
-    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 0
+  importAnimation: 1
   humanDescription:
     serializedVersion: 3
     human: []
@@ -148,18 +88,18 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.01
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
-    skeletonHasParents: 0
+    skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
-  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
-  remapMaterialsIfMaterialImportModeIsNone: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

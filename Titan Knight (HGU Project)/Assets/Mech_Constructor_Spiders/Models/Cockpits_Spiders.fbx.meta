@@ -1,112 +1,20 @@
 fileFormatVersion: 2
-guid: 922aa3aa5684af347b2656ec163fd4a7
+guid: 559e8971a7a5ce84f931ac41b49f4a2a
 ModelImporter:
-  serializedVersion: 22
-  fileIDToRecycleName:
-    100000: Cockpit_Flybot
-    100002: Cockpit_Flybot_Geom
-    100004: Cockpit_Flyer
-    100006: Cockpit_Flyer_Geom
-    100008: Cockpit_Gun
-    100010: Cockpit_Gun_2x
-    100012: Cockpit_Gun_2x_Geom
-    100014: Cockpit_Gun_Geom
-    100016: Cockpit_Gunbot
-    100018: Cockpit_Gunbot_Geom
-    100020: Cockpit_Gunner
-    100022: Cockpit_Gunner_Geom
-    100024: //RootNode
-    100026: Mount_backpack
-    100028: Mount_backpack 1
-    100030: Mount_backpack 2
-    100032: Mount_backpack 3
-    100034: Mount_backpack 4
-    100036: Mount_backpack 5
-    100038: Mount_Top_Weapon_Platform
-    100040: Mount_Weapon_L
-    100042: Mount_Weapon_L 1
-    100044: Mount_Weapon_L 2
-    100046: Mount_Weapon_L 3
-    100048: Mount_Weapon_L 4
-    100050: Mount_Weapon_L 5
-    100052: Mount_Weapon_Main
-    100054: Mount_Weapon_R
-    100056: Mount_Weapon_R 1
-    100058: Mount_Weapon_R 2
-    100060: Mount_Weapon_R 3
-    100062: Mount_Weapon_R 4
-    100064: Mount_Weapon_R 5
-    100066: Mount_Weapon_top
-    100068: Mount_Weapon_top 1
-    100070: Mount_Weapon_top 2
-    100072: Mount_Weapon_top 3
-    400000: Cockpit_Flybot
-    400002: Cockpit_Flybot_Geom
-    400004: Cockpit_Flyer
-    400006: Cockpit_Flyer_Geom
-    400008: Cockpit_Gun
-    400010: Cockpit_Gun_2x
-    400012: Cockpit_Gun_2x_Geom
-    400014: Cockpit_Gun_Geom
-    400016: Cockpit_Gunbot
-    400018: Cockpit_Gunbot_Geom
-    400020: Cockpit_Gunner
-    400022: Cockpit_Gunner_Geom
-    400024: //RootNode
-    400026: Mount_backpack
-    400028: Mount_backpack 1
-    400030: Mount_backpack 2
-    400032: Mount_backpack 3
-    400034: Mount_backpack 4
-    400036: Mount_backpack 5
-    400038: Mount_Top_Weapon_Platform
-    400040: Mount_Weapon_L
-    400042: Mount_Weapon_L 1
-    400044: Mount_Weapon_L 2
-    400046: Mount_Weapon_L 3
-    400048: Mount_Weapon_L 4
-    400050: Mount_Weapon_L 5
-    400052: Mount_Weapon_Main
-    400054: Mount_Weapon_R
-    400056: Mount_Weapon_R 1
-    400058: Mount_Weapon_R 2
-    400060: Mount_Weapon_R 3
-    400062: Mount_Weapon_R 4
-    400064: Mount_Weapon_R 5
-    400066: Mount_Weapon_top
-    400068: Mount_Weapon_top 1
-    400070: Mount_Weapon_top 2
-    400072: Mount_Weapon_top 3
-    2300000: Cockpit_Flybot_Geom
-    2300002: Cockpit_Flyer_Geom
-    2300004: Cockpit_Gun_2x_Geom
-    2300006: Cockpit_Gun_Geom
-    2300008: Cockpit_Gunbot_Geom
-    2300010: Cockpit_Gunner_Geom
-    3300000: Cockpit_Flybot_Geom
-    3300002: Cockpit_Flyer_Geom
-    3300004: Cockpit_Gun_2x_Geom
-    3300006: Cockpit_Gun_Geom
-    3300008: Cockpit_Gunbot_Geom
-    3300010: Cockpit_Gunner_Geom
-    4300000: Cockpit_Flyer_Geom
-    4300002: Cockpit_Flybot_Geom
-    4300004: Cockpit_Gunbot_Geom
-    4300006: Cockpit_Gunner_Geom
-    4300008: Cockpit_Gun_Geom
-    4300010: Cockpit_Gun_2x_Geom
-    9500000: //RootNode
+  serializedVersion: 21300
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
-    importMaterials: 0
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -115,6 +23,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -123,38 +32,53 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.01
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importVisibility: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
-    indexFormat: 1
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 4
-    normalCalculationMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -164,14 +88,18 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
-    skeletonHasParents: 0
+    skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
