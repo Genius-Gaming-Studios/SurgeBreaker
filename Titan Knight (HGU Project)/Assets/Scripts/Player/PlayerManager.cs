@@ -14,6 +14,9 @@ public class PlayerManager : MonoBehaviour
 {
     [Space(20)]
     [Header("Player Preferences")]
+
+    [Tooltip("The amount of currency that the player starts with.")] [Range(375,3750)] public int startCurrency = 500; // Do not use this to get a reference to her current amount of currency.
+
     [Tooltip("The walkspeed of the player")] [Range(4.0f, 12.0f)] public float speed = 6.0f;
     [Tooltip("The walkspeed multiplayer when the player's running")] [Range(0.1f, 4.5f)] public float runSpeedMultiplier = 1.5f;
     [Tooltip("The jump force")] [Range(1.0f, 12)] public float jumpPower = 8.0f;
@@ -67,6 +70,7 @@ public class PlayerManager : MonoBehaviour
     private GameManager gm;
 
     public static bool isDead;
+    public static int currentCurrency; // This constantly updates, and should be used to get the current amount of money that she has.
 
     [HideInInspector] public Vector3 movementDirection;
 
@@ -77,6 +81,8 @@ public class PlayerManager : MonoBehaviour
         gm = FindObjectOfType<GameManager>();
 
         Camera.main.fieldOfView = normalFOV;
+
+        currentCurrency = startCurrency;
     }
 
     public void Die() // Automatically called when the player dies. This is just for the proto-stage of Titan Knights.

@@ -22,12 +22,13 @@ public class Enemy : MonoBehaviour
     [Tooltip("Should the enemy follow a path or follow the player?\n There should be two prefab isotopes of this enemy with either mode enabled.")] [SerializeField] public EnemyFollowMode FollowMode = EnemyFollowMode.FollowPath; // Very important stuff
 
     //[SerializeField] int walkSpeed;
-    [Tooltip("The attack damage that this enemy does.")] [SerializeField] int attackDamage = 5;
+    [Tooltip("The attack damage that this enemy does. \nNote, this is also the damage that it will do to the generator.")] [SerializeField] int attackDamage = 5;
     [Tooltip("This is the time between her attacks.")] [SerializeField] [Range(0.0f, 3.0f)] float attackRate = 1;
     [Tooltip("The sight range is how close a player must be for an enemy to see her.")] [SerializeField] [Range(0.0f, 100.0f)] float sightRange;
     [Tooltip("The attack range is how close the player must be for the enemy to attack her. \nEnsure that this isn't too low- so the Enemy doesn't go INTO the player when attacking.")] [SerializeField][Range(0.0f, 100.0f)] float attackRange;
     [Tooltip("The range of how far this enemy will patrol when no player is in range. \nEnsure this value isn't too high- So the enemy doesn't wander away.")] [SerializeField] [Range(2,100)] float patrolRange;
 
+    [Space(10)] [SerializeField] [Tooltip("The amount of currency that the player will gain when this enemy is killed.\nCAUTION: ENSURE THAT THIS IS BALANCED!")] [Range(1, 375)] int bounty = 10;
 
 
     [Header("Important References")]
@@ -205,6 +206,7 @@ public class Enemy : MonoBehaviour
             EndPath();
             return;
         }
+        
        //  Debug.Log("<color=green>Next waypoint</color>");
 
         waypointIndex++;
@@ -213,7 +215,11 @@ public class Enemy : MonoBehaviour
 
     void EndPath() // If this is the final waypoint, the enemy will destroy itself, and cause damage to the generator.
     {
-        // Debug.Log("<color=blue>End path</color>");
+        Debug.Log($"<color=blue>[Enemy] </color> Enemy has successfully damaged a generator.");
+
+        assignedPath.DamageGenerator(attackDamage);
+
+
         Destroy(gameObject);
     }
 
