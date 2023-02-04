@@ -22,6 +22,7 @@ public class Health : MonoBehaviour
     
     [Tooltip("This is a test of adding resistance to the player. This can be used later to make 'Armor-like' buffs. (health - (damage / resistance))")] public int resistance;
 
+    [HideInInspector] public int _bounty; // This should be assigned via the Enemy script.
 
     public ObjectType HealthType;
 
@@ -82,7 +83,7 @@ public class Health : MonoBehaviour
     {
         if (HealthType != ObjectType.Enemy) return;
 
-        // Cash.AddCash(value) functionality can be added in the MVP
+        PlayerManager.currentCurrency += _bounty;
 
         Destroy(this.gameObject); 
     }

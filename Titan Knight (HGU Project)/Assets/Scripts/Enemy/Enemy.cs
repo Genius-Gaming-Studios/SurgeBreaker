@@ -27,7 +27,6 @@ public class Enemy : MonoBehaviour
     [Tooltip("The sight range is how close a player must be for an enemy to see her.")] [SerializeField] [Range(0.0f, 100.0f)] float sightRange;
     [Tooltip("The attack range is how close the player must be for the enemy to attack her. \nEnsure that this isn't too low- so the Enemy doesn't go INTO the player when attacking.")] [SerializeField][Range(0.0f, 100.0f)] float attackRange;
     [Tooltip("The range of how far this enemy will patrol when no player is in range. \nEnsure this value isn't too high- So the enemy doesn't wander away.")] [SerializeField] [Range(2,100)] float patrolRange;
-
     [Space(10)] [SerializeField] [Tooltip("The amount of currency that the player will gain when this enemy is killed.\nCAUTION: ENSURE THAT THIS IS BALANCED!")] [Range(1, 375)] int bounty = 10;
 
 
@@ -53,6 +52,7 @@ public class Enemy : MonoBehaviour
         player = FindObjectOfType<PlayerManager>().transform;
         agent = GetComponent<NavMeshAgent>();
         // if (FollowMode == EnemyFollowMode.FollowPath) target = assignedPath.points[0];  // If the enemy prefab does not start with 'enabled' to false, a bug will come from this line of code.
+    
     }
 
 
@@ -80,6 +80,8 @@ public class Enemy : MonoBehaviour
             // Looks at the player 
             Transform playerPos = FindObjectOfType<PlayerManager>().transform;
         }
+
+        GetComponentInChildren<Health>()._bounty = bounty; // Set the bounty
 
     }
 
