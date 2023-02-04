@@ -1,7 +1,7 @@
 # Surge Breaker (1.5.3p)
  *Surge Breaker - Genius Studios Project*
  
-*This is the Unity Project for the Titan knights HGU Project.*
+*This is the Unity Project for the Surge Breaker Genius Studios Project.*
 
 ## Installation
 To open this project in Unity, you must use Unity __2021.3.11f1__. You can install Unity 2021.3.11 here: https://unity3d.com/unity/whats-new/2021.3.11
