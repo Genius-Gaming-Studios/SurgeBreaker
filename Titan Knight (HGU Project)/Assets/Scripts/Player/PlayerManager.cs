@@ -56,7 +56,10 @@ public class PlayerManager : MonoBehaviour
     [Header("Misc. References")]
     [Tooltip("This is currently a Screen Space canvas, but later it should be modified to be a World Space canvas near the player.")][SerializeField] Slider healthDisplay;
     [Tooltip("Later, this should be a sort of armor indicator. Currently, it is a second health display.")] [SerializeField] GameObject[] ArmorIcons;
-    [SerializeField] TextMeshProUGUI healthText;
+    [SerializeField] TextMeshProUGUI healthText, currencyText;
+
+
+
 
     [Space(5)]
 
@@ -131,6 +134,8 @@ public class PlayerManager : MonoBehaviour
         if (playerHealth.currentHealth >= 66) ArmorIcons[0].SetActive(true); else ArmorIcons[0].SetActive(false);
         if (playerHealth.currentHealth >= 33) ArmorIcons[1].SetActive(true); else ArmorIcons[1].SetActive(false);
         if (playerHealth.currentHealth >= 10) ArmorIcons[2].SetActive(true); else ArmorIcons[2].SetActive(false);
+
+        currencyText.text = $"${currentCurrency}";
     }
 
     private IEnumerator ReloadScene()  // Reloads the scene if and when the player dies.
