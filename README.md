@@ -1,5 +1,5 @@
-# Titan Knights
- *Titan Knights (working title.) - HGU Project*
+# Surge Breaker (1.5.3p)
+ *Surge Breaker - Genius Studios Project*
  
 *This is the Unity Project for the Titan knights HGU Project.*
 
