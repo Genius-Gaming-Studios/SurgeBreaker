@@ -8,6 +8,7 @@ using UnityEngine;
 public class TurretManager : MonoBehaviour
 {
 
+    [Tooltip("The range in which the turret can reach enemies from.")] [SerializeField] [Range(75, 9999)] public int turretCost = 150;
 
     [Header("General")]
     [Tooltip("The range in which the turret can reach enemies from.")] [SerializeField] [Range(3, 100)] public float range = 15f;

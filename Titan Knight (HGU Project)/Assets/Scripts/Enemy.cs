@@ -2,7 +2,7 @@
  * 
  * THIS SHOULD BE ATTACHED TO THE PARENT OBJECT OF AN ENEMY AT ALL TIMES
  * 
- */
+ *//*
 
 using System.Collections;
 using System.Collections.Generic;
@@ -28,6 +28,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] NavMeshAgent agent;
 
+    private GameManager gm;
+
     private Transform player;
 
     private Vector3 walkPoint; // Patrolling destination
@@ -37,6 +39,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        gm = FindObjectOfType<GameManager>();
         player = FindObjectOfType<PlayerManager>().transform;
         agent = GetComponent<NavMeshAgent>();
     }
@@ -44,9 +47,13 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (gm.currentMode == GameMode.Build) agent.enabled = false; else agent.enabled = true;
+
+
         // This checks to see if the player is in sight and attack range.
         pInSightRange = Physics.CheckSphere(transform.position, sightRange, PlayerLayer); // She is in the general range of sight 
         pInAttackRange = Physics.CheckSphere(transform.position, attackRange, PlayerLayer); // She is in general range of being atkd  
+
 
         if (!pInSightRange && !pInAttackRange) Patrolling();
         if (pInSightRange && !pInAttackRange) ChasePlayer();
@@ -59,7 +66,6 @@ public class Enemy : MonoBehaviour
 
     }
 
-
     //private void OnTriggerStay(Collider other)
     //{
     //    if (other.CompareTag("Player")) other.GetComponent<Health>().Damage(attackDamage); // (Only hurt the player)
@@ -68,6 +74,8 @@ public class Enemy : MonoBehaviour
 
     private void Patrolling()
     {
+        if (gm.currentMode == GameMode.Build) return;
+
         if (!walkPointSet) SearchWalkPoint(); // Find a walkpoint if there's no patrolling destination
 
         if (walkPointSet)  // If there is a walkpoint, just make the navmesh travel to it
@@ -98,12 +106,16 @@ public class Enemy : MonoBehaviour
 
     private void ChasePlayer()
     {
+        if (gm.currentMode == GameMode.Build) return;
+
         agent.SetDestination(player.position); // Simply follows the player
         transform.LookAt(player.position);
     }
 
     private void AttackPlayer()
     {
+        if (gm.currentMode == GameMode.Build) return;
+
         agent.SetDestination(transform.position); // Stops the enemy from moving when it attacks in order to stop it from continuously running. This could be changed later to make different, faster types of enemies
 
         transform.LookAt(player);
@@ -127,8 +139,9 @@ public class Enemy : MonoBehaviour
 
 
 
-    private void Attack()   /* This is the attack function. Currently, it just hits the player, but later, it can be more complex-- (projectiles, self-destruction, etc..) */
+    private void Attack()   *//* This is the attack function. Currently, it just hits the player, but later, it can be more complex-- (projectiles, self-destruction, etc..) *//*
     {
         player.GetComponent<Health>().Damage(attackDamage); // Basic Hit method that will attack the player, dealing attackDamage damage. 
     }
 }
+*/

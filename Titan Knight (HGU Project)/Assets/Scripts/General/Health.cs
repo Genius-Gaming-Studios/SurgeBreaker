@@ -14,13 +14,15 @@ public enum ObjectType
 [Tooltip("This class is to be put onto any object that has health.")]
 public class Health : MonoBehaviour 
 {
-    [Tooltip("This will turn RED when this instance takes damage!")][SerializeField] MeshRenderer modelMaterial;
+    [Tooltip("This will turn RED when this instance takes damage!")] [SerializeField] SkinnedMeshRenderer modelMaterial;
+
     [Space(10)]
     [Tooltip("The start player health. (Not used to change/read current health!)")] [SerializeField] public int startHealth = 100;
     [Tooltip("The current health of the player. (Read only!)")] public int currentHealth = 1;
     
     [Tooltip("This is a test of adding resistance to the player. This can be used later to make 'Armor-like' buffs. (health - (damage / resistance))")] public int resistance;
 
+    [HideInInspector] public int _bounty; // This should be assigned via the Enemy script.
 
     public ObjectType HealthType;
 
@@ -81,7 +83,7 @@ public class Health : MonoBehaviour
     {
         if (HealthType != ObjectType.Enemy) return;
 
-        // Cash.AddCash(value) functionality can be added in the MVP
+        PlayerManager.currentCurrency += _bounty;
 
         Destroy(this.gameObject); 
     }

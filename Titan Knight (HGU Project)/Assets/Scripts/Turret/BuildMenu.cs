@@ -10,7 +10,8 @@ public class BuildMenu : MonoBehaviour
     {
         foreach (BuildNode Node in FindObjectsOfType<BuildNode>())
         {
-            if (Node.uniqueNodeID == nodeID) BuildTurret(turret, Node); // Check to see if the node is the current selected node
+            if (Node.uniqueNodeID == nodeID) if (PlayerManager.currentCurrency >= turret.cost) BuildTurret(turret, Node); // Check to see if the node is the current selected node
+                else Debug.LogErrorFormat("Not enough money.");
         }
     }
 
