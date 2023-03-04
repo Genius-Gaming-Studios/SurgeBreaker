@@ -20,3 +20,8 @@
 - This is the Game Design Documentation (GDD) for Titan Knights: https://docs.google.com/document/d/151hSkVtsA0YYmxjPKl8OPJCGj4EHKUAGi7DemlB3rQM/edit?pli=1# 
 
 - The Asana for the project also houses pending tasks, as well as future tasks.
+
+
+
+`Latest Version: [1.6.0]`
+`Last Updated: [3.3.23]`
