@@ -14,7 +14,9 @@ public enum ObjectType
 [Tooltip("This class is to be put onto any object that has health.")]
 public class Health : MonoBehaviour 
 {
+     
     [Tooltip("This will turn RED when this instance takes damage!")] [SerializeField] SkinnedMeshRenderer modelMaterial;
+    [Tooltip("This will turn RED when this instance takes damage!")] [SerializeField] MeshRenderer playerModelMaterial;
 
     [Space(10)]
     [Tooltip("The start player health. (Not used to change/read current health!)")] [SerializeField] public int startHealth = 100;
@@ -31,7 +33,8 @@ public class Health : MonoBehaviour
         if (HealthType == ObjectType.Turret) Debug.LogWarningFormat("Health Type is Turret, however, Turret health has no true functionality!");
 
 
-        standardColor = modelMaterial.material.color;
+        if (modelMaterial != null) standardColor = modelMaterial.material.color;
+        else standardColor = playerModelMaterial.material.color;
         currentHealth = startHealth; // Initialize current health 
     }
 
@@ -69,12 +72,13 @@ public class Health : MonoBehaviour
     private IEnumerator DamageRenderer() // This simply makes the renderer appear red for a tenth of a second when it gets damaged. Sounds can be added later.
     {
 
-        modelMaterial.material.color = Color.red; 
+        if (modelMaterial != null) modelMaterial.material.color = Color.red;
+        else playerModelMaterial.material.color = Color.red;
 
         yield return new WaitForSeconds(0.1f);
 
-        modelMaterial.material.color = standardColor;
-
+        if (modelMaterial != null) modelMaterial.material.color = standardColor;
+        else playerModelMaterial.material.color = Color.red;
     }
 
 

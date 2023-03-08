@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject CombatCanvas, BuildCanvas;
     [Tooltip("This will be turned off when the player is in Build Mode!")][SerializeField] GameObject WeaponsParent;
 
-
+    [SerializeField] public GameObject BuildMenu;
 
 
     private void Update()
