@@ -17,7 +17,9 @@ public class BuildMenu : MonoBehaviour
 
     private void BuildTurret(Turret turret, BuildNode Node)
     {
+        PlayerManager.currentCurrency -= turret.cost;
         Instantiate(turret.prefab, Node.transform);
+
 
         this.gameObject.SetActive(false); // Disable the build menu
     }
