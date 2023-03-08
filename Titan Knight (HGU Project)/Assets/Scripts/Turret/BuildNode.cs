@@ -13,20 +13,21 @@ public class BuildNode : MonoBehaviour
 
     public void Awake()
     {
-        
+        if (BuildMenu == null) BuildMenu = FindObjectOfType<GameManager>().BuildMenu;
+
         uniqueNodeID = $"{Random.Range(10000,99999)}";
-        BuildMenu.SetActive(false);
     }
 
     public void OnMouseOver()
     {
+        if (BuildMenu == null) BuildMenu = FindObjectOfType<GameManager>().BuildMenu;
+
         //if (PlayerCasting.DistanceFromTarget < 4) // Is the player close enough to the build node?
         //{
-            HoverObject.SetActive(true); // Show the hover object
+        HoverObject.SetActive(true); // Show the hover object
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-            if (BuildMenu == null) BuildMenu = FindObjectOfType<GameManager>().BuildMenu;
           
                 BuildMenu.SetActive(true);
                 BuildMenu.GetComponent<BuildMenu>().nodeID = uniqueNodeID;
@@ -37,12 +38,16 @@ public class BuildNode : MonoBehaviour
 
     public void OnMouseExit()
     {
+        if (BuildMenu == null) BuildMenu = FindObjectOfType<GameManager>().BuildMenu;
+
         HoverObject.SetActive(false);
     }
 
 
     public void Disable() // Turn off the nodes - Note: This is being called in an Update function!
     {
+        if (BuildMenu == null) BuildMenu = FindObjectOfType<GameManager>().BuildMenu;
+
         this.GetComponent<MeshRenderer>().enabled = false;
 
         HoverObject.SetActive(false); // Hide the hover object
@@ -57,6 +62,8 @@ public class BuildNode : MonoBehaviour
 
     public void Enable() // Turn on the nodes - Note: This is being called in an Update function!
     {
+        if (BuildMenu == null) BuildMenu = FindObjectOfType<GameManager>().BuildMenu;
+
         GetComponent<BoxCollider>().enabled = true;
 
         this.GetComponent<MeshRenderer>().enabled = true;
