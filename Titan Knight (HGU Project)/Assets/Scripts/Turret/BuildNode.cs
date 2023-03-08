@@ -26,6 +26,8 @@ public class BuildNode : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+            if (BuildMenu == null) BuildMenu = FindObjectOfType<GameManager>().BuildMenu;
+          
                 BuildMenu.SetActive(true);
                 BuildMenu.GetComponent<BuildMenu>().nodeID = uniqueNodeID;
             }
