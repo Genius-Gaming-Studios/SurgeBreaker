@@ -1,4 +1,4 @@
-# Surge Breaker (1.6proto)
+# Surge Breaker (1.6.2proto)
  *Surge Breaker - Genius Studios Project*
  
 *This is the Unity Project for the Surge Breaker Genius Studios Project.*
