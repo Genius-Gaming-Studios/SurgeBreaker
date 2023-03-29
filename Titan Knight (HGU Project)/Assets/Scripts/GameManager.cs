@@ -16,9 +16,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject CombatCanvas, BuildCanvas;
     [Tooltip("This will be turned off when the player is in Build Mode!")][SerializeField] GameObject WeaponsParent;
 
+    /// <summary>
+    /// The only audio player that the FX come out of.
+    /// </summary>
+    public AudioSource CoreFXPlayer;
+    
+    /// <summary>
+    /// The only audio player that the Music should come out of.
+    /// </summary>
+    public AudioSource CoreMusicPlayer;
 
-
-
+    public static AudioSource GetCorePlayer() { return FindObjectOfType<GameManager>().CoreFXPlayer; }
     private void Update()
     {
 

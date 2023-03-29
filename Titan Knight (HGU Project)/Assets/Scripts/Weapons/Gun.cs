@@ -12,26 +12,34 @@ public class Gun : MonoBehaviour
     [SerializeField] Transform firePoint;
     [SerializeField] GameObject bulletTargetPrefab;
     [SerializeField] Transform fireDis;
+    [SerializeField] GameObject FxObject;
+    [Tooltip("The sound that can be heard when the gun is fired.")][SerializeField] AudioClip fireSound;
 
     private float timeToFire = 1;
 
+    private bool doFire; // True when the gun is firing.
+    private AudioSource coreFXPlayer;
+
+    private void OnEnable()
+    {
+        coreFXPlayer = FindObjectOfType<GameManager>().CoreFXPlayer;
+    }
     private void FixedUpdate()
     {
         
+        if (timeToFire >= 0) timeToFire -= Time.deltaTime * (1 / gunSettings.fireRate); // Automatically reduce the time till the next bullet even though the gun is being spammed
+
+        if (doFire && timeToFire <= 0) Fire();
+
         if (Input.GetMouseButton(0))
         {
-            timeToFire -= Time.deltaTime * (1/gunSettings.fireRate);
-
-            if (timeToFire <= 0)
-                Fire();
+            doFire = true;
         }
-
-        if (Input.GetMouseButtonDown(0))
+        else
         {
-            Fire();
+            doFire = false;
         }
 
-        if (Input.GetMouseButtonUp(0)) timeToFire = 1;
     }
 
     private void Fire()
@@ -42,10 +50,20 @@ public class Gun : MonoBehaviour
         GameObject firedBullet = (GameObject)Instantiate(gunSettings.bulletToFire, firePoint.position, Quaternion.identity); // Spawn the bullet
 
 
-        /* Problem:*/ GameObject target = Instantiate(bulletTargetPrefab, fireDis.position, Quaternion.identity); // Spawn the despawn target of the bullet
+        /* Problem:*/
+        GameObject target = Instantiate(bulletTargetPrefab, fireDis.position, Quaternion.identity); // Spawn the despawn target of the bullet
 
 
         firedBullet.GetComponent<Bullet>().target = target.transform; // Assign the despawn target of the bullet
+
+        // Instantiate a sound object in order to give it a custom pitch
+        GameObject soundObject = Instantiate(FxObject, coreFXPlayer.gameObject.transform);
+        AudioSource audioSource = soundObject.GetComponent<AudioSource>();
+        audioSource.pitch = Random.Range(.7f, .9f);
+        audioSource.volume = 0.25f;
+        audioSource.clip = fireSound;
+        audioSource.Play();
+        Destroy(soundObject, fireSound.length);
 
     }
 }
