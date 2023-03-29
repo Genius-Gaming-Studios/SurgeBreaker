@@ -14,8 +14,10 @@ public enum ObjectType
 [Tooltip("This class is to be put onto any object that has health.")]
 public class Health : MonoBehaviour 
 {
+     
     [Tooltip("This will turn RED when this instance takes damage!")] [SerializeField] SkinnedMeshRenderer modelMaterial;
     [Tooltip("[EXPERIMENTAL]")] [SerializeField] MeshRenderer pModelMaterial; 
+
 
     [Space(10)]
     [Tooltip("The start player health. (Not used to change/read current health!)")] [SerializeField] public int startHealth = 100;
@@ -34,7 +36,6 @@ public class Health : MonoBehaviour
 
         if (modelMaterial != null) standardColor = modelMaterial.material.color;
         else standardColor = pModelMaterial.material.color;
-
         currentHealth = startHealth; // Initialize current health 
     }
 
@@ -80,6 +81,7 @@ public class Health : MonoBehaviour
 
         if (modelMaterial != null) modelMaterial.material.color = standardColor;
         else pModelMaterial.material.color = standardColor;
+
     }
 
 
