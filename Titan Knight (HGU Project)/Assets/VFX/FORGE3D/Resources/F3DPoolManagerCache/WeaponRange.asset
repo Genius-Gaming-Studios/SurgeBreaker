@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1393d0f3c350e4981d23bc526f480d, type: 3}
+  m_Name: WeaponRange
+  m_EditorClassIdentifier: 
+  poolsName: []
+  pools:
+  - poolName: GeneratedPool
+    templates:
+    - {fileID: 492552, guid: c7e9f38264df9af438839ee9c90e07c4, type: 3}
+    - {fileID: 400002, guid: bd9162be33a5ce54aa35d8e984e6d39d, type: 3}
+    - {fileID: 400010, guid: ce59e020d922ccb43866dee1ba26a673, type: 3}
+    - {fileID: 400004, guid: 45116fb1512dc704b99d70267628129a, type: 3}
+    - {fileID: 400004, guid: 64703ac190f718b4abd5d10cb23c96ce, type: 3}
+    - {fileID: 400002, guid: 497cce4f043498049994c48e6e47f0ae, type: 3}
+    - {fileID: 400000, guid: 66b50793fa1c780409218a1a1db5b1d8, type: 3}
+    - {fileID: 400000, guid: a5251bb5b54465f43aebe1ddc2724566, type: 3}
+    - {fileID: 400004, guid: ec543be1efaafca46aeac6f66e7a5ff0, type: 3}
+    - {fileID: 400002, guid: e4aff98840a58c94ea1cec28789d55d6, type: 3}
+    - {fileID: 400000, guid: e7b84dec6cdbfb646a33fd06b85cf64e, type: 3}
+    - {fileID: 400000, guid: ec0fb8bef2fb8a5459c55c3700521b70, type: 3}
+    - {fileID: 400010, guid: 2e92e894e0311c14c87f9544b2c88693, type: 3}
+    - {fileID: 400000, guid: 49ca46ce7082ccf4c91329cd9b7c4b61, type: 3}
+    - {fileID: 400010, guid: 762a17aff08aa1f40ac72b27c15fe2d1, type: 3}
+    - {fileID: 400004, guid: 43a8e47b31adb9a47b81c4653b412e5c, type: 3}
+    - {fileID: 400000, guid: 5f10243d9632db04bb987838fb3b36b7, type: 3}
+    - {fileID: 400000, guid: 12e7c1b739173c946b6fa3d40e9f62d1, type: 3}
+    - {fileID: 400004, guid: a980d2b7788c0ef489f3c79f44da79e1, type: 3}
+    - {fileID: 400004, guid: fd953838f1872d042a334b466e298967, type: 3}
+    - {fileID: 400012, guid: 440fe57f42038354092415c07a4d55a9, type: 3}
+    - {fileID: 400000, guid: b16d97c287e513344af2399ff138cd27, type: 3}
+    - {fileID: 400000, guid: bfa7781c328a236468eda51a8ae2be55, type: 3}
+    - {fileID: 400002, guid: ca6dec307275d294ba519247d04b6733, type: 3}
+    - {fileID: 400000, guid: e496166a742ada640b89650ebebbd052, type: 3}
+    - {fileID: 400000, guid: 9eeb3f92e3355994db8dc67cb3ea8ba0, type: 3}
+    - {fileID: 400002, guid: 0072b525437a5ed4891ebd255ec94fe6, type: 3}
+    - {fileID: 6391351660618465683, guid: f1d6be8fd7d5cc6448b99caa0671e56f, type: 3}
+    poolLength: 32000000320000003200000032000000320000003200000032000000320000003200000032000000320000003200000032000000320000003200000032000000320000003200000032000000320000003200000032000000320000003200000032000000f40100003200000032000000
+    poolLengthMax: 32000000320000003200000032000000320000003200000032000000320000003200000032000000320000003200000032000000320000003200000032000000320000003200000032000000320000003200000032000000320000003200000032000000f40100003200000032000000
+    broadcastSpawnName: OnSpawned
+    broadcastDespawnName: OnDespawned
+    delayedSpawnInInstall: 0
+    objectsPerUpdate: 5
+    needBroadcasting: 1
+    optimizeSpawn: 0
+    targetFPS: 50
+    pooling: 1
+    needSort: 0
+    needParenting: 0
+    needDebug: 0
+  namer: WeaponRange
