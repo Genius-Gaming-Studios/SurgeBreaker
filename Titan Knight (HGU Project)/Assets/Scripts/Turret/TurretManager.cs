@@ -1,5 +1,5 @@
 /* MARK GASKINS
- * Audio should be added in later
+ * Genius Studios 2023
  * 
  */
 
@@ -25,15 +25,19 @@ public class TurretManager : MonoBehaviour
 
     [Tooltip("The speed in which the Turret fires bullets.")] [SerializeField] [Range(0, 15)] float fireRate = 1f;
 
+    [SerializeField] GameObject FxObject;
+    [Tooltip("The sound that can be heard when the gun is fired.")] [SerializeField] AudioClip fireSound;
 
     private float fireCountdown;
     private Transform target;
     private Enemy targetEnemy;
-
-
+    private AudioSource coreFXPlayer;
+    
     private void Start()
     {
+
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        coreFXPlayer = FindObjectOfType<GameManager>().CoreFXPlayer;
     }
 
     void UpdateTarget()
@@ -77,7 +81,7 @@ public class TurretManager : MonoBehaviour
 
         if (fireCountdown <= 0f)
         {
-            Shoot();
+            Fire();
             fireCountdown = 1f / fireRate;
         }
 
@@ -96,8 +100,9 @@ public class TurretManager : MonoBehaviour
         Hinge.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 
     }
-    private void Shoot()
+    private void Fire()
     {
+        
         GameObject bulletObject = (GameObject)Instantiate(BulletPrefab, firePoint.position, firePoint.rotation);
         TurretBullet bullet = bulletObject.GetComponent<TurretBullet>();
 
@@ -105,6 +110,15 @@ public class TurretManager : MonoBehaviour
         {
             bullet.Seek(target);
         }
+
+        // Instantiate a sound object in order to give it a custom pitch
+        GameObject soundObject = Instantiate(FxObject, coreFXPlayer.gameObject.transform);
+        AudioSource audioSource = soundObject.GetComponent<AudioSource>();
+        audioSource.pitch = Random.Range(1.1f, 1.3f);
+        audioSource.volume = 0.09f;
+        audioSource.clip = fireSound;
+        audioSource.Play();
+        Destroy(soundObject, fireSound.length);
     }
 
     private void OnDrawGizmosSelected() // Shows the range of the turret's bullets with a red gizmo. (Ensure Gizmos are enabled in the editor)
