@@ -16,7 +16,8 @@ public class TurretBullet : MonoBehaviour
     [Header("Attributes")]
     [Tooltip("The speed that the bullet travels.")] [SerializeField] [Range(10, 150)] float speed = 70f;
     [Tooltip("The damage that the bullet does.")] [SerializeField] [Range(2, 1000)] int power = 50;
-
+    [Tooltip("The tag of the walls, or any object that the bullet can not go through.")] [SerializeField] string _solidObjectTag = "Can Stop Bullets";
+    [Tooltip("The radius of the object collision checking.")] [SerializeField] float checkingRange = 1f;
     public void Seek(Transform _target)
     {
         target = _target;
@@ -37,6 +38,14 @@ public class TurretBullet : MonoBehaviour
 
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
         transform.LookAt(target);
+
+        // Checks to see when it should delete the bullet after being too close to an object (after colliding with a wall)
+        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, checkingRange);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag(_solidObjectTag)) Destroy(this.gameObject);
+        }
+
     }
 
     private void HitTarget()
@@ -60,5 +69,5 @@ public class TurretBullet : MonoBehaviour
         }
         Destroy(gameObject);
     }
-
+ 
 }
