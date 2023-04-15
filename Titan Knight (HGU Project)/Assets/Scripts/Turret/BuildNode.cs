@@ -9,7 +9,7 @@ public class BuildNode : MonoBehaviour
 
 
     [HideInInspector] [Tooltip("This helps the script identify what node it should build a turret on.")] public string uniqueNodeID;
-
+    public bool isNodeOccupied;
 
     public void Awake()
     {
@@ -22,16 +22,20 @@ public class BuildNode : MonoBehaviour
     {
         if (BuildMenu == null) BuildMenu = FindObjectOfType<GameManager>().BuildMenu;
 
-        //if (PlayerCasting.DistanceFromTarget < 4) // Is the player close enough to the build node?
+        //if (PlayerCasting.DistanceFromTarget < 4) // Is the player close enough to the build node? [DEPRECATED]
         //{
-        HoverObject.SetActive(true); // Show the hover object
+
+        if (!isNodeOccupied)
+        {
+            HoverObject.SetActive(true); // Show the hover object
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-          
+
                 BuildMenu.SetActive(true);
                 BuildMenu.GetComponent<BuildMenu>().nodeID = uniqueNodeID;
             }
+        }
         //}
         //else HoverObject.SetActive(false); // Player is not close enough to the build node
     }
@@ -43,7 +47,10 @@ public class BuildNode : MonoBehaviour
         HoverObject.SetActive(false);
     }
 
-
+    private void Update()
+    {
+        if (GetComponentInChildren<TurretManager>()) isNodeOccupied = true; else isNodeOccupied = false; // Update node occupation status
+    }
     public void Disable() // Turn off the nodes - Note: This is being called in an Update function!
     {
         if (BuildMenu == null) BuildMenu = FindObjectOfType<GameManager>().BuildMenu;
@@ -64,9 +71,12 @@ public class BuildNode : MonoBehaviour
     {
         if (BuildMenu == null) BuildMenu = FindObjectOfType<GameManager>().BuildMenu;
 
-        GetComponent<BoxCollider>().enabled = true;
+        if (!isNodeOccupied) // Makes sure the node is not occupied first.
+        {
+            GetComponent<BoxCollider>().enabled = true;
 
-        this.GetComponent<MeshRenderer>().enabled = true;
+            this.GetComponent<MeshRenderer>().enabled = true;
+        }
 
     }
 }
