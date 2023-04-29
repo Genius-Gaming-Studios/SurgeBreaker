@@ -79,7 +79,7 @@ public class TurretManager : MonoBehaviour
         LockOnTarget();
 
 
-        if (fireCountdown <= 0f)
+        if ( fireCountdown <= 0f)
         {
             Fire();
             fireCountdown = 1f / fireRate;
