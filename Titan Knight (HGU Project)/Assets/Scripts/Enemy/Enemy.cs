@@ -196,7 +196,7 @@ public class Enemy : MonoBehaviour
             GetNextWaypoint();
         }
 
-
+        if (nextWaypoint != Vector3.zero) transform.LookAt(nextWaypoint); // Make the enemy look towards the next waypoint
 
     }
 

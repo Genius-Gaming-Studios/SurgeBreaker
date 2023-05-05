@@ -57,10 +57,10 @@ public class Gun : MonoBehaviour
         firedBullet.GetComponent<Bullet>().target = target.transform; // Assign the despawn target of the bullet
 
         // Instantiate a sound object in order to give it a custom pitch
-        GameObject soundObject = Instantiate(FxObject, coreFXPlayer.gameObject.transform);
+        GameObject soundObject = Instantiate(FxObject, this.gameObject.transform);
         AudioSource audioSource = soundObject.GetComponent<AudioSource>();
-        audioSource.pitch = Random.Range(.7f, .9f);
-        audioSource.volume = 0.25f;
+        // audioSource.pitch = Random.Range(.9f, 1.1f); // no
+        audioSource.volume = 0.67f;
         audioSource.clip = fireSound;
         audioSource.Play();
         Destroy(soundObject, fireSound.length);

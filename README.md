@@ -1,18 +1,21 @@
-# Surge Breaker (1.6.2proto)
+# Surge Breaker (1.7 alpha)
  *Surge Breaker - Genius Studios Project*
  
 *This is the Unity Project for the Surge Breaker Genius Studios Project.*
 
 ## What's New
 
-- The project has been signifigantly organized in order to create a more easily readable and modifiable environment. 
+- The Alpha of the game has been released, shifting Surge Breaker to Update 1.7alpha. We are out of the proto stages, so there will be no more 'p' following the version of the game.
 
-- Some of the files that you have been working on may be in new places. Make sure you look around for where they should (reasonably) be. None of your files were deleted, just moved to a different renamed folder.
+- Sound has been added
 
-- Created a **Level Template** scene, which has renamed and optimized ways in which the level objects are sorted. 
-- Please use the **Level Template** when creating a new scene. To use the level template, simply press `Ctrl/Cmd + N`, and click `Level Template` on the screen that appears. 
-- Created a **Enemy Template**, which can be used to easily create enemies for the `Path`, and for the `Player`.
-- **Fixed** all broken fonts. Please *only* used the font "`Prototype Font`" when creating text with Text Mesh Pro (TMP), until the Genius Studios officially decides on which Primary and Secondary fonts will be used for Surge Breaker.
+- Enemies have been given basic animations
+
+- A working build of the game is now viewable and playable.
+
+- A functional main menu has been added
+
+- We are now ready to begin work on polishing, voice acting, more rigorous animations/models, as well as adding more content to Surge Breaker in the coming updates.
 
 ## Installation
 - To open this project in Unity, you must use Unity __2021.3.11f1__. You can install Unity 2021.3.11 here: https://unity3d.com/unity/whats-new/2021.3.11
@@ -27,5 +30,5 @@
 
 
 
-`Latest Version: [1.6.1p]`
-`Last Updated: [3.4.23]`
+`Latest Version: [1.7a]`
+`Last Updated: [4.28.23]`

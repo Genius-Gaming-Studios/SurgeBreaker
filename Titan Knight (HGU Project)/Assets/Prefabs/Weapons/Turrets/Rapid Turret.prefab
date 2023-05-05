@@ -918,7 +918,7 @@ Transform:
   m_GameObject: {fileID: 5645677824237461905}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.57, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5645677825570014887}
@@ -1146,18 +1146,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d0a192fe416448db3320b4461a6ac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretCost: 150
-  range: 21
+  turretCost: 575
+  range: 26.2
   firePoint: {fileID: 4834591139213341190}
-  turnSpeed: 10
+  turnSpeed: 19.1
   enemyTag: Enemy
   Hinge: {fileID: 5645677824237461902}
-  BulletPrefab: {fileID: 5890929398850381768, guid: 9317401ddc5894d9f9116b1edabbfb09,
+  BulletPrefab: {fileID: 5890929398850381768, guid: 4326dfbf1691cc84e977e86fb90f7ed8,
     type: 3}
-  fireRate: 3
+  fireRate: 2.55
   FxObject: {fileID: 5857432720347368802, guid: 7e74c4160dbb641468e4f7b540463203,
     type: 3}
-  fireSound: {fileID: 8300000, guid: c321e51bf5d49304e9c337206098f391, type: 3}
+  fireSound: {fileID: 8300000, guid: b704bf4687adcc247954edf6b701dfda, type: 3}
 --- !u!1 &5645677824440669468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1599,7 +1599,7 @@ Transform:
   m_GameObject: {fileID: 5645677825525246830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5645677824308193499}
