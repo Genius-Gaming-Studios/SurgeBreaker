@@ -14,7 +14,7 @@ public class TurretManager : MonoBehaviour
     [Tooltip("The range in which the turret can reach enemies from.")] [SerializeField] [Range(3, 100)] public float range = 15f;
     [Tooltip("The tip of the turret that its bullets will fire from.")] [SerializeField] Transform firePoint;
 
-    [Tooltip("The turn speed of the hinge. Doesn't affect how fast the turret fires.")] [SerializeField] [Range(0, 15)] float turnSpeed = 10f;
+    [Tooltip("The turn speed of the hinge. Doesn't affect how fast the turret fires.")] [SerializeField] [Range(0, 30)] float turnSpeed = 10f;
     [Tooltip("The tag of the enemy. Ensure that all enemies have this tag name assigned to them.")] [SerializeField] string enemyTag = "Enemy";
 
 
@@ -79,7 +79,7 @@ public class TurretManager : MonoBehaviour
         LockOnTarget();
 
 
-        if (fireCountdown <= 0f)
+        if ( fireCountdown <= 0f)
         {
             Fire();
             fireCountdown = 1f / fireRate;
@@ -112,10 +112,10 @@ public class TurretManager : MonoBehaviour
         }
 
         // Instantiate a sound object in order to give it a custom pitch
-        GameObject soundObject = Instantiate(FxObject, coreFXPlayer.gameObject.transform);
+        GameObject soundObject = Instantiate(FxObject, this.gameObject.transform);
         AudioSource audioSource = soundObject.GetComponent<AudioSource>();
-        audioSource.pitch = Random.Range(1.1f, 1.3f);
-        audioSource.volume = 0.09f;
+        // audioSource.pitch = Random.Range(1.1f, 1.3f); // sounds so bad lol
+        audioSource.volume = .8f;
         audioSource.clip = fireSound;
         audioSource.Play();
         Destroy(soundObject, fireSound.length);
