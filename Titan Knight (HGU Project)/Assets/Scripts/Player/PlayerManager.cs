@@ -38,6 +38,7 @@ public class PlayerManager : MonoBehaviour
     [Space(26)]
     [Header("Player References")]
     [Tooltip("The parent object of the player model, which rotates the player model in the direction that the player is facing.")] [SerializeField] Transform pModelRotation;
+    [Tooltip(("Reference to player's Animator component "))] public Animator pAnimator;
 
     [Space(20)]
     [Header("Camera References")]
@@ -82,6 +83,7 @@ public class PlayerManager : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         playerHealth = GetComponent<Health>();
+        //pAnimator = GetComponent<Animator>();
         gm = FindObjectOfType<GameManager>();
 
         Camera.main.fieldOfView = normalFOV;
@@ -204,6 +206,8 @@ public class PlayerManager : MonoBehaviour
                 Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, normalFOV, smoothFOVSpeed * Time.deltaTime);
 
             controller.Move(movementVelocity * Time.deltaTime);
+            pAnimator.SetBool("isWalking", true);
+            
         }
         else // Sprinting 
         {
@@ -215,7 +219,9 @@ public class PlayerManager : MonoBehaviour
             movementDirection.x * (speed * runSpeedMultiplier),
             movementDirection.y * speed, /* Prevent the jump power from multiplying! */
             movementDirection.z * (speed * runSpeedMultiplier)) * Time.deltaTime);
+             pAnimator.SetBool("isWalking", true);
         }
+         pAnimator.SetBool("isWalking", false);
 
     }
 
