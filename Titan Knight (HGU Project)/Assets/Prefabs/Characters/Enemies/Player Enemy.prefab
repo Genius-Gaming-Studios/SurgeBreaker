@@ -755,7 +755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FollowMode: 1
-  attackDamage: 1
+  attackDamage: 4
   attackRate: 0.67
   sightRange: 85.7
   attackRange: 2
@@ -782,13 +782,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bb35e09994842fbbccb81079b75839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HealthType: 1
   modelMaterial: {fileID: 7014265701486680298}
   pModelMaterial: {fileID: 0}
   startHealth: 100
   currentHealth: 1
   resistance: 0
+  GeneratorHealthBar: {fileID: 0}
+  GeneratorHealthText: {fileID: 0}
   _bounty: 0
-  HealthType: 1
 --- !u!143 &5622125658679942981
 CharacterController:
   m_ObjectHideFlags: 0

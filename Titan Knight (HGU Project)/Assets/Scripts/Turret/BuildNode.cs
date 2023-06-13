@@ -29,7 +29,7 @@ public class BuildNode : MonoBehaviour
         {
             HoverObject.SetActive(true); // Show the hover object
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetMouseButtonDown(0))
             {
 
                 BuildMenu.SetActive(true);
