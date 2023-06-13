@@ -1,50 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
+using UnityEngine.UI;
 public enum ObjectType
 {
     NotSpecified,
     Enemy,
     Turret,
-    Player
+    Player,
+    Generator
 }
 
 
 [Tooltip("This class is to be put onto any object that has health.")]
 public class Health : MonoBehaviour 
 {
-     
+    [Tooltip("Very important reference that must be assigned. ObjectType: NOTSPECIFIED, ENEMY, TURRET, PLAYER, GENERATOR")]public ObjectType HealthType;
+
     [Tooltip("This will turn RED when this instance takes damage!")] [SerializeField] SkinnedMeshRenderer modelMaterial;
     [Tooltip("[EXPERIMENTAL]")] [SerializeField] MeshRenderer pModelMaterial; 
 
 
     [Space(10)]
     [Tooltip("The start player health. (Not used to change/read current health!)")] [SerializeField] public int startHealth = 100;
-    [Tooltip("The current health of the player. (Read only!)")] public int currentHealth = 1;
+    [Tooltip("The current health of the player. (Read only! Overwritten on initialization!)")] public int currentHealth = 1;
     
     [Tooltip("This is a test of adding resistance to the player. This can be used later to make 'Armor-like' buffs. (health - (damage / resistance))")] public int resistance;
 
+    // Generators
+    [Tooltip("The on-screen health bar of the GENERATOR that corresponds to this health component. (Only for generators!)")] public Slider GeneratorHealthBar;
+    [Tooltip("The on-screen health TEXT (e.g. 20%, 500%, 300%) of the GENERATOR that corresponds to this health component. (Only for generators!) ")] public TextMeshProUGUI GeneratorHealthText;
+
+
     [HideInInspector] public int _bounty; // This should be assigned via the Enemy script.
 
-    public ObjectType HealthType;
 
     private void Start()
     {
         if (HealthType == ObjectType.Turret) Debug.LogWarningFormat("Health Type is Turret, however, Turret health has no true functionality!");
 
 
-        if (modelMaterial != null) standardColor = modelMaterial.material.color;
-        else standardColor = pModelMaterial.material.color;
-        currentHealth = startHealth; // Initialize current health 
+        if (modelMaterial != null) foreach (Material mat in modelMaterial.materials) standardColor = mat.color; 
+        else foreach(Material mat in pModelMaterial.materials) standardColor = mat.color;
+
+        // Generators
+        if (HealthType == ObjectType.Generator)
+        {
+            GeneratorHealthBar.maxValue = startHealth;
+            GeneratorHealthBar.minValue = 0;
+        }
+       
+        
+        currentHealth = startHealth; // Initialize current health for things that are not Generators
     }
 
     private void Update()
     {
         if (HealthType == ObjectType.NotSpecified) { Debug.LogErrorFormat("Please specify the Health Type of this health object."); return; }
 
-
-
+        // Generators
+        if (HealthType == ObjectType.Generator)
+        {
+            GeneratorHealthBar.value = currentHealth;
+            GeneratorHealthText.text = $"{currentHealth}%";
+        }
         if (currentHealth <= 0) // This will kill the health object. If it's an enemy, it should be attatched to the parent object.
         {
             if (HealthType == ObjectType.Player) GetComponent<PlayerManager>().Die();
@@ -52,6 +72,7 @@ public class Health : MonoBehaviour
 
             this.enabled = false;
         }
+
 
     }
 
@@ -70,17 +91,17 @@ public class Health : MonoBehaviour
 
     private Color standardColor;
 
-    private IEnumerator DamageRenderer() // This simply makes the renderer appear red for a tenth of a second when it gets damaged. Sounds can be added later.
+    public IEnumerator DamageRenderer() // This simply makes the renderer appear red for a tenth of a second when it gets damaged. Sounds can be added later.
     {
 
-        if (modelMaterial != null) modelMaterial.material.color = Color.red;
-        else pModelMaterial.material.color = Color.red;
+        if (modelMaterial != null) foreach (Material mat in modelMaterial.materials) mat.color = Color.red;
+        else if (pModelMaterial != null) foreach (Material mat in pModelMaterial.materials) mat.color = Color.red;
 
         yield return new WaitForSeconds(0.1f);
 
 
-        if (modelMaterial != null) modelMaterial.material.color = standardColor;
-        else pModelMaterial.material.color = standardColor;
+        if (modelMaterial != null) foreach (Material mat in modelMaterial.materials) mat.color = standardColor;
+        else if (pModelMaterial != null) foreach (Material mat in pModelMaterial.materials) mat.color = standardColor;
 
     }
 
@@ -90,8 +111,11 @@ public class Health : MonoBehaviour
     {
         if (HealthType != ObjectType.Enemy) return;
 
-        PlayerManager.currentCurrency += _bounty;
+        PlayerManager.currentCurrency += _bounty; // Add player money according to the enemy's bounty.
 
-        Destroy(this.gameObject); 
+        GameManager.enemiesAlive--; // Subtract from the index of enemies alive before proceeding.
+
+        Destroy(this.gameObject);
+
     }
 }
