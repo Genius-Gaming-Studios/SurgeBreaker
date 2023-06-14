@@ -1,9 +1,11 @@
-# Surge Breaker (1.7 alpha)
+# Surge Breaker (1.8.1 alpha)
  *Surge Breaker - Genius Studios Project*
  
 *This is the Unity Project for the Surge Breaker Genius Studios Project.*
 
 ## What's New
+
+- You can now click on an occupied Turret-Node in order to bring up a sell menu. When you sell a turret, the money given back to you is equivilant of 3/4 of the original cost of the turret.
 
 - The Alpha of the game has been released, shifting Surge Breaker to Update 1.7alpha. We are out of the proto stages, so there will be no more 'p' following the version of the game.
 

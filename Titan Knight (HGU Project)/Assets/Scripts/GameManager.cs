@@ -15,7 +15,9 @@ public class GameManager : MonoBehaviour
     [Tooltip("(Difficulty) The amount of times that the game cycles between build mode and combat mode.")] [SerializeField] [Range(1, 6)] public int amountOfCycles;
     [Tooltip("(Difficulty) The amount of enemies to spawn per generator.")] [SerializeField] [Range(1, 100)] public int enemiesPerGenerator;
     [Tooltip("(Difficulty) The amount of enemies that are added to the enemiesPerGenerator, per each cycled.")] [SerializeField] [Range(1, 40)] public int enemiesIncreasePerCycle;
-    [Tooltip("This is the amount of time that a player will have in either of the specified modes.")] [SerializeField] [Range(10, 49)] public int timeInBuildMode = 30, timeInCombatMode = 30;
+    [Tooltip("(Difficulty) The amount of enemies that spawn per generator in wave one.")] [SerializeField] [Range(1, 25)] public int waveOneEnemies = 10;
+
+    [Tooltip("This is the amount of time that a player will have in either of the specified modes.")] [SerializeField] [Range(10, 49)] public int timeInBuildMode = 30, timeInCombatMode = 30, timeInWaveOneBuild =30;
 
     [Header("Technical")]
     [Tooltip("This is the current GameMode that majorly effects how the game acts. Idle = 0, Build = 1, Combat = 2")]public GameMode currentMode = GameMode.Build;
@@ -91,8 +93,16 @@ public class GameManager : MonoBehaviour
 
             /// Starts in build mode
             SwitchGamemode(GameMode.Build);
-            timerTime = timeInBuildMode;
-            yield return new WaitForSeconds(timeInBuildMode);
+            if (i > 1)
+            {
+                timerTime = timeInBuildMode;
+                yield return new WaitForSeconds(timeInBuildMode);
+            }
+            else // Distinction between wave one difficulty and all of the other difficulties
+            {
+                timerTime = timeInWaveOneBuild;
+                yield return new WaitForSeconds(timeInWaveOneBuild);
+            }
             /// Provide 5 seconds between cycles. Do not show on the game timer. This is invisible time.
             timerTime = 0;
             yield return new WaitForSeconds(2);
@@ -101,8 +111,17 @@ public class GameManager : MonoBehaviour
             /// Initiate the combat mode
             foreach (EnemySpawner spawner in FindObjectsOfType<EnemySpawner>())
             {
-                spawner.enemiesToSpawn = enemiesPerGenerator;
-                enemiesAlive += enemiesPerGenerator;
+                if (i > 1)
+                {
+                    spawner.enemiesToSpawn = enemiesPerGenerator;
+                    enemiesAlive += enemiesPerGenerator;
+                }
+                else // Distinction between wave one difficulty and all of the other difficulties
+                {
+                    spawner.enemiesToSpawn = waveOneEnemies;
+                    enemiesAlive += waveOneEnemies;
+                }
+
                 spawner.StartCoroutine(spawner.SpawnWave());
             }
             /// Wait until all enemies are dead, not for the timer, to set the round to a win state.
@@ -136,7 +155,7 @@ public class GameManager : MonoBehaviour
 
     public static AudioSource GetCorePlayer() { return FindObjectOfType<GameManager>().CoreFXPlayer; }
 
-[SerializeField] public GameObject BuildMenu;
+[SerializeField] public GameObject BuildMenu, DeleteMenu;
 
 
     private void Update()
@@ -162,7 +181,6 @@ public class GameManager : MonoBehaviour
                 CombatCanvas.SetActive(true);
                 BuildCanvas.SetActive(false);
                 WeaponsParent.SetActive(true);
-
                 foreach (BuildNode node in FindObjectsOfType<BuildNode>()) node.Disable(); // Hide all node mesh renderers
 
                 break;
