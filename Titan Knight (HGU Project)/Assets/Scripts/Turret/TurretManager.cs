@@ -16,7 +16,7 @@ public class TurretManager : MonoBehaviour
 
     [Tooltip("The turn speed of the hinge. Doesn't affect how fast the turret fires.")] [SerializeField] [Range(0, 30)] float turnSpeed = 10f;
     [Tooltip("The tag of the enemy. Ensure that all enemies have this tag name assigned to them.")] [SerializeField] string enemyTag = "Enemy";
-
+    public Turret turretSettings; 
 
     [Header("Bullet Preferences")]
 
@@ -28,6 +28,7 @@ public class TurretManager : MonoBehaviour
     [SerializeField] GameObject FxObject;
     [Tooltip("The sound that can be heard when the gun is fired.")] [SerializeField] AudioClip fireSound;
 
+
     private float fireCountdown;
     private Transform target;
     private Enemy targetEnemy;
@@ -38,6 +39,8 @@ public class TurretManager : MonoBehaviour
 
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
         coreFXPlayer = FindObjectOfType<GameManager>().CoreFXPlayer;
+
+        if (turretSettings == null) Debug.LogWarningFormat("Please attatch the turret settings to a Turret in this scene in order to utilize the Selling features.");
     }
 
     void UpdateTarget()
