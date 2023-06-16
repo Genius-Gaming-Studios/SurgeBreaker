@@ -203,6 +203,71 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b29378e26e3014e54bd64537ce18f7c8, type: 3}
+--- !u!1 &815382512
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 815382514}
+  - component: {fileID: 815382513}
+  m_Layer: 0
+  m_Name: '>> GameManager'
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &815382513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815382512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 943957b85209b49929721682e83c0f21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountOfCycles: 4
+  enemiesPerGenerator: 20
+  enemiesIncreasePerCycle: 15
+  waveOneEnemies: 11
+  timeInBuildMode: 12
+  timeInCombatMode: 30
+  timeInWaveOneBuild: 27
+  currentMode: 2
+  CombatCanvas: {fileID: 0}
+  BuildCanvas: {fileID: 0}
+  WeaponsParent: {fileID: 0}
+  GameTimerText: {fileID: 0}
+  GameCycleText: {fileID: 0}
+  EnemiesAliveText: {fileID: 0}
+  _enemiesAlive: 0
+  GeneratorsInLevel:
+  - {fileID: 0}
+  CoreFXPlayer: {fileID: 0}
+  CoreMusicPlayer: {fileID: 0}
+  BuildMenu: {fileID: 0}
+  DeleteMenu: {fileID: 0}
+--- !u!4 &815382514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815382512}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 769.34296, y: 445.59473, z: 12.978068}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &880002330
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +417,7 @@ PrefabInstance:
     - target: {fileID: 5622125658679942991, guid: 9f32172a17de12645b8c9a4396c4c0b6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5622125658679942991, guid: 9f32172a17de12645b8c9a4396c4c0b6,
         type: 3}
@@ -507,7 +572,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1252654569
 PrefabInstance:
@@ -524,7 +589,7 @@ PrefabInstance:
     - target: {fileID: 8172549335678160583, guid: bd85b00e41896994bb826928fd9c6104,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8172549335678160583, guid: bd85b00e41896994bb826928fd9c6104,
         type: 3}
@@ -671,7 +736,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &1486949998
 MonoBehaviour:
