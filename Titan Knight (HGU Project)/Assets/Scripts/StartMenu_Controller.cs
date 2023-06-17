@@ -5,9 +5,32 @@ using UnityEngine.SceneManagement;
 
 public class StartMenu_Controller : MonoBehaviour
 {
-   public void NewGame() 
+    public GameObject MainScreen;
+    public GameObject LevelScreen;
+    public GameObject OptionsScreen;
+
+    public void OptionsButton()
+    {
+        MainScreen.SetActive(false);
+        OptionsScreen.SetActive(true);
+    }
+
+    public void ReturnButton()
+    {
+        MainScreen.SetActive(true);
+        OptionsScreen.SetActive(false);
+        LevelScreen.SetActive(false);
+    }
+
+    public void LevelsButton()
+    {
+        MainScreen.SetActive(false);
+        LevelScreen.SetActive(true);
+    }
+
+   public void LoadLevel(string levelName) 
    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(levelName) ;
    }
 
    public void ExitGame()
