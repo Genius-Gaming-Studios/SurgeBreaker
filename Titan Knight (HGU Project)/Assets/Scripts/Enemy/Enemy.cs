@@ -221,6 +221,7 @@ public class Enemy : MonoBehaviour
 
         assignedPath.DamageGenerator(attackDamage);
 
+        GameManager.enemiesAlive--; // Subtract from the list of enemies alive.
 
         Destroy(gameObject);
     }
