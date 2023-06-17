@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
 
     [Header("Options")]
-    [SerializeField] int enemiesToSpawn = 16;
+    [SerializeField] public int enemiesToSpawn = 16;
     [Range(0.1f, 3f)] [SerializeField] float spawnRate = 2; 
 
     [Space(10)]
@@ -23,13 +23,11 @@ public class EnemySpawner : MonoBehaviour
         gm = FindObjectOfType<GameManager>(); // Assign the build mode
 
         if (spawnSound == null) Debug.Log("<color=cyan>Notice! You have not assigned the audio clip for the spawn sound for an Enemy Spawner in this scene!</color> The enemy spawner will not function properly. If you are unaware of how to add an audio clip to the Build Menu's script, please contact Mark in the Hidden Genius Slack.");
-
-        StartCoroutine(SpawnWave());
     }
 
-    private IEnumerator SpawnWave()
+    public IEnumerator SpawnWave()
     {
-
+        
         for (int i = 0; i < enemiesToSpawn; i++)
         {
             // Assign the required values to the enemy prefab to let it navigate properly
