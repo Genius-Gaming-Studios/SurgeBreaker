@@ -38,6 +38,7 @@ public class PlayerManager : MonoBehaviour
     [Space(26)]
     [Header("Player References")]
     [Tooltip("The parent object of the player model, which rotates the player model in the direction that the player is facing.")] [SerializeField] Transform pModelRotation;
+    [Tooltip(("Reference to player's Animator component "))] public Animator pAnimator;
 
     [Space(20)]
     [Header("Camera References")]
@@ -82,6 +83,7 @@ public class PlayerManager : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         playerHealth = GetComponent<Health>();
+        //pAnimator = GetComponent<Animator>();
         gm = FindObjectOfType<GameManager>();
 
         Camera.main.fieldOfView = normalFOV;
@@ -105,6 +107,7 @@ public class PlayerManager : MonoBehaviour
 
         HandleMovement();
         HandleSprinting();
+        HandleAnimations();
 
         // HandleJumping();
 
@@ -204,6 +207,7 @@ public class PlayerManager : MonoBehaviour
                 Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, normalFOV, smoothFOVSpeed * Time.deltaTime);
 
             controller.Move(movementVelocity * Time.deltaTime);
+            
         }
         else // Sprinting 
         {
@@ -215,8 +219,8 @@ public class PlayerManager : MonoBehaviour
             movementDirection.x * (speed * runSpeedMultiplier),
             movementDirection.y * speed, /* Prevent the jump power from multiplying! */
             movementDirection.z * (speed * runSpeedMultiplier)) * Time.deltaTime);
+             pAnimator.SetBool("isWalking", true);
         }
-
     }
 
 
@@ -251,5 +255,27 @@ public class PlayerManager : MonoBehaviour
         // Update position of player's "isometric" camera
         pCamera.transform.position = pCamera_Position.transform.position;
         pCamera.transform.rotation = pCamera_Position.transform.rotation;
+    }
+
+    private void HandleAnimations()
+    {
+        if (Input.GetAxis("Vertical") > 0)
+        {
+            pAnimator.SetBool("IsWalkingForward", true);
+            pAnimator.SetBool("IsWalkingBackward", false);
+        }
+
+        else if (Input.GetAxis("Vertical") < 0)
+        {
+            pAnimator.SetBool("IsWalkingForward", false);
+            pAnimator.SetBool("IsWalkingBackward", true);
+        }
+
+        else
+        {
+            pAnimator.SetBool("IsWalkingForward", false);
+            pAnimator.SetBool("IsWalkingBackward", false);
+        }
+        
     }
 }
