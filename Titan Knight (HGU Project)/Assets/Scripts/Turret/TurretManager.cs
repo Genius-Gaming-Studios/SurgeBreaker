@@ -45,6 +45,8 @@ public class TurretManager : MonoBehaviour
         coreFXPlayer = FindObjectOfType<GameManager>().CoreFXPlayer;
 
         if (turretSettings == null) Debug.LogWarningFormat("Please attatch the turret settings to a Turret in this scene in order to utilize the Selling features.");
+
+        mzwaitTime = fireRate;
     }
 
     void UpdateTarget()
