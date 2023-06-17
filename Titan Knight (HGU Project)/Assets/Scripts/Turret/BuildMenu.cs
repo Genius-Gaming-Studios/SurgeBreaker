@@ -23,7 +23,11 @@ public class BuildMenu : MonoBehaviour
     private void BuildTurret(Turret turret, BuildNode Node)
     {
         PlayerManager.currentCurrency -= turret.cost;
-        Instantiate(turret.prefab, Node.transform);
+        Node.MyPrefab  = (GameObject)Instantiate(turret.prefab, Node.transform);
+
+
+        Debug.Log("Assigned " + Node.MyPrefab);
+        Node.MyPrefab.GetComponent<TurretManager>().turretSettings = turret; // Assigns turret settings
 
         GameManager.GetCorePlayer().PlayOneShot(purchase_FX);
 
