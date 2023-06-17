@@ -94,13 +94,13 @@ public class Health : MonoBehaviour
     public IEnumerator DamageRenderer() // This simply makes the renderer appear red for a tenth of a second when it gets damaged. Sounds can be added later.
     {
 
-        if (modelMaterial != null) foreach (Material mat in modelMaterial.materials) mat.color = Color.red;
+        if (modelMaterial != null) foreach (SkinnedMeshRenderer renderer in modelMaterial) foreach (Material mat in renderer.materials) mat.color = Color.red;
         else if (pModelMaterial != null) foreach (Material mat in pModelMaterial.materials) mat.color = Color.red;
 
         yield return new WaitForSeconds(0.1f);
 
 
-        if (modelMaterial != null) foreach (Material mat in modelMaterial.materials) mat.color = standardColor;
+        if (modelMaterial != null) foreach (SkinnedMeshRenderer renderer in modelMaterial) foreach (Material mat in renderer.materials) mat.color = standardColor;
         else if (pModelMaterial != null) foreach (Material mat in pModelMaterial.materials) mat.color = standardColor;
 
     }
