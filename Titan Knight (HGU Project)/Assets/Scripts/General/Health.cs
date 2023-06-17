@@ -18,7 +18,7 @@ public class Health : MonoBehaviour
 {
     [Tooltip("Very important reference that must be assigned. ObjectType: NOTSPECIFIED, ENEMY, TURRET, PLAYER, GENERATOR")]public ObjectType HealthType;
 
-    [Tooltip("This will turn RED when this instance takes damage!")] [SerializeField] SkinnedMeshRenderer modelMaterial;
+    [Tooltip("This will turn RED when this instance takes damage!")] [SerializeField] SkinnedMeshRenderer[] modelMaterial;
     [Tooltip("[EXPERIMENTAL]")] [SerializeField] MeshRenderer pModelMaterial; 
 
 
@@ -41,7 +41,7 @@ public class Health : MonoBehaviour
         if (HealthType == ObjectType.Turret) Debug.LogWarningFormat("Health Type is Turret, however, Turret health has no true functionality!");
 
 
-        if (modelMaterial != null) foreach (Material mat in modelMaterial.materials) standardColor = mat.color; 
+        if (modelMaterial != null) foreach (SkinnedMeshRenderer renderer in modelMaterial) foreach (Material mat in renderer.materials) standardColor = mat.color; 
         else foreach(Material mat in pModelMaterial.materials) standardColor = mat.color;
 
         // Generators
