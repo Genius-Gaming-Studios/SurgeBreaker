@@ -107,6 +107,7 @@ public class PlayerManager : MonoBehaviour
 
         HandleMovement();
         HandleSprinting();
+        HandleAnimations();
 
         // HandleJumping();
 
@@ -206,7 +207,6 @@ public class PlayerManager : MonoBehaviour
                 Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, normalFOV, smoothFOVSpeed * Time.deltaTime);
 
             controller.Move(movementVelocity * Time.deltaTime);
-            pAnimator.SetBool("isWalking", true);
             
         }
         else // Sprinting 
@@ -221,8 +221,6 @@ public class PlayerManager : MonoBehaviour
             movementDirection.z * (speed * runSpeedMultiplier)) * Time.deltaTime);
              pAnimator.SetBool("isWalking", true);
         }
-         pAnimator.SetBool("isWalking", false);
-
     }
 
 
@@ -257,5 +255,27 @@ public class PlayerManager : MonoBehaviour
         // Update position of player's "isometric" camera
         pCamera.transform.position = pCamera_Position.transform.position;
         pCamera.transform.rotation = pCamera_Position.transform.rotation;
+    }
+
+    private void HandleAnimations()
+    {
+        if (Input.GetAxis("Vertical") > 0)
+        {
+            pAnimator.SetBool("IsWalkingForward", true);
+            pAnimator.SetBool("IsWalkingBackward", false);
+        }
+
+        else if (Input.GetAxis("Vertical") < 0)
+        {
+            pAnimator.SetBool("IsWalkingForward", false);
+            pAnimator.SetBool("IsWalkingBackward", true);
+        }
+
+        else
+        {
+            pAnimator.SetBool("IsWalkingForward", false);
+            pAnimator.SetBool("IsWalkingBackward", false);
+        }
+        
     }
 }
