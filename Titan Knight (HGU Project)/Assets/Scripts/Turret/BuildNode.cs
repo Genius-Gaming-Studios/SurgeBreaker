@@ -85,7 +85,7 @@ public class BuildNode : MonoBehaviour
         BuildMenu.GetComponent<BuildMenu>().nodeID = ""; // Reset the Node ID
 
         SellMenu.SetActive(false);
-        SellMenu.GetComponent<BuildMenu>().nodeID = ""; // Reset the Node ID
+        SellMenu.GetComponent <SellMenu>().nodeID = ""; // Reset the Node ID
 
 
     }
