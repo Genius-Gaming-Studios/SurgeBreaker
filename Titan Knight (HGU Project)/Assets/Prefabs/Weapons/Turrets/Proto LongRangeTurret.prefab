@@ -918,7 +918,7 @@ Transform:
   m_GameObject: {fileID: 5645677824237461905}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.57, z: 0}
-  m_LocalScale: {x: 3, y: 1, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5645677825570014887}
@@ -1151,14 +1151,17 @@ MonoBehaviour:
   firePoint: {fileID: 8959968206839062051}
   turnSpeed: 10
   enemyTag: Enemy
-  turretSettings: {fileID: 0}
   Hinge: {fileID: 5645677824237461902}
   BulletPrefab: {fileID: 5890929398850381768, guid: 299be1b4cc35e48f28cdf8d872cfd243,
     type: 3}
   fireRate: 3
   FxObject: {fileID: 5857432720347368802, guid: 7e74c4160dbb641468e4f7b540463203,
     type: 3}
+<<<<<<< Updated upstream
+  fireSound: {fileID: 8300000, guid: 8986c4184dbe1994c9b6aec6692e4a45, type: 3}
+=======
   fireSound: {fileID: 8300000, guid: 20a27dfac173c0b4f80bef482cc3985a, type: 3}
+>>>>>>> Stashed changes
 --- !u!1 &5645677824440669468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1600,7 +1603,7 @@ Transform:
   m_GameObject: {fileID: 5645677825525246830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 1, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5645677824308193499}
