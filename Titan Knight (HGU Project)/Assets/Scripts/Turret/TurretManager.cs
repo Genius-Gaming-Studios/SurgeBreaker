@@ -27,9 +27,13 @@ public class TurretManager : MonoBehaviour
 
     [SerializeField] GameObject FxObject;
     [Tooltip("The sound that can be heard when the gun is fired.")] [SerializeField] AudioClip fireSound;
+    [Tooltip("The muzzle flash for the gun.")] [SerializeField] GameObject muzzleFlash;
 
 
     private float fireCountdown;
+    private float mzwaitTime = 1f;
+    private float mzTimer = 0.0f;
+ 
     private Transform target;
     private Enemy targetEnemy;
     private AudioSource coreFXPlayer;
@@ -85,6 +89,13 @@ public class TurretManager : MonoBehaviour
         if ( fireCountdown <= 0f)
         {
             Fire();
+
+            mzTimer += Time.deltaTime;
+            if (mzTimer > mzwaitTime)
+            {
+                muzzleFlash.SetActive(false);
+            }
+
             fireCountdown = 1f / fireRate;
         }
 
@@ -103,6 +114,7 @@ public class TurretManager : MonoBehaviour
         Hinge.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 
     }
+
     private void Fire()
     {
         
@@ -114,6 +126,9 @@ public class TurretManager : MonoBehaviour
             bullet.Seek(target);
         }
 
+        muzzleFlash.SetActive(true);
+        mzTimer = 0f;
+
         // Instantiate a sound object in order to give it a custom pitch
         GameObject soundObject = Instantiate(FxObject, this.gameObject.transform);
         AudioSource audioSource = soundObject.GetComponent<AudioSource>();
@@ -122,6 +137,7 @@ public class TurretManager : MonoBehaviour
         audioSource.clip = fireSound;
         audioSource.Play();
         Destroy(soundObject, fireSound.length);
+        // muzzleFlash.SetActive(false);
     }
 
     private void OnDrawGizmosSelected() // Shows the range of the turret's bullets with a red gizmo. (Ensure Gizmos are enabled in the editor)
