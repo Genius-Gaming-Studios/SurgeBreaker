@@ -40,6 +40,8 @@ public class PreferencesHandler : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = true;
+
         /// Update the existing values from the Player Preferences.
         Invoke(nameof(InitializeSavedValues), 0.1f);
         /// Try to assign the audio source on this object to its place.
