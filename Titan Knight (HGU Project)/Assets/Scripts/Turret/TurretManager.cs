@@ -95,7 +95,7 @@ public class TurretManager : MonoBehaviour
             mzTimer += Time.deltaTime;
             if (mzTimer > mzwaitTime)
             {
-                muzzleFlash.SetActive(false);
+                // muzzleFlash.SetActive(false);
             }
 
             fireCountdown = 1f / fireRate;
@@ -128,14 +128,14 @@ public class TurretManager : MonoBehaviour
             bullet.Seek(target);
         }
 
-        muzzleFlash.SetActive(true);
+       //  muzzleFlash.SetActive(true);
         mzTimer = 0f;
 
         // Instantiate a sound object in order to give it a custom pitch
         GameObject soundObject = Instantiate(FxObject, this.gameObject.transform);
         AudioSource audioSource = soundObject.GetComponent<AudioSource>();
         // audioSource.pitch = Random.Range(1.1f, 1.3f); // sounds so bad lol
-        audioSource.volume = .8f;
+        audioSource.volume = FindObjectOfType<UniversalPreferences>()._fxVolume;
         audioSource.clip = fireSound;
         audioSource.Play();
         Destroy(soundObject, fireSound.length);
