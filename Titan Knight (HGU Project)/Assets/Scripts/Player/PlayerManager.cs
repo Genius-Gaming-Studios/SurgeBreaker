@@ -79,6 +79,13 @@ public class PlayerManager : MonoBehaviour
 
     [HideInInspector] public Vector3 movementDirection;
 
+    private void Start()
+    {
+        isDead = false;
+        generatorsDestroyed = false;
+        AudioListener.pause = false;
+    }
+
     private void Awake() // Assign defaults
     {
         controller = GetComponent<CharacterController>();
@@ -126,7 +133,7 @@ public class PlayerManager : MonoBehaviour
             controller.enabled = false;
             this.enabled = false;
 
-            StartCoroutine(ReloadScene()); // Reload the scene.
+            FindObjectOfType<GameManager>().GameOver();
         }
 
         if (isDead)
@@ -136,7 +143,7 @@ public class PlayerManager : MonoBehaviour
             controller.enabled = false;
             this.enabled = false;
 
-            StartCoroutine(ReloadScene()); // Reload the scene.
+            FindObjectOfType<GameManager>().GameOver();
         }
 
 
@@ -150,14 +157,6 @@ public class PlayerManager : MonoBehaviour
         if (playerHealth.currentHealth >= 10) ArmorIcons[2].SetActive(true); else ArmorIcons[2].SetActive(false);
 
         currencyText.text = $"${currentCurrency}";
-    }
-
-    private IEnumerator ReloadScene()  // Reloads the scene if and when the player dies.
-    {
-        yield return new WaitForSeconds(3);
-        isDead = false;
-        generatorsDestroyed = false;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     private void HandleDynamicCursor() // Handle the crosshair switching in a canvas to support animation of the crosshair.
@@ -228,7 +227,7 @@ public class PlayerManager : MonoBehaviour
             movementDirection.x * (speed * runSpeedMultiplier),
             movementDirection.y * speed, /* Prevent the jump power from multiplying! */
             movementDirection.z * (speed * runSpeedMultiplier)) * Time.deltaTime);
-             pAnimator.SetBool("isWalking", true);
+            pAnimator.SetBool("isWalking", true);
         }
     }
 

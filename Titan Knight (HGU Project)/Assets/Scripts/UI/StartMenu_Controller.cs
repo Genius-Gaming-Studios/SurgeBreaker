@@ -9,6 +9,11 @@ public class StartMenu_Controller : MonoBehaviour
     public GameObject LevelScreen;
     public GameObject OptionsScreen;
 
+    private void Awake()
+    {
+        AudioListener.pause = false;
+    }
+
     public void OptionsButton()
     {
         MainScreen.SetActive(false);
