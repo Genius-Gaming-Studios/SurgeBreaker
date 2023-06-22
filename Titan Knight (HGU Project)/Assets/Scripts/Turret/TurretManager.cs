@@ -146,6 +146,9 @@ public class TurretManager : MonoBehaviour
         audioSource.Play();
         Destroy(soundObject, fireSound.length);
         Destroy(flashObject, fireSound.length);
+
+        // Play the fire animation.
+        fireAnimation.Play();
     }
 
     private void OnDrawGizmosSelected() // Shows the range of the turret's bullets with a red gizmo. (Ensure Gizmos are enabled in the editor)

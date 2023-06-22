@@ -956,8 +956,8 @@ Transform:
   m_Children:
   - {fileID: 5645677825570014887}
   - {fileID: 8959968206839062051}
-  m_Father: {fileID: 5645677824414783082}
-  m_RootOrder: 1
+  m_Father: {fileID: 6273767922189322402}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!111 &282063249371184777
 Animation:
@@ -1200,7 +1200,7 @@ MonoBehaviour:
   firePoint: {fileID: 8959968206839062051}
   turnSpeed: 10
   enemyTag: Enemy
-  turretSettings: {fileID: 0}
+  turretSettings: {fileID: 11400000, guid: c182664fddee041018cd789197d473c1, type: 2}
   Hinge: {fileID: 6273767922189322402}
   BulletPrefab: {fileID: 5890929398850381768, guid: 299be1b4cc35e48f28cdf8d872cfd243,
     type: 3}
@@ -1209,6 +1209,7 @@ MonoBehaviour:
     type: 3}
   fireSound: {fileID: 8300000, guid: c321e51bf5d49304e9c337206098f391, type: 3}
   muzzleFlash: {fileID: 100002, guid: 615b583080b2f7140b3c3d9d5315c9f1, type: 3}
+  fireAnimation: {fileID: 282063249371184777}
 --- !u!1 &5645677824440669468
 GameObject:
   m_ObjectHideFlags: 0
