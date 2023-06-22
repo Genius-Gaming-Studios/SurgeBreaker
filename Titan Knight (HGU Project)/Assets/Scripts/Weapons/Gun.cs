@@ -60,7 +60,7 @@ public class Gun : MonoBehaviour
         GameObject soundObject = Instantiate(FxObject, this.gameObject.transform);
         AudioSource audioSource = soundObject.GetComponent<AudioSource>();
         // audioSource.pitch = Random.Range(.9f, 1.1f); // no
-        audioSource.volume = 0.67f;
+        audioSource.volume = FindObjectOfType<UniversalPreferences>()._fxVolume;
         audioSource.clip = fireSound;
         audioSource.Play();
         Destroy(soundObject, fireSound.length);

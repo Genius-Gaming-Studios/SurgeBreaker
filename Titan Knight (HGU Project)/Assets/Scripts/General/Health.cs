@@ -18,7 +18,7 @@ public class Health : MonoBehaviour
 {
     [Tooltip("Very important reference that must be assigned. ObjectType: NOTSPECIFIED, ENEMY, TURRET, PLAYER, GENERATOR")]public ObjectType HealthType;
 
-    [Tooltip("This will turn RED when this instance takes damage!")] [SerializeField] SkinnedMeshRenderer modelMaterial;
+    [Tooltip("This will turn RED when this instance takes damage!")] [SerializeField] SkinnedMeshRenderer[] modelMaterial;
     [Tooltip("[EXPERIMENTAL]")] [SerializeField] MeshRenderer pModelMaterial; 
 
 
@@ -41,7 +41,7 @@ public class Health : MonoBehaviour
         if (HealthType == ObjectType.Turret) Debug.LogWarningFormat("Health Type is Turret, however, Turret health has no true functionality!");
 
 
-        if (modelMaterial != null) foreach (Material mat in modelMaterial.materials) standardColor = mat.color; 
+        if (modelMaterial != null) foreach (SkinnedMeshRenderer renderer in modelMaterial) foreach (Material mat in renderer.materials) standardColor = mat.color; 
         else foreach(Material mat in pModelMaterial.materials) standardColor = mat.color;
 
         // Generators
@@ -63,7 +63,8 @@ public class Health : MonoBehaviour
         if (HealthType == ObjectType.Generator)
         {
             GeneratorHealthBar.value = currentHealth;
-            GeneratorHealthText.text = $"{currentHealth}%";
+            if (currentHealth > 1) GeneratorHealthText.text = $"{currentHealth}%";
+            else GeneratorHealthText.text = $"<color=red>OFFLINE</color>";
         }
         if (currentHealth <= 0) // This will kill the health object. If it's an enemy, it should be attatched to the parent object.
         {
@@ -94,13 +95,13 @@ public class Health : MonoBehaviour
     public IEnumerator DamageRenderer() // This simply makes the renderer appear red for a tenth of a second when it gets damaged. Sounds can be added later.
     {
 
-        if (modelMaterial != null) foreach (Material mat in modelMaterial.materials) mat.color = Color.red;
+        if (modelMaterial != null) foreach (SkinnedMeshRenderer renderer in modelMaterial) foreach (Material mat in renderer.materials) mat.color = Color.red;
         else if (pModelMaterial != null) foreach (Material mat in pModelMaterial.materials) mat.color = Color.red;
 
         yield return new WaitForSeconds(0.1f);
 
 
-        if (modelMaterial != null) foreach (Material mat in modelMaterial.materials) mat.color = standardColor;
+        if (modelMaterial != null) foreach (SkinnedMeshRenderer renderer in modelMaterial) foreach (Material mat in renderer.materials) mat.color = standardColor;
         else if (pModelMaterial != null) foreach (Material mat in pModelMaterial.materials) mat.color = standardColor;
 
     }

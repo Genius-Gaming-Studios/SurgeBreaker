@@ -1,23 +1,21 @@
-# Surge Breaker (1.8.1 alpha)
+# Surge Breaker (1.8.2 alpha)
  *Surge Breaker - Genius Studios Project*
  
 *This is the Unity Project for the Surge Breaker Genius Studios Project.*
 
-## What's New
+## 1.8.2 Playability Update
 
-- You can now click on an occupied Turret-Node in order to bring up a sell menu. When you sell a turret, the money given back to you is equivilant of 3/4 of the original cost of the turret.
+### What's New?
+- Game is now fully functional
+- Options have been added for several volume states. Options come with volume testing feature in the updated main menu.
+- Pause menu completed, for now
+- Mech animations completed for a demo
+- When all generators in a level are destroyed, it will do the same thing that happens when the player is killed, for now
+- Added Level Selection screen
+- Added basic hint arrows in the main menu
+- Added Hidden Genius Logo to main menu
 
-- The Alpha of the game has been released, shifting Surge Breaker to Update 1.7alpha. We are out of the proto stages, so there will be no more 'p' following the version of the game.
-
-- Sound has been added
-
-- Enemies have been given basic animations
-
-- A working build of the game is now viewable and playable.
-
-- A functional main menu has been added
-
-- We are now ready to begin work on polishing, voice acting, more rigorous animations/models, as well as adding more content to Surge Breaker in the coming updates.
+- *More rigorous updates and explanations can be provided in a meeting with [Mark Gaskins](mailto:mark.gaskins@hgs.hiddengeniusproject.org?subject=A%20Few%20Questions&body=Good%20Day%20Mark%2C%20%0A%0AI%20have%20a%20few%20questions%20regarding%20...)*
 
 ## Installation
 - To open this project in Unity, you must use Unity __2021.3.11f1__. You can install Unity 2021.3.11 here: https://unity3d.com/unity/whats-new/2021.3.11
@@ -32,5 +30,5 @@
 
 
 
-`Latest Version: [1.7a]`
-`Last Updated: [4.28.23]`
+`Latest Version: [1.8.2a]`
+`Last Updated: [6.18.23]`

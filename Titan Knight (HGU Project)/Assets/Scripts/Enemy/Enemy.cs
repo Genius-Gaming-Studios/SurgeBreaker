@@ -59,11 +59,12 @@ public class Enemy : MonoBehaviour
     #region Follow Player Mechanics
     private void FixedUpdate()
     {
+
         // The script will now determine whether or not this enemy should follow the player or follow a path's waypoints.
         if (FollowMode == EnemyFollowMode.FollowPlayer) 
         {
 
-            if (gm.currentMode == GameMode.Build) { agent.enabled = false; return;  } else agent.enabled = true; // Completely pause the enemy when the current mode is Build Mode.
+            if (gm.currentMode == GameMode.Build || PlayerManager.generatorsDestroyed) { agent.enabled = false; return;  } else agent.enabled = true; // Completely pause the enemy when the current mode is Build Mode.
 
 
             // This checks to see if the player is in sight and attack range.
@@ -180,6 +181,8 @@ public class Enemy : MonoBehaviour
         if (FollowMode == EnemyFollowMode.FollowPlayer) return; // Only allow for this region to function when the follow mode is FollowPlayer.
         
         if (PlayerManager.isDead) return; // Pause enemies if the player is dead
+
+        if (PlayerManager.generatorsDestroyed) return; // Pause enemies if all generators destroyed
 
         if (gm.currentMode == GameMode.Build) return; // Pause enemies if the player is in build mode
 

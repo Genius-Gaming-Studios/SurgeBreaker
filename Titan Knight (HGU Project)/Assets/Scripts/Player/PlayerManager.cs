@@ -38,6 +38,7 @@ public class PlayerManager : MonoBehaviour
     [Space(26)]
     [Header("Player References")]
     [Tooltip("The parent object of the player model, which rotates the player model in the direction that the player is facing.")] [SerializeField] Transform pModelRotation;
+    [Tooltip(("Reference to player's Animator component "))] public Animator pAnimator;
 
     [Space(20)]
     [Header("Camera References")]
@@ -48,7 +49,7 @@ public class PlayerManager : MonoBehaviour
     [Header("Cursor References")] // Handle the crosshair switching in a canvas to support animation of the crosshair.
     [Tooltip("Should the game use the dynamic cursors?\n This hides the default cursor and replaces it with one determined by the current mode.")] [SerializeField] public bool doDynamicCursors;
     [Space(8)]
-    [Tooltip("Parent of the dynamic cursors.")] [SerializeField] RectTransform CursorsParent;
+    [Tooltip("Parent of the dynamic cursors.")] [SerializeField] public RectTransform CursorsParent;
     [Tooltip("The default cursor. Appears in idle mode.")] [SerializeField] GameObject DefaultCursor; // (Default Cursor)
     [Tooltip("The build cursor. Appears in build mode.")] [SerializeField] GameObject BuildCursor; // (Build mode)
     [Tooltip("The crosshair cursor. Appears in combat mode.")] [SerializeField] GameObject CrosshairCursor; // (Combat mode)
@@ -73,7 +74,7 @@ public class PlayerManager : MonoBehaviour
 
     private GameManager gm;
 
-    public static bool isDead;
+    public static bool isDead, generatorsDestroyed;
     public static int currentCurrency; // This constantly updates, and should be used to get the current amount of money that she has.
 
     [HideInInspector] public Vector3 movementDirection;
@@ -82,6 +83,7 @@ public class PlayerManager : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         playerHealth = GetComponent<Health>();
+        //pAnimator = GetComponent<Animator>();
         gm = FindObjectOfType<GameManager>();
 
         Camera.main.fieldOfView = normalFOV;
@@ -105,6 +107,7 @@ public class PlayerManager : MonoBehaviour
 
         HandleMovement();
         HandleSprinting();
+        HandleAnimations();
 
         // HandleJumping();
 
@@ -116,6 +119,14 @@ public class PlayerManager : MonoBehaviour
             CrosshairCursor.SetActive(false);
 
             Cursor.visible = true;
+        }
+
+        if (generatorsDestroyed)
+        {
+            controller.enabled = false;
+            this.enabled = false;
+
+            StartCoroutine(ReloadScene()); // Reload the scene.
         }
 
         if (isDead)
@@ -145,6 +156,7 @@ public class PlayerManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         isDead = false;
+        generatorsDestroyed = false;
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
@@ -204,6 +216,7 @@ public class PlayerManager : MonoBehaviour
                 Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, normalFOV, smoothFOVSpeed * Time.deltaTime);
 
             controller.Move(movementVelocity * Time.deltaTime);
+            
         }
         else // Sprinting 
         {
@@ -215,8 +228,8 @@ public class PlayerManager : MonoBehaviour
             movementDirection.x * (speed * runSpeedMultiplier),
             movementDirection.y * speed, /* Prevent the jump power from multiplying! */
             movementDirection.z * (speed * runSpeedMultiplier)) * Time.deltaTime);
+             pAnimator.SetBool("isWalking", true);
         }
-
     }
 
 
@@ -251,5 +264,27 @@ public class PlayerManager : MonoBehaviour
         // Update position of player's "isometric" camera
         pCamera.transform.position = pCamera_Position.transform.position;
         pCamera.transform.rotation = pCamera_Position.transform.rotation;
+    }
+
+    private void HandleAnimations()
+    {
+        if (Input.GetAxis("Vertical") > 0)
+        {
+            pAnimator.SetBool("IsWalkingForward", true);
+            pAnimator.SetBool("IsWalkingBackward", false);
+        }
+
+        else if (Input.GetAxis("Vertical") < 0)
+        {
+            pAnimator.SetBool("IsWalkingForward", false);
+            pAnimator.SetBool("IsWalkingBackward", true);
+        }
+
+        else
+        {
+            pAnimator.SetBool("IsWalkingForward", false);
+            pAnimator.SetBool("IsWalkingBackward", false);
+        }
+        
     }
 }
