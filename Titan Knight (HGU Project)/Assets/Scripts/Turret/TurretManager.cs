@@ -92,11 +92,11 @@ public class TurretManager : MonoBehaviour
         {
             Fire();
 
-            mzTimer += Time.deltaTime;
-            if (mzTimer > mzwaitTime)
-            {
-                // muzzleFlash.SetActive(false);
-            }
+            // mzTimer += Time.deltaTime;
+            // if (mzTimer > mzwaitTime)
+            // {
+            //     // muzzleFlash.SetActive(false);
+            // }
 
             fireCountdown = 1f / fireRate;
         }
@@ -129,7 +129,10 @@ public class TurretManager : MonoBehaviour
         }
 
        //  muzzleFlash.SetActive(true);
-        mzTimer = 0f;
+        // mzTimer = 0f;
+
+        // muzzle flash
+        GameObject flashObject = Instantiate(muzzleFlash, firePoint.position, firePoint.rotation);
 
         // Instantiate a sound object in order to give it a custom pitch
         GameObject soundObject = Instantiate(FxObject, this.gameObject.transform);
@@ -139,7 +142,7 @@ public class TurretManager : MonoBehaviour
         audioSource.clip = fireSound;
         audioSource.Play();
         Destroy(soundObject, fireSound.length);
-        // muzzleFlash.SetActive(false);
+        Destroy(flashObject, fireSound.length);
     }
 
     private void OnDrawGizmosSelected() // Shows the range of the turret's bullets with a red gizmo. (Ensure Gizmos are enabled in the editor)
