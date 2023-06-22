@@ -83,6 +83,38 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2676216151399751988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4288885430175236401}
+  m_Layer: 0
+  m_Name: Turret Hinge
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4288885430175236401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2676216151399751988}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5645677824237461902}
+  m_Father: {fileID: 5645677824414783082}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2930664900158722506
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,8 +934,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5645677824237461902}
+  - component: {fileID: 4470109957993054699}
   m_Layer: 0
-  m_Name: Turning Hinge
+  m_Name: Fire Animation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -916,7 +949,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5645677824237461905}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.57, z: 0}
   m_LocalScale: {x: 3, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
@@ -924,9 +957,25 @@ Transform:
   - {fileID: 5645677825570014887}
   - {fileID: 4834591139213341190}
   - {fileID: 8802198386568992817}
-  m_Father: {fileID: 5645677824414783082}
-  m_RootOrder: 1
+  m_Father: {fileID: 4288885430175236401}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &4470109957993054699
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5645677824237461905}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 52bc264baea0c1a4497182a8c1b5bd18, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 52bc264baea0c1a4497182a8c1b5bd18, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &5645677824254238569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1131,7 +1180,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5645677825525246831}
-  - {fileID: 5645677824237461902}
+  - {fileID: 4288885430175236401}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -2.878, y: 0, z: 0}
@@ -1153,7 +1202,7 @@ MonoBehaviour:
   turnSpeed: 5.3
   enemyTag: Enemy
   turretSettings: {fileID: 0}
-  Hinge: {fileID: 5645677824237461902}
+  Hinge: {fileID: 4288885430175236401}
   BulletPrefab: {fileID: 5890929398850381768, guid: 9317401ddc5894d9f9116b1edabbfb09,
     type: 3}
   fireRate: 1
@@ -1161,6 +1210,7 @@ MonoBehaviour:
     type: 3}
   fireSound: {fileID: 8300000, guid: 1f773ca51b5d85d479e6f1cb1cf8286a, type: 3}
   muzzleFlash: {fileID: 8802198386568692753}
+  fireAnimation: {fileID: 4470109957993054699}
 --- !u!1 &5645677824440669468
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class BuildMenu : MonoBehaviour
     {
         foreach (BuildNode Node in FindObjectsOfType<BuildNode>())
         {
+            Node.HidePreview(); // Disable the build preview.
 
             if (Node.uniqueNodeID == nodeID) if (PlayerManager.currentCurrency >= turret.cost) BuildTurret(turret, Node); // Check to see if the node is the current selected node
                 else { Debug.LogErrorFormat("Not enough money."); GameManager.GetCorePlayer().PlayOneShot(notEnoughMoneyPress_FX); }
@@ -28,9 +29,41 @@ public class BuildMenu : MonoBehaviour
 
         Debug.Log("Assigned " + Node.MyPrefab);
         Node.MyPrefab.GetComponent<TurretManager>().turretSettings = turret; // Assigns turret settings
+        Node.MyTurretData = turret; // Assign turret settings to node
 
         GameManager.GetCorePlayer().PlayOneShot(purchase_FX);
 
         this.gameObject.SetActive(false); // Disable the build menu
+
+
+    }
+
+
+    /// <summary>
+    /// Called when a turret build icon is hovered over (in the build menu)
+    /// </summary>
+    public void TurretPreviewStart(Turret turret)
+    {
+        foreach (BuildNode Node in FindObjectsOfType<BuildNode>())
+        {
+            if (Node.uniqueNodeID == nodeID) // Filtering through to get the selected node
+            {
+                Node.ShowPreview(turret.range);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Called when the turret build icon is unhovered (in the build menu)
+    /// </summary>
+    public void TurretPreviewEnd()
+    {
+        foreach (BuildNode Node in FindObjectsOfType<BuildNode>())
+        {
+            if (Node.uniqueNodeID == nodeID) // Filtering through to get the selected node
+            {
+                Node.HidePreview();
+            }
+        }
     }
 }
