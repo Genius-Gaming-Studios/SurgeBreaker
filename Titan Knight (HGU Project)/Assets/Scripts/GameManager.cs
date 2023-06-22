@@ -79,7 +79,12 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (hasLost) Debug.Log("All generators destroyed. Player has lost.");
+        if (hasLost)
+        {
+            PlayerManager.generatorsDestroyed = true;
+            foreach (MusicPlayer player in FindObjectsOfType<MusicPlayer>()) player.GetComponent<AudioSource>().Stop();
+            Debug.Log("All generators destroyed. Player has lost.");
+        }
       
     
     }
@@ -133,7 +138,10 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(5);
             /// Cycle has been won
             currentCycle++;
-            enemiesPerGenerator += enemiesIncreasePerCycle; // Increase game difficulty
+            if (i > 1)
+            {
+                enemiesPerGenerator += enemiesIncreasePerCycle; // Increase game difficulty if it isn't the first wave.
+            }
             /// Game Has been won
             if (i == amountOfCycles)
             {

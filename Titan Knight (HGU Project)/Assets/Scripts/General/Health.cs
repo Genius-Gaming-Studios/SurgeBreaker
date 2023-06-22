@@ -63,7 +63,8 @@ public class Health : MonoBehaviour
         if (HealthType == ObjectType.Generator)
         {
             GeneratorHealthBar.value = currentHealth;
-            GeneratorHealthText.text = $"{currentHealth}%";
+            if (currentHealth > 1) GeneratorHealthText.text = $"{currentHealth}%";
+            else GeneratorHealthText.text = $"<color=red>OFFLINE</color>";
         }
         if (currentHealth <= 0) // This will kill the health object. If it's an enemy, it should be attatched to the parent object.
         {

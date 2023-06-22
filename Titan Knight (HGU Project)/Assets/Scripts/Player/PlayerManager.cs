@@ -49,7 +49,7 @@ public class PlayerManager : MonoBehaviour
     [Header("Cursor References")] // Handle the crosshair switching in a canvas to support animation of the crosshair.
     [Tooltip("Should the game use the dynamic cursors?\n This hides the default cursor and replaces it with one determined by the current mode.")] [SerializeField] public bool doDynamicCursors;
     [Space(8)]
-    [Tooltip("Parent of the dynamic cursors.")] [SerializeField] RectTransform CursorsParent;
+    [Tooltip("Parent of the dynamic cursors.")] [SerializeField] public RectTransform CursorsParent;
     [Tooltip("The default cursor. Appears in idle mode.")] [SerializeField] GameObject DefaultCursor; // (Default Cursor)
     [Tooltip("The build cursor. Appears in build mode.")] [SerializeField] GameObject BuildCursor; // (Build mode)
     [Tooltip("The crosshair cursor. Appears in combat mode.")] [SerializeField] GameObject CrosshairCursor; // (Combat mode)
@@ -74,7 +74,7 @@ public class PlayerManager : MonoBehaviour
 
     private GameManager gm;
 
-    public static bool isDead;
+    public static bool isDead, generatorsDestroyed;
     public static int currentCurrency; // This constantly updates, and should be used to get the current amount of money that she has.
 
     [HideInInspector] public Vector3 movementDirection;
@@ -121,6 +121,14 @@ public class PlayerManager : MonoBehaviour
             Cursor.visible = true;
         }
 
+        if (generatorsDestroyed)
+        {
+            controller.enabled = false;
+            this.enabled = false;
+
+            StartCoroutine(ReloadScene()); // Reload the scene.
+        }
+
         if (isDead)
         {
             pModelRotation.gameObject.SetActive(false);
@@ -148,6 +156,7 @@ public class PlayerManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         isDead = false;
+        generatorsDestroyed = false;
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
