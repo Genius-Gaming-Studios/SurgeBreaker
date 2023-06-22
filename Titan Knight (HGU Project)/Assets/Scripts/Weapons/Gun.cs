@@ -44,6 +44,8 @@ public class Gun : MonoBehaviour
 
     private void Fire()
     {
+        if (GameManager.hasWon) return; // Player will not be allowed to be controlled if they have already won.
+
         timeToFire = 1;
 
         // Spawn a bullet (because it's cooler seeing a real bullet object, instead of an invisible bullet)
