@@ -39,21 +39,28 @@ public class GameManager : MonoBehaviour
     public static int enemiesAlive;
     public int _enemiesAlive;
 
+    public static bool hasWon;
+
     [Tooltip("A reference for the health object of each of the generators in the level.")] [SerializeField] Health[] GeneratorsInLevel;
 
 
     private void Start()
     {
-        /// Initialize the game
+        /// Initialize the game, Restart static values
         InvokeRepeating(nameof(UpdateGenerators), 0, 3);
         InvokeRepeating(nameof(TickGameTimer), 0, .1f);
         StartCoroutine(GameCycleSequence());
+        SwitchGamemode(GameMode.Build);
+
         enemiesAlive = 0;
+        hasWon = false;
+
         gameTimeDefaultColor = GameTimerText.color;
+
         GameOverCanvas.SetActive(false);
         MissionSucessCanvas.SetActive(false);
         MainCanvas.SetActive(true);
-        SwitchGamemode(GameMode.Build);
+
         Time.timeScale = 1.0f;
         AudioListener.pause = false;
     }
@@ -155,6 +162,8 @@ public class GameManager : MonoBehaviour
             /// Game Has been won
             if (i == amountOfCycles)
             {
+                hasWon = true;
+
                 LevelComplete();
                 Debug.Log("<b>[Game Manager]</b> <color=green>Game Won! (Show UI Prompt Now)</color>");
             }
