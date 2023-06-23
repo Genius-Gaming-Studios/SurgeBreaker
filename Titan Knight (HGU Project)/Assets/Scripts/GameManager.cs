@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("A reference for the health object of each of the generators in the level.")] [SerializeField] Health[] GeneratorsInLevel;
 
+    [Tooltip("The music player for the game.")] [SerializeField] GameObject GameMusicPlayer;
 
     private void Start()
     {
@@ -99,7 +100,7 @@ public class GameManager : MonoBehaviour
         if (hasLost)
         {
             PlayerManager.generatorsDestroyed = true;
-            foreach (MusicPlayer player in FindObjectsOfType<MusicPlayer>()) player.GetComponent<AudioSource>().Stop();
+            //GameMusicPlayer.SetActive(false); 
             Debug.Log("All generators destroyed. Player has lost.");
         }
       
@@ -214,13 +215,16 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameMode.GameOver:
+                GameMusicPlayer.SetActive(false);
+
                 MainCanvas.SetActive(false);
                 GameOverCanvas.SetActive(true);
-                AudioListener.pause = true;
                 Cursor.visible = true;
                 break;
 
             case GameMode.LvlComplete:
+                GameMusicPlayer.SetActive(false);
+
                 MainCanvas.SetActive(false);
                 MissionSucessCanvas.SetActive(true);
                 Cursor.visible = true;
