@@ -216,7 +216,6 @@ public class GameManager : MonoBehaviour
             case GameMode.GameOver:
                 MainCanvas.SetActive(false);
                 GameOverCanvas.SetActive(true);
-                AudioListener.pause = true;
                 Cursor.visible = true;
                 break;
 
