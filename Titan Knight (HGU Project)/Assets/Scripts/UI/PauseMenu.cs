@@ -20,7 +20,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !PlayerManager.isDead && !PlayerManager.generatorsDestroyed)
         {
             GameIsPaused = !GameIsPaused;
 

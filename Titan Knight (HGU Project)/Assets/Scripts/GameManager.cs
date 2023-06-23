@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 public enum GameMode
 {
     Idle,
     Build,
     Combat,
+    GameOver,
+    LvlComplete,
 }
 
 public class GameManager : MonoBehaviour
@@ -22,7 +26,7 @@ public class GameManager : MonoBehaviour
     [Header("Technical")]
     [Tooltip("This is the current GameMode that majorly effects how the game acts. Idle = 0, Build = 1, Combat = 2")]public GameMode currentMode = GameMode.Build;
 
-    [SerializeField] GameObject CombatCanvas, BuildCanvas;
+    [SerializeField] GameObject CombatCanvas, BuildCanvas, MainCanvas, GameOverCanvas, MissionSucessCanvas;
     [Tooltip("This will be turned off when the player is in Build Mode!")][SerializeField] GameObject WeaponsParent;
     [Tooltip("This is the text shown for teh game time that is remaining.")] [SerializeField] TextMeshProUGUI GameTimerText;
     [Tooltip("This is the text shown for the current game cycle.")] [SerializeField] TextMeshProUGUI GameCycleText;
@@ -35,17 +39,30 @@ public class GameManager : MonoBehaviour
     public static int enemiesAlive;
     public int _enemiesAlive;
 
+    public static bool hasWon;
+
     [Tooltip("A reference for the health object of each of the generators in the level.")] [SerializeField] Health[] GeneratorsInLevel;
 
 
     private void Start()
     {
-        /// Initialize the game
+        /// Initialize the game, Restart static values
         InvokeRepeating(nameof(UpdateGenerators), 0, 3);
         InvokeRepeating(nameof(TickGameTimer), 0, .1f);
         StartCoroutine(GameCycleSequence());
+        SwitchGamemode(GameMode.Build);
+
         enemiesAlive = 0;
+        hasWon = false;
+
         gameTimeDefaultColor = GameTimerText.color;
+
+        GameOverCanvas.SetActive(false);
+        MissionSucessCanvas.SetActive(false);
+        MainCanvas.SetActive(true);
+
+        Time.timeScale = 1.0f;
+        AudioListener.pause = false;
     }
 
 
@@ -145,6 +162,9 @@ public class GameManager : MonoBehaviour
             /// Game Has been won
             if (i == amountOfCycles)
             {
+                hasWon = true;
+
+                LevelComplete();
                 Debug.Log("<b>[Game Manager]</b> <color=green>Game Won! (Show UI Prompt Now)</color>");
             }
         }
@@ -191,6 +211,19 @@ public class GameManager : MonoBehaviour
                 WeaponsParent.SetActive(true);
                 foreach (BuildNode node in FindObjectsOfType<BuildNode>()) node.Disable(); // Hide all node mesh renderers
 
+                break;
+
+            case GameMode.GameOver:
+                MainCanvas.SetActive(false);
+                GameOverCanvas.SetActive(true);
+                AudioListener.pause = true;
+                Cursor.visible = true;
+                break;
+
+            case GameMode.LvlComplete:
+                MainCanvas.SetActive(false);
+                MissionSucessCanvas.SetActive(true);
+                Cursor.visible = true;
                 break;
 
             default: 
@@ -241,6 +274,21 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log($"Switched gamemode to <color=\"yellow\">{currentMode}</color>.");
+    }
+
+    public void  GameOver() // Called by the PlayerManager when a lose condition is met
+    {
+        SwitchGamemode(GameMode.GameOver);
+    }
+
+    public void LevelComplete()
+    {
+        SwitchGamemode(GameMode.LvlComplete);
+    }
+
+    public void LoadLevel(int sceneIndex)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
     }
 
 }
