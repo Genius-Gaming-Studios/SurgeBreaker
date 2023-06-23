@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("(Difficulty) The amount of enemies to spawn per generator.")] [SerializeField] [Range(1, 100)] public int enemiesPerGenerator;
     [Tooltip("(Difficulty) The amount of enemies that are added to the enemiesPerGenerator, per each cycled.")] [SerializeField] [Range(1, 40)] public int enemiesIncreasePerCycle;
     [Tooltip("(Difficulty) The amount of enemies that spawn per generator in wave one.")] [SerializeField] [Range(1, 25)] public int waveOneEnemies = 10;
+    [Tooltip("(Difficulty) The amount of extra money given to the player at the beginning of each round.")] [SerializeField] [Range(25, 125)] int waveMoneyBoost = 25;
 
     [Tooltip("This is the amount of time that a player will have in either of the specified modes.")] [SerializeField] [Range(10, 49)] public int timeInBuildMode = 30, timeInCombatMode = 30, timeInWaveOneBuild =30;
 
@@ -31,7 +32,8 @@ public class GameManager : MonoBehaviour
     [Tooltip("This is the text shown for teh game time that is remaining.")] [SerializeField] TextMeshProUGUI GameTimerText;
     [Tooltip("This is the text shown for the current game cycle.")] [SerializeField] TextMeshProUGUI GameCycleText;
     [Tooltip("This is the text shown for the current amount of enemies alive.")] [SerializeField] TextMeshProUGUI EnemiesAliveText;
-
+    [Tooltip("Turns off when the player wins or loses.")] [SerializeField] GameObject GameMusicPlayer;
+    [Tooltip("Shown each time the player wins a round. This is the amount of extra health that they were given.")] [SerializeField] TextMeshProUGUI MoneyBoostText, EnemyBoostText;
     private float timerTime = 0; /// The Displayed timer time on the GUI. Not for technical functionality, only for the GUI functionality.
     private int currentCycle = 1;
 
@@ -125,7 +127,7 @@ public class GameManager : MonoBehaviour
                 timerTime = timeInWaveOneBuild;
                 yield return new WaitForSeconds(timeInWaveOneBuild);
             }
-            /// Provide 5 seconds between cycles. Do not show on the game timer. This is invisible time.
+            /// Provide 2 seconds between cycles. Do not show on the game timer. This is invisible time.
             timerTime = 0;
             yield return new WaitForSeconds(2);
             /// Switch to combat mode
@@ -135,6 +137,10 @@ public class GameManager : MonoBehaviour
             {
                 if (i > 1)
                 {
+                    EnemyBoostText.text = $"+{enemiesPerGenerator}";
+                    EnemyBoostText.GetComponent<Animation>().Play();
+
+                    spawner.enemyHealthIncrease *= 2;
                     spawner.enemiesToSpawn = enemiesPerGenerator;
                     enemiesAlive += enemiesPerGenerator;
                 }
@@ -152,7 +158,14 @@ public class GameManager : MonoBehaviour
 
             /// Provide 5 seconds between cycles. Do not show on the game timer. This is invisible time.
             timerTime = 0;
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(2.5f);
+            // Show the money boost dislay
+            MoneyBoostText.text = $"+{waveMoneyBoost}";
+            MoneyBoostText.GetComponent<Animation>().Play();
+            // Add extra money to the player, because they completed the round.
+            PlayerManager.currentCurrency += waveMoneyBoost;           
+            yield return new WaitForSeconds(2.5f);
+
             /// Cycle has been won
             currentCycle++;
             if (i > 1)
@@ -216,12 +229,15 @@ public class GameManager : MonoBehaviour
             case GameMode.GameOver:
                 MainCanvas.SetActive(false);
                 GameOverCanvas.SetActive(true);
+                GameMusicPlayer.SetActive(false);
                 Cursor.visible = true;
                 break;
 
             case GameMode.LvlComplete:
                 MainCanvas.SetActive(false);
                 MissionSucessCanvas.SetActive(true);
+                GameMusicPlayer.SetActive(false);
+
                 Cursor.visible = true;
                 break;
 
