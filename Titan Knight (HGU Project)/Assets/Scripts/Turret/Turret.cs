@@ -7,4 +7,5 @@ public class Turret : ScriptableObject
     [Tooltip("Name that the game will refer to this turret as:")] public string turretName = "Turret";
 
     public int cost;
+    public float range;
 }

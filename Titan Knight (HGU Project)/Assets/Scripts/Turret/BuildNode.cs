@@ -14,6 +14,28 @@ public class BuildNode : MonoBehaviour
     public bool isNodeOccupied;
 
     public GameObject MyPrefab; // Prefab of this build node. 
+    public Turret MyTurretData; // Turret data of this node.
+
+    [Tooltip("Parent object of the preview")] public GameObject TurretPreview; 
+    [Tooltip("The range of the preview that is showing. The range is set an modified by script.")] public Transform RangePreview, constantRangePreview; 
+
+
+    /// <summary>
+    /// Shows a preview for any general turret.
+    /// </summary>
+    /// <param name="turretRange">The range of the turet, for the preview.</param>
+    public void ShowPreview(float turretRange)
+    {
+        TurretPreview.SetActive(true);
+
+        // Set the range scale of the preview circle.
+        RangePreview.localScale = new(turretRange, RangePreview.localScale.y, turretRange);
+    }
+
+    public void HidePreview()
+    {
+        TurretPreview.SetActive(false); 
+    }
 
     public void Awake()
     {
@@ -21,6 +43,8 @@ public class BuildNode : MonoBehaviour
         if (SellMenu == null) SellMenu = FindObjectOfType<GameManager>().DeleteMenu;
 
         uniqueNodeID = $"{Random.Range(10000,99999)}";
+
+        HidePreview();
     }
 
     public void OnMouseOver()
@@ -39,6 +63,7 @@ public class BuildNode : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
+
                     SellMenu.SetActive(false);
                     BuildMenu.SetActive(true);
                     BuildMenu.GetComponent<BuildMenu>().nodeID = uniqueNodeID;
@@ -46,6 +71,7 @@ public class BuildNode : MonoBehaviour
             }
             else // Node is occupied
             {
+
                 DeleteOutline.SetActive(true);
 
                 if (Input.GetMouseButtonDown(0))
@@ -72,6 +98,8 @@ public class BuildNode : MonoBehaviour
     private void Update()
     {
         if (GetComponentInChildren<TurretManager>()) isNodeOccupied = true; else isNodeOccupied = false; // Update node occupation status
+
+        if (MyPrefab == null) MyTurretData = null;
     }
     public void Disable() // Turn off the nodes - Note: This is being called in an Update function!
     {
@@ -87,6 +115,10 @@ public class BuildNode : MonoBehaviour
         SellMenu.SetActive(false);
         SellMenu.GetComponent <SellMenu>().nodeID = ""; // Reset the Node ID
 
+        // Hide the previews
+        HidePreview();
+        constantRangePreview.gameObject.SetActive(false);
+
 
     }
 
@@ -95,5 +127,16 @@ public class BuildNode : MonoBehaviour
     {
         if (BuildMenu == null) BuildMenu = FindObjectOfType<GameManager>().BuildMenu;
         if (SellMenu == null) SellMenu = FindObjectOfType<GameManager>().DeleteMenu;
+
+        // Show the range of turret constantly
+        if (isNodeOccupied)
+        {
+            constantRangePreview.gameObject.SetActive(true);
+            constantRangePreview.localScale = new(MyTurretData.range, constantRangePreview.localScale.y, MyTurretData.range);
+        }
+        else
+        {
+            constantRangePreview.gameObject.SetActive(false);
+        }
     }
 }

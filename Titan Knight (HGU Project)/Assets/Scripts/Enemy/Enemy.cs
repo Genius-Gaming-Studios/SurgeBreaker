@@ -188,7 +188,10 @@ public class Enemy : MonoBehaviour
 
         if (target == null) target = assignedPath.points[0];
 
-        agent.enabled = false;
+
+        /// FOLLOW PATH ----- 
+       
+        agent.enabled = false; // Disable the Ai. This is for follwo path, not follow player.
 
         Vector3 nextWaypoint = target.position - transform.position; // Set the next waypoint that the enemy will walk to.
 
@@ -199,7 +202,7 @@ public class Enemy : MonoBehaviour
             GetNextWaypoint();
         }
 
-        if (nextWaypoint != Vector3.zero) transform.LookAt(nextWaypoint); // Make the enemy look towards the next waypoint
+        if (nextWaypoint != Vector3.zero) transform.LookAt(target.transform.position); // Make the enemy look towards the next waypoint
 
     }
 

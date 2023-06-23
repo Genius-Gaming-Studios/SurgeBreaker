@@ -235,6 +235,7 @@ public class PlayerManager : MonoBehaviour
     private Vector3 movementVelocity;
     private void HandleMovement() // The movement will be completely rescripted in order to rotate movement grid by 45°
     {
+        if (GameManager.hasWon) return; // Player will not be allowed to be controlled if they have already won.
 
         if (Input.GetKey(KeyCode.LeftShift)) isRunning = true; else isRunning = false; // Handle sprinting with left shift
 
