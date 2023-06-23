@@ -29,6 +29,7 @@ public class TurretManager : MonoBehaviour
     [Tooltip("The sound that can be heard when the gun is fired.")] [SerializeField] AudioClip fireSound;
     [Tooltip("The muzzle flash for the gun.")] [SerializeField] GameObject muzzleFlash;
 
+    [Tooltip("The part that contains the fire animation.")] [SerializeField] Animation fireAnimation;
 
     private float fireCountdown;
     private float mzwaitTime = 1f;
@@ -92,11 +93,11 @@ public class TurretManager : MonoBehaviour
         {
             Fire();
 
-            mzTimer += Time.deltaTime;
-            if (mzTimer > mzwaitTime)
-            {
-                // muzzleFlash.SetActive(false);
-            }
+            // mzTimer += Time.deltaTime;
+            // if (mzTimer > mzwaitTime)
+            // {
+            //     // muzzleFlash.SetActive(false);
+            // }
 
             fireCountdown = 1f / fireRate;
         }
@@ -119,7 +120,9 @@ public class TurretManager : MonoBehaviour
 
     private void Fire()
     {
-        
+        // Reset the fire animation.
+        fireAnimation.Stop();
+
         GameObject bulletObject = (GameObject)Instantiate(BulletPrefab, firePoint.position, firePoint.rotation);
         TurretBullet bullet = bulletObject.GetComponent<TurretBullet>();
 
@@ -129,7 +132,10 @@ public class TurretManager : MonoBehaviour
         }
 
        //  muzzleFlash.SetActive(true);
-        mzTimer = 0f;
+        // mzTimer = 0f;
+
+        // muzzle flash
+        GameObject flashObject = Instantiate(muzzleFlash, firePoint.position, firePoint.rotation);
 
         // Instantiate a sound object in order to give it a custom pitch
         GameObject soundObject = Instantiate(FxObject, this.gameObject.transform);
@@ -139,7 +145,10 @@ public class TurretManager : MonoBehaviour
         audioSource.clip = fireSound;
         audioSource.Play();
         Destroy(soundObject, fireSound.length);
-        // muzzleFlash.SetActive(false);
+        Destroy(flashObject, fireSound.length);
+
+        // Play the fire animation.
+        fireAnimation.Play();
     }
 
     private void OnDrawGizmosSelected() // Shows the range of the turret's bullets with a red gizmo. (Ensure Gizmos are enabled in the editor)
