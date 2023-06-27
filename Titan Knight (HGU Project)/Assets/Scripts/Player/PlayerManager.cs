@@ -16,7 +16,7 @@ public class PlayerManager : MonoBehaviour
     [Space(20)]
     [Header("Player Preferences")]
 
-    [Tooltip("The amount of currency that the player starts with.")] [Range(375,3750)] public int startCurrency = 500; // Do not use this to get a reference to her current amount of currency.
+    [Tooltip("The amount of currency that the player starts with.")] [Range(0,3750)] public int startCurrency = 500; // Do not use this to get a reference to her current amount of currency.
 
     [Tooltip("The walkspeed of the player")] [Range(4.0f, 12.0f)] public float speed = 6.0f;
     [Tooltip("The walkspeed multiplayer when the player's running")] [Range(0.1f, 4.5f)] public float runSpeedMultiplier = 1.5f;
