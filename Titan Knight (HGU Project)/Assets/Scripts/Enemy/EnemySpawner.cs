@@ -16,6 +16,7 @@ public class EnemySpawner : MonoBehaviour
     [Tooltip("Enemy prefabs to spawn in. Uses RNG to choose which one to spawn, but that can/will be modified later.")] [SerializeField] List<GameObject> EnemyPrefabs; // RNG determines which one of the enemies in this List will spawn in..
     [Tooltip("The sound that plays when a enemy spawns here.")] [SerializeField] AudioClip spawnSound;
 
+    [Tooltip("Extra health given to enemies, multiplied by 2 each round. Try not to make this value too high!")] [Range(5, 75)] public int enemyHealthIncrease = 5;
     GameManager gm;
 
     private void OnEnable()
@@ -38,10 +39,12 @@ public class EnemySpawner : MonoBehaviour
 
             thisEnemy.assignedPath = CorrespondingPathway;
             thisEnemy.target = thisEnemy.assignedPath.points[0];
+            thisEnemy.GetComponent<Health>().startHealth += enemyHealthIncrease;
 
             // thisEnemy.FollowMode = EnemyFollowMode.FollowPath; // Discontinued, to allow for enemies that follow the player to also be spawned.
 
             thisEnemy.GetComponent<Enemy>().enabled = true;
+            thisEnemy.GetComponent<Health>().enabled = true;
 
             // WaitForSeconds() is prohibited in the spawning of waves. WaitForSeconds() disregards the necessity of pausing the spawning of waves while in build mode. 
             float timer = 0f; 
