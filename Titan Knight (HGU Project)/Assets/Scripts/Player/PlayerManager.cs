@@ -16,13 +16,17 @@ public class PlayerManager : MonoBehaviour
     [Space(20)]
     [Header("Player Preferences")]
 
-    [Tooltip("The amount of currency that the player starts with.")] [Range(375,3750)] public int startCurrency = 500; // Do not use this to get a reference to her current amount of currency.
+    [Tooltip("The amount of currency that the player starts with.")] [Range(150, 999)] public int startCurrency = 275; // Do not use this to get a reference to her current amount of currency.
 
     [Tooltip("The walkspeed of the player")] [Range(4.0f, 12.0f)] public float speed = 6.0f;
+    [Tooltip("" +
+        "The side walkspeed of the player. The higher this value, the slower the side speed.\n" +
+        "(0 > Disabled, 5 > Default Speed, 9.5 > Fastest Recommended Speed) ")]
+    [Range(2.0f, 9.5f)] public float sideSpeedMultiplier = 5;
     [Tooltip("The walkspeed multiplayer when the player's running")] [Range(0.1f, 4.5f)] public float runSpeedMultiplier = 1.5f;
     [Tooltip("The jump force")] [Range(1.0f, 12)] public float jumpPower = 8.0f;
     [Tooltip("Gravity's influence on the player")] [Range(10.0f, 50.0f)] public float gravity = 20.0f;
-    [Tooltip("The speed in which the player rotates when input is recieved")] [SerializeField] [Range(300,1000)] float pModelRotSpeed = 800;
+    [Tooltip("The speed in which the player rotates when input is recieved")] [SerializeField] [Range(300, 1000)] float pModelRotSpeed = 800;
     [Space(5)]
     //[Tooltip("The amount of health that the player starts with. (default: 100)")] [SerializeField] private int startPlayerHealth = 100; // Do not use this to reference current player health.
     //[Tooltip("A non-static reference for the current Player Health. (read values only!)")] public int currentPlayerHealth;
@@ -56,7 +60,7 @@ public class PlayerManager : MonoBehaviour
 
     [Space(20)]
     [Header("Misc. References")]
-    [Tooltip("This is currently a Screen Space canvas, but later it should be modified to be a World Space canvas near the player.")][SerializeField] Slider healthDisplay;
+    [Tooltip("This is currently a Screen Space canvas, but later it should be modified to be a World Space canvas near the player.")] [SerializeField] Slider healthDisplay;
     [Tooltip("Later, this should be a sort of armor indicator. Currently, it is a second health display.")] [SerializeField] GameObject[] ArmorIcons;
     [SerializeField] TextMeshProUGUI healthText, currencyText;
 
@@ -108,26 +112,35 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Pressing R will reload the scene. Might need to be discontinued soon.
 
-        if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         HandleVisuals();
-
         HandleMovement();
         HandleSprinting();
         HandleAnimations();
+        HandleDynamicCursor();
+        // HandleJumping(); Jumping has been permanently discontinued.
+        HandleLosing();
 
-        // HandleJumping();
 
-        if (doDynamicCursors) HandleDynamicCursor();
-        else // Hide the dynamic cursor if doDynamicCursors is false.
-        {
-            BuildCursor.SetActive(false);
-            DefaultCursor.SetActive(false);
-            CrosshairCursor.SetActive(false);
+        currencyText.text = $"${currentCurrency}";
 
-            Cursor.visible = true;
-        }
+    }
 
+
+    private void HandleHealthUI()
+    {
+        // Update temporary health display (shown for debug reasons)
+        healthDisplay.value = playerHealth.currentHealth;
+        healthDisplay.maxValue = playerHealth.startHealth;
+        healthText.text = $"{playerHealth.currentHealth}%";
+
+        if (playerHealth.currentHealth >= 66) ArmorIcons[0].SetActive(true); else ArmorIcons[0].SetActive(false);
+        if (playerHealth.currentHealth >= 33) ArmorIcons[1].SetActive(true); else ArmorIcons[1].SetActive(false);
+        if (playerHealth.currentHealth >= 10) ArmorIcons[2].SetActive(true); else ArmorIcons[2].SetActive(false);
+    }
+    private void HandleLosing()
+    {
         if (generatorsDestroyed)
         {
             controller.enabled = false;
@@ -145,50 +158,48 @@ public class PlayerManager : MonoBehaviour
 
             FindObjectOfType<GameManager>().GameOver();
         }
-
-
-        // Update temporary health display (shown for debug reasons)
-        healthDisplay.value = playerHealth.currentHealth;
-        healthDisplay.maxValue = playerHealth.startHealth;
-        healthText.text = $"{playerHealth.currentHealth}%";
-
-        if (playerHealth.currentHealth >= 66) ArmorIcons[0].SetActive(true); else ArmorIcons[0].SetActive(false);
-        if (playerHealth.currentHealth >= 33) ArmorIcons[1].SetActive(true); else ArmorIcons[1].SetActive(false);
-        if (playerHealth.currentHealth >= 10) ArmorIcons[2].SetActive(true); else ArmorIcons[2].SetActive(false);
-
-        currencyText.text = $"${currentCurrency}";
     }
-
     private void HandleDynamicCursor() // Handle the crosshair switching in a canvas to support animation of the crosshair.
     {
-        Cursor.visible = false;
-
-        CursorsParent.position = Input.mousePosition;
-
-        if (gm.currentMode == GameMode.Build) // Show the build crosshair if the current mode is build mode
+        if (doDynamicCursors)
         {
-            BuildCursor.SetActive(true);
+            Cursor.visible = false;
 
+            CursorsParent.position = Input.mousePosition;
+
+            if (gm.currentMode == GameMode.Build) // Show the build crosshair if the current mode is build mode
+            {
+                BuildCursor.SetActive(true);
+
+                DefaultCursor.SetActive(false);
+                CrosshairCursor.SetActive(false);
+            }
+            else if (gm.currentMode == GameMode.Idle)  // Show the default (idle) crosshair if the current mode is idle mode
+            {
+                DefaultCursor.SetActive(true);
+
+                BuildCursor.SetActive(false);
+                CrosshairCursor.SetActive(false);
+            }
+            else if (gm.currentMode == GameMode.Combat)  // Show the combat crosshair if the current mode is combat mode
+            {
+                CrosshairCursor.SetActive(true);
+
+                DefaultCursor.SetActive(false);
+                BuildCursor.SetActive(false);
+            }
+        }
+        else // Hide the dynamic cursor if doDynamicCursors is false.
+        {
+            BuildCursor.SetActive(false);
             DefaultCursor.SetActive(false);
             CrosshairCursor.SetActive(false);
-        }
-        else if (gm.currentMode == GameMode.Idle)  // Show the default (idle) crosshair if the current mode is idle mode
-        {
-            DefaultCursor.SetActive(true);
 
-            BuildCursor.SetActive(false);
-            CrosshairCursor.SetActive(false);
-        }
-        else if (gm.currentMode == GameMode.Combat)  // Show the combat crosshair if the current mode is combat mode
-        {
-            CrosshairCursor.SetActive(true);
-
-            DefaultCursor.SetActive(false);
-            BuildCursor.SetActive(false);
+            Cursor.visible = true;
         }
     }
 
-    private void HandleJumping()
+    private void HandleJumping() // Jumping has been discontinued
     {
         // Check for standing on the ground
         if (controller.isGrounded)
@@ -215,7 +226,7 @@ public class PlayerManager : MonoBehaviour
                 Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, normalFOV, smoothFOVSpeed * Time.deltaTime);
 
             controller.Move(movementVelocity * Time.deltaTime);
-            
+
         }
         else // Sprinting 
         {
@@ -254,7 +265,9 @@ public class PlayerManager : MonoBehaviour
         }
 
         // Make the player move in the direction of the pModelRotation.
-        movementDirection = new Vector3(pModelRotation.transform.forward.x, pModelRotation.transform.forward.y, pModelRotation.transform.forward.z) * Input.GetAxis("Vertical");
+        movementDirection = pModelRotation.transform.forward * Input.GetAxis("Vertical") + pModelRotation.transform.right * (Input.GetAxis("Horizontal") - Input.GetAxis("Horizontal") / sideSpeedMultiplier);
+
+
         movementVelocity = movementDirection * speed;
 
     }
@@ -268,6 +281,8 @@ public class PlayerManager : MonoBehaviour
 
     private void HandleAnimations()
     {
+        /// [1.9a NOTICE] Horizontal animations for walking are required, as this code is now deprecated as of version 1.9a
+
         if (Input.GetAxis("Vertical") > 0)
         {
             pAnimator.SetBool("IsWalkingForward", true);
@@ -285,6 +300,8 @@ public class PlayerManager : MonoBehaviour
             pAnimator.SetBool("IsWalkingForward", false);
             pAnimator.SetBool("IsWalkingBackward", false);
         }
-        
+
+
+
     }
 }
