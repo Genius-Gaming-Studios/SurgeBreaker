@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour 
+public class EnemySpawner : MonoBehaviour
 {
 
     [Header("Options")]
     [SerializeField] public int enemiesToSpawn = 16;
-    [Range(0.1f, 3f)] [SerializeField] float spawnRate = 2; 
+    [Range(0.1f, 3f)] [SerializeField] float spawnRate = 2;
 
     [Space(10)]
     [Header("References")]
@@ -26,6 +26,26 @@ public class EnemySpawner : MonoBehaviour
         if (spawnSound == null) Debug.Log("<color=cyan>Notice! You have not assigned the audio clip for the spawn sound for an Enemy Spawner in this scene!</color> The enemy spawner will not function properly. If you are unaware of how to add an audio clip to the Build Menu's script, please contact Mark in the Hidden Genius Slack.");
     }
 
+    /// <summary>
+    /// Spawns a singular enemy. Health boost is bypassed here.
+    /// </summary>
+    /// <param name="enemyToSpawn">The data of the enemy that will spawn here.</param>
+    public void Spawn(GameObject enemyToSpawn)
+    {
+        // Assign the required values to the enemy prefab to let it navigate properly
+        GameObject spawnedEnemyObj = Instantiate(enemyToSpawn, SpawnWaypoint.position, Quaternion.identity);
+        Enemy thisEnemy = spawnedEnemyObj.GetComponent<Enemy>();
+
+        if (spawnSound != null) FindObjectOfType<GameManager>().CoreFXPlayer.PlayOneShot(spawnSound);
+
+        thisEnemy.assignedPath = CorrespondingPathway;
+        thisEnemy.target = thisEnemy.assignedPath.points[0];
+    
+        // Initialize Enemy
+        thisEnemy.GetComponent<Enemy>().enabled = true;
+        thisEnemy.GetComponent<Health>().enabled = true;
+
+    }
     public IEnumerator SpawnWave()
     {
         
