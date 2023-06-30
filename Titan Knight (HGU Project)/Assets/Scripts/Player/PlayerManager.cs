@@ -121,7 +121,7 @@ public class PlayerManager : MonoBehaviour
         HandleDynamicCursor();
         // HandleJumping(); Jumping has been permanently discontinued.
         HandleLosing();
-
+        HandleHealthUI();
 
         currencyText.text = $"${currentCurrency}";
 

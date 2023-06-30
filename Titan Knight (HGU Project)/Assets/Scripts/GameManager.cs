@@ -15,16 +15,23 @@ public enum GameMode
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Game Bosses")]
+    [Space(10)]
+    [Tooltip("(Important) These are the cycle numbers that bosses will spawn on.  *More details below. \n\n[Boss Wave Description]\n- At the end of the cycle, there will be a 3-5 second pause, before a big boss should spawn. \n- After beating the boss, the game will continue along with the usual sequence.\n- Multiple bosses can spawn in a level.\n- The cycle(s) that bosses spawn on are determined by a list called the 'BossCycles'.\n- The boss that spawns on the Boss Wave is determined by a list called the 'BossWaveBosses'.\n- The boss that will spond corresponds with the boss wave that it should spawn at, as set by the BossCycles list.\n\t(e.g. if the first element of the BossCycles list is [2], then on Cycle [2], the boss from the first element of the 'BossWaveBosses' will spawn.)\n\t(The boss from the 'BossWaveBosses' list can either be a path boss or a player boss. But either way, they should be super slow!)")] [SerializeField] public List<int> BossCycles;
+    [Tooltip("(Important) These are the bosses that will spawn on their corresponding 'BossCycle' from the 'BossCycles' list. *More details below. \n\n[Boss Wave Description]\n- At the end of the cycle, there will be a 3-5 second pause, before a big boss should spawn. \n- After beating the boss, the game will continue along with the usual sequence.\n- Multiple bosses can spawn in a level.\n- The cycle(s) that bosses spawn on are determined by a list called the 'BossCycles'.\n- The boss that spawns on the Boss Wave is determined by a list called the 'BossWaveBosses'.\n- The boss that will spond corresponds with the boss wave that it should spawn at, as set by the BossCycles list.\n\t(e.g. if the first element of the BossCycles list is [2], then on Cycle [2], the boss from the first element of the 'BossWaveBosses' will spawn.)\n\t(The boss from the 'BossWaveBosses' list can either be a path boss or a player boss. But either way, they should be super slow!)")] [SerializeField] public List<Enemy> BossWaveBosses;
+
     [Header("Difficulty Modifiers")]
     [Tooltip("(Difficulty) The amount of times that the game cycles between build mode and combat mode.")] [SerializeField] [Range(1, 6)] public int amountOfCycles;
-    [Tooltip("(Difficulty) The amount of enemies to spawn per generator.")] [SerializeField] [Range(1, 100)] public int enemiesPerGenerator;
-    [Tooltip("(Difficulty) The amount of enemies that are added to the enemiesPerGenerator, per each cycled.")] [SerializeField] [Range(1, 40)] public int enemiesIncreasePerCycle;
+    [Tooltip("(Difficulty) The amount of enemies to spawn per spawner.")] [SerializeField] [Range(1, 100)] public int enemiesPerSpawner;
+    [Tooltip("(Difficulty) The amount of enemies that are added to the enemiesPerSpawner, per each cycled.")] [SerializeField] [Range(1, 40)] public int enemiesIncreasePerCycle;
     [Tooltip("(Difficulty) The amount of enemies that spawn per generator in wave one.")] [SerializeField] [Range(1, 25)] public int waveOneEnemies = 10;
     [Tooltip("(Difficulty) The amount of extra money given to the player at the beginning of each round.")] [SerializeField] [Range(25, 125)] int waveMoneyBoost = 25;
+    [Tooltip("(Difficulty) The money boost multiplier given to the money boost at the beginning of each round. \n\t(1.0 > No boost every round, 2.0 > Doubled every round)")] [SerializeField] [Range(1.0f, 2.0f)] float moneyBoostMultiplier = 1.2f;
 
     [Tooltip("This is the amount of time that a player will have in either of the specified modes.")] [SerializeField] [Range(10, 49)] public int timeInBuildMode = 30, timeInCombatMode = 30, timeInWaveOneBuild =30;
 
     [Header("Technical")]
+    [Space(10)]
     [Tooltip("This is the current GameMode that majorly effects how the game acts. Idle = 0, Build = 1, Combat = 2")]public GameMode currentMode = GameMode.Build;
 
     [SerializeField] GameObject CombatCanvas, BuildCanvas, MainCanvas, GameOverCanvas, MissionSucessCanvas;
@@ -137,12 +144,12 @@ public class GameManager : MonoBehaviour
             {
                 if (i > 1)
                 {
-                    EnemyBoostText.text = $"+{enemiesPerGenerator}";
+                    EnemyBoostText.text = $"+{enemiesPerSpawner}";
                     EnemyBoostText.GetComponent<Animation>().Play();
 
                     spawner.enemyHealthIncrease *= 2;
-                    spawner.enemiesToSpawn = enemiesPerGenerator;
-                    enemiesAlive += enemiesPerGenerator;
+                    spawner.enemiesToSpawn = enemiesPerSpawner;
+                    enemiesAlive += enemiesPerSpawner;
                 }
                 else // Distinction between wave one difficulty and all of the other difficulties
                 {
@@ -156,6 +163,32 @@ public class GameManager : MonoBehaviour
             timerTime = 0;
             while (enemiesAlive > 0) yield return null;
 
+            // Begin checking to see if this is a boss round or not
+            bool isBossRound = false;
+            int _bossID = 0;
+
+            for (int bossID = 0; bossID < BossCycles.Count; bossID++)
+                if (currentCycle == BossCycles[bossID]) { isBossRound = true; bossID = _bossID; }
+
+            /// Boss round returned true, begin operating boss round.
+            if (isBossRound)
+            {
+                yield return new WaitForSeconds(3);
+                enemiesAlive++; // Register boss enemy
+
+                /// Find spawner for boss enemy
+                List<EnemySpawner> AllSpawners = new List<EnemySpawner>();
+                foreach (EnemySpawner spawner in FindObjectsOfType<EnemySpawner>()) AllSpawners.Add(spawner);
+
+                AllSpawners[Random.Range(0, AllSpawners.Count)].Spawn(BossWaveBosses[_bossID].gameObject);
+
+                /// Wait until boss is dead, not for the timer, to set the round to a win state.
+                timerTime = 0;
+                while (enemiesAlive > 0) yield return null;
+            }
+
+
+            /// Win Delay ------------------------
             /// Provide 5 seconds between cycles. Do not show on the game timer. This is invisible time.
             timerTime = 0;
             yield return new WaitForSeconds(2.5f);
@@ -163,14 +196,16 @@ public class GameManager : MonoBehaviour
             MoneyBoostText.text = $"+{waveMoneyBoost}";
             MoneyBoostText.GetComponent<Animation>().Play();
             // Add extra money to the player, because they completed the round.
-            PlayerManager.currentCurrency += waveMoneyBoost;           
+            PlayerManager.currentCurrency += waveMoneyBoost;
             yield return new WaitForSeconds(2.5f);
 
             /// Cycle has been won
             currentCycle++;
+            waveMoneyBoost = Mathf.RoundToInt(waveMoneyBoost * moneyBoostMultiplier);
+
             if (i > 1)
             {
-                enemiesPerGenerator += enemiesIncreasePerCycle; // Increase game difficulty if it isn't the first wave.
+                enemiesPerSpawner += enemiesIncreasePerCycle; // Increase game difficulty if it isn't the first wave.
             }
             /// Game Has been won
             if (i == amountOfCycles)
