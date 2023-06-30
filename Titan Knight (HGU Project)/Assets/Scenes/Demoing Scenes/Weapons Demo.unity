@@ -7939,7 +7939,7 @@ PrefabInstance:
         type: 3}
       propertyPath: BuildMenu
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2301580473094588778}
     - target: {fileID: 8162802011712870888, guid: bd85b00e41896994bb826928fd9c6104,
         type: 3}
       propertyPath: m_Name
@@ -21911,7 +21911,7 @@ PrefabInstance:
         type: 3}
       propertyPath: BuildMenu
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2301580473094588778}
     - target: {fileID: 8162802011712870888, guid: bd85b00e41896994bb826928fd9c6104,
         type: 3}
       propertyPath: m_Name
@@ -26639,7 +26639,7 @@ PrefabInstance:
         type: 3}
       propertyPath: BuildMenu
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2301580473094588778}
     - target: {fileID: 8162802011712870888, guid: bd85b00e41896994bb826928fd9c6104,
         type: 3}
       propertyPath: m_Name
@@ -31914,7 +31914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a243b3faf710341118be394771c8fed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startCurrency: 150
+  startCurrency: 999
   speed: 10
   sideSpeedMultiplier: 7.5
   runSpeedMultiplier: 1.7
@@ -40587,7 +40587,7 @@ PrefabInstance:
         type: 3}
       propertyPath: BuildMenu
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2301580473094588778}
     - target: {fileID: 8162802011712870888, guid: bd85b00e41896994bb826928fd9c6104,
         type: 3}
       propertyPath: m_Name
@@ -46733,17 +46733,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 943957b85209b49929721682e83c0f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BossCycles: 
-  BossWaveBosses: []
-  amountOfCycles: 3
-  enemiesPerSpawner: 4
-  enemiesIncreasePerCycle: 1
+  BossCycles: 04000000
+  BossWaveBosses:
+  - {fileID: 5622125658679942990, guid: 6fab11ad50451594db0421f5e9a9bf1c, type: 3}
+  amountOfCycles: 4
+  enemiesPerSpawner: 12
+  enemiesIncreasePerCycle: 5
   waveOneEnemies: 4
   waveMoneyBoost: 25
   moneyBoostMultiplier: 1.6
   timeInBuildMode: 15
   timeInCombatMode: 30
-  timeInWaveOneBuild: 25
+  timeInWaveOneBuild: 10
   currentMode: 1
   CombatCanvas: {fileID: 504224380}
   BuildCanvas: {fileID: 2301580472290593975}
@@ -46762,7 +46763,7 @@ MonoBehaviour:
   - {fileID: 1688763057}
   CoreFXPlayer: {fileID: 242189830}
   CoreMusicPlayer: {fileID: 1724199924}
-  BuildMenu: {fileID: 0}
+  BuildMenu: {fileID: 2301580473094588778}
   DeleteMenu: {fileID: 663023301}
 --- !u!4 &2063935975
 Transform:
@@ -49655,7 +49656,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6264676546030135489}
+  - {fileID: 2301580473094588781}
   - {fileID: 2301580471676311676}
   - {fileID: 663023302}
   m_Father: {fileID: 2301580472290593974}
@@ -49717,6 +49718,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &2301580473094588778 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7858268124165767528, guid: ae8ca9e589909e243af914bc9be398c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 8286330877058369538}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &2301580473094588781 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7858268124165767535, guid: ae8ca9e589909e243af914bc9be398c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 8286330877058369538}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2682589463794407433
 GameObject:
   m_ObjectHideFlags: 0
@@ -52708,7 +52721,7 @@ PrefabInstance:
         type: 3}
       propertyPath: BuildMenu
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2301580473094588778}
     - target: {fileID: 5262347397676423136, guid: bd85b00e41896994bb826928fd9c6104,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -52782,23 +52795,19 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3816744266991944886}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6264676546030135488
+--- !u!4 &8172549335295474321 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8172549335678160583, guid: bd85b00e41896994bb826928fd9c6104,
+    type: 3}
+  m_PrefabInstance: {fileID: 433566806}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8286330877058369538
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 2301580472258613886}
     m_Modifications:
-    - target: {fileID: 1943208818039874851, guid: ae8ca9e589909e243af914bc9be398c7,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1943208818039874851, guid: ae8ca9e589909e243af914bc9be398c7,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7858268124165767528, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_Name
@@ -52872,17 +52881,17 @@ PrefabInstance:
     - target: {fileID: 7858268124165767535, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7858268124165767535, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7858268124165767535, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7858268124165767535, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
@@ -52911,15 +52920,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae8ca9e589909e243af914bc9be398c7, type: 3}
---- !u!224 &6264676546030135489 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7858268124165767535, guid: ae8ca9e589909e243af914bc9be398c7,
-    type: 3}
-  m_PrefabInstance: {fileID: 6264676546030135488}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &8172549335295474321 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8172549335678160583, guid: bd85b00e41896994bb826928fd9c6104,
-    type: 3}
-  m_PrefabInstance: {fileID: 433566806}
-  m_PrefabAsset: {fileID: 0}

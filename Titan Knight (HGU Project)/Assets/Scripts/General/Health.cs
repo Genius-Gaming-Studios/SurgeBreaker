@@ -82,7 +82,6 @@ public class Health : MonoBehaviour
         StopCoroutine(DamageRenderer());
         StartCoroutine(DamageRenderer());
 
-        Debug.Log(amount);
         if (resistance == 0) currentHealth -= amount;
         else
         {
