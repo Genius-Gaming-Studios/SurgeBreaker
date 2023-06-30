@@ -82,8 +82,8 @@ public class Health : MonoBehaviour
         StopCoroutine(DamageRenderer());
         StartCoroutine(DamageRenderer());
 
+        Debug.Log(amount);
         if (resistance == 0) currentHealth -= amount;
-
         else
         {
             currentHealth = Mathf.RoundToInt(currentHealth -= amount / resistance); // This just divides the damage by the resistance. It's a simple feature, but it works.

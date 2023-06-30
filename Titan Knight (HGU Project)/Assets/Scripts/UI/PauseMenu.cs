@@ -46,6 +46,13 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = false;
     }
 
+    /// <summary>
+    /// Automatically reloads the game
+    /// </summary>
+    public void RetryGame()
+    {
+        LoadLevel(SceneManager.GetActiveScene().buildIndex);
+    }
     public void PauseGame()
     {
         _pauseMenuPanel.SetActive(true);
