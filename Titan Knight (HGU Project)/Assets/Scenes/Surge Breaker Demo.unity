@@ -5697,6 +5697,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97379481}
   m_CullTransparentMesh: 1
+--- !u!1 &114595958 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7858268124165767528, guid: ae8ca9e589909e243af914bc9be398c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 6264676546030135488}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &118848360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46763,7 +46769,7 @@ MonoBehaviour:
   - {fileID: 1688763057}
   CoreFXPlayer: {fileID: 242189830}
   CoreMusicPlayer: {fileID: 1724199924}
-  BuildMenu: {fileID: 0}
+  BuildMenu: {fileID: 114595958}
   DeleteMenu: {fileID: 663023301}
 --- !u!4 &2063935975
 Transform:
@@ -52793,17 +52799,22 @@ PrefabInstance:
     - target: {fileID: 1943208818039874851, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.83831954
       objectReference: {fileID: 0}
     - target: {fileID: 1943208818039874851, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7858268124165767528, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_Name
       value: BuildMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858268124165767528, guid: ae8ca9e589909e243af914bc9be398c7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7858268124165767535, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
