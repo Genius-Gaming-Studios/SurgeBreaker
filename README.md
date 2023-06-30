@@ -14,6 +14,7 @@ Note: This is a fully functional, playable demo version of the game.
 - Added: Side walking
 - Added: Side walking speed modifier
 - Added: Enemy Boss
+- Added: Money Boost Multiplier. (Adds more money *to* the amount of money given each round) 
 
 ### New Patches
 - No new patches yet
