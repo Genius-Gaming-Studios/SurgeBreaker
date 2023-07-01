@@ -39,7 +39,9 @@ public class Waypoints : MonoBehaviour
     public void DamageGenerator(int damage) // This will damage the generator. If the health is 0, the generator dies.
     {
         generatorHealth.currentHealth -= damage;
-        generatorHealth.StartCoroutine(generatorHealth.DamageRenderer());
+
+        if (generatorHealth.DamageCoroutine != null) generatorHealth.StopCoroutine(generatorHealth.DamageCoroutine);
+        generatorHealth.DamageCoroutine = StartCoroutine(generatorHealth.DamageRenderer(Color.red));
 
         // Handle generator destruction
         if (generatorHealth.currentHealth <= 0)

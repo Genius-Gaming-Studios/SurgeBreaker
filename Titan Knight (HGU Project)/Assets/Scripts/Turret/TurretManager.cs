@@ -16,7 +16,8 @@ public class TurretManager : MonoBehaviour
 {
     [Header("Settings")]
     [Tooltip("(Important) The type of this turret.")] [SerializeField] public TurretTypes TurretType; // Very important, decides how the entire turret will behave.
-
+    [Tooltip("(Important) Will cause the turret's entire mechanics to target the Player, instead of the mob. The attack damage is changed into the heal amount.")] [SerializeField] public bool doHealingMode = false;
+    
     [Header("General")]
     [Tooltip("The range in which the turret can reach enemies from.")] [SerializeField] [Range(75, 9999)] public int turretCost = 150;
 
@@ -71,56 +72,89 @@ public class TurretManager : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
-        foreach (GameObject enemy in enemies)
-        {
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < shortestDistance)
-            {
-                shortestDistance = distanceToEnemy;
-                nearestEnemy = enemy;
-            }
-        }
+        float distanceToPlayer = 0;
 
-        if (nearestEnemy != null && shortestDistance <= range) // This targets the nearest enemy, but can be modified later to target the enemy with the most power, HP, etc..
-        {
-            target = nearestEnemy.transform;
-            targetEnemy = nearestEnemy.GetComponent<Enemy>();
-        }
+        if (!doHealingMode)
+            foreach (GameObject enemy in enemies)
+            {
+                float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+                if (distanceToEnemy < shortestDistance)
+                {
+                    shortestDistance = distanceToEnemy;
+                    nearestEnemy = enemy;
+                }
+            }
         else
         {
-            target = null;
+            distanceToPlayer = Vector3.Distance(transform.position, FindObjectOfType<PlayerManager>().transform.position);
+            nearestEnemy = FindObjectOfType<PlayerManager>().gameObject;
         }
 
+        if (!doHealingMode)
+            if (nearestEnemy != null && shortestDistance <= range) // This targets the nearest enemy, but can be modified later to target the enemy with the most power, HP, etc..
+            {
+                target = nearestEnemy.transform;
+                targetEnemy = nearestEnemy.GetComponent<Enemy>();
+            }
+            else
+                target = null;
+        else
+        {
+            if (distanceToPlayer <= range)
+                target = nearestEnemy.transform;
+            else target = null;
+        }
     }
 
     private void FixedUpdate()
     {
+
+
         if (target == null)
         {
             if (TurretType == TurretTypes.Laser)
             {
-                laserRenderer.enabled = false; // Hides the laser if there is no target in range of the turret.
+                    laserRenderer.enabled = false; // Hides the laser if there is no target in range of the turret.
                 laserRenderer.GetComponent<AudioSource>().enabled = false;
             }
 
             return;
         }
         else if (TurretType == TurretTypes.Laser)
-        { // Re-enable graphic and audio
-            laserRenderer.GetComponent<AudioSource>().enabled = true;
-            laserRenderer.enabled = true;
+        {
+            if (doHealingMode && (target.GetComponent<Health>().currentHealth >= target.GetComponent<Health>().maximumHealth)) // This line is here to just make the turret ignore the player if they are at max health.
+                laserRenderer.GetComponent<AudioSource>().enabled = false;
+
+
+            // Re-enable graphic and audio
+            if (doHealingMode && (target.GetComponent<Health>().currentHealth < target.GetComponent<Health>().maximumHealth))
+            {
+                laserRenderer.enabled = true;
+                laserRenderer.GetComponent<AudioSource>().enabled = true;
+            }
+
+            if (!doHealingMode)
+            {
+                laserRenderer.GetComponent<AudioSource>().enabled = true;
+
+
+                laserRenderer.enabled = true;
+            }
         }
 
         if (FindObjectOfType<GameManager>().currentMode != GameMode.Combat) return; // Ensure that it's in combat mode fire
 
-        LockOnTarget();
+
+         LockOnTarget();
 
         if (TurretType == TurretTypes.Bullet)
         {
             if (fireCountdown <= 0f)
             {
+                if (target.gameObject.name.Contains("Player Controller") && (target.GetComponent<Health>().currentHealth < target.GetComponent<Health>().maximumHealth))
+                    Fire();
 
-                Fire();
+                if (!target.gameObject.name.Contains("Player Controller")) Fire();
 
                 fireCountdown = 1f / fireRate;
             }
@@ -129,7 +163,10 @@ public class TurretManager : MonoBehaviour
         }
         else if (TurretType == TurretTypes.Laser)
         {
-            LaserFire();
+            if (target.gameObject.name.Contains("Player Controller") && (target.GetComponent<Health>().currentHealth < target.GetComponent<Health>().maximumHealth))
+                LaserFire();
+
+            if (!target.gameObject.name.Contains("Player Controller")) LaserFire();
 
             fireCountdown -= Time.deltaTime;
         }
