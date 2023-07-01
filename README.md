@@ -12,6 +12,7 @@ Note: This is a fully functional, playable demo version of the game.
 - Changed: Build Menu is now a flexible grid. This means, it has been HIGHLY optimized in terms of allowing the game level designers to easily enable and disable the turrets that should be in the levels.
 - Changed: Reduced the minimum value permitted in the Player Controller's startCurrency
 - Changed: Ran more organization of the update method
+- Added: *Debug Options* in the Game Manager object.
 - Added: Healing Turrets, Slowing Turrets
 - Added: Side walking
 - Added: Side walking speed modifier
