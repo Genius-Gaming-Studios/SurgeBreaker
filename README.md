@@ -3,7 +3,7 @@
  
 *This is the Unity Project for the Surge Breaker Genius Studios Project.*
 
-## 1.9.1a Polish Update
+## 1.9.2a Polish Update
 
 Note: This is a fully functional, playable demo version of the game.
 
@@ -11,6 +11,7 @@ Note: This is a fully functional, playable demo version of the game.
 
 - Changed: Reduced the minimum value permitted in the Player Controller's startCurrency
 - Changed: Ran more organization of the update method
+- Added: Healing Turrets
 - Added: Side walking
 - Added: Side walking speed modifier
 - Added: Enemy Boss
