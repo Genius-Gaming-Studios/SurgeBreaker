@@ -174,13 +174,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bb35e09994842fbbccb81079b75839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modelMaterial: {fileID: 0}
+  HealthType: 1
+  modelMaterial:
+  - {fileID: 0}
   pModelMaterial: {fileID: 8269782329766215826}
   startHealth: 100
   currentHealth: 1
+  maximumHealth: 100
+  autoAssignMaxHealth: 1
   resistance: 0
+  GeneratorHealthBar: {fileID: 0}
+  GeneratorHealthText: {fileID: 0}
   _bounty: 0
-  HealthType: 1
+  beingSlowed: 0
+  SlowMaterial: {fileID: 0}
 --- !u!143 &5622125658679942981
 CharacterController:
   m_ObjectHideFlags: 0

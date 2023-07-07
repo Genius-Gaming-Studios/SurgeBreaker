@@ -14,10 +14,17 @@ public class TurretBullet : MonoBehaviour
 
 
     [Header("Attributes")]
-    [Tooltip("The speed that the bullet travels.")] [SerializeField] [Range(10, 150)] float speed = 70f;
+    [Tooltip("The speed that the bullet travels.")] [SerializeField] [Range(10, 150)] float speed = 70.0f;
     [Tooltip("The damage that the bullet does.")] [SerializeField] [Range(2, 1000)] int power = 50;
     [Tooltip("The tag of the walls, or any object that the bullet can not go through.")] [SerializeField] string _solidObjectTag = "Can Stop Bullets";
-    [Tooltip("The radius of the object collision checking.")] [SerializeField] float checkingRange = 1f;
+    [Tooltip("The radius of the object collision checking.")] [SerializeField] float checkingRange = 1.0f;
+
+    [Header("Power ups")]
+    [Tooltip("Should this bullet do slowing on enemies?")] [SerializeField] public bool doSlowing;
+    [Tooltip("How long should enemies be slowed for?")] [SerializeField] [Range(0.3f, 2.5f)] public float slowTime = 1.0f;
+    [Tooltip("What is the speed that enemies should be slowed to?")] [SerializeField] [Range(1.0f, 5.0f)] public float slowTo = 2.0f;
+
+
     public void Seek(Transform _target)
     {
         target = _target;
@@ -51,8 +58,6 @@ public class TurretBullet : MonoBehaviour
     private void HitTarget()
     {
         Damage(target);
-
-        Destroy(gameObject);
     }
 
     void Damage(Transform enemy)
@@ -62,11 +67,24 @@ public class TurretBullet : MonoBehaviour
         if (e != null)
         {
             e.GetComponent<Health>().Damage(power);
+
+            /// Register enemy slowing, if this is a slower bullet.
+            if (doSlowing)
+            {
+                if (e.SlowingCoroutine != null) e.StopCoroutine(e.SlowingCoroutine);
+                e.SlowingCoroutine = e.StartCoroutine(e.SlowEnemy(slowTo, slowTime));
+            }
         }
         else
         {
-            Debug.Log("This isn't an enemy.");
+            if (enemy.GetComponent<PlayerManager>() != null) // Heal
+                enemy.GetComponent<Health>().Damage(-power);
+            else
+                Debug.Log("This isn't an enemy or a player.");
         }
+
+
+
         Destroy(gameObject);
     }
  

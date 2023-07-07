@@ -755,7 +755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FollowMode: 0
-  attackDamage: 50
+  attackDamage: 89
   attackRate: 0.67
   sightRange: 20
   attackRange: 2
@@ -786,12 +786,16 @@ MonoBehaviour:
   modelMaterial:
   - {fileID: 7014265701486680298}
   pModelMaterial: {fileID: 0}
-  startHealth: 550
+  startHealth: 1500
   currentHealth: 1
+  maximumHealth: 100
+  autoAssignMaxHealth: 1
   resistance: 2
   GeneratorHealthBar: {fileID: 0}
   GeneratorHealthText: {fileID: 0}
   _bounty: 0
+  beingSlowed: 0
+  SlowMaterial: {fileID: 2100000, guid: fc77e0a4f03510a42aa969e6a4418ac8, type: 2}
 --- !u!143 &5622125658679942981
 CharacterController:
   m_ObjectHideFlags: 0
@@ -820,7 +824,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4
+  m_Speed: 5
   m_Acceleration: 12
   avoidancePriority: 50
   m_AngularSpeed: 120
