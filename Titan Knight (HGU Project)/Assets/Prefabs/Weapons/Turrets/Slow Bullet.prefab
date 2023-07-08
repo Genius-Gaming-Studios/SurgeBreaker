@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2933673285059474408}
   - component: {fileID: -918282479700997729}
   m_Layer: 0
-  m_Name: Proto FastTurret (Bullet)
+  m_Name: Slow Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5890929398850381768}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.152, y: 0.79, z: 4.76}
-  m_LocalScale: {x: 0.12496, y: 0.12496, z: 0.12496}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5890929400096472633}
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1be6d54e3c9bc485f8450066d07b5744, type: 2}
+  - {fileID: 2100000, guid: 4c3ecc9a35829864ba3b2f73c58841bf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,10 +111,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b626a57fcb149fcb9c24fcea0ae2f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  power: 9
+  speed: 24
+  power: 10
   _solidObjectTag: Can Stop Bullets
-  checkingRange: 2
+  checkingRange: 3
+  doSlowing: 1
+  slowTime: 1.39
+  slowTo: 1.8
 --- !u!1 &5890929400096472634
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,14 +162,14 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0, g: 0.72531223, b: 1, a: 1}
+  m_Color: {r: 0.9557204, g: 0, b: 1, a: 1}
   m_Intensity: 12.8
   m_Range: 6.7
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1

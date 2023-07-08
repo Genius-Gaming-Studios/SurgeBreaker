@@ -16,7 +16,7 @@ public class PlayerManager : MonoBehaviour
     [Space(20)]
     [Header("Player Preferences")]
 
-    [Tooltip("The amount of currency that the player starts with.")] [Range(150, 999)] public int startCurrency = 275; // Do not use this to get a reference to her current amount of currency.
+    [Tooltip("The amount of currency that the player starts with.")] [Range(150, 3999)] public int startCurrency = 275; // Do not use this to get a reference to her current amount of currency.
 
     [Tooltip("The walkspeed of the player")] [Range(4.0f, 12.0f)] public float speed = 6.0f;
     [Tooltip("" +
@@ -123,7 +123,8 @@ public class PlayerManager : MonoBehaviour
         HandleLosing();
         HandleHealthUI();
 
-        currencyText.text = $"${currentCurrency}";
+        if (FindObjectOfType<GameManager>().doInfiniteMoney) { currencyText.text = "inf."; currentCurrency = 99999999; }
+        else currencyText.text = $"${currentCurrency}";
 
     }
 

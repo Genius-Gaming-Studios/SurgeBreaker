@@ -15,8 +15,14 @@ public enum GameMode
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Game Bosses")]
     [Space(10)]
+    [Header("Debug Controls [DEBUG ONLY]")]
+    [Tooltip("[DEBUG ONLY] Do infinite money")] [SerializeField] public bool doInfiniteMoney;
+    [Tooltip("[DEBUG ONLY] Do remove wait times")] [SerializeField] public bool doRemoveWaitTimes;
+    [Tooltip("[DEBUG ONLY] Do allow press tab to toggle game mode")] [SerializeField] public bool doAllowTabToggling;
+
+    [Space(10)]
+    [Header("Game Bosses")]
     [Tooltip("(Important) These are the cycle numbers that bosses will spawn on.  *More details below. \n\n[Boss Wave Description]\n- At the end of the cycle, there will be a 3-5 second pause, before a big boss should spawn. \n- After beating the boss, the game will continue along with the usual sequence.\n- Multiple bosses can spawn in a level.\n- The cycle(s) that bosses spawn on are determined by a list called the 'BossCycles'.\n- The boss that spawns on the Boss Wave is determined by a list called the 'BossWaveBosses'.\n- The boss that will spond corresponds with the boss wave that it should spawn at, as set by the BossCycles list.\n\t(e.g. if the first element of the BossCycles list is [2], then on Cycle [2], the boss from the first element of the 'BossWaveBosses' will spawn.)\n\t(The boss from the 'BossWaveBosses' list can either be a path boss or a player boss. But either way, they should be super slow!)")] [SerializeField] public List<int> BossCycles;
     [Tooltip("(Important) These are the bosses that will spawn on their corresponding 'BossCycle' from the 'BossCycles' list. *More details below. \n\n[Boss Wave Description]\n- At the end of the cycle, there will be a 3-5 second pause, before a big boss should spawn. \n- After beating the boss, the game will continue along with the usual sequence.\n- Multiple bosses can spawn in a level.\n- The cycle(s) that bosses spawn on are determined by a list called the 'BossCycles'.\n- The boss that spawns on the Boss Wave is determined by a list called the 'BossWaveBosses'.\n- The boss that will spond corresponds with the boss wave that it should spawn at, as set by the BossCycles list.\n\t(e.g. if the first element of the BossCycles list is [2], then on Cycle [2], the boss from the first element of the 'BossWaveBosses' will spawn.)\n\t(The boss from the 'BossWaveBosses' list can either be a path boss or a player boss. But either way, they should be super slow!)")] [SerializeField] public List<Enemy> BossWaveBosses;
 
@@ -30,8 +36,8 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("This is the amount of time that a player will have in either of the specified modes.")] [SerializeField] [Range(10, 49)] public int timeInBuildMode = 30, timeInCombatMode = 30, timeInWaveOneBuild =30;
 
-    [Header("Technical")]
     [Space(10)]
+    [Header("Technical")]
     [Tooltip("This is the current GameMode that majorly effects how the game acts. Idle = 0, Build = 1, Combat = 2")]public GameMode currentMode = GameMode.Build;
 
     [SerializeField] GameObject CombatCanvas, BuildCanvas, MainCanvas, GameOverCanvas, MissionSucessCanvas;
@@ -53,8 +59,11 @@ public class GameManager : MonoBehaviour
     [Tooltip("A reference for the health object of each of the generators in the level.")] [SerializeField] Health[] GeneratorsInLevel;
 
 
+     
     private void Start()
     {
+        if (doRemoveWaitTimes) timeInWaveOneBuild = 0;
+
         /// Initialize the game, Restart static values
         InvokeRepeating(nameof(UpdateGenerators), 0, 3);
         InvokeRepeating(nameof(TickGameTimer), 0, .1f);
@@ -114,6 +123,29 @@ public class GameManager : MonoBehaviour
       
     
     }
+
+    private void DoBossCheck()
+    {
+        bossCheckComplete = false;
+        // Begin checking to see if this is a boss round or not
+        isBossRound = false;
+        bossToSpawn = 0;
+
+        for (int bossID = 0; bossID < BossCycles.Count; bossID++)
+        {
+            Debug.Log("-----------\n" + $"Currently checking element {bossID}.\nThe wave that this boss will spawn on is: {BossCycles[bossID]}\nThe curent cycle is: {currentCycle}");
+
+            if (BossCycles[bossID] == currentCycle) { Debug.Log("<color=green> Proceed to spawn.</color>");  isBossRound = true;  bossToSpawn = bossID; }
+
+        }
+
+        bossCheckComplete = true;
+    }
+
+    bool bossCheckComplete = false;
+    bool isBossRound = false;
+    int bossToSpawn = 0;
+
     private IEnumerator GameCycleSequence()
     {
         for (int i = 1; i < amountOfCycles+1; i++)
@@ -163,12 +195,8 @@ public class GameManager : MonoBehaviour
             timerTime = 0;
             while (enemiesAlive > 0) yield return null;
 
-            // Begin checking to see if this is a boss round or not
-            bool isBossRound = false;
-            int _bossID = 0;
-
-            for (int bossID = 0; bossID < BossCycles.Count; bossID++)
-                if (currentCycle == BossCycles[bossID]) { isBossRound = true; bossID = _bossID; }
+             DoBossCheck();
+            while (!bossCheckComplete) yield return null;
 
             /// Boss round returned true, begin operating boss round.
             if (isBossRound)
@@ -180,7 +208,7 @@ public class GameManager : MonoBehaviour
                 List<EnemySpawner> AllSpawners = new List<EnemySpawner>();
                 foreach (EnemySpawner spawner in FindObjectsOfType<EnemySpawner>()) AllSpawners.Add(spawner);
 
-                AllSpawners[Random.Range(0, AllSpawners.Count)].Spawn(BossWaveBosses[_bossID].gameObject);
+                AllSpawners[Random.Range(0, AllSpawners.Count)].Spawn(BossWaveBosses[bossToSpawn].gameObject);
 
                 /// Wait until boss is dead, not for the timer, to set the round to a win state.
                 timerTime = 0;
@@ -236,6 +264,26 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+
+        if (doAllowTabToggling && Input.GetKeyDown(KeyCode.Tab))
+        {
+            switch (currentMode)
+            {
+                case GameMode.Build: SwitchGamemode(GameMode.Combat); break;
+                case GameMode.Combat: SwitchGamemode(GameMode.Build); break;
+
+            }
+        }
+
+
+        if (doRemoveWaitTimes)
+        {
+            timeInBuildMode = 0;
+            timeInCombatMode = 0;
+            timeInWaveOneBuild = 0;
+        }
+
+
         _enemiesAlive = enemiesAlive;
         EnemiesAliveText.text = enemiesAlive.ToString();
         switch (currentMode)

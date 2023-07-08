@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] NavMeshAgent agent;
 
     private GameManager gm;
-
+    private Health enemyHealth;
     private Transform player;
 
     private Vector3 walkPoint; // Patrolling destination
@@ -46,11 +46,15 @@ public class Enemy : MonoBehaviour
     private bool hasAttacked, pInAttackRange, pInSightRange;
 
 
+    private float originalSpeed; 
+
     private void Awake() // Initialize all vaues
     {
         gm = FindObjectOfType<GameManager>();
         player = FindObjectOfType<PlayerManager>().transform;
         agent = GetComponent<NavMeshAgent>();
+        enemyHealth = GetComponent<Health>();
+        originalSpeed = agent.speed;
         // if (FollowMode == EnemyFollowMode.FollowPath) target = assignedPath.points[0];  // If the enemy prefab does not start with 'enabled' to false, a bug will come from this line of code.
     
     }
@@ -86,11 +90,23 @@ public class Enemy : MonoBehaviour
 
     }
 
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.CompareTag("Player")) other.GetComponent<Health>().Damage(attackDamage); // (Only hurt the player)
-    //}
 
+    public Coroutine SlowingCoroutine; // Object reference required to stop coroutine. 
+
+    /// <summary>
+    /// Slows the enemy down to slowTo speed for slowTime seconds.
+    /// </summary>
+    /// <param name="_slowTo">Speed that the enemy will be slowed to.</param>
+    /// <param name="_slowTime">Amount of timeenemy will be slowed to slowTo speed for.</param>
+
+    public IEnumerator SlowEnemy(float _slowTo, float _slowTime)
+    {
+        enemyHealth.beingSlowed = true;
+        agent.speed = _slowTo;
+        yield return new WaitForSeconds(_slowTime);
+        agent.speed = originalSpeed;
+        enemyHealth.beingSlowed = false;
+    }
 
     private void Patrolling()
     {
