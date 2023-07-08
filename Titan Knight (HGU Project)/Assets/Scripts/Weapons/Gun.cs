@@ -14,6 +14,8 @@ public class Gun : MonoBehaviour
     [SerializeField] Transform fireDis;
     [SerializeField] GameObject FxObject;
     [Tooltip("The sound that can be heard when the gun is fired.")][SerializeField] AudioClip fireSound;
+    [SerializeField] Vector3 __fireDisPos = new Vector3(-9f, 1.1f, 72.8f);
+    [SerializeField] bool doOverrideFirePos = true;
 
     private float timeToFire = 1;
 
@@ -23,6 +25,8 @@ public class Gun : MonoBehaviour
     private void OnEnable()
     {
         coreFXPlayer = FindObjectOfType<GameManager>().CoreFXPlayer;
+
+        if (doOverrideFirePos) fireDis.localPosition = __fireDisPos;
     }
     private void FixedUpdate()
     {
