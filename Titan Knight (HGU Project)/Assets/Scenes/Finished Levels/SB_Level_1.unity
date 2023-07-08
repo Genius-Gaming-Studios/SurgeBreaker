@@ -22507,6 +22507,8 @@ MonoBehaviour:
   FxObject: {fileID: 5857432720347368802, guid: 7e74c4160dbb641468e4f7b540463203,
     type: 3}
   fireSound: {fileID: 8300000, guid: 5b1e8bc88bd04fa4eb22facb53648604, type: 3}
+  __fireDisPos: {x: -9, y: 1.1, z: 72.8}
+  doOverrideFirePos: 1
 --- !u!1 &1016701452
 GameObject:
   m_ObjectHideFlags: 0
@@ -22820,7 +22822,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084937250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.435043, y: -35.406418, z: 1.501007}
+  m_LocalPosition: {x: 27.435043, y: -17, z: 1.501007}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -31872,10 +31874,14 @@ MonoBehaviour:
   pModelMaterial: {fileID: 0}
   startHealth: 100
   currentHealth: 1
+  maximumHealth: 100
+  autoAssignMaxHealth: 1
   resistance: 0
   GeneratorHealthBar: {fileID: 0}
   GeneratorHealthText: {fileID: 0}
   _bounty: 0
+  beingSlowed: 0
+  SlowMaterial: {fileID: 0}
 --- !u!33 &1517094449
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -31950,7 +31956,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517094447}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.792942, y: 0.13300002, z: -22.53048}
+  m_LocalPosition: {x: 9.792942, y: 18, z: -22.53048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -33384,10 +33390,14 @@ MonoBehaviour:
   pModelMaterial: {fileID: 1845469805}
   startHealth: 100
   currentHealth: 1
+  maximumHealth: 100
+  autoAssignMaxHealth: 1
   resistance: 0
   GeneratorHealthBar: {fileID: 717150777}
   GeneratorHealthText: {fileID: 1858382002}
   _bounty: 0
+  beingSlowed: 0
+  SlowMaterial: {fileID: 0}
 --- !u!1001 &1692812766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39919,7 +39929,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879298364}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -33.8, y: -1, z: -23.3}
+  m_LocalPosition: {x: -33.8, y: 15, z: -23.3}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -46733,6 +46743,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 943957b85209b49929721682e83c0f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doInfiniteMoney: 0
+  doRemoveWaitTimes: 0
+  doAllowTabToggling: 0
   BossCycles: 
   BossWaveBosses: []
   amountOfCycles: 3
