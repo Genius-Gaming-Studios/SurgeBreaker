@@ -10,7 +10,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [Header("Attributes")]
-    [Tooltip("Damage that the bullet deals.")] [SerializeField] [Range(1, 99)] public int damage = 5;
+    [Tooltip("Damage that the bullet deals. If this is explosive damage, the attack damage is doubled by 1/3 of the original power for the target that was hit, and trickles down to the others that were in the radius.")] [SerializeField] [Range(1, 250)] public int damage = 5; // Please do not change the maximum value of the range without informing Mark Gaskins, as it will interfere with other processes.
     [SerializeField] [Range(10, 150)] float speed = 70f;
     [Tooltip("The tag of the walls, or any object that the bullet can not go through.")] [SerializeField] string _solidObjectTag = "Can Stop Bullets";
     [Tooltip("The radius of the object collision checking.")] [SerializeField] float checkingRange = 1f;
@@ -19,6 +19,7 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
+
         if (target == null) { Destroy(gameObject); return; } // Destroy bullet if no target
 
         Vector3 dir = target.position - transform.position;
@@ -50,13 +51,11 @@ public class Bullet : MonoBehaviour
         if (col.GetComponent<Bullet>()) return;
         if (col.GetComponent<PlayerManager>()) return;
 
-
         if (col.GetComponent<Enemy>())
         {
             col.GetComponent<Health>().Damage(damage);
             Destroy(this.gameObject);
         }
+
     }
-
-
 }
