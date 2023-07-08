@@ -133,10 +133,7 @@ public class GameManager : MonoBehaviour
 
         for (int bossID = 0; bossID < BossCycles.Count; bossID++)
         {
-            Debug.Log("-----------\n" + $"Currently checking element {bossID}.\nThe wave that this boss will spawn on is: {BossCycles[bossID]}\nThe curent cycle is: {currentCycle}");
-
             if (BossCycles[bossID] == currentCycle) { Debug.Log("<color=green> Proceed to spawn.</color>");  isBossRound = true;  bossToSpawn = bossID; }
-
         }
 
         bossCheckComplete = true;

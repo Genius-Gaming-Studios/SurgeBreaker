@@ -28,9 +28,10 @@ public class TurretBullet : MonoBehaviour
     [Tooltip("Should this bullet explode when it hits the target?")] public bool doExplosion = false;
     [Tooltip("[GIZMO] Explosion radius of the bullet when it hits the target.")] [Range(3.5f, 17.5f)] [SerializeField] float explosionRange = 6f;
     [Tooltip("The FX that will appear when the bullet reaches the target.")] [SerializeField] GameObject ExplosionFX;
+    [Tooltip("The SFX that will play when the bullet explodes.")] [SerializeField] AudioClip ExplosionSFX;
+
     [Tooltip("The multiplier of the damage given to the ones in the center [Ring A] of the explosion. (DEFAULT: 1.3)")] [SerializeField] [Range(1.0f, 1.9f)] float centerDamageMultiplier = 1.3f;
     [Tooltip("[Read Only] This is a preview. This is the maximum amount of damage that anyone in the radius will experience.")] [SerializeField] [Range(0, 475)] private int maxDamagePreview;
-
 
     public void Seek(Transform _target)
     {
@@ -82,6 +83,7 @@ public class TurretBullet : MonoBehaviour
             else /// Explosion bullet AOE mechanics [1.9.5a]
             {
                 GameObject explosionFX = Instantiate(ExplosionFX, transform.position, Quaternion.identity); // Instantiates the explosion FX where the bullet currently is.
+                FindObjectOfType<GameManager>().CoreFXPlayer.PlayOneShot(ExplosionSFX);
 
                 // First damage the enemy in the center of the AOE in order to raise the stakes of being the one in the center of the attack.
                 e.GetComponent<Health>().Damage(power / 3);
