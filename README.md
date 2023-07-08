@@ -1,9 +1,9 @@
-# Surge Breaker (1.9 alpha)
+# Surge Breaker (1.9.4a alpha)
  *Surge Breaker - Genius Studios Project*
  
 *This is the Unity Project for the Surge Breaker Genius Studios Project.*
 
-## 1.9.3a More Turrets Update
+## 1.9.4a More Turrets Update
 
 Note: This is a fully functional, playable demo version of the game.
 
@@ -20,7 +20,8 @@ Note: This is a fully functional, playable demo version of the game.
 - Added: Money Boost Multiplier. (Adds more money *to* the amount of money given each round) 
 
 ### New Patches
-- No new patches yet
+- Patched: Build Menu can now be escaped out of if the player did not mean to actually open up the build menu.
+- Patched: Fixed the direction that the bullets fire, to make them more accurate to the direction that the player is looking in.
 
 ## Game Build 
 
@@ -40,5 +41,5 @@ Note: This is a fully functional, playable demo version of the game.
 
 
 
-`Latest Version: [1.9a]`
-`Last Updated: [6.29.23]`
+`Latest Version: [1.9.4a]`
+`Last Updated: [7.7.23]`
