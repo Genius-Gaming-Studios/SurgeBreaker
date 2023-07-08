@@ -20,7 +20,8 @@ Note: This is a fully functional, playable demo version of the game.
 - Added: Money Boost Multiplier. (Adds more money *to* the amount of money given each round) 
 
 ### New Patches
-- No new patches yet
+- Patched: Build Menu can now be exitted out of if the player did not mean to actually open up the build menu.
+- Patched: Fixed the direction that the bullets fire, to make them more accurate to the direction that the player is looking in.
 
 ## Game Build 
 
