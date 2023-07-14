@@ -26,7 +26,7 @@ public class TurretBullet : MonoBehaviour
 
     [Space(10)]
     [Tooltip("Should this bullet explode when it hits the target?")] public bool doExplosion = false;
-    [Tooltip("[GIZMO] Explosion radius of the bullet when it hits the target.")] [Range(3.5f, 17.5f)] [SerializeField] float explosionRange = 6f;
+    [Tooltip("[GIZMO] Explosion radius of the bullet when it hits the target.")] [Range(3.5f, 47.5f)] [SerializeField] float explosionRange = 6f;
     [Tooltip("The FX that will appear when the bullet reaches the target.")] [SerializeField] GameObject ExplosionFX;
     [Tooltip("The SFX that will play when the bullet explodes.")] [SerializeField] AudioClip ExplosionSFX;
 
