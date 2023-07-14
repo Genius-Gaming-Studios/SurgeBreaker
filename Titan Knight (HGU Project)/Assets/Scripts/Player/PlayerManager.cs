@@ -155,7 +155,7 @@ public class PlayerManager : MonoBehaviour
 
         if (isDead)
         {
-            pModelRotation.gameObject.SetActive(false);
+            //pModelRotation.gameObject.SetActive(false);
 
             controller.enabled = false;
             this.enabled = false;
@@ -285,6 +285,7 @@ public class PlayerManager : MonoBehaviour
     private void HandleAnimations(float xInput, float zInput)
     {
         /// [1.9a NOTICE] Horizontal animations for walking are required, as this code is now deprecated as of version 1.9a
+        if (isDead) pAnimator.SetTrigger("Die");
 
         pAnimator.SetFloat("forwardMovement", zInput);
 
