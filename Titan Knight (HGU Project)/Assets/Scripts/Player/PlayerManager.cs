@@ -288,6 +288,7 @@ public class PlayerManager : MonoBehaviour
         if (isDead) pAnimator.SetTrigger("Die");
 
         pAnimator.SetFloat("forwardMovement", zInput);
-
+        pAnimator.SetFloat("strafingMovement", xInput);
+        pAnimator.SetBool("isShooting", Input.GetMouseButton(0));
     }
 }
