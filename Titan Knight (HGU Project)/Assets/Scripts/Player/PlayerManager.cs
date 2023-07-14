@@ -114,10 +114,13 @@ public class PlayerManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Pressing R will reload the scene. Might need to be discontinued soon.
 
+        float zInput = Input.GetAxis("Vertical");    // Forward/Backward Movement
+        float xInput = Input.GetAxis("Horizontal");  // Left/Right Movement
+
         HandleVisuals();
-        HandleMovement();
+        HandleMovement(xInput, zInput);
         HandleSprinting();
-        HandleAnimations();
+        HandleAnimations(xInput, zInput);
         HandleDynamicCursor();
         // HandleJumping(); Jumping has been permanently discontinued.
         HandleLosing();
@@ -239,13 +242,13 @@ public class PlayerManager : MonoBehaviour
             movementDirection.x * (speed * runSpeedMultiplier),
             movementDirection.y * speed, /* Prevent the jump power from multiplying! */
             movementDirection.z * (speed * runSpeedMultiplier)) * Time.deltaTime);
-            pAnimator.SetBool("isWalking", true);
+            //pAnimator.SetFloat("forwardMovement", zInput);
         }
     }
 
 
     private Vector3 movementVelocity;
-    private void HandleMovement() // The movement will be completely rescripted in order to rotate movement grid by 45°
+    private void HandleMovement(float xInput, float zInput) // The movement will be completely rescripted in order to rotate movement grid by 45°
     {
         if (GameManager.hasWon) return; // Player will not be allowed to be controlled if they have already won.
 
@@ -266,8 +269,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         // Make the player move in the direction of the pModelRotation.
-        movementDirection = pModelRotation.transform.forward * Input.GetAxis("Vertical") + pModelRotation.transform.right * (Input.GetAxis("Horizontal") - Input.GetAxis("Horizontal") / sideSpeedMultiplier);
-
+        movementDirection = pModelRotation.transform.forward * zInput + pModelRotation.transform.right * xInput - (pModelRotation.transform.right * (xInput / sideSpeedMultiplier));
 
         movementVelocity = movementDirection * speed;
 
@@ -280,29 +282,11 @@ public class PlayerManager : MonoBehaviour
         pCamera.transform.rotation = pCamera_Position.transform.rotation;
     }
 
-    private void HandleAnimations()
+    private void HandleAnimations(float xInput, float zInput)
     {
         /// [1.9a NOTICE] Horizontal animations for walking are required, as this code is now deprecated as of version 1.9a
 
-        if (Input.GetAxis("Vertical") > 0)
-        {
-            pAnimator.SetBool("IsWalkingForward", true);
-            pAnimator.SetBool("IsWalkingBackward", false);
-        }
-
-        else if (Input.GetAxis("Vertical") < 0)
-        {
-            pAnimator.SetBool("IsWalkingForward", false);
-            pAnimator.SetBool("IsWalkingBackward", true);
-        }
-
-        else
-        {
-            pAnimator.SetBool("IsWalkingForward", false);
-            pAnimator.SetBool("IsWalkingBackward", false);
-        }
-
-
+        pAnimator.SetFloat("forwardMovement", zInput);
 
     }
 }
