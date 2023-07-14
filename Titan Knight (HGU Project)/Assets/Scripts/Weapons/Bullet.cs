@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
         }
 
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
-
+        transform.LookAt(target.transform);
 
         // Checks to see when it should delete the bullet after being too close to an object (after colliding with a wall)
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, checkingRange);
