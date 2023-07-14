@@ -24,6 +24,14 @@ public class TurretBullet : MonoBehaviour
     [Tooltip("How long should enemies be slowed for?")] [SerializeField] [Range(0.3f, 2.5f)] public float slowTime = 1.0f;
     [Tooltip("What is the speed that enemies should be slowed to?")] [SerializeField] [Range(1.0f, 5.0f)] public float slowTo = 2.0f;
 
+    [Space(10)]
+    [Tooltip("Should this bullet explode when it hits the target?")] public bool doExplosion = false;
+    [Tooltip("[GIZMO] Explosion radius of the bullet when it hits the target.")] [Range(3.5f, 17.5f)] [SerializeField] float explosionRange = 6f;
+    [Tooltip("The FX that will appear when the bullet reaches the target.")] [SerializeField] GameObject ExplosionFX;
+    [Tooltip("The SFX that will play when the bullet explodes.")] [SerializeField] AudioClip ExplosionSFX;
+
+    [Tooltip("The multiplier of the damage given to the ones in the center [Ring A] of the explosion. (DEFAULT: 1.3)")] [SerializeField] [Range(1.0f, 1.9f)] float centerDamageMultiplier = 1.3f;
+    [Tooltip("[Read Only] This is a preview. This is the maximum amount of damage that anyone in the radius will experience.")] [SerializeField] [Range(0, 475)] private int maxDamagePreview;
 
     public void Seek(Transform _target)
     {
@@ -62,11 +70,50 @@ public class TurretBullet : MonoBehaviour
 
     void Damage(Transform enemy)
     {
+
         Enemy e = enemy.GetComponent<Enemy>();
+
 
         if (e != null)
         {
-            e.GetComponent<Health>().Damage(power);
+            if (!doExplosion)
+            {
+                e.GetComponent<Health>().Damage(power);
+            }
+            else /// Explosion bullet AOE mechanics [1.9.5a]
+            {
+                GameObject explosionFX = Instantiate(ExplosionFX, transform.position, Quaternion.identity); // Instantiates the explosion FX where the bullet currently is.
+                FindObjectOfType<GameManager>().CoreFXPlayer.PlayOneShot(ExplosionSFX);
+
+                // First damage the enemy in the center of the AOE in order to raise the stakes of being the one in the center of the attack.
+                e.GetComponent<Health>().Damage(power / 3);
+
+                // Find all enemies within the range of the blast 
+                GameObject[] enemiesInRange = GameObject.FindGameObjectsWithTag("Enemy");
+                foreach (GameObject _enemy in enemiesInRange)
+                {
+                    // Fill values and identify the rings of damage
+                    float distanceFromCenter = Vector3.Distance(transform.position, _enemy.transform.position);
+                    float perimeterA = explosionRange / 4; /// Closest - Most Damaged
+                    float perimeterB = (explosionRange / 4) * 2; /// Second Closest
+                    float perimeterC = (explosionRange / 4) * 3; /// Third Closest
+                    float perimeterD = explosionRange; /// Furthest - Least Damged
+
+                                                        /// Damage all enemies in range, depending on how close they were to the target.
+                    if (distanceFromCenter <= perimeterA) // First ring of damage [A]
+                        _enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(power * centerDamageMultiplier)); // This damage is multiplied by the centerDamageMultiplier to ensure that the ones closest to the center are hit harder than the rest.
+                    else if (distanceFromCenter <= perimeterB && distanceFromCenter >= perimeterA) // Second ring of damage [B]
+                        _enemy.GetComponent<Health>().Damage(power);
+                    else if (distanceFromCenter <= perimeterC && distanceFromCenter >= perimeterB) // Third ring of damage [C]
+                       _enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(power - power / 4));
+                    else if (distanceFromCenter <= perimeterD && distanceFromCenter >= perimeterC) // Fourth ring of damage [D]
+                        _enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(power - power / 2));
+                }
+
+
+                Destroy(explosionFX, 3);  // Destroys the explosion FX after 3 seconds of delay.
+                Destroy(this.gameObject, 1); // Destroy the bullet when the explosion is complete.
+            }
 
             /// Register enemy slowing, if this is a slower bullet.
             if (doSlowing)
@@ -87,5 +134,18 @@ public class TurretBullet : MonoBehaviour
 
         Destroy(gameObject);
     }
- 
+
+    public void OnDrawGizmosSelected()
+    {
+        /// Shows the explosion radius when gizmos are selected.
+        if (doExplosion)
+        {
+            Gizmos.DrawWireSphere(transform.position, explosionRange);
+        }
+
+        /// <summary>
+        /// Editor function to update the preview according to the damage values.
+        /// </summary>
+        maxDamagePreview = Mathf.RoundToInt(power * centerDamageMultiplier);
+    }
 }
