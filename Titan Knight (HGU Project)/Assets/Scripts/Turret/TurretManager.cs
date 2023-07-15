@@ -114,7 +114,7 @@ public class TurretManager : MonoBehaviour
         {
             if (TurretType == TurretTypes.Laser)
             {
-                    laserRenderer.enabled = false; // Hides the laser if there is no target in range of the turret.
+                laserRenderer.enabled = false; // Hides the laser if there is no target in range of the turret.
                 laserRenderer.GetComponent<AudioSource>().enabled = false;
             }
 
@@ -122,15 +122,27 @@ public class TurretManager : MonoBehaviour
         }
         else if (TurretType == TurretTypes.Laser)
         {
-            if (doHealingMode && (target.GetComponent<Health>().currentHealth >= target.GetComponent<Health>().maximumHealth)) // This line is here to just make the turret ignore the player if they are at max health.
+            if (FindObjectOfType<GameManager>().currentMode == GameMode.Combat)
+            {
+                if (doHealingMode && (target.GetComponent<Health>().currentHealth >= target.GetComponent<Health>().maximumHealth)) // This line is here to just make the turret ignore the player if they are at max health.
+                {
+                    laserRenderer.enabled = false;
+                    laserRenderer.GetComponent<AudioSource>().enabled = false;
+                }
+
+                // Re-enable graphic and audio
+                else if (doHealingMode && (target.GetComponent<Health>().currentHealth < target.GetComponent<Health>().maximumHealth))
+                {
+                    laserRenderer.enabled = true;
+                    laserRenderer.GetComponent<AudioSource>().enabled = true;
+                }
+            }
+            else
+            {
                 laserRenderer.GetComponent<AudioSource>().enabled = false;
 
+                laserRenderer.enabled = false;
 
-            // Re-enable graphic and audio
-            if (doHealingMode && (target.GetComponent<Health>().currentHealth < target.GetComponent<Health>().maximumHealth))
-            {
-                laserRenderer.enabled = true;
-                laserRenderer.GetComponent<AudioSource>().enabled = true;
             }
 
             if (!doHealingMode)
@@ -190,7 +202,8 @@ public class TurretManager : MonoBehaviour
 
         if (fireCountdown <= 0f)
         {
-            target.gameObject.GetComponent<Health>().Damage(laserPower);
+            if (!doHealingMode) target.gameObject.GetComponent<Health>().Damage(laserPower);
+            else target.gameObject.GetComponent<Health>().Damage(-laserPower);
 
             fireCountdown = 1f / damageRate;
         }
