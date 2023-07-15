@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
     [Header("Important References")]
     [Tooltip("Ensure that these are assigned at all times.")] [SerializeField] LayerMask GroundLayer;
     [Tooltip("Ensure that these are assigned at all times.")] [SerializeField] LayerMask PlayerLayer;
+    [Tooltip("Ensure that these are assigned at all times.")] public Animator eAnimator;
 
     [SerializeField] NavMeshAgent agent;
 
@@ -250,4 +251,9 @@ public class Enemy : MonoBehaviour
 
 
     #endregion
+
+    private void HandleAnimations()
+    {
+        if (pInAttackRange) eAnimator.SetBool("inAttackRange", true);
+    }
 }

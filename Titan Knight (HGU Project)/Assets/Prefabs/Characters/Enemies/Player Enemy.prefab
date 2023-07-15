@@ -1081,6 +1081,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6090887206244471884}
   - component: {fileID: 4534207535972882174}
+  - component: {fileID: 6864322030311761360}
   m_Layer: 0
   m_Name: Base mesh Purle Variant
   m_TagString: Untagged
@@ -1112,7 +1113,7 @@ Animation:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6903170540687331062}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: ceaecebf1b6e15948be0fa4c750be9f5, type: 2}
   m_Animations:
@@ -1121,6 +1122,26 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!95 &6864322030311761360
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6903170540687331062}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: faf17c2f038500849a32c06ddf31de64, type: 3}
+  m_Controller: {fileID: 9100000, guid: 65da96cea7e3f4c449ea85af04d189ea, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6962506482655473101
 GameObject:
   m_ObjectHideFlags: 0
