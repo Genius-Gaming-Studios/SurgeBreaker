@@ -767,6 +767,7 @@ MonoBehaviour:
   PlayerLayer:
     serializedVersion: 2
     m_Bits: 64
+  eAnimator: {fileID: 0}
   agent: {fileID: 8113799589385001452}
   target: {fileID: 0}
   assignedPath: {fileID: 0}
@@ -1080,7 +1081,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6090887206244471884}
-  - component: {fileID: 4534207535972882174}
   - component: {fileID: 6864322030311761360}
   m_Layer: 0
   m_Name: Base mesh Purle Variant
@@ -1106,22 +1106,6 @@ Transform:
   m_Father: {fileID: 5268242161961317250}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &4534207535972882174
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6903170540687331062}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: ceaecebf1b6e15948be0fa4c750be9f5, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: ceaecebf1b6e15948be0fa4c750be9f5, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!95 &6864322030311761360
 Animator:
   serializedVersion: 4

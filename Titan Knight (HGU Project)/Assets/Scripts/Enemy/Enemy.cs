@@ -55,6 +55,7 @@ public class Enemy : MonoBehaviour
         player = FindObjectOfType<PlayerManager>().transform;
         agent = GetComponent<NavMeshAgent>();
         enemyHealth = GetComponent<Health>();
+        eAnimator = transform.GetChild(0).GetChild(0).GetComponent<Animator>();
         originalSpeed = agent.speed;
         // if (FollowMode == EnemyFollowMode.FollowPath) target = assignedPath.points[0];  // If the enemy prefab does not start with 'enabled' to false, a bug will come from this line of code.
     
@@ -81,7 +82,7 @@ public class Enemy : MonoBehaviour
             if (pInSightRange && !pInAttackRange) ChasePlayer();
             if (pInSightRange && pInAttackRange) AttackPlayer();
 
-
+            HandleAnimations();
 
             // Looks at the player 
             Transform playerPos = FindObjectOfType<PlayerManager>().transform;
@@ -163,6 +164,7 @@ public class Enemy : MonoBehaviour
         {
             hasAttacked = true;
 
+            eAnimator.SetTrigger("Attack");
             Attack();
 
             Invoke(nameof(ResetAttack), attackRate); 
@@ -254,6 +256,7 @@ public class Enemy : MonoBehaviour
 
     private void HandleAnimations()
     {
-        if (pInAttackRange) eAnimator.SetBool("inAttackRange", true);
+        bool inPounceRange = Physics.CheckSphere(transform.position, 10.0f, PlayerLayer);
+        eAnimator.SetBool("inPounceRange", inPounceRange);
     }
 }

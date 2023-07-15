@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.AI;
+
 public enum ObjectType
 {
     NotSpecified,
@@ -83,8 +85,6 @@ public class Health : MonoBehaviour
         {
             if (HealthType == ObjectType.Player) GetComponent<PlayerManager>().Die(); // The player manager needs to handle it herself.
             else Die(); // We can handle it ourselves.
-
-            this.enabled = false;
         }
 
         if (HealthType == ObjectType.Enemy)
@@ -160,11 +160,27 @@ public class Health : MonoBehaviour
     {
         if (HealthType != ObjectType.Enemy) return;
 
+        this.enabled = false;
+
         PlayerManager.currentCurrency += _bounty; // Add player money according to the enemy's bounty.
 
         GameManager.enemiesAlive--; // Subtract from the index of enemies alive before proceeding.
 
-        Destroy(this.gameObject);
+        Animator eAnimator = GetComponentInChildren<Animator>();
+        if (eAnimator != null) // Currently set for Player Enemies; An animator will be set up for Generator enemies soon and render this code obsolete
+        {
+            eAnimator.SetTrigger("Die");
 
+            Enemy enemy = GetComponent<Enemy>();
+            enemy.enabled = false;
+
+            NavMeshAgent agent = GetComponent<NavMeshAgent>();
+            agent.enabled = false;
+
+            Destroy(this.gameObject, 1.5f); // Delay for death animation
+        } else
+        {
+            Destroy(this.gameObject); // Destroy Generator enemies immediately becuase they have no death animations currently.
+        }
     }
 }
