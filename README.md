@@ -1,28 +1,19 @@
-# Surge Breaker (1.9.5a alpha)
+# Surge Breaker (1.9.6a alpha)
  *Surge Breaker - Genius Studios Project*
  
 *This is the Unity Project for the Surge Breaker Genius Studios Project.*
 
-## 1.9.5a Polish Update
+## 1.9.6a Polish Update
 
 Note: This is a fully functional, playable demo version of the game.
 
 ### What's New?
 
-- Changed: Build Menu is now a flexible grid. This means, it has been HIGHLY optimized in terms of allowing the game level designers to easily enable and disable the turrets that should be in the levels.
-- Changed: Reduced the minimum value permitted in the Player Controller's startCurrency
-- Changed: Ran more organization of the update method
-- Added: Explosive Turret Bullets
-- Added: *Debug Options* in the Game Manager object.
-- Added: Healing Turrets, Slowing Turrets
-- Added: Side walking
-- Added: Side walking speed modifier
-- Added: Enemy Boss
-- Added: Money Boost Multiplier. (Adds more money *to* the amount of money given each round) 
+- Added: Enemy Animations
+- Fixed: Turrets no longer target dead enemies
+- Fixed: Mech Animations
+- Changed: Laser Healer SFX Heavily Updated
 
-### New Patches
-- Patched: Build Menu can now be escaped out of if the player did not mean to actually open up the build menu.
-- Patched: Fixed the direction that the bullets fire, to make them more accurate to the direction that the player is looking in.
 
 ## Game Build 
 

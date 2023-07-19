@@ -2649,10 +2649,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cb00de59263affe47ac59ad63ba8016d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 959e88d28b35e2c419016ab8ee0d9e9d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 1.1
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -2660,9 +2660,9 @@ AudioSource:
   Priority: 156
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 58.05
+  MaxDistance: 4000
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -2671,16 +2671,25 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      value: 1.1
+      inSlope: 0.8690345
+      outSlope: 0.8690345
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
+      outWeight: 0.15560392
+    - serializedVersion: 3
+      time: 0.538833
+      value: 1.0088525
+      inSlope: -2.9870267
+      outSlope: -2.9870267
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.16503073
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 0
+      time: 0.97714996
+      value: 0.057641983
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2695,7 +2704,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.754
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2725,7 +2734,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 1.1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

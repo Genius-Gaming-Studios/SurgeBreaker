@@ -76,8 +76,15 @@ public class TurretBullet : MonoBehaviour
 
         if (e != null)
         {
-            if (!doExplosion)
+            if (!doExplosion) /// Singular Enemy Hit
             {
+                /// Register singular enemy slowing, if this is a slower bullet.
+                if (doSlowing)
+                {
+                    if (e.SlowingCoroutine != null) e.StopCoroutine(e.SlowingCoroutine);
+                    e.SlowingCoroutine = e.StartCoroutine(e.SlowEnemy(slowTo, slowTime));
+                }
+
                 e.GetComponent<Health>().Damage(power);
             }
             else /// Explosion bullet AOE mechanics [1.9.5a]
@@ -99,15 +106,26 @@ public class TurretBullet : MonoBehaviour
                     float perimeterC = (explosionRange / 4) * 3; /// Third Closest
                     float perimeterD = explosionRange; /// Furthest - Least Damged
 
-                                                        /// Damage all enemies in range, depending on how close they were to the target.
+                    /// Damage all enemies in range, depending on how close they were to the target.
                     if (distanceFromCenter <= perimeterA) // First ring of damage [A]
                         _enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(power * centerDamageMultiplier)); // This damage is multiplied by the centerDamageMultiplier to ensure that the ones closest to the center are hit harder than the rest.
                     else if (distanceFromCenter <= perimeterB && distanceFromCenter >= perimeterA) // Second ring of damage [B]
                         _enemy.GetComponent<Health>().Damage(power);
                     else if (distanceFromCenter <= perimeterC && distanceFromCenter >= perimeterB) // Third ring of damage [C]
-                       _enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(power - power / 4));
+                        _enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(power - power / 4));
                     else if (distanceFromCenter <= perimeterD && distanceFromCenter >= perimeterC) // Fourth ring of damage [D]
                         _enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(power - power / 2));
+
+                    // Do slowing on enemies in A and B ring ------------
+                    /// Register enemy slowing, if this is a slower bullet.
+                    if (doSlowing)
+                    {
+                        if (distanceFromCenter <= perimeterB) // Only For: Perimeters [A] and [B]
+                        {
+                            if (_enemy.GetComponent<Enemy>().SlowingCoroutine != null) _enemy.GetComponent<Enemy>().StopCoroutine(_enemy.GetComponent<Enemy>().SlowingCoroutine);
+                            _enemy.GetComponent<Enemy>().SlowingCoroutine = _enemy.GetComponent<Enemy>().StartCoroutine(_enemy.GetComponent<Enemy>().SlowEnemy(slowTo, slowTime));
+                        }
+                    }
                 }
 
 
@@ -115,12 +133,7 @@ public class TurretBullet : MonoBehaviour
                 Destroy(this.gameObject, 1); // Destroy the bullet when the explosion is complete.
             }
 
-            /// Register enemy slowing, if this is a slower bullet.
-            if (doSlowing)
-            {
-                if (e.SlowingCoroutine != null) e.StopCoroutine(e.SlowingCoroutine);
-                e.SlowingCoroutine = e.StartCoroutine(e.SlowEnemy(slowTo, slowTime));
-            }
+
         }
         else
         {

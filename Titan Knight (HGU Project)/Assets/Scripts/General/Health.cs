@@ -160,6 +160,7 @@ public class Health : MonoBehaviour
     {
         if (HealthType != ObjectType.Enemy) return;
 
+
         this.enabled = false;
 
         PlayerManager.currentCurrency += _bounty; // Add player money according to the enemy's bounty.
@@ -167,18 +168,25 @@ public class Health : MonoBehaviour
         GameManager.enemiesAlive--; // Subtract from the index of enemies alive before proceeding.
 
         Animator eAnimator = GetComponentInChildren<Animator>();
+
+        /// [1.5.7a PATCHES]: This is required to deactivate the enemy, and must happen regardless of it being an animated enemy or not.
+        Enemy enemy = GetComponent<Enemy>();
+        enemy.enabled = false;
+
+        if (GetComponent<BoxCollider>() != null) this.GetComponent<BoxCollider>().enabled = false;
+        if (GetComponent<CharacterController>() != null)  this.GetComponent<CharacterController>().enabled = false;
+
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        agent.enabled = false;
+        /// ----
+
         if (eAnimator != null) // Currently set for Player Enemies; An animator will be set up for Generator enemies soon and render this code obsolete
         {
             eAnimator.SetTrigger("Die");
 
-            Enemy enemy = GetComponent<Enemy>();
-            enemy.enabled = false;
-
-            NavMeshAgent agent = GetComponent<NavMeshAgent>();
-            agent.enabled = false;
-
             Destroy(this.gameObject, 1.5f); // Delay for death animation
-        } else
+        } 
+        else
         {
             Destroy(this.gameObject); // Destroy Generator enemies immediately becuase they have no death animations currently.
         }
