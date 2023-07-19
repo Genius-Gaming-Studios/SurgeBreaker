@@ -91,7 +91,7 @@ public class TurretManager : MonoBehaviour
         }
 
         if (!doHealingMode)
-            if (nearestEnemy != null && shortestDistance <= range) // This targets the nearest enemy, but can be modified later to target the enemy with the most power, HP, etc..
+            if (nearestEnemy != null && shortestDistance <= range && nearestEnemy.GetComponent<Enemy>().enabled) // This targets the nearest enemy, but can be modified later to target the enemy with the most power, HP, etc..
             {
                 target = nearestEnemy.transform;
                 targetEnemy = nearestEnemy.GetComponent<Enemy>();
