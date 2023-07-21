@@ -27665,7 +27665,7 @@ PrefabInstance:
     - target: {fileID: 3205581641023515360, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3205581641023515360, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
@@ -27961,6 +27961,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2301580472258613886}
     m_Modifications:
+    - target: {fileID: 1652101321, guid: ae8ca9e589909e243af914bc9be398c7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1652101322, guid: ae8ca9e589909e243af914bc9be398c7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -27985,6 +27989,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1793544098, guid: ae8ca9e589909e243af914bc9be398c7, type: 3}
+      propertyPath: m_text
+      value: '$900
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 136995364505547556, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_Size
@@ -27998,7 +28008,14 @@ PrefabInstance:
     - target: {fileID: 538362058044807219, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 707768794329668818, guid: ae8ca9e589909e243af914bc9be398c7,
+        type: 3}
+      propertyPath: m_text
+      value: '$600
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 1943208818039874851, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
@@ -28015,6 +28032,11 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2893285833624772229, guid: ae8ca9e589909e243af914bc9be398c7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3099268780506819190, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -28043,6 +28065,11 @@ PrefabInstance:
     - target: {fileID: 3099268780506819190, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3117722008595424537, guid: ae8ca9e589909e243af914bc9be398c7,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4969574962357405394, guid: ae8ca9e589909e243af914bc9be398c7,
@@ -28108,7 +28135,7 @@ PrefabInstance:
     - target: {fileID: 6797274888764472658, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7228059155588972517, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
@@ -28124,6 +28151,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.000045776367
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858268123770644950, guid: ae8ca9e589909e243af914bc9be398c7,
+        type: 3}
+      propertyPath: m_text
+      value: $100
       objectReference: {fileID: 0}
     - target: {fileID: 7858268124008126459, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
@@ -28154,6 +28186,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858268124132435408, guid: ae8ca9e589909e243af914bc9be398c7,
+        type: 3}
+      propertyPath: m_text
+      value: $500
       objectReference: {fileID: 0}
     - target: {fileID: 7858268124165767528, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
@@ -28957,7 +28994,7 @@ Transform:
   - {fileID: 8172549335295474321}
   - {fileID: 908216517}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1217049072
 GameObject:
@@ -33643,7 +33680,7 @@ Transform:
   m_Children:
   - {fileID: 428019683}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1509472607
 PrefabInstance:
@@ -38924,7 +38961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a243b3faf710341118be394771c8fed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startCurrency: 999
+  startCurrency: 150
   speed: 10
   sideSpeedMultiplier: 7.5
   runSpeedMultiplier: 1.7
@@ -48884,7 +48921,7 @@ Transform:
   - {fileID: 1357676698}
   - {fileID: 1983670256}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1879723348
 GameObject:
@@ -56773,18 +56810,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doInfiniteMoney: 1
   doRemoveWaitTimes: 0
-  doAllowTabToggling: 1
+  doAllowTabToggling: 0
   BossCycles: 
   BossWaveBosses: []
   amountOfCycles: 3
   enemiesPerSpawner: 5
-  enemiesIncreasePerCycle: 3
-  waveOneEnemies: 8
+  enemiesIncreasePerCycle: 2
+  waveOneEnemies: 4
   waveMoneyBoost: 25
   moneyBoostMultiplier: 1.6
   timeInBuildMode: 15
   timeInCombatMode: 30
-  timeInWaveOneBuild: 10
+  timeInWaveOneBuild: 30
   currentMode: 1
   CombatCanvas: {fileID: 504224380}
   BuildCanvas: {fileID: 2301580472290593975}
