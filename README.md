@@ -1,9 +1,9 @@
-# Surge Breaker (1.9.6a alpha)
+# Surge Breaker (1.9.7a alpha)
  *Surge Breaker - Genius Studios Project*
  
 *This is the Unity Project for the Surge Breaker Genius Studios Project.*
 
-## 1.9.6a Polish Update
+## 1.9.7a Polish Update
 
 Note: This is a fully functional, playable demo version of the game.
 
