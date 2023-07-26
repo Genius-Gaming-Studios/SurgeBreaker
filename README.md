@@ -13,7 +13,7 @@ Note: This is a fully functional, playable demo version of the game.
 
 - Fixed: Play button now goes to level 1
 
-- Noted: Death in Level 1 does not take you back to Level 1! I can not fix this, due to the chance of conflicts arriving, as DO-Nutt is also working on this level. So keep this in mind before finalizing Level 1.
+- Noted: Death in Level 1 does not take you back to Level 1! Developer Jake can not fix this, due to the chance of conflicts arriving, as DO-Nutt is also working on this level. So keep this in mind before finalizing Level 1.
 
 ## Game Build (1.9.Xa)
 
