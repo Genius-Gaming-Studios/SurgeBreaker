@@ -17,7 +17,8 @@ public class TurretManager : MonoBehaviour
     [Header("Settings")]
     [Tooltip("(Important) The type of this turret.")] [SerializeField] public TurretTypes TurretType; // Very important, decides how the entire turret will behave.
     [Tooltip("(Important) Will cause the turret's entire mechanics to target the Player, instead of the mob. The attack damage is changed into the heal amount.")] [SerializeField] public bool doHealingMode = false;
-    
+    /// [Tooltip("(Important) Will cause the healing turret to fire, AND shoot bullets.")] public bool shootAndHeal; [deprecated]
+
     [Header("General")]
     [Tooltip("The range in which the turret can reach enemies from.")] [SerializeField] [Range(75, 9999)] public int turretCost = 150;
 
