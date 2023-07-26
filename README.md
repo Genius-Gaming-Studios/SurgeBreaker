@@ -1,21 +1,21 @@
-# Surge Breaker (1.9.7a alpha)
+# Surge Breaker (1.9.9a alpha)
  *Surge Breaker - Genius Studios Project*
  
 *This is the Unity Project for the Surge Breaker Genius Studios Project.*
 
-## 1.9.7a Polish Update
+## 1.9.9a Turrets: Final Pass
 
 Note: This is a fully functional, playable demo version of the game.
 
 ### What's New?
 
-- Added: Enemy Animations
-- Fixed: Turrets no longer target dead enemies
-- Fixed: Mech Animations
-- Changed: Laser Healer SFX Heavily Updated
+- Changed: Final passing on the turrets. All turret models and adjustments to audio have been implemented
 
+- Fixed: Play button now goes to level 1
 
-## Game Build 
+- Noted: Death in Level 1 does not take you back to Level 1! I can not fix this, due to the chance of conflicts arriving, as DO-Nutt is also working on this level. So keep this in mind before finalizing Level 1.
+
+## Game Build (1.9.Xa)
 
 - To run the demo game build, you must use either a **Mac or a Windows**.
 
@@ -33,5 +33,5 @@ Note: This is a fully functional, playable demo version of the game.
 
 
 
-`Latest Version: [1.9.4a]`
-`Last Updated: [7.7.23]`
+`Latest Version: [1.9.9a]`
+`Last Updated: [7.26.23]`
