@@ -27963,7 +27963,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1652101321, guid: ae8ca9e589909e243af914bc9be398c7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1652101322, guid: ae8ca9e589909e243af914bc9be398c7, type: 3}
       propertyPath: m_AnchorMax.y
@@ -28008,7 +28008,7 @@ PrefabInstance:
     - target: {fileID: 538362058044807219, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 707768794329668818, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
@@ -28035,7 +28035,7 @@ PrefabInstance:
     - target: {fileID: 2893285833624772229, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3099268780506819190, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
@@ -28070,7 +28070,7 @@ PrefabInstance:
     - target: {fileID: 3117722008595424537, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4969574962357405394, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
@@ -28145,7 +28145,7 @@ PrefabInstance:
     - target: {fileID: 6797274888764472658, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7228059155588972517, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
@@ -31189,7 +31189,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 867b937d481246a46a472c1893de8ea5, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &1356281268
 GameObject:
   m_ObjectHideFlags: 0
@@ -56818,20 +56818,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 943957b85209b49929721682e83c0f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doInfiniteMoney: 0
+  doInfiniteMoney: 1
   doRemoveWaitTimes: 0
-  doAllowTabToggling: 0
+  doAllowTabToggling: 1
   BossCycles: 
   BossWaveBosses: []
   amountOfCycles: 3
   enemiesPerSpawner: 5
   enemiesIncreasePerCycle: 2
-  waveOneEnemies: 4
+  waveOneEnemies: 3
   waveMoneyBoost: 25
   moneyBoostMultiplier: 1.6
   timeInBuildMode: 15
   timeInCombatMode: 30
-  timeInWaveOneBuild: 30
+  timeInWaveOneBuild: 10
   currentMode: 1
   CombatCanvas: {fileID: 504224380}
   BuildCanvas: {fileID: 2301580472290593975}
