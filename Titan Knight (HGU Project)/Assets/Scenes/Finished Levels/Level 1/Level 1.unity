@@ -15670,7 +15670,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &558087931
 PrefabInstance:
@@ -27576,7 +27576,7 @@ MonoBehaviour:
   CorrespondingPathway: {fileID: 1086085086}
   EnemyPrefabs:
   - {fileID: 5622125658679942988, guid: 73d9dd7b8055d4141ba48945a8acd767, type: 3}
-  - {fileID: 5622125658679942988, guid: 9f32172a17de12645b8c9a4396c4c0b6, type: 3}
+  - {fileID: 5622125658679942988, guid: 73d9dd7b8055d4141ba48945a8acd767, type: 3}
   - {fileID: 5622125658679942988, guid: 73d9dd7b8055d4141ba48945a8acd767, type: 3}
   spawnSound: {fileID: 8300000, guid: c97911ba9a2131c4f97af6819e76bdf6, type: 3}
   enemyHealthIncrease: 5
@@ -27961,6 +27961,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2301580472258613886}
     m_Modifications:
+    - target: {fileID: 1652101321, guid: ae8ca9e589909e243af914bc9be398c7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1652101322, guid: ae8ca9e589909e243af914bc9be398c7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -27998,7 +28002,7 @@ PrefabInstance:
     - target: {fileID: 538362058044807219, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1943208818039874851, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
@@ -28013,6 +28017,11 @@ PrefabInstance:
     - target: {fileID: 1943208818039874851, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2893285833624772229, guid: ae8ca9e589909e243af914bc9be398c7,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3099268780506819190, guid: ae8ca9e589909e243af914bc9be398c7,
@@ -28043,6 +28052,11 @@ PrefabInstance:
     - target: {fileID: 3099268780506819190, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3117722008595424537, guid: ae8ca9e589909e243af914bc9be398c7,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4969574962357405394, guid: ae8ca9e589909e243af914bc9be398c7,
@@ -28108,7 +28122,7 @@ PrefabInstance:
     - target: {fileID: 6797274888764472658, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7228059155588972517, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
@@ -28124,6 +28138,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.000045776367
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858268123770644950, guid: ae8ca9e589909e243af914bc9be398c7,
+        type: 3}
+      propertyPath: m_text
+      value: '$100
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 7858268124008126459, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
@@ -28154,6 +28175,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858268124132435408, guid: ae8ca9e589909e243af914bc9be398c7,
+        type: 3}
+      propertyPath: m_text
+      value: '$450
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 7858268124165767528, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
@@ -31510,7 +31538,7 @@ RectTransform:
   - {fileID: 623396723}
   - {fileID: 2301580472290593974}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -38924,7 +38952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a243b3faf710341118be394771c8fed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startCurrency: 999
+  startCurrency: 150
   speed: 10
   sideSpeedMultiplier: 7.5
   runSpeedMultiplier: 1.7
@@ -48264,6 +48292,125 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1054785074}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1849159892
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3778924568521580691, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_Name
+      value: Pause Menu Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778924568521580703, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2e6bd2387bcdf5f4bac6c61fb876c9d7, type: 3}
 --- !u!1001 &1857532503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56771,17 +56918,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 943957b85209b49929721682e83c0f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doInfiniteMoney: 1
+  doInfiniteMoney: 0
   doRemoveWaitTimes: 0
-  doAllowTabToggling: 1
+  doAllowTabToggling: 0
   BossCycles: 
   BossWaveBosses: []
-  amountOfCycles: 3
+  amountOfCycles: 2
   enemiesPerSpawner: 5
   enemiesIncreasePerCycle: 3
-  waveOneEnemies: 8
+  waveOneEnemies: 3
   waveMoneyBoost: 25
-  moneyBoostMultiplier: 1.6
+  moneyBoostMultiplier: 1.5
   timeInBuildMode: 15
   timeInCombatMode: 30
   timeInWaveOneBuild: 10
@@ -57951,7 +58098,7 @@ MonoBehaviour:
   CorrespondingPathway: {fileID: 2119607654}
   EnemyPrefabs:
   - {fileID: 5622125658679942988, guid: 73d9dd7b8055d4141ba48945a8acd767, type: 3}
-  - {fileID: 5622125658679942988, guid: 9f32172a17de12645b8c9a4396c4c0b6, type: 3}
+  - {fileID: 5622125658679942988, guid: 73d9dd7b8055d4141ba48945a8acd767, type: 3}
   - {fileID: 5622125658679942988, guid: 73d9dd7b8055d4141ba48945a8acd767, type: 3}
   spawnSound: {fileID: 8300000, guid: c97911ba9a2131c4f97af6819e76bdf6, type: 3}
   enemyHealthIncrease: 6
