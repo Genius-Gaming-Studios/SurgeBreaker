@@ -9458,7 +9458,7 @@ PrefabInstance:
     - target: {fileID: 8172549335678160583, guid: bd85b00e41896994bb826928fd9c6104,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -27.115162
+      value: -11.407835
       objectReference: {fileID: 0}
     - target: {fileID: 8172549335678160583, guid: bd85b00e41896994bb826928fd9c6104,
         type: 3}
@@ -16629,7 +16629,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 860497ec5472fce4fbb266941dc97969,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 349
+      value: 363.00003
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 860497ec5472fce4fbb266941dc97969,
         type: 3}
@@ -23984,6 +23984,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barrier_Solid_01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4153374271684122850, guid: 4b86cf0b77a1dc542bd6560f3e07cc58,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b86cf0b77a1dc542bd6560f3e07cc58, type: 3}
 --- !u!1001 &754922123
@@ -24290,6 +24295,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Barrier_Solid_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153374271684122850, guid: 4b86cf0b77a1dc542bd6560f3e07cc58,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b86cf0b77a1dc542bd6560f3e07cc58, type: 3}
@@ -28413,7 +28423,7 @@ PrefabInstance:
     - target: {fileID: 3205581640734944230, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3205581641021722237, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
@@ -34525,7 +34535,7 @@ PrefabInstance:
     - target: {fileID: 8172549335678160583, guid: bd85b00e41896994bb826928fd9c6104,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 93.50851
+      value: 92.38656
       objectReference: {fileID: 0}
     - target: {fileID: 8172549335678160583, guid: bd85b00e41896994bb826928fd9c6104,
         type: 3}
@@ -34535,7 +34545,7 @@ PrefabInstance:
     - target: {fileID: 8172549335678160583, guid: bd85b00e41896994bb826928fd9c6104,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 74.9824
+      value: 73.86045
       objectReference: {fileID: 0}
     - target: {fileID: 8172549335678160583, guid: bd85b00e41896994bb826928fd9c6104,
         type: 3}
@@ -51068,7 +51078,7 @@ PrefabInstance:
     - target: {fileID: 8172549335678160583, guid: bd85b00e41896994bb826928fd9c6104,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 71.61655
+      value: 66.00679
       objectReference: {fileID: 0}
     - target: {fileID: 8172549335678160583, guid: bd85b00e41896994bb826928fd9c6104,
         type: 3}
@@ -57889,15 +57899,15 @@ MonoBehaviour:
   doAllowTabToggling: 0
   BossCycles: 
   BossWaveBosses: []
-  amountOfCycles: 3
-  enemiesPerSpawner: 5
+  amountOfCycles: 2
+  enemiesPerSpawner: 4
   enemiesIncreasePerCycle: 3
-  waveOneEnemies: 10
+  waveOneEnemies: 3
   waveMoneyBoost: 25
   moneyBoostMultiplier: 1.5
   timeInBuildMode: 15
   timeInCombatMode: 30
-  timeInWaveOneBuild: 10
+  timeInWaveOneBuild: 30
   currentMode: 1
   CombatCanvas: {fileID: 504224380}
   BuildCanvas: {fileID: 2301580472290593975}
