@@ -31120,7 +31120,7 @@ PrefabInstance:
     - target: {fileID: 7858268124216285581, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_text
-      value: $225
+      value: $150
       objectReference: {fileID: 0}
     - target: {fileID: 7858268124570114609, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
@@ -31190,7 +31190,7 @@ PrefabInstance:
     - target: {fileID: 8117771307763304330, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_text
-      value: $150
+      value: $225
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae8ca9e589909e243af914bc9be398c7, type: 3}
@@ -61602,16 +61602,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doInfiniteMoney: 0
-  doRemoveWaitTimes: 0
-  doAllowTabToggling: 0
-  BossCycles: 04000000
-  BossWaveBosses:
-  - {fileID: 5622125658679942990, guid: a33cbd93d6482bb4da7424fd677ed534, type: 3}
-  - {fileID: 5622125658679942990, guid: a33cbd93d6482bb4da7424fd677ed534, type: 3}
+  doRemoveWaitTimes: 1
+  doAllowTabToggling: 1
+  BossCycles: 
+  BossWaveBosses: []
   amountOfCycles: 4
   enemiesPerSpawner: 5
   enemiesIncreasePerCycle: 3
-  waveOneEnemies: 4
+  waveOneEnemies: 3
   waveMoneyBoost: 25
   moneyBoostMultiplier: 1.75
   timeInBuildMode: 15
