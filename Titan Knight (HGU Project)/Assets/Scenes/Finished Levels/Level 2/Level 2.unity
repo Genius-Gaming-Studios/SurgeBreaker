@@ -26221,7 +26221,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829349259}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 376.2, y: 12.610001, z: 375.55005}
+  m_LocalPosition: {x: 432.43, y: 12.610001, z: 375.55005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30339,6 +30339,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7858268124216285581, guid: ae8ca9e589909e243af914bc9be398c7,
+        type: 3}
+      propertyPath: m_text
+      value: $225
+      objectReference: {fileID: 0}
     - target: {fileID: 7858268124570114609, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -30407,7 +30412,7 @@ PrefabInstance:
     - target: {fileID: 8117771307763304330, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
       propertyPath: m_text
-      value: $570
+      value: $300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae8ca9e589909e243af914bc9be398c7, type: 3}
@@ -33260,7 +33265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336769607}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 393.66003, y: 12.610001, z: 375.55005}
+  m_LocalPosition: {x: 449.89, y: 12.610001, z: 375.55005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35529,7 +35534,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1499381641}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 401.734, y: 13.050001, z: 363.7}
+  m_LocalPosition: {x: 457.96, y: 13.050001, z: 363.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -60819,7 +60824,7 @@ MonoBehaviour:
   doAllowTabToggling: 0
   BossCycles: 
   BossWaveBosses: []
-  amountOfCycles: 2
+  amountOfCycles: 3
   enemiesPerSpawner: 5
   enemiesIncreasePerCycle: 3
   waveOneEnemies: 4
@@ -60827,7 +60832,7 @@ MonoBehaviour:
   moneyBoostMultiplier: 1.5
   timeInBuildMode: 15
   timeInCombatMode: 30
-  timeInWaveOneBuild: 10
+  timeInWaveOneBuild: 30
   currentMode: 1
   CombatCanvas: {fileID: 504224380}
   BuildCanvas: {fileID: 2301580472290593975}

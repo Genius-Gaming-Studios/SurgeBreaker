@@ -34,14 +34,14 @@ public class GameManager : MonoBehaviour
     [Tooltip("(Difficulty) The amount of extra money given to the player at the beginning of each round.")] [SerializeField] [Range(25, 125)] int waveMoneyBoost = 25;
     [Tooltip("(Difficulty) The money boost multiplier given to the money boost at the beginning of each round. \n\t(1.0 > No boost every round, 2.0 > Doubled every round)")] [SerializeField] [Range(1.0f, 2.0f)] float moneyBoostMultiplier = 1.2f;
 
-    [Tooltip("This is the amount of time that a player will have in either of the specified modes.")] [SerializeField] [Range(10, 49)] public int timeInBuildMode = 30, timeInCombatMode = 30, timeInWaveOneBuild =30;
+    [Tooltip("This is the amount of time that a player will have in either of the specified modes.")] [SerializeField] [Range(10, 49)] public int timeInBuildMode = 30, timeInCombatMode = 30, timeInWaveOneBuild = 30;
 
     [Space(10)]
     [Header("Technical")]
-    [Tooltip("This is the current GameMode that majorly effects how the game acts. Idle = 0, Build = 1, Combat = 2")]public GameMode currentMode = GameMode.Build;
+    [Tooltip("This is the current GameMode that majorly effects how the game acts. Idle = 0, Build = 1, Combat = 2")] public GameMode currentMode = GameMode.Build;
 
     [SerializeField] GameObject CombatCanvas, BuildCanvas, MainCanvas, GameOverCanvas, MissionSucessCanvas;
-    [Tooltip("This will be turned off when the player is in Build Mode!")][SerializeField] GameObject WeaponsParent;
+    [Tooltip("This will be turned off when the player is in Build Mode!")] [SerializeField] GameObject WeaponsParent;
     [Tooltip("This is the text shown for teh game time that is remaining.")] [SerializeField] TextMeshProUGUI GameTimerText;
     [Tooltip("This is the text shown for the current game cycle.")] [SerializeField] TextMeshProUGUI GameCycleText;
     [Tooltip("This is the text shown for the current amount of enemies alive.")] [SerializeField] TextMeshProUGUI EnemiesAliveText;
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("A reference for the health object of each of the generators in the level.")] [SerializeField] Health[] GeneratorsInLevel;
 
 
-     
+
     private void Start()
     {
         if (doRemoveWaitTimes) timeInWaveOneBuild = 0;
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void TickGameTimer()
     {
-        if (timerTime > 0) timerTime-=0.1f;
+        if (timerTime > 0) timerTime -= 0.1f;
 
         // Format the text
         if (timerTime > 9) { GameTimerText.color = gameTimeDefaultColor; GameTimerText.text = timerTime.ToString("##.#"); }
@@ -104,24 +104,24 @@ public class GameManager : MonoBehaviour
         foreach (Health generatorHealth in GeneratorsInLevel) { if (generatorHealth.currentHealth > 0) generatorIsAlive.Add(true); else generatorIsAlive.Add(false); }
 
 
-        bool hasLost = true;
+        bool hasLost = false;
 
         for (int i = 0; i < generatorIsAlive.Count; ++i)
         {
-            if (generatorIsAlive[i])
+            if (!generatorIsAlive[i])
             {
-                hasLost = false;
+                hasLost = true;
+            }
+
+
+            if (hasLost)
+            {
+                PlayerManager.generatorsDestroyed = true;
+                foreach (MusicPlayer player in FindObjectsOfType<MusicPlayer>()) player.GetComponent<AudioSource>().Stop();
+                Debug.Log("A generator in this level has been destroyed. Player has lost.");
             }
         }
 
-        if (hasLost)
-        {
-            PlayerManager.generatorsDestroyed = true;
-            foreach (MusicPlayer player in FindObjectsOfType<MusicPlayer>()) player.GetComponent<AudioSource>().Stop();
-            Debug.Log("All generators destroyed. Player has lost.");
-        }
-      
-    
     }
 
     private void DoBossCheck()
@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
 
         for (int bossID = 0; bossID < BossCycles.Count; bossID++)
         {
-            if (BossCycles[bossID] == currentCycle) { Debug.Log("<color=green> Proceed to spawn.</color>");  isBossRound = true;  bossToSpawn = bossID; }
+            if (BossCycles[bossID] == currentCycle) { Debug.Log("<color=green> Proceed to spawn.</color>"); isBossRound = true; bossToSpawn = bossID; }
         }
 
         bossCheckComplete = true;
@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator GameCycleSequence()
     {
-        for (int i = 1; i < amountOfCycles+1; i++)
+        for (int i = 1; i < amountOfCycles + 1; i++)
         {
             Debug.Log($"<color=cyan>[Game Manager]</color> Begin Cycle {i}/{amountOfCycles}.");
             GameCycleText.text = $"{i}/{amountOfCycles}";
@@ -192,7 +192,7 @@ public class GameManager : MonoBehaviour
             timerTime = 0;
             while (enemiesAlive > 0) yield return null;
 
-             DoBossCheck();
+            DoBossCheck();
             while (!bossCheckComplete) yield return null;
 
             /// Boss round returned true, begin operating boss round.
@@ -248,7 +248,7 @@ public class GameManager : MonoBehaviour
     /// The only audio player that the FX come out of.
     /// </summary>
     public AudioSource CoreFXPlayer;
-    
+
     /// <summary>
     /// The only audio player that the Music should come out of.
     /// </summary>
@@ -256,7 +256,7 @@ public class GameManager : MonoBehaviour
 
     public static AudioSource GetCorePlayer() { return FindObjectOfType<GameManager>().CoreFXPlayer; }
 
-[SerializeField] public GameObject BuildMenu, DeleteMenu;
+    [SerializeField] public GameObject BuildMenu, DeleteMenu;
 
 
     private void Update()
@@ -293,7 +293,7 @@ public class GameManager : MonoBehaviour
                 foreach (BuildNode node in FindObjectsOfType<BuildNode>())
                 {
                     node.Enable(); // Show all node mesh renderes
-                } 
+                }
 
 
                 break;
@@ -321,7 +321,7 @@ public class GameManager : MonoBehaviour
                 Cursor.visible = true;
                 break;
 
-            default: 
+            default:
                 CombatCanvas.SetActive(false);
                 BuildCanvas.SetActive(false);
                 WeaponsParent.SetActive(false);
@@ -339,8 +339,8 @@ public class GameManager : MonoBehaviour
         // This is primarily used for pausing the spawning of waves while in build mode.
         // This method may be deprecated in the future due to all of the problems that may come from pausing time itself while in build mode. Try not to take this off of your radar.
 
-            // if (currentMode == GameMode.Build) Time.timeScale = 0;
-            // else Time.timeScale = 1; // Normalize Time Scale. This may need more TLC if there is a pause menu that is implemented.
+        // if (currentMode == GameMode.Build) Time.timeScale = 0;
+        // else Time.timeScale = 1; // Normalize Time Scale. This may need more TLC if there is a pause menu that is implemented.
     }
 
 
@@ -371,7 +371,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Switched gamemode to <color=\"yellow\">{currentMode}</color>.");
     }
 
-    public void  GameOver() // Called by the PlayerManager when a lose condition is met
+    public void GameOver() // Called by the PlayerManager when a lose condition is met
     {
         SwitchGamemode(GameMode.GameOver);
     }
