@@ -117,12 +117,10 @@ public class PlayerManager : MonoBehaviour
         float zInput = Input.GetAxis("Vertical");    // Forward/Backward Movement
         float xInput = Input.GetAxis("Horizontal");  // Left/Right Movement
 
-        HandleVisuals();
         HandleMovement(xInput, zInput);
         HandleSprinting();
         HandleAnimations(xInput, zInput);
         HandleDynamicCursor();
-        // HandleJumping(); Jumping has been permanently discontinued.
         HandleLosing();
         HandleHealthUI();
 
@@ -203,24 +201,6 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void HandleJumping() // Jumping has been discontinued
-    {
-        // Check for standing on the ground
-        if (controller.isGrounded)
-        {
-            verticalSpeed = -1; // Vertical speed is used to make the jumping smooth, instead of instantly teleporting player upwards
-
-            //Jumping has been discontinued.
-            //if (Input.GetButton("Jump"))
-            //    verticalSpeed = jumpPower;
-
-        }
-
-        verticalSpeed -= gravity * Time.deltaTime; // Apply gravity
-        movementDirection.y = verticalSpeed;
-
-    }
-
     private void HandleSprinting()
     {
         // Handle sprinting 
@@ -273,13 +253,6 @@ public class PlayerManager : MonoBehaviour
 
         movementVelocity = movementDirection * speed;
 
-    }
-
-    private void HandleVisuals()
-    {
-        // Update position of player's "isometric" camera
-        pCamera.transform.position = pCamera_Position.transform.position;
-        pCamera.transform.rotation = pCamera_Position.transform.rotation;
     }
 
     private void HandleAnimations(float xInput, float zInput)
