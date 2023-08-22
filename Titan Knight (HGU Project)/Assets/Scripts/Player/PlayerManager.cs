@@ -13,6 +13,8 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerManager : MonoBehaviour
 {
+    public static PlayerManager Instance {get; private set;} // Pubclic static instance of this to allow easy access from other scripts
+
     [Space(20)]
     [Header("Player Preferences")]
 
@@ -24,9 +26,6 @@ public class PlayerManager : MonoBehaviour
         "(0 > Disabled, 5 > Default Speed, 9.5 > Fastest Recommended Speed) ")]
     [Range(2.0f, 9.5f)] public float sideSpeedMultiplier = 5;
     [Tooltip("The walkspeed multiplayer when the player's running")] [Range(0.1f, 4.5f)] public float runSpeedMultiplier = 1.5f;
-    [Tooltip("The jump force")] [Range(1.0f, 12)] public float jumpPower = 8.0f;
-    [Tooltip("Gravity's influence on the player")] [Range(10.0f, 50.0f)] public float gravity = 20.0f;
-    [Tooltip("The speed in which the player rotates when input is recieved")] [SerializeField] [Range(300, 1000)] float pModelRotSpeed = 800;
     [Space(5)]
     //[Tooltip("The amount of health that the player starts with. (default: 100)")] [SerializeField] private int startPlayerHealth = 100; // Do not use this to reference current player health.
     //[Tooltip("A non-static reference for the current Player Health. (read values only!)")] public int currentPlayerHealth;
@@ -43,11 +42,6 @@ public class PlayerManager : MonoBehaviour
     [Header("Player References")]
     [Tooltip("The parent object of the player model, which rotates the player model in the direction that the player is facing.")] [SerializeField] Transform pModelRotation;
     [Tooltip(("Reference to player's Animator component "))] public Animator pAnimator;
-
-    [Space(20)]
-    [Header("Camera References")]
-    [Tooltip("This is the player camera. It has a Fixed Position!")] [SerializeField] GameObject pCamera; // The pos/rot of this will update with the pCamera_Position.
-    [Tooltip("This is the game object that updates the position and rotation of the pCamera.")] [SerializeField] GameObject pCamera_Position;
 
     [Space(20)]
     [Header("Cursor References")] // Handle the crosshair switching in a canvas to support animation of the crosshair.
@@ -92,6 +86,18 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake() // Assign defaults
     {
+        // Check if there is already an Instance of this in the scene
+        if (Instance != null)
+        {   
+            // Destroy this extra copy if this is
+            Destroy(gameObject);
+            Debug.LogError("Cannot Have More Than One Instance of [PlayerManager] In The Scene!");
+            return;
+        } 
+
+        // Set this instance as the public static Instance if it is the only one
+        Instance = this; 
+
         controller = GetComponent<CharacterController>();
         playerHealth = GetComponent<Health>();
         //pAnimator = GetComponent<Animator>();

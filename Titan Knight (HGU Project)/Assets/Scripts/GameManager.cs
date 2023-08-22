@@ -15,6 +15,8 @@ public enum GameMode
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance {get; private set;}
+
     [Space(10)]
     [Header("Debug Controls [DEBUG ONLY]")]
     [Tooltip("[DEBUG ONLY] Do infinite money")] [SerializeField] public bool doInfiniteMoney;
@@ -58,26 +60,44 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("A reference for the health object of each of the generators in the level.")] [SerializeField] Health[] GeneratorsInLevel;
 
+    private void Awake()
+    {
+        // Check if there is already an Instance of this in the scene
+        if (Instance != null)
+        {   
+            // Destroy this extra copy if this is
+            Destroy(gameObject);
+            Debug.LogError("Cannot Have More Than One Instance of [GameManager] In The Scene!");
+            return;
+        } 
 
+        Instance = this;
+    }
      
     private void Start()
     {
+
+        // Checks if the TutorialManager is running first before starting gameplay
+        if (currentMode != GameMode.Idle)
+        {
+            /// Initialize the game, Restart static values
+            InvokeRepeating(nameof(UpdateGenerators), 0, 3);
+            InvokeRepeating(nameof(TickGameTimer), 0, .1f);
+            StartCoroutine(GameCycleSequence());
+            SwitchGamemode(GameMode.Build);
+
+            GameOverCanvas.SetActive(false);
+            MissionSucessCanvas.SetActive(false);
+            MainCanvas.SetActive(true);
+        }
+        
         if (doRemoveWaitTimes) timeInWaveOneBuild = 0;
-
-        /// Initialize the game, Restart static values
-        InvokeRepeating(nameof(UpdateGenerators), 0, 3);
-        InvokeRepeating(nameof(TickGameTimer), 0, .1f);
-        StartCoroutine(GameCycleSequence());
-        SwitchGamemode(GameMode.Build);
-
         enemiesAlive = 0;
         hasWon = false;
 
         gameTimeDefaultColor = GameTimerText.color;
 
-        GameOverCanvas.SetActive(false);
-        MissionSucessCanvas.SetActive(false);
-        MainCanvas.SetActive(true);
+        
 
         Time.timeScale = 1.0f;
         AudioListener.pause = false;
@@ -261,6 +281,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        // Do nothing if this is set to "Idle"
+        if (currentMode == GameMode.Idle) return;
+
 
         if (doAllowTabToggling && Input.GetKeyDown(KeyCode.Tab))
         {
@@ -325,8 +348,6 @@ public class GameManager : MonoBehaviour
                 CombatCanvas.SetActive(false);
                 BuildCanvas.SetActive(false);
                 WeaponsParent.SetActive(false);
-
-
                 foreach (BuildNode node in FindObjectsOfType<BuildNode>()) node.Disable(); // Hide all node mesh renderers
 
                 break;
@@ -384,6 +405,13 @@ public class GameManager : MonoBehaviour
     public void LoadLevel(int sceneIndex)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+    }
+
+    public void HideAllUI()
+    {
+        GameOverCanvas.SetActive(false);
+        MissionSucessCanvas.SetActive(false);
+        MainCanvas.SetActive(false);
     }
 
 }

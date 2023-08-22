@@ -52,6 +52,8 @@ public class Gun : MonoBehaviour
     {
         if (GameManager.hasWon) return; // Player will not be allowed to be controlled if they have already won.
 
+        if (GameManager.Instance.currentMode == GameMode.Idle) return; // Do nothing while the game mode is "Idle"
+
         timeToFire = 1;
 
         // Spawn a bullet (because it's cooler seeing a real bullet object, instead of an invisible bullet)
