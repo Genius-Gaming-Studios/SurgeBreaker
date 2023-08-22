@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public enum GameMode
 {
@@ -76,19 +77,13 @@ public class GameManager : MonoBehaviour
      
     private void Start()
     {
+        GameOverCanvas.SetActive(false);
+        MissionSucessCanvas.SetActive(false);
 
         // Checks if the TutorialManager is running first before starting gameplay
         if (currentMode != GameMode.Idle)
         {
-            /// Initialize the game, Restart static values
-            InvokeRepeating(nameof(UpdateGenerators), 0, 3);
-            InvokeRepeating(nameof(TickGameTimer), 0, .1f);
-            StartCoroutine(GameCycleSequence());
-            SwitchGamemode(GameMode.Build);
-
-            GameOverCanvas.SetActive(false);
-            MissionSucessCanvas.SetActive(false);
-            MainCanvas.SetActive(true);
+            StartGameCycles();
         }
         
         if (doRemoveWaitTimes) timeInWaveOneBuild = 0;
@@ -309,6 +304,7 @@ public class GameManager : MonoBehaviour
         switch (currentMode)
         {
             case GameMode.Build:
+                MainCanvas.SetActive(true);
                 CombatCanvas.SetActive(false);
                 BuildCanvas.SetActive(true);
                 WeaponsParent.SetActive(false);
@@ -412,6 +408,19 @@ public class GameManager : MonoBehaviour
         GameOverCanvas.SetActive(false);
         MissionSucessCanvas.SetActive(false);
         MainCanvas.SetActive(false);
+    }
+
+    public void StartGameCycles()
+    {
+        /// Starts all the necessary cycles to start the actual gameplay
+
+        /// Initialize the game, Restart static values
+            InvokeRepeating(nameof(UpdateGenerators), 0, 3);
+            InvokeRepeating(nameof(TickGameTimer), 0, .1f);
+            StartCoroutine(GameCycleSequence());
+            SwitchGamemode(GameMode.Build);
+
+            MainCanvas.SetActive(true);
     }
 
 }

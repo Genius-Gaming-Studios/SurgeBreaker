@@ -33,4 +33,9 @@ public class TutorialManager : MonoBehaviour
         GameManager.Instance.HideAllUI();
         GameManager.Instance.SwitchGamemode(GameMode.Idle);
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) GameManager.Instance.StartGameCycles();
+    }
 }
