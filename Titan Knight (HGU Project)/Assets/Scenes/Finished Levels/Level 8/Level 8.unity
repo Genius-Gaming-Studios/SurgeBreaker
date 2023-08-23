@@ -31891,7 +31891,7 @@ PrefabInstance:
     - target: {fileID: 3205581640734944230, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3205581641021722237, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
@@ -63131,8 +63131,10 @@ MonoBehaviour:
   doInfiniteMoney: 0
   doRemoveWaitTimes: 0
   doAllowTabToggling: 1
-  BossCycles: 
-  BossWaveBosses: []
+  BossCycles: 0300000004000000
+  BossWaveBosses:
+  - {fileID: 5622125658679942990, guid: a33cbd93d6482bb4da7424fd677ed534, type: 3}
+  - {fileID: 5622125658679942990, guid: a33cbd93d6482bb4da7424fd677ed534, type: 3}
   amountOfCycles: 4
   enemiesPerSpawner: 7
   enemiesIncreasePerCycle: 3
