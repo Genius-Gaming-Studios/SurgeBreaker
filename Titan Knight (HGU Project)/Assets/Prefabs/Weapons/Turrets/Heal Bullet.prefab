@@ -112,9 +112,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 24
-  power: 2
+  power: 5
   _solidObjectTag: Can Stop Bullets
   checkingRange: 3
+  doSlowing: 0
+  slowTime: 1
+  slowTo: 2
+  doExplosion: 0
+  explosionRange: 6
+  ExplosionFX: {fileID: 0}
+  ExplosionSFX: {fileID: 0}
+  centerDamageMultiplier: 1.3
+  maxDamagePreview: 0
 --- !u!1 &5890929400096472634
 GameObject:
   m_ObjectHideFlags: 0
