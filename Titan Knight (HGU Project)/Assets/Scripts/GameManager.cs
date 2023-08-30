@@ -237,6 +237,21 @@ public class GameManager : MonoBehaviour
             {
                 hasWon = true;
 
+
+                // Store Win Data (save)
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 1") PlayerPrefs.SetInt("winlv1", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 2") PlayerPrefs.SetInt("winlv2", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 3") PlayerPrefs.SetInt("winlv3", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 4") PlayerPrefs.SetInt("winlv4", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 5") PlayerPrefs.SetInt("winlv5", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 6") PlayerPrefs.SetInt("winlv6", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 7") PlayerPrefs.SetInt("winlv7", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 8") PlayerPrefs.SetInt("winlv8", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 9") PlayerPrefs.SetInt("winlv9", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 10") PlayerPrefs.SetInt("winlv10", 1);
+
+                PlayerPrefs.Save();
+
                 LevelComplete();
                 Debug.Log("<b>[Game Manager]</b> <color=green>Game Won! (Show UI Prompt Now)</color>");
             }
@@ -314,6 +329,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameMode.LvlComplete:
+
                 MainCanvas.SetActive(false);
                 MissionSucessCanvas.SetActive(true);
                 GameMusicPlayer.SetActive(false);
@@ -379,6 +395,8 @@ public class GameManager : MonoBehaviour
     public void LevelComplete()
     {
         SwitchGamemode(GameMode.LvlComplete);
+
+
     }
 
     public void LoadLevel(int sceneIndex)
