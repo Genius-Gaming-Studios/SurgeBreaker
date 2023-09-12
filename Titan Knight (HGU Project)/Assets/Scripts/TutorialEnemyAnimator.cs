@@ -23,7 +23,6 @@ public class TutorialEnemyAnimator : MonoBehaviour
         {
             int animationIndex = Random.Range(1, 4);
             _animator.SetInteger("AttackIndex", animationIndex);
-            Debug.Log("Attack Index " + animationIndex);
             yield return new WaitForSeconds(.5f);
         }
         

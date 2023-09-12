@@ -270,4 +270,12 @@ public class PlayerManager : MonoBehaviour
         pAnimator.SetFloat("strafingMovement", xInput);
         pAnimator.SetBool("isShooting", Input.GetMouseButton(0));
     }
+
+    public void ResetAnimations()
+    {
+        // Sets all triggers for all player animations off
+        pAnimator.SetFloat("forwardMovement", 0);
+        pAnimator.SetFloat("strafingMovement", 0);
+        pAnimator.SetBool("isShooting", false);
+    }
 }
