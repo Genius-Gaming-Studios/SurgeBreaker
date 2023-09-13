@@ -118,6 +118,20 @@ public class Health : MonoBehaviour
         {
             DamageCoroutine = StartCoroutine(DamageRenderer(Color.red));
 
+            // Handle audio voice line
+            if (HealthType == ObjectType.Player)
+            {
+                // Handle Voice Line Randomization
+                int displayLine = 0;
+                displayLine = Random.Range(0, 4); // Fair chance
+                if (displayLine == 0)
+                {
+                    // Trigger a voice line. This is a player spoken voice line so 'true' is enabled.
+                    FindObjectOfType<VoicesManager>().TriggerVoiceLine(TriggerCode.PlayerHurtCode, true);
+                }
+
+            }
+
             if (resistance == 0) currentHealth -= amount;
             else
             {
@@ -159,6 +173,15 @@ public class Health : MonoBehaviour
     private void Die() // This is called for enemies. Turret functionality is not going to be created.
     {
         if (HealthType != ObjectType.Enemy) return;
+
+        // Send the voice trigger
+        int displayLine = 0;
+        displayLine = Random.Range(0, 8); // Low chance
+        if (displayLine == 0)
+        {
+            // Trigger a voice line. This is a player spoken voice line so 'true' is enabled.
+            FindObjectOfType<VoicesManager>().TriggerVoiceLine(TriggerCode.EnemyDieCode, true);
+        }
 
 
         this.enabled = false;
