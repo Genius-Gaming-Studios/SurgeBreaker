@@ -110,9 +110,15 @@ public class PlayerManager : MonoBehaviour
 
     public void Die() // Automatically called when the player dies. This is just for the proto-stage of Titan Knights.
     {
-        Debug.Log($"<color=\"red\"><b>Player has died!</b></color>");
+        if (!isDead)
+        {
+            Debug.Log($"<color=\"red\"><b>Player has died!</b></color>");
 
-        isDead = true;
+            // Trigger a voice line. Override any delays with 'false'
+            FindObjectOfType<VoicesManager>().TriggerVoiceLine(TriggerCode.PlayerDieCode, false);
+
+            isDead = true;
+        }
     }
 
 
