@@ -24,7 +24,7 @@ public class BuildMenu : MonoBehaviour
     private void BuildTurret(Turret turret, BuildNode Node)
     {
         PlayerManager.currentCurrency -= turret.cost;
-        Node.MyPrefab  = (GameObject)Instantiate(turret.prefab, Node.transform);
+        Node.MyPrefab = (GameObject)Instantiate(turret.prefab, Node.transform);
 
 
         Debug.Log("Assigned " + Node.MyPrefab);
@@ -32,6 +32,16 @@ public class BuildMenu : MonoBehaviour
         Node.MyTurretData = turret; // Assign turret settings to node
 
         GameManager.GetCorePlayer().PlayOneShot(purchase_FX);
+
+        // Handle Voice Line Randomization
+        int displayLine = 0;
+        displayLine = Random.Range(0, 2); //50% chance
+        if (displayLine == 0)
+        {
+            // Trigger a voice line. This is a player spoken voice line so 'true' is enabled.
+            FindObjectOfType<VoicesManager>().TriggerVoiceLine(TriggerCode.TurretBoughtCode, true);
+        }
+
 
         this.gameObject.SetActive(false); // Disable the build menu
 

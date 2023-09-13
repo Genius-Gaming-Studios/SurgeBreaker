@@ -133,7 +133,16 @@ public class GameManager : MonoBehaviour
 
         for (int bossID = 0; bossID < BossCycles.Count; bossID++)
         {
-            if (BossCycles[bossID] == currentCycle) { Debug.Log("<color=green> Proceed to spawn.</color>"); isBossRound = true; bossToSpawn = bossID; }
+
+            if (BossCycles[bossID] == currentCycle) 
+            {
+                Debug.Log("<color=green> Proceed to spawn boss.</color>");
+
+                FindObjectOfType<VoicesManager>().TriggerVoiceLine(TriggerCode.BossSpawnCode, false); // It is false because we need it to override.
+
+                isBossRound = true; 
+                bossToSpawn = bossID; 
+            }
         }
 
         bossCheckComplete = true;
