@@ -332,10 +332,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 943957b85209b49929721682e83c0f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doInfiniteMoney: 0
+  doRemoveWaitTimes: 0
+  doAllowTabToggling: 0
+  BossCycles: 
+  BossWaveBosses: []
   amountOfCycles: 4
-  enemiesPerGenerator: 20
+  enemiesPerSpawner: 0
   enemiesIncreasePerCycle: 15
   waveOneEnemies: 11
+  waveMoneyBoost: 25
+  moneyBoostMultiplier: 1.2
   timeInBuildMode: 12
   timeInCombatMode: 30
   timeInWaveOneBuild: 27
@@ -349,6 +356,9 @@ MonoBehaviour:
   GameTimerText: {fileID: 0}
   GameCycleText: {fileID: 0}
   EnemiesAliveText: {fileID: 0}
+  GameMusicPlayer: {fileID: 0}
+  MoneyBoostText: {fileID: 0}
+  EnemyBoostText: {fileID: 0}
   _enemiesAlive: 0
   GeneratorsInLevel:
   - {fileID: 0}
