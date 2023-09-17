@@ -9837,7 +9837,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.5099921, y: 0.31909543, z: -0.21124563, w: 0.7703645}
+  m_LocalRotation: {x: 0.50999206, y: 0.3190954, z: -0.21124561, w: 0.7703645}
   m_LocalPosition: {x: 3.792942, y: 28.533, z: -28.53048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -32083,7 +32083,7 @@ PrefabInstance:
     - target: {fileID: 3205581640734944230, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3205581640734944230, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
@@ -32093,7 +32093,7 @@ PrefabInstance:
     - target: {fileID: 3205581640734944230, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadLevel
+      value: ReloadLevel
       objectReference: {fileID: 0}
     - target: {fileID: 3205581640734944230, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
@@ -32451,6 +32451,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045391817141878371, guid: ae8ca9e589909e243af914bc9be398c7,
+        type: 3}
+      propertyPath: m_ScrollSensitivity
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6716845276457756338, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
@@ -37302,7 +37307,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1443122799}
-  m_LocalRotation: {x: 0.5099921, y: 0.31909543, z: -0.21124563, w: 0.7703645}
+  m_LocalRotation: {x: 0.50999206, y: 0.3190954, z: -0.21124561, w: 0.7703645}
   m_LocalPosition: {x: 3.792942, y: 28.533, z: -28.53048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -63740,7 +63745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 943957b85209b49929721682e83c0f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doInfiniteMoney: 1
+  doInfiniteMoney: 0
   doRemoveWaitTimes: 0
   doAllowTabToggling: 0
   BossCycles: 0300000004000000

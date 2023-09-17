@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using System.Security.Cryptography;
 
 public enum GameMode
 {
@@ -61,6 +62,10 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("A reference for the health object of each of the generators in the level.")] [SerializeField] Health[] GeneratorsInLevel;
 
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     private void Awake()
     {
         // Check if there is already an Instance of this in the scene

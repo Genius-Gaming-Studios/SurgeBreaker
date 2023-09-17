@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.14153619, g: 0.034152597, b: 0.032205157, a: 1}
+  m_IndirectSpecularColor: {r: 0.14151205, g: 0.03406313, b: 0.032174572, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -29425,7 +29425,7 @@ PrefabInstance:
     - target: {fileID: 3205581640734944230, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3205581640734944230, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
@@ -29435,7 +29435,7 @@ PrefabInstance:
     - target: {fileID: 3205581640734944230, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadLevel
+      value: ReloadLevel
       objectReference: {fileID: 0}
     - target: {fileID: 3205581640734944230, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
@@ -29979,6 +29979,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5045391817141878371, guid: ae8ca9e589909e243af914bc9be398c7,
+        type: 3}
+      propertyPath: m_ScrollSensitivity
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6716845276457756338, guid: ae8ca9e589909e243af914bc9be398c7,
         type: 3}
