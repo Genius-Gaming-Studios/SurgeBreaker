@@ -16,6 +16,8 @@ public class Drone : MonoBehaviour
     [Tooltip("The duration of this drone. How long until it is automatically returned back to its post to recharge?")] [Range(10, 30)] public int startDuration = 15;
     [Space(10)]
     [Tooltip("The attack range is how close the enemy must be for the drone to attack her. \nEnsure that this isn't too low- so the Drone doesn't go INTO the enemy when attacking.")] [SerializeField] [Range(0.0f, 100.0f)] float attackRange;
+    [Tooltip("The attack range is how close the enemy must be for the drone to see her. \nEnsure that this isn't too low- so the Drone can still see enemies.")] [SerializeField] [Range(0.0f, 100.0f)] float sightRange;
+
     [Tooltip("This is the time between her attacks.")] [SerializeField] [Range(0.0f, 3.0f)] float attackRate = 1.5f;
 
     [Header("Important References")]
@@ -36,11 +38,15 @@ public class Drone : MonoBehaviour
 
     void Start()
     {
+        // Initialize all that crap
+        InvokeRepeating("UpdateTarget", 0f, 0.5f);
+         
         agent = GetComponent<NavMeshAgent>();
         gm = FindObjectOfType<GameManager>();
        
         currentDuration = startDuration;
     }
+
 
     // Update is called once per frame
     void Update()
@@ -57,11 +63,39 @@ public class Drone : MonoBehaviour
             if (!eInAttackRange) ChaseTarget();
             else AttackTarget();
         }
-        else
-            if (FindObjectOfType<Enemy>() != null) enemyTarget = FindObjectOfType<Enemy>().transform;
         
     }
 
+     
+    void UpdateTarget()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        float shortestDistance = Mathf.Infinity;
+        GameObject nearestEnemy = null;
+        float distanceToPlayer = 0;
+
+        foreach (GameObject enemy in enemies)
+        {
+            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distanceToEnemy < shortestDistance)
+            {
+                shortestDistance = distanceToEnemy;
+                nearestEnemy = enemy;
+            }
+        }
+
+        distanceToPlayer = Vector3.Distance(transform.position, FindObjectOfType<PlayerManager>().transform.position);
+        nearestEnemy = FindObjectOfType<PlayerManager>().gameObject;
+        
+
+        if (nearestEnemy != null && shortestDistance <=  && nearestEnemy.GetComponent<Enemy>().enabled) // This targets the nearest enemy, but can be modified later to target the enemy with the most power, HP, etc..
+        {
+            enemyTarget = nearestEnemy.transform;
+        }
+        else
+            enemyTarget = null;
+
+    }
 
 
     private void FixedUpdate()
@@ -97,6 +131,8 @@ public class Drone : MonoBehaviour
         Debug.Log("<b>[Drone]</b> <color=red>A drone has perished.</color>");
     }
 
+
+
     /// <summary>
     /// Chase the enemy target
     /// </summary>
@@ -110,6 +146,7 @@ public class Drone : MonoBehaviour
 
     private bool hasAttacked = false;
 
+    // This is automatically, and continuously called when the drone is in range to atk. (fun fact: this was typed in vr)
     private void AttackTarget()
     {
         if (gm.currentMode == GameMode.Build) return;
