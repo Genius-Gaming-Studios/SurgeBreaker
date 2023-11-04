@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
     {
         GameOverCanvas.SetActive(false);
         MissionSucessCanvas.SetActive(false);
+        if (doRemoveWaitTimes) timeInWaveOneBuild = 0;
 
         // Checks if the TutorialManager is running first before starting gameplay
         if (currentMode != GameMode.Idle)
@@ -86,7 +87,6 @@ public class GameManager : MonoBehaviour
             StartGameCycles();
         }
         
-        if (doRemoveWaitTimes) timeInWaveOneBuild = 0;
         enemiesAlive = 0;
         hasWon = false;
 
