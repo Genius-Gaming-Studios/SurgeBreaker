@@ -51,8 +51,6 @@ public class Drone : MonoBehaviour
     void Start()
     {
         // Initialize all that crap
-        InvokeRepeating("UpdateTarget", 0f, 0.5f);
-         
         agent = GetComponent<NavMeshAgent>();
         gm = FindObjectOfType<GameManager>();
        
@@ -66,6 +64,7 @@ public class Drone : MonoBehaviour
         if (PlayerManager.generatorsDestroyed) // Player lost
         { agent.enabled = false; return; }
 
+        UpdateTarget();
 
         if (gm.currentMode == GameMode.Build)
         { attackState = AttackState.Recharge; DroneNodeCharging.SetActive(true); DroneNodeActive.SetActive(false); }
@@ -77,17 +76,24 @@ public class Drone : MonoBehaviour
 
             eInAttackRange = Vector3.Distance(transform.position, enemyTarget.position) < attackRange; // She is in general range of attacking the target.  
 
-            // Chase/Att
-            if (!eInAttackRange) ChaseTarget();
-            else AttackTarget();
+
+            if (gm.currentMode == GameMode.Combat)
+            {
+                // Chase/Att
+                if (!eInAttackRange) ChaseTarget();
+                else AttackTarget();
+
+
+            }
         }
-        else
+        else if (attackState == AttackState.Recharge)
         {
             /// automatically goes back to the drone node 
 
             agent.SetDestination(MyDroneNode.position); // Simply follows the player
             ModelParent.transform.LookAt(MyDroneNode.position);
         }
+        
     }
 
 
@@ -164,6 +170,7 @@ public class Drone : MonoBehaviour
 
         agent.SetDestination(enemyTarget.position); // Simply follows the player
         ModelParent.transform.LookAt(enemyTarget.position);
+
     }
 
     private bool hasAttacked = false;
@@ -173,10 +180,6 @@ public class Drone : MonoBehaviour
     {
         if (gm.currentMode == GameMode.Build) return;
         Debug.Log("Attack");
-
-        agent.SetDestination(transform.position); // Stops the enemy from moving when it attacks in order to stop it from continuously running. This could be changed later to make different, faster types of enemies
-
-        ModelParent.transform.LookAt(enemyTarget.position);
 
 
         // This initiates a delay between her attacks, dependent on attackRate.
