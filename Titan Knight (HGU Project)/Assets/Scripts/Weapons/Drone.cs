@@ -9,6 +9,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+enum AttackState
+{
+    Recharge,
+    Attack
+}
 public class Drone : MonoBehaviour
 {
     [Header("Options")]
@@ -22,14 +27,21 @@ public class Drone : MonoBehaviour
 
     [Header("Important References")]
     [Tooltip("Ensure that these are assigned at all times.")] [SerializeField] Transform ModelParent;
-    
+    [Tooltip("The type of bullet that the drone shoots.")] [SerializeField] GameObject DroneBullet;
+    [Space(10)]
+    [Tooltip("Location of the drone bullet's spawning.")] [SerializeField] GameObject FirePos;
+    [Tooltip("Effect that the drone display swhen bullet is fired.")] [SerializeField] GameObject FireVFX;
+
     private NavMeshAgent agent;
     private GameManager gm; 
 
     [Space(10)]
     [Header("DEBUG")]
-    [SerializeField] Transform enemyTarget; // Visible for debug purposes only. Do not modify
+    public Transform enemyTarget; // Visible for debug purposes only. Do not modify
+    public Transform MyDroneNode;
+    public GameObject DroneNodeCharging, DroneNodeActive;
 
+    private AttackState attackState;
     private bool eInAttackRange = false; // Is enemy in attack range?
 
     bool droneIsAlive = true, canPerish = true;
@@ -51,10 +63,16 @@ public class Drone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gm.currentMode == GameMode.Build || PlayerManager.generatorsDestroyed) { agent.enabled = false; return; } else agent.enabled = true; // Completely pause the enemy when the current mode is Build Mode.
+        if (PlayerManager.generatorsDestroyed) // Player lost
+        { agent.enabled = false; return; }
 
 
-        if (enemyTarget != null)
+        if (gm.currentMode == GameMode.Build)
+        { attackState = AttackState.Recharge; DroneNodeCharging.SetActive(true); DroneNodeActive.SetActive(false); }
+        else
+        { attackState = AttackState.Attack; DroneNodeCharging.SetActive(false); DroneNodeActive.SetActive(true); }
+
+        if (enemyTarget != null && attackState == AttackState.Attack)
         {
 
             eInAttackRange = Vector3.Distance(transform.position, enemyTarget.position) < attackRange; // She is in general range of attacking the target.  
@@ -63,38 +81,40 @@ public class Drone : MonoBehaviour
             if (!eInAttackRange) ChaseTarget();
             else AttackTarget();
         }
-        
+        else
+        {
+            /// automatically goes back to the drone node 
+
+            agent.SetDestination(MyDroneNode.position); // Simply follows the player
+            ModelParent.transform.LookAt(MyDroneNode.position);
+        }
     }
 
-     
+
     void UpdateTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        float shortestDistance = Mathf.Infinity;
-        GameObject nearestEnemy = null;
-        float distanceToPlayer = 0;
-
-        foreach (GameObject enemy in enemies)
+        if (attackState == AttackState.Attack)
         {
-            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distanceToEnemy < shortestDistance)
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            float shortestDistance = Mathf.Infinity;
+            GameObject nearestEnemy = null;
+
+            foreach (GameObject enemy in enemies)
             {
-                shortestDistance = distanceToEnemy;
-                nearestEnemy = enemy;
+                float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+                if (distanceToEnemy < shortestDistance)
+                {
+                    shortestDistance = distanceToEnemy;
+                    nearestEnemy = enemy;
+                }
             }
+
+            if (nearestEnemy != null && shortestDistance <= sightRange && nearestEnemy.GetComponent<Enemy>().enabled) // This targets the nearest enemy, but can be modified later to target the enemy with the most power, HP, etc..
+                enemyTarget = nearestEnemy.transform;
+            else
+                enemyTarget = null;
+
         }
-
-        distanceToPlayer = Vector3.Distance(transform.position, FindObjectOfType<PlayerManager>().transform.position);
-        nearestEnemy = FindObjectOfType<PlayerManager>().gameObject;
-        
-
-        if (nearestEnemy != null && shortestDistance <=  && nearestEnemy.GetComponent<Enemy>().enabled) // This targets the nearest enemy, but can be modified later to target the enemy with the most power, HP, etc..
-        {
-            enemyTarget = nearestEnemy.transform;
-        }
-        else
-            enemyTarget = null;
-
     }
 
 
@@ -122,6 +142,8 @@ public class Drone : MonoBehaviour
     public void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(this.transform.position, attackRange);
+        Gizmos.DrawWireSphere(this.transform.position, sightRange);
+
     }
     /// <summary>
     /// This automatically happens when she runs out of duration.
@@ -150,6 +172,7 @@ public class Drone : MonoBehaviour
     private void AttackTarget()
     {
         if (gm.currentMode == GameMode.Build) return;
+        Debug.Log("Attack");
 
         agent.SetDestination(transform.position); // Stops the enemy from moving when it attacks in order to stop it from continuously running. This could be changed later to make different, faster types of enemies
 
@@ -161,7 +184,7 @@ public class Drone : MonoBehaviour
         {
             hasAttacked = true;
 
-            // eAnimator.SetTrigger("Attack"); <-- ( Here is where you'd run an animation. )
+            // droneAnimator.SetTrigger("Attack"); <-- ( Here is where you'd run an animation. )
 
             Attack();
 
@@ -173,7 +196,21 @@ public class Drone : MonoBehaviour
     {
         if (gm.currentMode == GameMode.Build) return;
 
-        Debug.Log("Attack!");
+        /// Shoot a bullet at the enemy target
+        Instantiate(FireVFX, FirePos.transform);
+        GameObject bulletObj = (GameObject)Instantiate(DroneBullet);
+        TurretBullet bullet = bulletObj.GetComponent<TurretBullet>();
+
+        Debug.Log("Attack");
+        try
+        {
+            bullet.Seek(enemyTarget);
+            bullet.transform.position = FirePos.transform.position;
+        }
+        catch (System.Exception Ex)
+        {
+            Debug.Log(Ex.ToString());
+        }
     }
 
     private void ResetAttack()
