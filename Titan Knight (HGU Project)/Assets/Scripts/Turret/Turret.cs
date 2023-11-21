@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "Turret", menuName = "Offensive/Basic Turret", order = 1)]
 public class Turret : ScriptableObject
@@ -8,4 +9,6 @@ public class Turret : ScriptableObject
 
     public int cost;
     public float range;
+
+    public Image menuIcon;
 }

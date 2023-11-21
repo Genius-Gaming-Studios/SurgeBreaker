@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84c2761b06c49410f9690fd801ad9b33, type: 3}
-  m_Name: Prototype (Gun)
+  m_Script: {fileID: 11500000, guid: d6b169578108f4888a592c7544f43442, type: 3}
+  m_Name: Long Range Turret
   m_EditorClassIdentifier: 
-  fireRate: 0.23
-  gunName: Prototype
-  bulletToFire: {fileID: 5890929398850381768, guid: 265fec4a26a1046c68439eacc3ba22e5,
-    type: 3}
+  prefab: {fileID: 5645677824414783085, guid: c6cd0d2046b4141169472ef943bf6767, type: 3}
+  turretName: Far Range Turret
+  cost: 100
+  range: 45
