@@ -18,6 +18,10 @@ public class PlayerManager : MonoBehaviour
     [Space(20)]
     [Header("Player Preferences")]
 
+
+    [Tooltip("(MELEE) Hotkey which comes up when the player right.")] public KeyCode MeleeAttackKey = KeyCode.Q; // The attack key. For now, it is Q, but it can be changed.
+    [Tooltip("(MELEE) The time (seconds) between each attack that the player may operate.")] [Range(0.1f, 3.5f)] public float meleeAttackDelay = 2;
+
     [Tooltip("The amount of currency that the player starts with.")] [Range(150, 3999)] public int startCurrency = 275; // Do not use this to get a reference to her current amount of currency.
 
     [Tooltip("The walkspeed of the player")] [Range(4.0f, 12.0f)] public float speed = 6.0f;
@@ -42,10 +46,13 @@ public class PlayerManager : MonoBehaviour
     [Header("Player References")]
     [Tooltip("The parent object of the player model, which rotates the player model in the direction that the player is facing.")] [SerializeField] Transform pModelRotation;
     [Tooltip(("Reference to player's Animator component "))] public Animator pAnimator;
+    [Tooltip("This is the VFX that will show up when the player presses the 'MeleeAttackKey' in order to trigger the melee attack. Ensure it is proportional to the acutal size of the melee hitbox please.")] [SerializeField] GameObject MeleeAttackVFX;
+    [Tooltip("This is important, and it is the point where the melee attack is instantiated at.")] [SerializeField] Transform MeleeAttackPoint;
 
     [Space(20)]
     [Header("Cursor References")] // Handle the crosshair switching in a canvas to support animation of the crosshair.
     [Tooltip("Should the game use the dynamic cursors?\n This hides the default cursor and replaces it with one determined by the current mode.")] [SerializeField] public bool doDynamicCursors;
+   
     [Space(8)]
     [Tooltip("Parent of the dynamic cursors.")] [SerializeField] public RectTransform CursorsParent;
     [Tooltip("The default cursor. Appears in idle mode.")] [SerializeField] GameObject DefaultCursor; // (Default Cursor)
@@ -72,6 +79,7 @@ public class PlayerManager : MonoBehaviour
 
     private GameManager gm;
 
+    public float currentMeleeDelay;
     public static bool isDead, generatorsDestroyed;
     public static int currentCurrency; // This constantly updates, and should be used to get the current amount of money that she has.
 
@@ -79,9 +87,13 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
+        
         isDead = false;
         generatorsDestroyed = false;
         AudioListener.pause = false;
+
+        currentMeleeDelay = meleeAttackDelay;
+
     }
 
     private void Awake() // Assign defaults
@@ -129,18 +141,43 @@ public class PlayerManager : MonoBehaviour
         float zInput = Input.GetAxis("Vertical");    // Forward/Backward Movement
         float xInput = Input.GetAxis("Horizontal");  // Left/Right Movement
 
+        // Handling the methods.
         HandleMovement(xInput, zInput);
         HandleSprinting();
         HandleAnimations(xInput, zInput);
         HandleDynamicCursor();
         HandleLosing();
         HandleHealthUI();
+        HandleMelee();
 
+        // Handle infinite currency [DEBUG]
         if (FindObjectOfType<GameManager>().doInfiniteMoney) { currencyText.text = "inf."; currentCurrency = 99999999; }
         else currencyText.text = $"${currentCurrency}";
 
     }
 
+    bool canAttack = false;
+
+    /// <summary>
+    /// Automatically called when the player clicks MeleeAttackKey. Damages all enemies in the nearby radius
+    /// </summary>
+    private void HandleMelee()
+    {
+        // Handle melee attack delay timer.
+        currentMeleeDelay -= 1.0f * Time.deltaTime;
+        currentMeleeDelay = Mathf.Max(currentMeleeDelay, 0.0f);
+
+        // Triggers the melee attack.
+        if (currentMeleeDelay <= 0 && Input.GetKeyDown(MeleeAttackKey))
+        {
+            currentMeleeDelay = meleeAttackDelay; 
+
+            GameObject MeleeVFXObject = Instantiate(MeleeAttackVFX, MeleeAttackPoint);
+            Destroy(MeleeVFXObject, 1.2f); // Destroys attack vfx after the vfx hasompleted its animation.
+
+            // Harm all enemies inside of the melee attack range.
+        }
+    }
 
     private void HandleHealthUI()
     {
