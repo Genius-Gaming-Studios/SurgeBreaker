@@ -8098,9 +8098,8 @@ GameObject:
   - component: {fileID: 294684954}
   - component: {fileID: 294684957}
   - component: {fileID: 294684956}
-  - component: {fileID: 294684955}
   m_Layer: 6
-  m_Name: Melee Attack Hitbox (range)
+  m_Name: Melee Attack Hitbox (reference only)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8114,26 +8113,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294684953}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6618376, z: 1.5093}
+  m_LocalPosition: {x: 0, y: 1.44, z: 0.47}
   m_LocalScale: {x: 9.385049, y: 3.9387958, z: 8.025108}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 946997974}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &294684955
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 294684953}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &294684956
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8661,7 +8647,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.4742199, y: 0.31810433, z: -0.18881926, w: 0.79891956}
+  m_LocalRotation: {x: 0.47421992, y: 0.31810436, z: -0.18881927, w: 0.79891956}
   m_LocalPosition: {x: 69.4, y: 24.533, z: -51.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -27994,7 +27980,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946997973}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.15302277, y: 0.53978634, z: 2.76}
+  m_LocalPosition: {x: 0.15302277, y: -0.37, z: 2.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -30210,7 +30196,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1111106249}
-  m_LocalRotation: {x: 0.4742199, y: 0.31810433, z: -0.18881926, w: 0.79891956}
+  m_LocalRotation: {x: 0.47421992, y: 0.31810436, z: -0.18881927, w: 0.79891956}
   m_LocalPosition: {x: 69.4, y: 24.533, z: -51.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -42073,6 +42059,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MeleeAttackKey: 113
   meleeAttackDelay: 0.5
+  meleeHitboxSize: {x: 9.38, y: 5.53, z: 8.02}
+  meleeDamage: 15
+  meleeSlowTime: 0.2
+  meleeSlowSpeed: 4
   startCurrency: 150
   speed: 10
   sideSpeedMultiplier: 7.5
@@ -42086,6 +42076,7 @@ MonoBehaviour:
   MeleeAttackVFX: {fileID: 2109917023591260276, guid: 461220b1a40a58948bd9b9917cab8d87,
     type: 3}
   MeleeAttackPoint: {fileID: 946997974}
+  meleeAttackHitbox: {fileID: 294684954}
   doDynamicCursors: 1
   CursorsParent: {fileID: 1919359546}
   DefaultCursor: {fileID: 1716813127}

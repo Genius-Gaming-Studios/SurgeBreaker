@@ -21,6 +21,10 @@ public class PlayerManager : MonoBehaviour
 
     [Tooltip("(MELEE) Hotkey which comes up when the player right.")] public KeyCode MeleeAttackKey = KeyCode.Q; // The attack key. For now, it is Q, but it can be changed.
     [Tooltip("(MELEE) The time (seconds) between each attack that the player may operate.")] [Range(0.1f, 3.5f)] public float meleeAttackDelay = 2;
+    [Tooltip("(MELEE) The size of the melee attack's hitbox. Turn on gizmos to see red box which represents the hitbox.")] public Vector3 meleeHitboxSize = new Vector3(9.38f, 3.93f, 8.02f);
+    [Tooltip("(MELEE) The melee damage. (wow)")] [Range(1, 100)] public int meleeDamage = 15;
+    [Tooltip("(MELEE) The time that the enemy is slowed down for.")] [Range(0, 1.5f)] public float meleeSlowTime = 0.5f;
+    [Tooltip("(MELEE) The speed that the enemy goes to when they're slowed for meleeSlowTime seconds.")] [Range(0,10)] public float meleeSlowSpeed = 4;
 
     [Tooltip("The amount of currency that the player starts with.")] [Range(150, 3999)] public int startCurrency = 275; // Do not use this to get a reference to her current amount of currency.
 
@@ -47,7 +51,8 @@ public class PlayerManager : MonoBehaviour
     [Tooltip("The parent object of the player model, which rotates the player model in the direction that the player is facing.")] [SerializeField] Transform pModelRotation;
     [Tooltip(("Reference to player's Animator component "))] public Animator pAnimator;
     [Tooltip("This is the VFX that will show up when the player presses the 'MeleeAttackKey' in order to trigger the melee attack. Ensure it is proportional to the acutal size of the melee hitbox please.")] [SerializeField] GameObject MeleeAttackVFX;
-    [Tooltip("This is important, and it is the point where the melee attack is instantiated at.")] [SerializeField] Transform MeleeAttackPoint;
+    [Tooltip("(MELEE) This is important, and it is the point where the melee attack is instantiated at.")] [SerializeField] Transform MeleeAttackPoint;
+    [Tooltip("(MELEE) The hitbox, who's size is determined by the meleeHitboxSize..")] [SerializeField] Transform meleeAttackHitbox; // For reference only.
 
     [Space(20)]
     [Header("Cursor References")] // Handle the crosshair switching in a canvas to support animation of the crosshair.
@@ -176,7 +181,38 @@ public class PlayerManager : MonoBehaviour
             Destroy(MeleeVFXObject, 1.2f); // Destroys attack vfx after the vfx hasompleted its animation.
 
             // Harm all enemies inside of the melee attack range.
+            Collider[] colliders = Physics.OverlapBox(transform.position + transform.forward * 2f, meleeHitboxSize / 2f);
+
+            foreach (var collider in colliders)
+            {
+                // enemy components
+                Health enemyHealth = collider.GetComponent<Health>();
+
+                // If collider is enemy, do damage
+                if (enemyHealth != null && enemyHealth.HealthType == ObjectType.Enemy)
+                {
+                    GameObject _enemy = enemyHealth.gameObject;
+
+                    enemyHealth.Damage(meleeDamage) ; // Adjust the damage value as needed\
+
+                    // Do slowing
+                    if (meleeSlowTime > 0)
+                    {
+                        if (_enemy.GetComponent<Enemy>().SlowingCoroutine != null) _enemy.GetComponent<Enemy>().StopCoroutine(_enemy.GetComponent<Enemy>().SlowingCoroutine);
+                        _enemy.GetComponent<Enemy>().SlowingCoroutine = _enemy.GetComponent<Enemy>().StartCoroutine(_enemy.GetComponent<Enemy>().SlowEnemy(meleeSlowSpeed, meleeSlowTime));
+                    }
+                   
+                }
+            }
         }
+    }
+
+
+    private void OnDrawGizmosSelected()
+    {
+        // Handle melee gizmos
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(meleeAttackHitbox.transform.position + meleeAttackHitbox.transform.forward * 2f, meleeHitboxSize);
     }
 
     private void HandleHealthUI()
