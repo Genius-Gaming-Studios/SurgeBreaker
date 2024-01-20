@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using System.Security.Cryptography;
 
 public enum GameMode
 {
@@ -61,6 +62,10 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("A reference for the health object of each of the generators in the level.")] [SerializeField] Health[] GeneratorsInLevel;
 
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     private void Awake()
     {
         // Check if there is already an Instance of this in the scene
@@ -330,7 +335,7 @@ public class GameManager : MonoBehaviour
             case GameMode.Build:
                 MainCanvas.SetActive(true);
                 CombatCanvas.SetActive(false);
-                BuildCanvas.SetActive(true);
+                UIManager.Instance.ShowBuildCanvas(); 
                 WeaponsParent.SetActive(false);
 
                 foreach (BuildNode node in FindObjectsOfType<BuildNode>())
@@ -343,7 +348,7 @@ public class GameManager : MonoBehaviour
 
             case GameMode.Combat:
                 CombatCanvas.SetActive(true);
-                BuildCanvas.SetActive(false);
+                UIManager.Instance.HideBuildCanvas();
                 WeaponsParent.SetActive(true);
                 foreach (BuildNode node in FindObjectsOfType<BuildNode>()) node.Disable(); // Hide all node mesh renderers
 
@@ -367,7 +372,7 @@ public class GameManager : MonoBehaviour
 
             default:
                 CombatCanvas.SetActive(false);
-                BuildCanvas.SetActive(false);
+                UIManager.Instance.HideBuildCanvas();
                 WeaponsParent.SetActive(false);
                 foreach (BuildNode node in FindObjectsOfType<BuildNode>()) node.Disable(); // Hide all node mesh renderers
 
