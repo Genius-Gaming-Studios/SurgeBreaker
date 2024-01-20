@@ -10,5 +10,6 @@ public class Turret : ScriptableObject
     public int cost;
     public float range;
 
-    public Image menuIcon;
+    public Sprite menuIcon;
 }
+   

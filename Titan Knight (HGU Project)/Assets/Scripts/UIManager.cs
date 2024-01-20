@@ -7,6 +7,12 @@ public class UIManager : MonoBehaviour
     // Create a singleton of this class
     public static UIManager Instance {get; private set;}
 
+     [SerializeField][Tooltip("Reference to the turret menu UI canvas")]
+     private GameObject _buildCanvas;
+
+     [Tooltip("This will show a (prototype) list of turrets that you can build when you press mouse 0 on the build node.")] [SerializeField] 
+     private GameObject _buildMenuUI;
+
     [SerializeField][Tooltip("Reference to the Player's loadout scriptable object used during gameplay")]
     private Loadout _loadout;
 
@@ -32,6 +38,40 @@ public class UIManager : MonoBehaviour
     private void Start() 
     {
         CreateTurretMenuButtons();
+    }
+
+
+    /// <summary>
+    /// Toggles the build menu On
+    /// </summary>
+    public void ShowBuildCanvas()
+    {
+        _buildCanvas.SetActive(true);
+    }
+
+    /// <summary>
+    /// Toggles the build menu Off
+    /// </summary>
+    public void HideBuildCanvas()
+    {
+        _buildCanvas.SetActive(false);
+    }
+
+    /// <summary>
+    /// Toggles the build menu Off
+    /// </summary>
+    public void ShowBuildMenu()
+    {
+        _buildMenuUI.SetActive(true);
+    }
+
+
+    /// <summary>
+    /// Toggles the build menu Off
+    /// </summary>
+    public void HideBuildMenu()
+    {
+        _buildMenuUI.SetActive(false);
     }
 
     private void CreateTurretMenuButtons()

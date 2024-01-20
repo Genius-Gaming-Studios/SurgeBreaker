@@ -335,7 +335,7 @@ public class GameManager : MonoBehaviour
             case GameMode.Build:
                 MainCanvas.SetActive(true);
                 CombatCanvas.SetActive(false);
-                BuildCanvas.SetActive(true);
+                UIManager.Instance.ShowBuildCanvas(); 
                 WeaponsParent.SetActive(false);
 
                 foreach (BuildNode node in FindObjectsOfType<BuildNode>())
@@ -348,7 +348,7 @@ public class GameManager : MonoBehaviour
 
             case GameMode.Combat:
                 CombatCanvas.SetActive(true);
-                BuildCanvas.SetActive(false);
+                UIManager.Instance.HideBuildCanvas();
                 WeaponsParent.SetActive(true);
                 foreach (BuildNode node in FindObjectsOfType<BuildNode>()) node.Disable(); // Hide all node mesh renderers
 
@@ -372,7 +372,7 @@ public class GameManager : MonoBehaviour
 
             default:
                 CombatCanvas.SetActive(false);
-                BuildCanvas.SetActive(false);
+                UIManager.Instance.HideBuildCanvas();
                 WeaponsParent.SetActive(false);
                 foreach (BuildNode node in FindObjectsOfType<BuildNode>()) node.Disable(); // Hide all node mesh renderers
 
