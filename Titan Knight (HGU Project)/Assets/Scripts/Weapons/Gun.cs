@@ -10,10 +10,9 @@ public class Gun : MonoBehaviour
 {
     [Tooltip("This will modify the values of this gun.")] public GunSettings gunSettings;
     [SerializeField] Transform firePoint;
-    [SerializeField] GameObject bulletTargetPrefab;
     [SerializeField] Transform fireDis;
     [SerializeField] GameObject FxObject;
-    [Tooltip("The sound that can be heard when the gun is fired.")][SerializeField] AudioClip fireSound;
+    [SerializeField] GameObject bulletTargetPrefab;
     [HideInInspector] Vector3 __fireDisPos;
     [SerializeField] bool doOverrideFirePos = true;
 
@@ -71,9 +70,9 @@ public class Gun : MonoBehaviour
         AudioSource audioSource = soundObject.GetComponent<AudioSource>();
         // audioSource.pitch = Random.Range(.9f, 1.1f); // no
         audioSource.volume = FindObjectOfType<UniversalPreferences>()._fxVolume;
-        audioSource.clip = fireSound;
+        audioSource.clip = gunSettings.fireSound;
         audioSource.Play();
-        Destroy(soundObject, fireSound.length);
+        Destroy(soundObject, gunSettings.fireSound.length);
 
     }
 }
