@@ -7,7 +7,6 @@ public class BuildNode : MonoBehaviour
     [Tooltip("This will appear when the player hovers over the build node.")] [SerializeField] GameObject HoverObject;
     [Tooltip("This will appear when the player right clicks on an occupied build node.")] [SerializeField] GameObject DeleteOutline;
 
-    [Tooltip("This will show a (prototype) list of turrets that you can build when you press mouse 0 on the build node.")] [SerializeField] GameObject BuildMenu;
     [Tooltip("The sell menu that confirms whether or not the player really wants to delete this selected turret.")]  [SerializeField] GameObject SellMenu;
 
     [HideInInspector] [Tooltip("This helps the script identify what node it should build a turret on.")] public string uniqueNodeID;
@@ -39,7 +38,6 @@ public class BuildNode : MonoBehaviour
 
     public void Awake()
     {
-        if (BuildMenu == null) BuildMenu = FindObjectOfType<GameManager>().BuildMenu;
         if (SellMenu == null) SellMenu = FindObjectOfType<GameManager>().DeleteMenu;
 
         uniqueNodeID = $"{Random.Range(10000,99999)}";
@@ -49,7 +47,6 @@ public class BuildNode : MonoBehaviour
 
     public void OnMouseOver()
     {
-        if (BuildMenu == null) BuildMenu = FindObjectOfType<GameManager>().BuildMenu;
         if (SellMenu == null) SellMenu = FindObjectOfType<GameManager>().DeleteMenu;
 
         //if (PlayerCasting.DistanceFromTarget < 4) // Is the player close enough to the build node? [DEPRECATED]
@@ -65,8 +62,8 @@ public class BuildNode : MonoBehaviour
                 {
 
                     SellMenu.SetActive(false);
-                    BuildMenu.SetActive(true);
-                    BuildMenu.GetComponent<BuildMenu>().nodeID = uniqueNodeID;
+                    UIManager.Instance.ShowBuildMenu();
+                    UIManager.Instance.GetBuildMenuUI().nodeID = uniqueNodeID;
                 }
             }
             else // Node is occupied
@@ -76,7 +73,7 @@ public class BuildNode : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    BuildMenu.SetActive(false);
+                    UIManager.Instance.HideBuildMenu();
                     SellMenu.SetActive(true);
                     SellMenu.GetComponent<SellMenu>().nodeID = uniqueNodeID;
                 }
@@ -88,7 +85,6 @@ public class BuildNode : MonoBehaviour
 
     public void OnMouseExit()
     {
-        if (BuildMenu == null) BuildMenu = FindObjectOfType<GameManager>().BuildMenu;
         if (SellMenu == null) SellMenu = FindObjectOfType<GameManager>().DeleteMenu;
 
         DeleteOutline.SetActive(false);
@@ -103,14 +99,13 @@ public class BuildNode : MonoBehaviour
     }
     public void Disable() // Turn off the nodes - Note: This is being called in an Update function!
     {
-        if (BuildMenu == null) BuildMenu = FindObjectOfType<GameManager>().BuildMenu;
         if (SellMenu == null) SellMenu = FindObjectOfType<GameManager>().DeleteMenu;
 
 
         HoverObject.SetActive(false); // Hide the hover object
 
-        BuildMenu.SetActive(false);
-        BuildMenu.GetComponent<BuildMenu>().nodeID = ""; // Reset the Node ID
+        UIManager.Instance.HideBuildMenu();
+        UIManager.Instance.GetBuildMenuUI().nodeID = "";
 
         SellMenu.SetActive(false);
         SellMenu.GetComponent <SellMenu>().nodeID = ""; // Reset the Node ID
@@ -125,7 +120,6 @@ public class BuildNode : MonoBehaviour
 
     public void Enable() // Turn on the nodes - Note: This is being called in an Update function!
     {
-        if (BuildMenu == null) BuildMenu = FindObjectOfType<GameManager>().BuildMenu;
         if (SellMenu == null) SellMenu = FindObjectOfType<GameManager>().DeleteMenu;
 
         // Show the range of turret constantly

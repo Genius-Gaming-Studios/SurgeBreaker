@@ -13,9 +13,6 @@ public class UIManager : MonoBehaviour
      [Tooltip("This will show a (prototype) list of turrets that you can build when you press mouse 0 on the build node.")] [SerializeField] 
      private GameObject _buildMenuUI;
 
-    [SerializeField][Tooltip("Reference to the Player's loadout scriptable object used during gameplay")]
-    private Loadout _loadout;
-
     [SerializeField][Tooltip("The transform component of the turret button container")]
     private Transform _turretButtonContainerTransform;
 
@@ -38,6 +35,7 @@ public class UIManager : MonoBehaviour
     private void Start() 
     {
         CreateTurretMenuButtons();
+        HideBuildMenu();
     }
 
 
@@ -74,12 +72,20 @@ public class UIManager : MonoBehaviour
         _buildMenuUI.SetActive(false);
     }
 
+    /// <summary>
+    /// <Returns the BuildMenuUI Gameobject to caller
+    /// </summary>
+    public BuildMenu GetBuildMenuUI()
+    {
+        return _buildMenuUI.GetComponent<BuildMenu>();
+    }
+
     private void CreateTurretMenuButtons()
     {
         // Instantiates the buttons for all 3 turrets in the build menu with the correct loadout
         // This function should only be called once at the start of a level
 
-        foreach (Turret turret in _loadout.selectedTurrets)
+        foreach (Turret turret in GameManager.Instance.loadout.selectedTurrets)
         {
             // Create an instance of the turret button UI for this turret & cache the Transform of the button 
             Transform turretButtonTransform = Instantiate(_turretButtonPrefab, _turretButtonContainerTransform);

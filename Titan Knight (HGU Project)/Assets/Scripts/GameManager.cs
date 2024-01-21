@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     [Space(10)]
     [Header("Technical")]
     [Tooltip("This is the current GameMode that majorly effects how the game acts. Idle = 0, Build = 1, Combat = 2")] public GameMode currentMode = GameMode.Build;
+    [Tooltip("Reference to the Player's loadout scriptable object used during gameplay")] public Loadout loadout;
 
     [SerializeField] GameObject CombatCanvas, BuildCanvas, MainCanvas, GameOverCanvas, MissionSucessCanvas;
     [Tooltip("This will be turned off when the player is in Build Mode!")] [SerializeField] GameObject WeaponsParent;
