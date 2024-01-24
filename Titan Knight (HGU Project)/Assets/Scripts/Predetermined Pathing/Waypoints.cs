@@ -36,8 +36,12 @@ public class Waypoints : MonoBehaviour
         isGeneratorAlive = true;
     }
 
+
+
     public void DamageGenerator(int damage) // This will damage the generator. If the health is 0, the generator dies.
     {
+         //generatorHealth.gameObject.GetComponent<AudioSource>().PlayOneShot(damageFX);
+        
         generatorHealth.currentHealth -= damage;
 
         if (generatorHealth.DamageCoroutine != null) generatorHealth.StopCoroutine(generatorHealth.DamageCoroutine);

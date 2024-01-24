@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
+using System.Security.Cryptography;
 
 public enum GameMode
 {
@@ -15,6 +17,8 @@ public enum GameMode
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance {get; private set;}
+
     [Space(10)]
     [Header("Debug Controls [DEBUG ONLY]")]
     [Tooltip("[DEBUG ONLY] Do infinite money")] [SerializeField] public bool doInfiniteMoney;
@@ -58,26 +62,42 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("A reference for the health object of each of the generators in the level.")] [SerializeField] Health[] GeneratorsInLevel;
 
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    private void Awake()
+    {
+        // Check if there is already an Instance of this in the scene
+        if (Instance != null)
+        {   
+            // Destroy this extra copy if this is
+            Destroy(gameObject);
+            Debug.LogError("Cannot Have More Than One Instance of [GameManager] In The Scene!");
+            return;
+        } 
 
-
+        Instance = this;
+    }
+     
     private void Start()
     {
+        GameOverCanvas.SetActive(false);
+        MissionSucessCanvas.SetActive(false);
         if (doRemoveWaitTimes) timeInWaveOneBuild = 0;
 
-        /// Initialize the game, Restart static values
-        InvokeRepeating(nameof(UpdateGenerators), 0, 3);
-        InvokeRepeating(nameof(TickGameTimer), 0, .1f);
-        StartCoroutine(GameCycleSequence());
-        SwitchGamemode(GameMode.Build);
-
+        // Checks if the TutorialManager is running first before starting gameplay
+        if (currentMode != GameMode.Idle)
+        {
+            StartGameCycles();
+        }
+        
         enemiesAlive = 0;
         hasWon = false;
 
         gameTimeDefaultColor = GameTimerText.color;
 
-        GameOverCanvas.SetActive(false);
-        MissionSucessCanvas.SetActive(false);
-        MainCanvas.SetActive(true);
+        
 
         Time.timeScale = 1.0f;
         AudioListener.pause = false;
@@ -133,7 +153,16 @@ public class GameManager : MonoBehaviour
 
         for (int bossID = 0; bossID < BossCycles.Count; bossID++)
         {
-            if (BossCycles[bossID] == currentCycle) { Debug.Log("<color=green> Proceed to spawn.</color>"); isBossRound = true; bossToSpawn = bossID; }
+
+            if (BossCycles[bossID] == currentCycle) 
+            {
+                Debug.Log("<color=green> Proceed to spawn boss.</color>");
+
+                FindObjectOfType<VoicesManager>().TriggerVoiceLine(TriggerCode.BossSpawnCode, false); // It is false because we need it to override.
+
+                isBossRound = true; 
+                bossToSpawn = bossID; 
+            }
         }
 
         bossCheckComplete = true;
@@ -237,6 +266,21 @@ public class GameManager : MonoBehaviour
             {
                 hasWon = true;
 
+
+                // Store Win Data (save)
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 1") PlayerPrefs.SetInt("winlv1", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 2") PlayerPrefs.SetInt("winlv2", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 3") PlayerPrefs.SetInt("winlv3", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 4") PlayerPrefs.SetInt("winlv4", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 5") PlayerPrefs.SetInt("winlv5", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 6") PlayerPrefs.SetInt("winlv6", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 7") PlayerPrefs.SetInt("winlv7", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 8") PlayerPrefs.SetInt("winlv8", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 9") PlayerPrefs.SetInt("winlv9", 1);
+                if (SceneManager.GetActiveScene().name.ToLower().Trim() == "level 10") PlayerPrefs.SetInt("winlv10", 1);
+
+                PlayerPrefs.Save();
+
                 LevelComplete();
                 Debug.Log("<b>[Game Manager]</b> <color=green>Game Won! (Show UI Prompt Now)</color>");
             }
@@ -261,6 +305,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        // Do nothing if this is set to "Idle"
+        if (currentMode == GameMode.Idle) return;
+
 
         if (doAllowTabToggling && Input.GetKeyDown(KeyCode.Tab))
         {
@@ -286,8 +333,9 @@ public class GameManager : MonoBehaviour
         switch (currentMode)
         {
             case GameMode.Build:
+                MainCanvas.SetActive(true);
                 CombatCanvas.SetActive(false);
-                BuildCanvas.SetActive(true);
+                UIManager.Instance.ShowBuildCanvas(); 
                 WeaponsParent.SetActive(false);
 
                 foreach (BuildNode node in FindObjectsOfType<BuildNode>())
@@ -300,7 +348,7 @@ public class GameManager : MonoBehaviour
 
             case GameMode.Combat:
                 CombatCanvas.SetActive(true);
-                BuildCanvas.SetActive(false);
+                UIManager.Instance.HideBuildCanvas();
                 WeaponsParent.SetActive(true);
                 foreach (BuildNode node in FindObjectsOfType<BuildNode>()) node.Disable(); // Hide all node mesh renderers
 
@@ -314,6 +362,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameMode.LvlComplete:
+
                 MainCanvas.SetActive(false);
                 MissionSucessCanvas.SetActive(true);
                 GameMusicPlayer.SetActive(false);
@@ -323,10 +372,8 @@ public class GameManager : MonoBehaviour
 
             default:
                 CombatCanvas.SetActive(false);
-                BuildCanvas.SetActive(false);
+                UIManager.Instance.HideBuildCanvas();
                 WeaponsParent.SetActive(false);
-
-
                 foreach (BuildNode node in FindObjectsOfType<BuildNode>()) node.Disable(); // Hide all node mesh renderers
 
                 break;
@@ -379,11 +426,33 @@ public class GameManager : MonoBehaviour
     public void LevelComplete()
     {
         SwitchGamemode(GameMode.LvlComplete);
+
+
     }
 
     public void LoadLevel(int sceneIndex)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+    }
+
+    public void HideAllUI()
+    {
+        GameOverCanvas.SetActive(false);
+        MissionSucessCanvas.SetActive(false);
+        MainCanvas.SetActive(false);
+    }
+
+    public void StartGameCycles()
+    {
+        /// Starts all the necessary cycles to start the actual gameplay
+
+        /// Initialize the game, Restart static values
+            InvokeRepeating(nameof(UpdateGenerators), 0, 3);
+            InvokeRepeating(nameof(TickGameTimer), 0, .1f);
+            StartCoroutine(GameCycleSequence());
+            SwitchGamemode(GameMode.Build);
+
+            MainCanvas.SetActive(true);
     }
 
 }

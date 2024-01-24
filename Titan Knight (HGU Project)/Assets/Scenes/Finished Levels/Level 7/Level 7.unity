@@ -8153,7 +8153,7 @@ PrefabInstance:
     - target: {fileID: 3578883488019130774, guid: 61e64b5d90ff6a647bab7805b52537fd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.97
+      value: 9.407084
       objectReference: {fileID: 0}
     - target: {fileID: 3578883488019130774, guid: 61e64b5d90ff6a647bab7805b52537fd,
         type: 3}
@@ -30002,7 +30002,7 @@ PrefabInstance:
     - target: {fileID: 3205581640734944230, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3205581640734944230, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
@@ -30012,7 +30012,7 @@ PrefabInstance:
     - target: {fileID: 3205581640734944230, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadLevel
+      value: ReloadLevel
       objectReference: {fileID: 0}
     - target: {fileID: 3205581640734944230, guid: cca34f145f3f8b647a4f08855ee24ad8,
         type: 3}
@@ -41998,17 +41998,12 @@ MonoBehaviour:
   speed: 10
   sideSpeedMultiplier: 7.5
   runSpeedMultiplier: 1.7
-  jumpPower: 3
-  gravity: 10
-  pModelRotSpeed: 485
   doSprintingFOV: 1
-  sprintingFOV: 92.2
-  normalFOV: 80
+  sprintingFOV: 100
+  normalFOV: 90
   smoothFOVSpeed: 10
   pModelRotation: {fileID: 1134834444}
   pAnimator: {fileID: 1490685904}
-  pCamera: {fileID: 330585543}
-  pCamera_Position: {fileID: 1682223521}
   doDynamicCursors: 1
   CursorsParent: {fileID: 1919359546}
   DefaultCursor: {fileID: 1716813127}
@@ -61175,7 +61170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doInfiniteMoney: 0
-  doRemoveWaitTimes: 1
+  doRemoveWaitTimes: 0
   doAllowTabToggling: 0
   BossCycles: 03000000
   BossWaveBosses:
