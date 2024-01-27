@@ -9837,7 +9837,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.50999206, y: 0.31909552, z: -0.2112457, w: 0.7703645}
+  m_LocalRotation: {x: 0.5099921, y: 0.31909543, z: -0.21124563, w: 0.7703645}
   m_LocalPosition: {x: 3.792942, y: 28.533, z: -28.53048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -30806,13 +30806,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunSettings: {fileID: 11400000, guid: aa3c185a9985144cdb31c9d9418edac0, type: 2}
   firePoint: {fileID: 153833256}
-  bulletTargetPrefab: {fileID: 3480794444780108235, guid: fa5c725cec4a04be69a1453f152b8061,
-    type: 3}
   fireDis: {fileID: 25660606}
   FxObject: {fileID: 5857432720347368802, guid: 7e74c4160dbb641468e4f7b540463203,
     type: 3}
-  fireSound: {fileID: 8300000, guid: 5b1e8bc88bd04fa4eb22facb53648604, type: 3}
+  bulletTargetPrefab: {fileID: 3480794444780108235, guid: fa5c725cec4a04be69a1453f152b8061,
+    type: 3}
   doOverrideFirePos: 1
+  overrideFireRate: 0
+  overrideDamageBoost: 0
 --- !u!1001 &1003022340
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37307,7 +37308,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1443122799}
-  m_LocalRotation: {x: 0.50999206, y: 0.31909552, z: -0.2112457, w: 0.7703645}
+  m_LocalRotation: {x: 0.5099921, y: 0.31909543, z: -0.21124563, w: 0.7703645}
   m_LocalPosition: {x: 3.792942, y: 28.533, z: -28.53048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -44102,6 +44103,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a243b3faf710341118be394771c8fed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MeleeAttackKey: 113
+  meleeAttackDelay: 2
+  meleeHitboxSize: {x: 9.38, y: 3.93, z: 8.02}
+  meleeDamage: 15
+  meleeSlowTime: 0.5
+  meleeSlowSpeed: 4
   startCurrency: 300
   speed: 10
   sideSpeedMultiplier: 7.5
@@ -44112,6 +44119,9 @@ MonoBehaviour:
   smoothFOVSpeed: 10
   pModelRotation: {fileID: 1134834444}
   pAnimator: {fileID: 1490685904}
+  MeleeAttackVFX: {fileID: 0}
+  MeleeAttackPoint: {fileID: 0}
+  meleeAttackHitbox: {fileID: 0}
   doDynamicCursors: 1
   CursorsParent: {fileID: 1919359546}
   DefaultCursor: {fileID: 1716813127}
@@ -44124,6 +44134,7 @@ MonoBehaviour:
   - {fileID: 479479674}
   healthText: {fileID: 2095931289}
   currencyText: {fileID: 1879723350}
+  currentMeleeDelay: 0
   movementDirection: {x: 0, y: 0, z: 0}
 --- !u!4 &1517094452
 Transform:
@@ -63747,7 +63758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doInfiniteMoney: 0
   doRemoveWaitTimes: 0
-  doAllowTabToggling: 0
+  doAllowTabToggling: 1
   BossCycles: 0300000004000000
   BossWaveBosses:
   - {fileID: 5622125658679942990, guid: a33cbd93d6482bb4da7424fd677ed534, type: 3}
