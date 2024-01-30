@@ -13,10 +13,16 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerManager : MonoBehaviour
 {
-    public static PlayerManager Instance {get; private set;} // Pubclic static instance of this to allow easy access from other scripts
-
-    [Space(20)]
+    public static PlayerManager Instance { get; private set; } // Pubclic static instance of this to allow easy access from other scripts
     [Header("Player Preferences")]
+
+
+    [Tooltip("(MELEE) Hotkey which comes up when the player right.")] public KeyCode MeleeAttackKey = KeyCode.Q; // The attack key. For now, it is Q, but it can be changed.
+    [Tooltip("(MELEE) The time (seconds) between each attack that the player may operate.")] [Range(0.1f, 3.5f)] public float meleeAttackDelay = 2;
+    [Tooltip("(MELEE) The size of the melee attack's hitbox. Turn on gizmos to see red box which represents the hitbox.")] public Vector3 meleeHitboxSize = new Vector3(9.38f, 3.93f, 8.02f);
+    [Tooltip("(MELEE) The melee damage. (wow)")] [Range(1, 100)] public int meleeDamage = 15;
+    [Tooltip("(MELEE) The time that the enemy is slowed down for.")] [Range(0, 1.5f)] public float meleeSlowTime = 0.5f;
+    [Tooltip("(MELEE) The speed that the enemy goes to when they're slowed for meleeSlowTime seconds.")] [Range(0, 10)] public float meleeSlowSpeed = 4;
 
     [Tooltip("The amount of currency that the player starts with.")] [Range(150, 3999)] public int startCurrency = 275; // Do not use this to get a reference to her current amount of currency.
 
@@ -42,10 +48,14 @@ public class PlayerManager : MonoBehaviour
     [Header("Player References")]
     [Tooltip("The parent object of the player model, which rotates the player model in the direction that the player is facing.")] [SerializeField] Transform pModelRotation;
     [Tooltip(("Reference to player's Animator component "))] public Animator pAnimator;
+    [Tooltip("This is the VFX that will show up when the player presses the 'MeleeAttackKey' in order to trigger the melee attack. Ensure it is proportional to the acutal size of the melee hitbox please.")] [SerializeField] GameObject MeleeAttackVFX;
+    [Tooltip("(MELEE) This is important, and it is the point where the melee attack is instantiated at.")] [SerializeField] Transform MeleeAttackPoint;
+    [Tooltip("(MELEE) The hitbox, who's size is determined by the meleeHitboxSize..")] [SerializeField] Transform meleeAttackHitbox; // For reference only.
 
     [Space(20)]
     [Header("Cursor References")] // Handle the crosshair switching in a canvas to support animation of the crosshair.
     [Tooltip("Should the game use the dynamic cursors?\n This hides the default cursor and replaces it with one determined by the current mode.")] [SerializeField] public bool doDynamicCursors;
+
     [Space(8)]
     [Tooltip("Parent of the dynamic cursors.")] [SerializeField] public RectTransform CursorsParent;
     [Tooltip("The default cursor. Appears in idle mode.")] [SerializeField] GameObject DefaultCursor; // (Default Cursor)
@@ -72,6 +82,7 @@ public class PlayerManager : MonoBehaviour
 
     private GameManager gm;
 
+    public float currentMeleeDelay;
     public static bool isDead, generatorsDestroyed;
     public static int currentCurrency; // This constantly updates, and should be used to get the current amount of money that she has.
 
@@ -79,27 +90,32 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
+
         isDead = false;
         generatorsDestroyed = false;
         AudioListener.pause = false;
+
+        currentMeleeDelay = meleeAttackDelay;
+
     }
 
     private void Awake() // Assign defaults
     {
         // Check if there is already an Instance of this in the scene
         if (Instance != null)
-        {   
+        {
             // Destroy this extra copy if this is
             Destroy(gameObject);
             Debug.LogError("Cannot Have More Than One Instance of [PlayerManager] In The Scene!");
             return;
-        } 
+        }
 
         // Set this instance as the public static Instance if it is the only one
-        Instance = this; 
+        Instance = this;
 
         controller = GetComponent<CharacterController>();
         playerHealth = GetComponent<Health>();
+        
         //pAnimator = GetComponent<Animator>();
         gm = FindObjectOfType<GameManager>();
 
@@ -129,18 +145,74 @@ public class PlayerManager : MonoBehaviour
         float zInput = Input.GetAxis("Vertical");    // Forward/Backward Movement
         float xInput = Input.GetAxis("Horizontal");  // Left/Right Movement
 
+        // Handling the methods.
         HandleMovement(xInput, zInput);
         HandleSprinting();
         HandleAnimations(xInput, zInput);
         HandleDynamicCursor();
         HandleLosing();
         HandleHealthUI();
+        HandleMelee();
 
+        // Handle infinite currency [DEBUG]
         if (FindObjectOfType<GameManager>().doInfiniteMoney) { currencyText.text = "inf."; currentCurrency = 99999999; }
         else currencyText.text = $"${currentCurrency}";
 
     }
 
+    bool canAttack = false;
+
+    /// <summary>
+    /// Automatically called when the player clicks MeleeAttackKey. Damages all enemies in the nearby radius
+    /// </summary>
+    private void HandleMelee()
+    {
+        // Handle melee attack delay timer.
+        currentMeleeDelay -= 1.0f * Time.deltaTime;
+        currentMeleeDelay = Mathf.Max(currentMeleeDelay, 0.0f);
+
+        // Triggers the melee attack.
+        if (currentMeleeDelay <= 0 && Input.GetKeyDown(MeleeAttackKey))
+        {
+            currentMeleeDelay = meleeAttackDelay;
+
+            GameObject MeleeVFXObject = Instantiate(MeleeAttackVFX, MeleeAttackPoint);
+            Destroy(MeleeVFXObject, 1.2f); // Destroys attack vfx after the vfx hasompleted its animation.
+
+            // Harm all enemies inside of the melee attack range.
+            Collider[] colliders = Physics.OverlapBox(transform.position + transform.forward * 2f, meleeHitboxSize / 2f);
+
+            foreach (var collider in colliders)
+            {
+                // enemy components
+                Health enemyHealth = collider.GetComponent<Health>();
+
+                // If collider is enemy, do damage
+                if (enemyHealth != null && enemyHealth.HealthType == ObjectType.Enemy)
+                {
+                    GameObject _enemy = enemyHealth.gameObject;
+
+                    enemyHealth.Damage(meleeDamage); // Adjust the damage value as needed\
+
+                    // Do slowing
+                    if (meleeSlowTime > 0)
+                    {
+                        if (_enemy.GetComponent<Enemy>().SlowingCoroutine != null) _enemy.GetComponent<Enemy>().StopCoroutine(_enemy.GetComponent<Enemy>().SlowingCoroutine);
+                        _enemy.GetComponent<Enemy>().SlowingCoroutine = _enemy.GetComponent<Enemy>().StartCoroutine(_enemy.GetComponent<Enemy>().SlowEnemy(meleeSlowSpeed, meleeSlowTime));
+                    }
+
+                }
+            }
+        }
+    }
+
+
+    private void OnDrawGizmosSelected()
+    {
+        // Handle melee gizmos
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(meleeAttackHitbox.transform.position + meleeAttackHitbox.transform.forward * 2f, meleeHitboxSize);
+    }
 
     private void HandleHealthUI()
     {
@@ -284,4 +356,207 @@ public class PlayerManager : MonoBehaviour
         pAnimator.SetFloat("strafingMovement", 0);
         pAnimator.SetBool("isShooting", false);
     }
+
+    #region Overclock Abilities Segmant
+    private Coroutine DisablingCoroutine;
+
+    private IEnumerator AbilityDisable(OverclockAbility stats)
+    {
+
+        if (FindObjectOfType<OverclockManager>().DEBUG_COOLDOWN_TEXT != null)  FindObjectOfType<OverclockManager>().DEBUG_COOLDOWN_TEXT.text = "ovc active."; //DEBUGGING ONLY
+        yield return new WaitForSeconds(
+            stats.overclockType == OverclockType.Hardener ? stats.duration_hrd :
+            stats.overclockType == OverclockType.MassiveEMPBlast ? 0 :
+            stats.overclockType == OverclockType.SelfTune_up ? stats.duration_stu :
+            stats.overclockType == OverclockType.SquadTune_up ? stats.duration_squ :
+            stats.overclockType == OverclockType.MoveSpeedBoost ? stats.duration_msb :
+            stats.overclockType == OverclockType.EmergencyRepairKit ? stats.healTime :
+            stats.duration_bzk
+        );
+
+
+        /// Disable ability, Specific for each indivisual ability 
+        Debug.Log("<b>[Overclock Manager (PlayerManager.cs)]</b> Overclock ability ended.");
+        if (FindObjectOfType<OverclockManager>().DEBUG_COOLDOWN_TEXT != null) FindObjectOfType<OverclockManager>().DEBUG_COOLDOWN_TEXT.text = string.Empty; //DEBUGGING ONLY
+        FindObjectOfType<OverclockManager>().doRunTimer = true; // Begin cooldown timer
+
+        switch (stats.overclockType)
+        {
+            case OverclockType.Hardener:
+                playerHealth.resistance = 0;
+                break;
+            case OverclockType.MassiveEMPBlast:
+                // No special cooldown disablers here..
+                break;
+            case OverclockType.SelfTune_up:
+                FindObjectOfType<Gun>().overrideDamageBoost = 0;
+                FindObjectOfType<Gun>().overrideFireRate = 0;
+                break;
+            case OverclockType.SquadTune_up:
+                FindObjectOfType<Gun>().overrideDamageBoost = 0;
+                FindObjectOfType<Gun>().overrideFireRate = 0;
+                foreach (TurretManager turret in FindObjectsOfType<TurretManager>()) turret.overrideFireRate = 0;
+
+                break;
+            case OverclockType.MoveSpeedBoost:
+                speed = stats.originalSpeed;
+                break;
+            case OverclockType.EmergencyRepairKit:
+
+                break;
+            case OverclockType.Berserk:
+                meleeDamage =   Mathf.RoundToInt( stats.originalDamage);
+                meleeAttackDelay = stats.originalFirerate;
+                break;
+        }
+
+        // Note, cooldown is handled in the update method of the overclock manager. Don't ask why, I don't know. it's just Easier to do these things
+    }
+
+
+    
+
+    public void DoHardenerAbility(OverclockAbility stats)
+    {
+        if (DisablingCoroutine != null) StopCoroutine(DisablingCoroutine); // Stop the disable coroutine first to prevent overlapping
+
+        /// Preform overclock
+        playerHealth.resistance = stats.damageReductionPercent;
+        
+        /// Begin cooldown
+        StartCoroutine(AbilityDisable(stats));
+    }
+
+    public void DoEMPAbility(OverclockAbility stats)
+    {
+        if (DisablingCoroutine != null) StopCoroutine(DisablingCoroutine); // Stop the disable coroutine first to prevent overlapping
+
+        /// Preform overclock
+        GameObject explosionFX = Instantiate(stats.ExplosionVFX, transform.position, Quaternion.identity); // Instantiates the explosion FX where the bullet currently is.
+        FindObjectOfType<GameManager>().CoreFXPlayer.PlayOneShot(stats.ExplosionSFX);
+
+
+        /// Find all enemies within the range of the blast  (Just the same AOE Calculations from turret bullet)
+        GameObject[] enemiesInRange = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject _enemy in enemiesInRange)
+        {
+            // Fill values and identify the rings of damage
+            float distanceFromCenter = Vector3.Distance(transform.position, _enemy.transform.position);
+            float perimeterA = stats.AOERange / 4; /// Closest - Most Damaged
+            float perimeterB = (stats.AOERange / 4) * 2; /// Second Closest
+            float perimeterC = (stats.AOERange / 4) * 3; /// Third Closest
+            float perimeterD = stats.AOERange; /// Furthest - Least Damged
+
+                                               /// Damage all enemies in range, depending on how close they were to the target.
+            if (distanceFromCenter <= perimeterA) // First ring of damage [A]
+                _enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(stats.explosionPower * 1.4f)); // This damage is multiplied by the centerDamageMultiplier to ensure that the ones closest to the center are hit harder than the rest.
+            else if (distanceFromCenter <= perimeterB && distanceFromCenter >= perimeterA) // Second ring of damage [B]
+                _enemy.GetComponent<Health>().Damage(stats.explosionPower);
+            else if (distanceFromCenter <= perimeterC && distanceFromCenter >= perimeterB) // Third ring of damage [C]
+                _enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(stats.explosionPower - stats.explosionPower / 4));
+            else if (distanceFromCenter <= perimeterD && distanceFromCenter >= perimeterC) // Fourth ring of damage [D]
+                _enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(stats.explosionPower - stats.explosionPower / 2));
+
+            // Do slowing on enemies in A and B ring ------------
+            if (distanceFromCenter <= perimeterB) // Only For: Perimeters [A] and [B]
+            {
+                if (_enemy.GetComponent<Enemy>().SlowingCoroutine != null) _enemy.GetComponent<Enemy>().StopCoroutine(_enemy.GetComponent<Enemy>().SlowingCoroutine);
+                _enemy.GetComponent<Enemy>().SlowingCoroutine = _enemy.GetComponent<Enemy>().StartCoroutine(_enemy.GetComponent<Enemy>().SlowEnemy(stats.slowTo, stats.slowTime));
+            }
+        }
+
+        /// Begin cooldown
+        Destroy(explosionFX, 3);  // Destroys the explosion FX after 3 seconds of delay.
+
+        StartCoroutine(AbilityDisable(stats));
+    }
+
+    public void DoSelfTuneUpAbility(OverclockAbility stats)
+    {
+        if (DisablingCoroutine != null) StopCoroutine(DisablingCoroutine); // Stop the disable coroutine first to prevent overlapping
+
+        /// Preform overclock
+        FindObjectOfType<Gun>().overrideDamageBoost = stats.damageBoostMultiplier_stu;
+        FindObjectOfType<Gun>().overrideFireRate = stats.newFireRate_stu;
+
+        /// Begin cooldown
+        StartCoroutine(AbilityDisable(stats));
+    }
+   
+    public void DoSquadTuneUpAbility(OverclockAbility stats)
+    {
+        if (DisablingCoroutine != null) StopCoroutine(DisablingCoroutine); // Stop the disable coroutine first to prevent overlapping
+
+        /// Preform overclock
+        FindObjectOfType<Gun>().overrideDamageBoost = stats.damageBoostMultiplier_squ;
+        FindObjectOfType<Gun>().overrideFireRate = stats.newFireRate_squ;
+        foreach (TurretManager turret in FindObjectsOfType<TurretManager>()) turret.overrideFireRate = 999; // Not the real firerate. just tells the turret that it is in overclock mode (Disabled for explosive turrets.)
+
+
+        /// Begin cooldown
+        StartCoroutine(AbilityDisable(stats));
+    }
+
+    public void DoSpeedAbility(OverclockAbility stats)
+    {
+        if (DisablingCoroutine != null) StopCoroutine(DisablingCoroutine); // Stop the disable coroutine first to prevent overlapping
+
+        /// Preform overclock
+        stats.originalSpeed = speed;
+        speed = speed * stats.speedBoost;
+
+        /// Begin cooldown
+        StartCoroutine(AbilityDisable(stats));
+    }
+
+    public void DoHealAbility(OverclockAbility stats)
+    {
+        if (DisablingCoroutine != null) StopCoroutine(DisablingCoroutine); // Stop the disable coroutine first to prevent overlapping
+
+        /// Preform overclock
+        if (stats.lowerPlayerHealth) playerHealth.currentHealth -= 92; // [DEBUG ONLY] Read lowerPlayerHealth tooltip for details.
+        StartCoroutine(HealingCoroutine(stats));
+
+        /// Begin cooldown
+        // Note: This already automatically happens after the heal is done, so no worries about coroutine overlapping.
+        StartCoroutine(AbilityDisable(stats));
+    }
+
+    /// <summary>
+    /// Healing routine required to heal the player over a set amount of time.
+    /// </summary>
+    /// <param name="stats">Overclock ability statistics</param>
+    private IEnumerator HealingCoroutine(OverclockAbility stats)
+    {
+        // Do math to handle the timed healing stuff (why did they make it so complex)
+        int timeIncrements = stats.healTime;
+        int healAmtPerIncrement = Mathf.RoundToInt(50/timeIncrements) ;
+
+        /// Handle the time increments, which basically just heals the player every single (time increment) seconds, and does calculations to ensure that it gets to about 50 percent healed no matter what.
+        yield return new WaitForSeconds(1);
+        for (int increment = 0; increment < timeIncrements; increment++)
+        {
+            playerHealth.currentHealth += playerHealth.currentHealth <= 99 ? healAmtPerIncrement : 0;
+            yield return new WaitForSeconds(1);
+        }
+    }
+
+    public void DoBerzerkAbility(OverclockAbility stats)
+    {
+        if (DisablingCoroutine != null) StopCoroutine(DisablingCoroutine); // Stop the disable coroutine first to prevent overlapping
+
+        /// Preform overclock
+        stats.originalFirerate = meleeAttackDelay;
+        stats.originalDamage = meleeDamage;
+        meleeDamage = Mathf.RoundToInt(meleeDamage * stats.damageBoostMultiplier_bzk);
+        meleeAttackDelay = stats.newMeleeAttackDelay;
+
+        /// Begin cooldown
+        StartCoroutine(AbilityDisable(stats));
+    }
+
+
+
+    #endregion
 }
+

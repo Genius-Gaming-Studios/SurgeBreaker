@@ -56,7 +56,12 @@ public class TurretManager : MonoBehaviour
     private Transform target;
     private Enemy targetEnemy;
     private AudioSource coreFXPlayer;
-    
+
+    // OVERCLOCK OVERRIDES
+    [HideInInspector] public float overrideFireRate;
+    [HideInInspector] public float overrideDamageBoost;
+
+
     private void Start()
     {
 
@@ -169,7 +174,7 @@ public class TurretManager : MonoBehaviour
 
                 if (!target.gameObject.name.Contains("Player Controller")) Fire();
 
-                fireCountdown = 1f / fireRate;
+                fireCountdown = (1f / fireRate) / ((overrideFireRate > 0) & (turretSettings.turretName.ToLower().Contains("explosive")) ? 2 : 1);
             }
 
             fireCountdown -= Time.deltaTime;
@@ -203,7 +208,7 @@ public class TurretManager : MonoBehaviour
 
         if (fireCountdown <= 0f)
         {
-            if (!doHealingMode) target.gameObject.GetComponent<Health>().Damage(laserPower);
+            if (!doHealingMode) target.gameObject.GetComponent<Health>().Damage(laserPower + overrideDamageBoost > 0 ? (laserPower - laserPower/4) : 0);
             else target.gameObject.GetComponent<Health>().Damage(-laserPower);
 
             fireCountdown = 1f / damageRate;
@@ -221,6 +226,9 @@ public class TurretManager : MonoBehaviour
         if (bullet != null)
         {
             bullet.Seek(target);
+
+            // overclock handle
+            if (overrideDamageBoost > 0) bullet.power = Mathf.RoundToInt((bullet.power * overrideDamageBoost));
         }
 
        //  muzzleFlash.SetActive(true);
@@ -248,4 +256,5 @@ public class TurretManager : MonoBehaviour
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, range);
     }
+
 }

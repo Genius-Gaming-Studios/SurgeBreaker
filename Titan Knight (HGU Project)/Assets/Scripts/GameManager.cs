@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
     {
         GameOverCanvas.SetActive(false);
         MissionSucessCanvas.SetActive(false);
+        if (doRemoveWaitTimes) timeInWaveOneBuild = 0;
 
         // Checks if the TutorialManager is running first before starting gameplay
         if (currentMode != GameMode.Idle)
@@ -92,7 +93,6 @@ public class GameManager : MonoBehaviour
             StartGameCycles();
         }
         
-        if (doRemoveWaitTimes) timeInWaveOneBuild = 0;
         enemiesAlive = 0;
         hasWon = false;
 
@@ -336,7 +336,7 @@ public class GameManager : MonoBehaviour
             case GameMode.Build:
                 MainCanvas.SetActive(true);
                 CombatCanvas.SetActive(false);
-                UIManager.Instance.ShowBuildCanvas(); 
+                if (FindObjectOfType<UIManager>() != null) UIManager.Instance.ShowBuildCanvas(); 
                 WeaponsParent.SetActive(false);
 
                 foreach (BuildNode node in FindObjectsOfType<BuildNode>())
@@ -349,7 +349,7 @@ public class GameManager : MonoBehaviour
 
             case GameMode.Combat:
                 CombatCanvas.SetActive(true);
-                UIManager.Instance.HideBuildCanvas();
+                if (FindObjectOfType<UIManager>() != null) UIManager.Instance.HideBuildCanvas();
                 WeaponsParent.SetActive(true);
                 foreach (BuildNode node in FindObjectsOfType<BuildNode>()) node.Disable(); // Hide all node mesh renderers
 
