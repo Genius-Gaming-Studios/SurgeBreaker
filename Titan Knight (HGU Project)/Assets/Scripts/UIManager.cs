@@ -7,17 +7,19 @@ public class UIManager : MonoBehaviour
     // Create a singleton of this class
     public static UIManager Instance {get; private set;}
 
-     [SerializeField][Tooltip("Reference to the turret menu UI canvas")]
-     private GameObject _buildCanvas;
+    [Space(10)][Header("Build Menu")][Space(5)]
+    [SerializeField][Tooltip("Reference to the turret menu UI canvas")]private GameObject _buildCanvas;
+    [Tooltip("This will show a (prototype) list of turrets that you can build when you press mouse 0 on the build node.")] [SerializeField] private GameObject _buildMenuUI;
+    [SerializeField][Tooltip("The transform component of the turret button container")] private Transform _turretButtonContainerTransform;
+    [SerializeField][Tooltip("The prefab of the turret button")] private Transform _turretButtonPrefab;
 
-     [Tooltip("This will show a (prototype) list of turrets that you can build when you press mouse 0 on the build node.")] [SerializeField] 
-     private GameObject _buildMenuUI;
+    [Space(10)][Header("Canvases")][Space(5)]
+    [SerializeField] GameObject _combatCanvas;
+    [SerializeField] GameObject _mainCanvas;
+    [SerializeField] GameObject _gameOverCanvas;
+    [SerializeField] GameObject _missionSucessCanvas;
 
-    [SerializeField][Tooltip("The transform component of the turret button container")]
-    private Transform _turretButtonContainerTransform;
 
-    [SerializeField][Tooltip("The prefab of the turret button")]
-    private Transform _turretButtonPrefab;
 
     private void Awake()
     {
@@ -38,46 +40,69 @@ public class UIManager : MonoBehaviour
         HideBuildMenu();
     }
 
-
-    /// <summary>
-    /// Toggles the build menu On
-    /// </summary>
     public void ShowBuildCanvas()
     {
         _buildCanvas.SetActive(true);
     }
 
-    /// <summary>
-    /// Toggles the build menu Off
-    /// </summary>
     public void HideBuildCanvas()
     {
         _buildCanvas.SetActive(false);
     }
 
-    /// <summary>
-    /// Toggles the build menu Off
-    /// </summary>
     public void ShowBuildMenu()
     {
         _buildMenuUI.SetActive(true);
     }
 
-
-    /// <summary>
-    /// Toggles the build menu Off
-    /// </summary>
     public void HideBuildMenu()
     {
         _buildMenuUI.SetActive(false);
     }
 
-    /// <summary>
-    /// <Returns the BuildMenuUI Gameobject to caller
-    /// </summary>
     public BuildMenu GetBuildMenuUI()
     {
         return _buildMenuUI.GetComponent<BuildMenu>();
+    }
+
+    public void ShowCombatCanvas()
+    {
+        _combatCanvas.SetActive(true);
+    }
+
+    public void HideCombatCanvas()
+    {
+        _combatCanvas.SetActive(false);
+    }
+
+    public void ShowMainCanvas()
+    {
+        _mainCanvas.SetActive(true);
+    }
+
+    public void HideMainCanvas()
+    {
+        _mainCanvas.SetActive(false);
+    }
+
+    public void ShowGameOverCanvas()
+    {
+        _gameOverCanvas.SetActive(true);
+    }
+
+    public void HideGameOverCanvas()
+    {
+        _gameOverCanvas.SetActive(false);
+    }
+
+    public void ShowMissionSucessCanvas()
+    {
+        _missionSucessCanvas.SetActive(true);
+    }
+
+    public void HideMissionSucessCanvas()
+    {
+        _missionSucessCanvas.SetActive(false);
     }
 
     private void CreateTurretMenuButtons()

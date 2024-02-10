@@ -11,5 +11,6 @@ public class Turret : ScriptableObject
     public float range;
 
     public Sprite menuIcon;
+
 }
    

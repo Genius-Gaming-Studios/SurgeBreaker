@@ -93,4 +93,9 @@ public class BuildMenu : MonoBehaviour
             }
         }
     }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Mouse1)) gameObject.SetActive(false);
+    }
 }

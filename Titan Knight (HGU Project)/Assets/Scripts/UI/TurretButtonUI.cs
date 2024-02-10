@@ -10,8 +10,6 @@ public class TurretButtonUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _buttonText;
 
     [SerializeField] private Image _turretIcon;
-
-    private int _turretLoadoutIndex = 0; // A private int to track which turret to instantiate & program 
     
 
     public void SetBaseTurret(Turret turret)
@@ -22,8 +20,8 @@ public class TurretButtonUI : MonoBehaviour
 
         // Assign this button the proper onClick functionality
         _button.onClick.AddListener(() => {
-            BuildMenu.Instance.BuildButtonPressed(GameManager.Instance.loadout.selectedTurrets[_turretLoadoutIndex]);
-            _turretLoadoutIndex ++;
+            BuildMenu.Instance.BuildButtonPressed(turret);
         });
+
     }
 }
