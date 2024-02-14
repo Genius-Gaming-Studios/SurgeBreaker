@@ -88,6 +88,8 @@ public class Enemy : MonoBehaviour
             Transform playerPos = FindObjectOfType<PlayerManager>().transform;
         }
 
+        
+
         GetComponentInChildren<Health>()._bounty = bounty; // Set the bounty
 
     }
