@@ -19,7 +19,7 @@ public class GunSettings : ScriptableObject
     [Tooltip("Name that the game will refer to this gun as:")] public string gunName = "Basic Gun";
     [Tooltip("The type of weapon this gun is.")][SerializeField] public WeaponType weaponType = WeaponType.Bullet;
     [Tooltip("The amount of damage each projectiles of this weapon deals.")][SerializeField] public float damage = 1f;
-    [Tooltip("Rate in which the gun fires bullets.")][SerializeField] [Range(0.1f, 2.0f)] public float fireRate = 1;
+    [Tooltip("Rate in which the gun fires bullets.")][SerializeField] [Range(0.1f, 8.0f)] public float fireRate = 1;
     [Tooltip("The sound that can be heard when the gun is fired.")][SerializeField] public AudioClip fireSound;
     
     
