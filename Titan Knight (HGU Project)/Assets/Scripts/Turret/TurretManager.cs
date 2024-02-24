@@ -11,6 +11,14 @@ public enum TurretTypes
     Laser
 }
 
+public enum PrioritizationType
+{
+    Random, // First enemy it detects [NOT RECOMMENDED! REALLY BAD, DELAYED]
+    Nearest, // Nearest to the turret (DEFAULT)
+    Strongest, // The enemy with the most health
+    PathEnemies, // Defends the generator
+    PlayerEnemies, // Defends the player
+}
 
 public class TurretManager : MonoBehaviour
 {
@@ -18,6 +26,7 @@ public class TurretManager : MonoBehaviour
     [Tooltip("(Important) The type of this turret.")] [SerializeField] public TurretTypes TurretType; // Very important, decides how the entire turret will behave.
     [Tooltip("(Important) Will cause the turret's entire mechanics to target the Player, instead of the mob. The attack damage is changed into the heal amount.")] [SerializeField] public bool doHealingMode = false;
     /// [Tooltip("(Important) Will cause the healing turret to fire, AND shoot bullets.")] public bool shootAndHeal; [deprecated]
+    [Tooltip("(Important) The prioritization that the turret will have on the battle field/which enemy will the turret target?"), SerializeField] PrioritizationType CurrentTurretPrioritization = PrioritizationType.Nearest; // Nearest is the default random prioritization type.
 
     [Header("General")]
     [Tooltip("The range in which the turret can reach enemies from.")] [SerializeField] [Range(75, 9999)] public int turretCost = 150;
@@ -53,7 +62,7 @@ public class TurretManager : MonoBehaviour
     private float mzwaitTime = 1f;
     private float mzTimer = 0.0f;
  
-    private Transform target;
+    public Transform target;
     private Enemy targetEnemy;
     private AudioSource coreFXPlayer;
 
@@ -61,6 +70,7 @@ public class TurretManager : MonoBehaviour
     [HideInInspector] public float overrideFireRate;
     [HideInInspector] public float overrideDamageBoost;
 
+    public GameObject TargetTest;
 
     private void Start()
     {
@@ -75,47 +85,117 @@ public class TurretManager : MonoBehaviour
 
     void UpdateTarget()
     {
+
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
         float shortestDistance = Mathf.Infinity;
-        GameObject nearestEnemy = null;
+        GameObject targetedEnemy = null;
         float distanceToPlayer = 0;
-
+        float cacheEnemyHealth = 999999;
+        GameObject cacheEnemy = null;
         if (!doHealingMode)
+        {
             foreach (GameObject enemy in enemies)
             {
-                float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-                if (distanceToEnemy < shortestDistance)
+                /// Handle the Turret Prioritization (v1.10.1A) 
+
+                switch (CurrentTurretPrioritization)
                 {
-                    shortestDistance = distanceToEnemy;
-                    nearestEnemy = enemy;
+                    // Handle all prioritization types, as explained next to the enums of the prioritization types.
+                    case PrioritizationType.Random: // Not recommended to use this one
+
+                        float _distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+                        shortestDistance = _distanceToEnemy;
+
+                        if (_distanceToEnemy < range)
+                            targetedEnemy = enemy;
+
+
+
+                        break;
+                    case PrioritizationType.Nearest:
+                        float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+                        if (distanceToEnemy < shortestDistance)
+                        {
+                            shortestDistance = distanceToEnemy;
+                            targetedEnemy = enemy;
+                        }
+                        break;
+                    case PrioritizationType.Strongest:
+
+                        float __distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+                        shortestDistance = __distanceToEnemy;
+
+
+                        // Determine which one of the enemies in the enemy array have the lowest amount of health.
+                        if (targetedEnemy == null)
+                        {
+                            float enemyHealth = enemy.GetComponent<Health>().currentHealth;
+                            if (enemyHealth < cacheEnemyHealth && shortestDistance < range)
+                            {
+                                cacheEnemyHealth = enemyHealth;
+
+
+                                targetedEnemy = enemy;
+                                target = targetedEnemy.transform;
+                                targetEnemy = targetedEnemy.GetComponent<Enemy>();
+                                // Debug.Log($"SET {cacheEnemy} {cacheEnemyHealth} {target} {targetedEnemy} {targetEnemy} AS STRONGEST TARGET");
+
+                                TargetTest = targetedEnemy;
+                                target = TargetTest.transform;
+                            }
+
+
+                        }
+                            
+                        break;
+                    case PrioritizationType.PathEnemies:
+
+                        float distance = Vector3.Distance(transform.position, enemy.transform.position);
+                        if (distance < shortestDistance && enemy.GetComponent<Enemy>().FollowMode == EnemyFollowMode.FollowPath)
+                        {
+                            shortestDistance = distance;
+                            targetedEnemy = enemy;
+                        }
+                        break;
+                    case PrioritizationType.PlayerEnemies:
+                        float distanceOfEnemies = Vector3.Distance(transform.position, enemy.transform.position);
+                        if (distanceOfEnemies < shortestDistance && enemy.GetComponent<Enemy>().FollowMode == EnemyFollowMode.FollowPlayer)
+                        {
+                            shortestDistance = distanceOfEnemies;
+                            targetedEnemy = enemy;
+                        }
+                        break;
                 }
             }
+
+
+
+        }
         else
         {
             distanceToPlayer = Vector3.Distance(transform.position, FindObjectOfType<PlayerManager>().transform.position);
-            nearestEnemy = FindObjectOfType<PlayerManager>().gameObject;
+            targetedEnemy = FindObjectOfType<PlayerManager>().gameObject;
         }
 
-        if (!doHealingMode)
-            if (nearestEnemy != null && shortestDistance <= range && nearestEnemy.GetComponent<Enemy>().enabled) // This targets the nearest enemy, but can be modified later to target the enemy with the most power, HP, etc..
+       
+        if (!doHealingMode && CurrentTurretPrioritization != PrioritizationType.Strongest)
+            if (targetedEnemy != null && shortestDistance <= range && targetedEnemy.GetComponent<Enemy>().enabled) // This targets the nearest enemy, but can be modified later to target the enemy with the most power, HP, etc..
             {
-                target = nearestEnemy.transform;
-                targetEnemy = nearestEnemy.GetComponent<Enemy>();
+                target = targetedEnemy.transform;
+                targetEnemy = targetedEnemy.GetComponent<Enemy>();
             }
             else
                 target = null;
         else
         {
             if (distanceToPlayer <= range)
-                target = nearestEnemy.transform;
+                target = targetedEnemy.transform;
             else target = null;
         }
     }
 
     private void FixedUpdate()
     {
-
-
         if (target == null)
         {
             if (TurretType == TurretTypes.Laser)
@@ -174,7 +254,7 @@ public class TurretManager : MonoBehaviour
 
                 if (!target.gameObject.name.Contains("Player Controller")) Fire();
 
-                fireCountdown = (1f / fireRate) / ((overrideFireRate > 0) & (turretSettings.turretName.ToLower().Contains("explosive")) ? 2 : 1);
+                fireCountdown = (1f / fireRate) / ((overrideFireRate > 0) & (!turretSettings.turretName.ToLower().Contains("explosive")) ? 2 : 1);
             }
 
             fireCountdown -= Time.deltaTime;
