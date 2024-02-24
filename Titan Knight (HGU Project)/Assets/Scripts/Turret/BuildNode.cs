@@ -60,7 +60,6 @@ public class BuildNode : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
-
                     SellMenu.SetActive(false);
                     UIManager.Instance.ShowBuildMenu();
                     UIManager.Instance.GetBuildMenuUI().nodeID = uniqueNodeID;

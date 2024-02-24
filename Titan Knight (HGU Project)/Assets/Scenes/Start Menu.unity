@@ -2785,7 +2785,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Level 10
+          m_StringArgument: Level 3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &480275134
@@ -12063,7 +12063,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1686976896
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13844,7 +13844,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1882821289
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14481,7 +14481,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Level 6
+          m_StringArgument: Level 2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1914104188
@@ -15928,6 +15928,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TurretType: 0
   doHealingMode: 0
+  CurrentTurretPrioritization: 1
   turretCost: 150
   range: 15
   firePoint: {fileID: 4834591138169335512}
@@ -15946,6 +15947,10 @@ MonoBehaviour:
   laserRenderer: {fileID: 0}
   damageRate: 1
   laserPower: 1
+  target: {fileID: 0}
+  overrideFireRate: 0
+  overrideDamageBoost: 0
+  TargetTest: {fileID: 0}
 --- !u!4 &2203428529866224923
 Transform:
   m_ObjectHideFlags: 0
