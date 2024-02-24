@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class UIManager : MonoBehaviour
     [Tooltip("This will show a (prototype) list of turrets that you can build when you press mouse 0 on the build node.")] [SerializeField] private GameObject _buildMenuUI;
     [SerializeField][Tooltip("The transform component of the turret button container")] private Transform _turretButtonContainerTransform;
     [SerializeField][Tooltip("The prefab of the turret button")] private Transform _turretButtonPrefab;
+
+
+    [Space(10)][Header("Loadout Menu")][Space(5)]
+    [SerializeField][Tooltip("The transform component of the loadout text container")] private Transform _loadoutTextContainerTransform;
+
+    [SerializeField][Tooltip("The prefab of the loadout text object")] private Transform _loadoutTextPrefab;
 
     [Space(10)][Header("Canvases")][Space(5)]
     [SerializeField] GameObject _combatCanvas;
@@ -34,9 +41,46 @@ public class UIManager : MonoBehaviour
         Instance = this;
     }
 
+    private void CreateTurretMenuButtons()
+    {
+        // Instantiates the buttons for all 3 turrets in the build menu with the correct loadout
+        // This function should only be called once at the start of a level
+
+        foreach (Turret turret in GameManager.Instance.loadout.selectedTurrets)
+        {
+            // Create an instance of the turret button UI for this turret & cache the Transform of the button 
+            Transform turretButtonTransform = Instantiate(_turretButtonPrefab, _turretButtonContainerTransform);
+            TurretButtonUI turretButtonUI = turretButtonTransform.GetComponent<TurretButtonUI>();
+            turretButtonUI.SetBaseTurret(turret); 
+        }
+    }
+
+    private void CreateLoadoutText()
+    {
+        // Instantiates UI text objects for the player's weapon, overclock ability, & melee, and displays their respective key bindings
+
+        // Create The Weapon Text
+        Transform weaponText = Instantiate(_loadoutTextPrefab, _loadoutTextContainerTransform);
+        weaponText.GetComponent<TextMeshProUGUI>().text = GameManager.Instance.loadout.selectedWeapon.gunName + ": Mouse0";
+
+        // Create The Overclock Ability Text
+        Transform abilityText = Instantiate(_loadoutTextPrefab, _loadoutTextContainerTransform);
+        abilityText.GetComponent<TextMeshProUGUI>().text = GameManager.Instance.loadout.selectedAbility.abilityName + ": " + OverclockManager.Instance.OverclockHotkey.ToString();
+
+        // Create The Meele Text
+        Transform meleeText = Instantiate(_loadoutTextPrefab, _loadoutTextContainerTransform);
+        meleeText.GetComponent<TextMeshProUGUI>().text = "Meele: " + PlayerManager.Instance.MeleeAttackKey.ToString();
+
+         // Create The Run Text
+        Transform runText = Instantiate(_loadoutTextPrefab, _loadoutTextContainerTransform);
+        runText.GetComponent<TextMeshProUGUI>().text = "Sprint: Shift";
+        
+    }
+
     private void Start() 
     {
         CreateTurretMenuButtons();
+        CreateLoadoutText();
         HideBuildMenu();
     }
 
@@ -105,17 +149,4 @@ public class UIManager : MonoBehaviour
         _missionSucessCanvas.SetActive(false);
     }
 
-    private void CreateTurretMenuButtons()
-    {
-        // Instantiates the buttons for all 3 turrets in the build menu with the correct loadout
-        // This function should only be called once at the start of a level
-
-        foreach (Turret turret in GameManager.Instance.loadout.selectedTurrets)
-        {
-            // Create an instance of the turret button UI for this turret & cache the Transform of the button 
-            Transform turretButtonTransform = Instantiate(_turretButtonPrefab, _turretButtonContainerTransform);
-            TurretButtonUI turretButtonUI = turretButtonTransform.GetComponent<TurretButtonUI>();
-            turretButtonUI.SetBaseTurret(turret); 
-        }
-    }
 }

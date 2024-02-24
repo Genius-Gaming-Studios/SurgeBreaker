@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5163799450177284415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5163799450177284413}
+  - component: {fileID: 5163799450177284412}
+  m_Layer: 0
+  m_Name: __ GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5163799450177284413
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5163799450177284415}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 769.34296, y: 445.59473, z: 12.978068}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5163799450177284412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5163799450177284415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 943957b85209b49929721682e83c0f21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doInfiniteMoney: 0
+  doRemoveWaitTimes: 1
+  doAllowTabToggling: 0
+  BossCycles: 
+  BossWaveBosses: []
+  amountOfCycles: 3
+  enemiesPerSpawner: 10
+  enemiesIncreasePerCycle: 5
+  waveOneEnemies: 12
+  waveMoneyBoost: 25
+  moneyBoostMultiplier: 1.5
+  timeInBuildMode: 15
+  timeInCombatMode: 25
+  timeInWaveOneBuild: 30
+  currentMode: 1
+  loadout: {fileID: 11400000, guid: 40ce5609665a74c4ea98047440c6bd7d, type: 2}
+  CombatCanvas: {fileID: 0}
+  BuildCanvas: {fileID: 0}
+  MainCanvas: {fileID: 0}
+  GameOverCanvas: {fileID: 0}
+  MissionSucessCanvas: {fileID: 0}
+  WeaponsParent: {fileID: 0}
+  GameTimerText: {fileID: 0}
+  GameCycleText: {fileID: 0}
+  EnemiesAliveText: {fileID: 0}
+  GameMusicPlayer: {fileID: 0}
+  MoneyBoostText: {fileID: 0}
+  EnemyBoostText: {fileID: 0}
+  _enemiesAlive: 0
+  GeneratorsInLevel:
+  - {fileID: 0}
+  CoreFXPlayer: {fileID: 0}
+  CoreMusicPlayer: {fileID: 0}
+  BuildMenu: {fileID: 0}
+  DeleteMenu: {fileID: 0}

@@ -11,13 +11,16 @@ using UnityEditor;
 /// </summary>
 public class OverclockManager : MonoBehaviour
 {
+
+    public static OverclockManager Instance { get; private set; } // Pubclic static instance of this to allow easy access from other scripts
+
     [Header("Overclock Manager")]
     [Tooltip("The Selected overclock ability. (For now, this is manually set, when loadout is finished it will be automatic.)")]
     [SerializeField] public OverclockAbility CurrentOverclockAbility;
 
     /// (warning stuff here, check overclockmanagereditor below to modify)
 
-    [Tooltip("The hotkey interacted with in order to use the overclock ability."), SerializeField] KeyCode OverclockHotkey = KeyCode.Space; // Key is Subject to chagne
+    [Tooltip("The hotkey interacted with in order to use the overclock ability."), SerializeField] public KeyCode OverclockHotkey = KeyCode.Space; // Key is Subject to chagne
     [Tooltip("Should the player have to DOUBLE CLICK the OverclockHotkey to enable it? (Recommended)"), SerializeField] public bool doubleClickActivate = true; // Double click to activate overclock ability
 
     [Space(6), Header("Debug")]
@@ -43,6 +46,19 @@ public class OverclockManager : MonoBehaviour
 
     private void Awake()
     {
+
+        // Check if there is already an Instance of this in the scene
+        if (Instance != null)
+        {
+            // Destroy this extra copy if this is
+            Destroy(gameObject);
+            Debug.LogError("Cannot Have More Than One Instance of [OverclockManager] In The Scene!");
+            return;
+        }
+
+        // Set this instance as the public static Instance if it is the only one
+        Instance = this;
+
         // Init all values here
         canOverclock = true;
 
