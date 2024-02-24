@@ -186,6 +186,8 @@ public class Health : MonoBehaviour
 
         this.enabled = false;
 
+        this.tag = "Untagged"; // Take off tag so they can no longer be hurt. Helps with delay
+
         PlayerManager.currentCurrency += _bounty; // Add player money according to the enemy's bounty.
 
         GameManager.enemiesAlive--; // Subtract from the index of enemies alive before proceeding.

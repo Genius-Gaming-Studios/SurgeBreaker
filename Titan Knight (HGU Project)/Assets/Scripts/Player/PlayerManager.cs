@@ -374,6 +374,8 @@ public class PlayerManager : MonoBehaviour
             stats.duration_bzk
         );
 
+        // Must have this wait time to ensure the weapons are active.
+        yield return new WaitUntil(() =>  gm.currentMode == GameMode.Combat);
 
         /// Disable ability, Specific for each indivisual ability 
         Debug.Log("<b>[Overclock Manager (PlayerManager.cs)]</b> Overclock ability ended.");
