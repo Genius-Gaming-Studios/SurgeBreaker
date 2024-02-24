@@ -3,14 +3,26 @@
 
 using UnityEngine;
 
+public enum WeaponType
+{
+    Bullet,
+    Energy,
+    Explosive,
+        // Add more weapon types as needed
+}
+
 [CreateAssetMenu(fileName = "Gun", menuName = "Offensive/Basic Gun", order = 1)]
 public class GunSettings : ScriptableObject
 {
 
     [Header("Gun Settings")]
-    [Tooltip("Rate in which the gun fires bullets.")][SerializeField] [Range(0.1f, 2.0f)] public float fireRate = 1;
     [Tooltip("Name that the game will refer to this gun as:")] public string gunName = "Basic Gun";
-    //[Tooltip("How far can this gun's bullets go until they despawn?")] [SerializeField] [Range(1f, 100)] public int bulletDespawnDistance = 35;
+    [Tooltip("The type of weapon this gun is.")][SerializeField] public WeaponType weaponType = WeaponType.Bullet;
+    [Tooltip("The amount of damage each projectiles of this weapon deals.")][SerializeField] public float damage = 1f;
+    [Tooltip("Rate in which the gun fires bullets.")][SerializeField] [Range(0.1f, 2.0f)] public float fireRate = 1;
+    [Tooltip("The sound that can be heard when the gun is fired.")][SerializeField] public AudioClip fireSound;
+    
+    
 
     public GameObject bulletToFire;
 

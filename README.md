@@ -1,21 +1,22 @@
-# Surge Breaker (1.9.9a alpha)
+# Surge Breaker (1.10.X alpha)
  *Surge Breaker - Genius Studios Project*
  
 *This is the Unity Project for the Surge Breaker Genius Studios Project.*
 
-## 1.9.9a Turrets: Final Pass
+## 1.10.Xa Overclock Mechanics
 
 Note: This is a fully functional, playable demo version of the game.
 
 ### What's New?
 
-- Changed: Final passing on the turrets. All turret models and adjustments to audio have been implemented
+We're starting 2024 off strong with a few of the biggest edditions yet. 
 
-- Fixed: Play button now goes to level 1
+- Added: +7 Overclock Abilities
+- Added: Voices Manager
+- Added: Several Voice-lines, Voiced by **Hynson**
+- Added: Melee Attack
 
-- Noted: Death in Level 1 does not take you back to Level 1! Developer Jake can not fix this, due to the chance of conflicts arriving, as DO-Nutt is also working on this level. So keep this in mind before finalizing Level 1.
-
-## Game Build (1.9.Xa)
+## Game Build (Latest: 1.9.Xa)
 
 - To run the demo game build, you must use either a **Mac or a Windows**.
 
@@ -31,7 +32,40 @@ Note: This is a fully functional, playable demo version of the game.
 
 - The Asana for the project also houses pending tasks, as well as future tasks.
 
+## More Details
+* Update README.md by @DeveloperJake1 in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/88
+* Fixed Level 1 Navmesh by @DO-Nutt in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/89
+* Audio cam by @camblakeleo in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/90
+* Level 1 Final Pass by @DO-Nutt in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/91
+* Level 2 Preliminary Pass by @DO-Nutt in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/93
+* Character design cairo by @Cairo128 in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/92
+* Levels Update (2-7) by @DO-Nutt in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/94
+* Patch Generator Death  by @DeveloperJake1 in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/95
+* Levels 8-10 Playable  by @DO-Nutt in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/96
+* Progressive Game Update by @DeveloperJake1 in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/97
+* New Dropship and Super Large Cruiser Model by @Hynson in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/98
+* Desert Planet Implementation by @Hynson in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/99
+* Vfx elijah by @Hynson in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/100
+* Mech Shield Texture Bug fixed. by @Hynson in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/101
+* Add Voices Manager by @DeveloperJake1 in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/103
+* Sandstorm  by @Hynson in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/102
+* Landscape Scene Complete by @DA-Nutt in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/104
+* Trailer Landscape Updates by @DA-Nutt in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/105
+* Enemy SFX Importation + Player Caption Text by @Hynson in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/106
+* Update Turret Bought 4.asset by @Hynson in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/107
+* Level 2, 6 & 10 Update by @DO-Nutt in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/109
+* Sand Color Changed! by @Hynson in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/110
+* Update Level Buttons by @DeveloperJake1 in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/111
+* Level 6 & 10 Terrain Fix by @DO-Nutt in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/113
+* 10_6 SFX 1.0 by @camblakeleo in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/114
+* Demo Demo by @DeveloperJake1 in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/115
+* Update Drone Demo.unity by @DeveloperJake1 in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/116
+* Drone pull request by @DeveloperJake1 in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/117
+* Melee Attack Completed by @DeveloperJake1 in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/118
+* UI design devon by @DA-Nutt in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/119
+* 1.10 Overclock Abilities Update by @DeveloperJake1 in https://github.com/Hgp-GeniusLabs/SurgeBreaker/pull/120
 
 
-`Latest Version: [1.9.9a]`
-`Last Updated: [7.26.23]`
+`Full Changelog`: https://github.com/Hgp-GeniusLabs/SurgeBreaker/compare/1.9.Xa...1.10.X
+`Latest Version: [1.10.Xa]`
+`Last Updated: [1.26.24]`

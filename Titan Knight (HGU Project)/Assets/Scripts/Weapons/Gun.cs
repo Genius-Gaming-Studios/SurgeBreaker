@@ -10,14 +10,17 @@ public class Gun : MonoBehaviour
 {
     [Tooltip("This will modify the values of this gun.")] public GunSettings gunSettings;
     [SerializeField] Transform firePoint;
-    [SerializeField] GameObject bulletTargetPrefab;
     [SerializeField] Transform fireDis;
     [SerializeField] GameObject FxObject;
-    [Tooltip("The sound that can be heard when the gun is fired.")][SerializeField] AudioClip fireSound;
+    [SerializeField] GameObject bulletTargetPrefab;
     [HideInInspector] Vector3 __fireDisPos;
     [SerializeField] bool doOverrideFirePos = true;
 
     private float timeToFire = 1;
+    
+    // OVERCLOCK OVERRIDES
+    [HideInInspector] public float overrideFireRate;
+    [HideInInspector] public float overrideDamageBoost;
 
     private bool doFire; // True when the gun is firing.
     private AudioSource coreFXPlayer;
@@ -33,7 +36,7 @@ public class Gun : MonoBehaviour
     private void FixedUpdate()
     {
         
-        if (timeToFire >= 0) timeToFire -= Time.deltaTime * (1 / gunSettings.fireRate); // Automatically reduce the time till the next bullet even though the gun is being spammed
+        if (timeToFire >= 0) timeToFire -= Time.deltaTime * (1 / (overrideFireRate == 0 ? gunSettings.fireRate: overrideFireRate)); // Automatically reduce the time till the next bullet even though the gun is being spammed
 
         if (doFire && timeToFire <= 0) Fire();
 
@@ -59,8 +62,9 @@ public class Gun : MonoBehaviour
         // Spawn a bullet (because it's cooler seeing a real bullet object, instead of an invisible bullet)
         GameObject firedBullet = (GameObject)Instantiate(gunSettings.bulletToFire, firePoint.position, Quaternion.identity); // Spawn the bullet
 
+        // OVERRIDE DAMAGE BOOST (OVC)
+        if (overrideDamageBoost != 0) firedBullet.GetComponent<Bullet>().damage = Mathf.RoundToInt(firedBullet.GetComponent<Bullet>().damage * overrideDamageBoost);
 
-        /* Problem:*/
         GameObject target = Instantiate(bulletTargetPrefab, fireDis.position, Quaternion.identity); // Spawn the despawn target of the bullet
 
 
@@ -71,9 +75,9 @@ public class Gun : MonoBehaviour
         AudioSource audioSource = soundObject.GetComponent<AudioSource>();
         // audioSource.pitch = Random.Range(.9f, 1.1f); // no
         audioSource.volume = FindObjectOfType<UniversalPreferences>()._fxVolume;
-        audioSource.clip = fireSound;
+        audioSource.clip = gunSettings.fireSound;
         audioSource.Play();
-        Destroy(soundObject, fireSound.length);
+        Destroy(soundObject, gunSettings.fireSound.length);
 
     }
 }
