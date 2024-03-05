@@ -15,7 +15,7 @@ public class TurretBullet : MonoBehaviour
 
     [Header("Attributes")]
     [Tooltip("The speed that the bullet travels.")] [SerializeField] [Range(10, 150)] float speed = 70.0f;
-    [Tooltip("The damage that the bullet does.")] [SerializeField] [Range(2, 1000)] int power = 50;
+    [Tooltip("The damage that the bullet does.")] [SerializeField] [Range(2, 1000)] public int power = 50;
     [Tooltip("The tag of the walls, or any object that the bullet can not go through.")] [SerializeField] string _solidObjectTag = "Can Stop Bullets";
     [Tooltip("The radius of the object collision checking.")] [SerializeField] float checkingRange = 1.0f;
 
