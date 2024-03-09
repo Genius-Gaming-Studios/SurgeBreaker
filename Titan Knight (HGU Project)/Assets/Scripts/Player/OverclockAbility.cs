@@ -32,6 +32,7 @@ public class OverclockAbility : ScriptableObject
         [Tooltip("The overclock type that the entire script is dependant on.")] [SerializeField] public OverclockType overclockType;
         #region Hardener Fields
         [DrawIf("overclockType", OverclockType.Hardener)] [Range(1, 60)] [Tooltip("Duration of the overclock ability.")] public int duration_hrd = 15;
+        [DrawIf("overclockType", OverclockType.Hardener), Tooltip("The packaged prefab which contain the vfx package for this overclock.")] public GameObject vfx_hrd;
         [DrawIf("overclockType", OverclockType.Hardener)] [Range(5, 100)] [Tooltip("This is the amount of damage that is reduced during the attack.")] public int damageReductionPercent = 80;
         #endregion
         #region EMP blast fields
@@ -45,26 +46,32 @@ public class OverclockAbility : ScriptableObject
         #endregion
         #region Self tune-up fields
         [DrawIf("overclockType", OverclockType.SelfTune_up)] [Range(5, 60)] [Tooltip("Duration of the overclock ability.")] public int duration_stu = 15;
+        [DrawIf("overclockType", OverclockType.SelfTune_up)] [Tooltip("The packaged prefab which contain the vfx package for this overclock.")] public GameObject vfx_stu;
         [DrawIf("overclockType", OverclockType.SelfTune_up)] [Range(.1f, 0.20f)] [Tooltip("New Weapon fire rate. (IMPORTANT NOTE, original fire rate = 0.23)")] public float newFireRate_stu = 0.15f;
         [DrawIf("overclockType", OverclockType.SelfTune_up)] [Range(1.1f, 2.5f)] [Tooltip("Damage boost multiplier. (IMPORTANT NOTE, if the original damage was 15, and the multiplier is 2, the new damage becomes 30! Be careful when using those higher values.)")] public float damageBoostMultiplier_stu = 1.5f;
         #endregion
         #region Squad tune-up fields    
         [DrawIf("overclockType", OverclockType.SquadTune_up)] [Range(1, 60)] [Tooltip("Duration of the overclock ability.")] public int duration_squ = 15;
+        [DrawIf("overclockType", OverclockType.SquadTune_up)] [Tooltip("The packaged prefab which contain the vfx package for this overclock.")] public GameObject vfx_squ;
+        [DrawIf("overclockType", OverclockType.SquadTune_up)] [Tooltip("The effect on the TURRETS (hence: 't' vfx). The packaged prefab which contain the vfx package for this overclock.")] public GameObject tVfx;
         [DrawIf("overclockType", OverclockType.SquadTune_up)] [Range(.1f, 0.20f)] [Tooltip("New Weapon fire rate FOR PLAYER GUNS. Turret guns is handled internally. Sorry! (IMPORTANT NOTE, original fire rate = 0.23)")] public float newFireRate_squ = 0.15f;
-    [DrawIf("overclockType", OverclockType.SquadTune_up)] [Range(1.1f, 2.5f)] [Tooltip("Damage boost multiplier. (IMPORTANT NOTE, if the original damage was 30, and the multiplier is 2, the new damage becomes 60! Be careful when using those higher values.)")] public float damageBoostMultiplier_squ = 1.5f;
+        [DrawIf("overclockType", OverclockType.SquadTune_up)] [Range(1.1f, 2.5f)] [Tooltip("Damage boost multiplier. (IMPORTANT NOTE, if the original damage was 30, and the multiplier is 2, the new damage becomes 60! Be careful when using those higher values.)")] public float damageBoostMultiplier_squ = 1.5f;
         #endregion
         #region Move Speed Boost fields
         [DrawIf("overclockType", OverclockType.MoveSpeedBoost)] [Range(1, 60)] [Tooltip("Duration of the overclock ability.")] public int duration_msb = 15;
+        [DrawIf("overclockType", OverclockType.MoveSpeedBoost)] [Tooltip("The packaged prefab which contain the vfx package for this overclock.")] public GameObject vfx_msb;
         [DrawIf("overclockType", OverclockType.MoveSpeedBoost)] [Range(1.4f, 2.6f)] [Tooltip("Speed boost multiplier. (Be careful when using those higher values.)")] public float speedBoost = 1.5f;
         [HideInInspector] public float originalSpeed;
         #endregion
         #region Emergency repair kit (heal) fields
         // Heals the mech to 50% of its Max health, which will usually just give 50 health points to the player after healTime seconds.
         [DrawIf("overclockType", OverclockType.EmergencyRepairKit)] [Range(1, 15)] [Tooltip("How long does it take for the mech to be healed by 50% of its max health? (seconds)")] public int healTime = 10;
-         [DrawIf("overclockType", OverclockType.EmergencyRepairKit)] [Tooltip("[DEBUG] Lowers the player health by EIGHTY POINTS to test stuff out without being hurt. Do not forget to turn that crap off."), SerializeField] public bool lowerPlayerHealth = false;
+        [DrawIf("overclockType", OverclockType.EmergencyRepairKit), Tooltip("The packaged prefab which contain the vfx package for this overclock.")] public GameObject vfx_heal;
+        [DrawIf("overclockType", OverclockType.EmergencyRepairKit), Tooltip("[DEBUG] Lowers the player health by EIGHTY POINTS to test stuff out without being hurt. Do not forget to turn that crap off.")] public bool lowerPlayerHealth = false;
         #endregion 
         #region Berserk
         [DrawIf("overclockType", OverclockType.Berserk)] [Range(1, 60)] [Tooltip("Duration of the overclock ability.")] public int duration_bzk = 15;
+        [DrawIf("overclockType", OverclockType.Berserk), Tooltip("The packaged prefab which contain the vfx package for this overclock.")] public GameObject vfx_bzk;
         [DrawIf("overclockType", OverclockType.Berserk)] [Range(0.01f, 1.00f)] [Tooltip("The time between melee attacks in seconds. (IMPORTANT NOTE, the original time between attacks is 0.5 seconds.)")] public float newMeleeAttackDelay = 0.15f;
         [DrawIf("overclockType", OverclockType.Berserk)] [Range(1.1f, 2.5f)] [Tooltip("Damage boost multiplier. (IMPORTANT NOTE, if the original damage was 15, and the multiplier is 2, the new damage becomes 30! Be careful when using those higher values.)")] public float damageBoostMultiplier_bzk = 1.5f;
         [HideInInspector] public float originalFirerate, originalDamage; // Calculations only
@@ -99,6 +106,7 @@ public class HelpBoxes : Editor
                 itsDefaultLol = true; //dBro what? who is even making the ability right now who is this hello?
                 //  (I will be so surprised if anyone ever reads this mess)
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("duration_hrd"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("vfx_hrd"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("damageReductionPercent"));
                 break;
             case OverclockType.MassiveEMPBlast:
@@ -112,25 +120,31 @@ public class HelpBoxes : Editor
                 break;
             case OverclockType.SelfTune_up:
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("duration_stu"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("vfx_stu"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("newFireRate_stu"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("damageBoostMultiplier_stu"));
                 break;
             case OverclockType.SquadTune_up:
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("duration_squ"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("vfx_squ"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("tVfx"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("newFireRate_squ"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("damageBoostMultiplier_squ"));
                 break;
             case OverclockType.MoveSpeedBoost:
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("duration_msb"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("vfx_msb"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("speedBoost"));
                 break;
             case OverclockType.EmergencyRepairKit:
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("healTime"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("vfx_heal"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("lowerPlayerHealth"));
 
                 break;
             case OverclockType.Berserk:
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("duration_bzk"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("vfx_bzk"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("newMeleeAttackDelay"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("damageBoostMultiplier_bzk"));
                 break;

@@ -173,8 +173,9 @@ public class GameManager : MonoBehaviour
     bool isBossRound = false;
     int bossToSpawn = 0;
 
-    private IEnumerator GameCycleSequence()
+    private IEnumerator GameCycleSequence() 
     {
+
         for (int i = 1; i < amountOfCycles + 1; i++)
         {
             Debug.Log($"<color=cyan>[Game Manager]</color> Begin Cycle {i}/{amountOfCycles}.");
@@ -242,7 +243,7 @@ public class GameManager : MonoBehaviour
                 while (enemiesAlive > 0) yield return null;
             }
 
-
+            // August was here
             /// Win Delay ------------------------
             /// Provide 5 seconds between cycles. Do not show on the game timer. This is invisible time.
             timerTime = 0;

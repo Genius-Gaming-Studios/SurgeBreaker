@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28cc290236086f04eb44ff57e9657c73, type: 3}
-  m_Name: Squad Tune-Up Sample
+  m_Name: Hardener Sample
   m_EditorClassIdentifier: 
-  abilityName: Squad Tune-Up Sample
-  cooldownTime: 5
-  overclockType: 3
-  duration_hrd: 15
-  vfx_hrd: {fileID: 0}
-  damageReductionPercent: 80
+  abilityName: Hardener Sample
+  cooldownTime: 3
+  overclockType: 0
+  duration_hrd: 8
+  vfx_hrd: {fileID: 8443926031748424104, guid: d01d832e5dce445479c8147c9c9558c4, type: 3}
+  damageReductionPercent: 40
   ExplosionVFX: {fileID: 100000, guid: 584ac5d745c6e3145bb530ee2571dbd0, type: 3}
   ExplosionSFX: {fileID: 8300000, guid: e7e451a20b4161a42b0fbe1b615aacd0, type: 3}
   AOERange: 24
@@ -25,13 +25,12 @@ MonoBehaviour:
   slowTo: 4
   slowTime: 2
   duration_stu: 5
-  vfx_stu: {fileID: 0}
+  vfx_stu: {fileID: 3148369741059609223, guid: 251e1537a985b3d4f8169900ea1992ef, type: 3}
   newFireRate_stu: 0.1
   damageBoostMultiplier_stu: 1.167
-  duration_squ: 8
-  vfx_squ: {fileID: 3148369741059609223, guid: 7188393edff80ea4cb4e8405c78e2271, type: 3}
-  tVfx: {fileID: 4461628060959246436, guid: e143217a8cfde794e8db738edaf7c99a, type: 3}
-  newFireRate_squ: 0.11
+  duration_squ: 15
+  vfx_squ: {fileID: 0}
+  newFireRate_squ: 1
   damageBoostMultiplier_squ: 1.5
   duration_msb: 15
   vfx_msb: {fileID: 0}

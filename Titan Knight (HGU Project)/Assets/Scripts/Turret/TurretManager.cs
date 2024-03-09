@@ -27,7 +27,8 @@ public class TurretManager : MonoBehaviour
     [Tooltip("(Important) Will cause the turret's entire mechanics to target the Player, instead of the mob. The attack damage is changed into the heal amount.")] [SerializeField] public bool doHealingMode = false;
     /// [Tooltip("(Important) Will cause the healing turret to fire, AND shoot bullets.")] public bool shootAndHeal; [deprecated]
     [Tooltip("(Important) The prioritization that the turret will have on the battle field/which enemy will the turret target?"), SerializeField] PrioritizationType CurrentTurretPrioritization = PrioritizationType.Nearest; // Nearest is the default random prioritization type.
-
+    [Tooltip("(Important) Used for VFX instantiation calculations; Different for every turret. Do not change.")] public float debug_VFXOffset = 0.0f; // Do not change.
+     
     [Header("General")]
     [Tooltip("The range in which the turret can reach enemies from.")] [SerializeField] [Range(75, 9999)] public int turretCost = 150;
 
@@ -271,7 +272,7 @@ public class TurretManager : MonoBehaviour
     }
 
 
-    void LockOnTarget()
+    void LockOnTarget() // Lock on the target when it's detected
     {
         Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
