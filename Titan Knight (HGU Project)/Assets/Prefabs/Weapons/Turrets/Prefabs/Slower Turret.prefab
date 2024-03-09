@@ -818,6 +818,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TurretType: 0
   doHealingMode: 0
+  CurrentTurretPrioritization: 1
+  debug_VFXOffset: -0.56
   turretCost: 300
   range: 30
   firePoint: {fileID: 8959968206839062051}
@@ -836,6 +838,10 @@ MonoBehaviour:
   laserRenderer: {fileID: 0}
   damageRate: 1
   laserPower: 1
+  target: {fileID: 0}
+  overrideFireRate: 0
+  overrideDamageBoost: 0
+  TargetTest: {fileID: 0}
 --- !u!1 &5768370227195216866
 GameObject:
   m_ObjectHideFlags: 0

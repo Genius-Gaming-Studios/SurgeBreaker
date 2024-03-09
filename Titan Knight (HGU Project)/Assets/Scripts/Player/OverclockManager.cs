@@ -11,10 +11,12 @@ using UnityEditor;
 /// </summary>
 public class OverclockManager : MonoBehaviour
 {
-    [Header("Overclock Manager")]
-    [Tooltip("The Selected overclock ability. (For now, this is manually set, when loadout is finished it will be automatic.)")]
-    [SerializeField] public OverclockAbility CurrentOverclockAbility;
+    
+    [SerializeField, Tooltip("This must be assigned! It is an empty object inside of the Player controller, located at exactly (0,-1,0).")] public Transform OverclockLocation; // Super important, must be located at (0,-1,0). It is in the root of the Player controller, the only other empty object with Model Parent.
 
+    [Header("Overclock Manager"), Tooltip("The Selected overclock ability. (For now, this is manually set, when loadout is finished it will be automatic.)")]
+    [SerializeField] public OverclockAbility CurrentOverclockAbility;
+    
     /// (warning stuff here, check overclockmanagereditor below to modify)
 
     [Tooltip("The hotkey interacted with in order to use the overclock ability."), SerializeField] KeyCode OverclockHotkey = KeyCode.Space; // Key is Subject to chagne
@@ -24,7 +26,7 @@ public class OverclockManager : MonoBehaviour
     [Tooltip("Can the player currently use the overclock ability? (It is determined via the cooldown period of the current overclock ability) [DEBUG ONLY]"), SerializeField] private bool canOverclock; // DEBUG ONLY
     [Tooltip("Time remaining on cooldown. Read only."), SerializeField] public float cooldownTimer = 0;
 
-    public  UnityEngine.UI.Text DEBUG_COOLDOWN_TEXT; // DEBUG ONLY!!
+    public UnityEngine.UI.Text DEBUG_COOLDOWN_TEXT; // DEBUG ONLY!!
 
     /// <summary> The time that the have between when the double click hotkey is clicked once and twice. (Note, only active for if doubleClickActivate is true, duh.)</summary>
     private float doubleClickTimeThreshold = 0.8f;
@@ -51,6 +53,8 @@ public class OverclockManager : MonoBehaviour
         {
             cooldownTimer = CurrentOverclockAbility.cooldownTime; // cool beans thats what we like to see
         }
+
+        if (OverclockLocation == null) Debug.LogWarningFormat("<b>[Overclock Manager]</b> The super important Overclock Location transform object is not assigned! There will be errors in game! <b>Assign it by creating an empty object in the <u>root</u> of the Player Controller, pose it at x=0, y=-1, z=0, and then drag it to the OverclockLocation reference.</b>");
 
         pm = FindObjectOfType<PlayerManager>(); // Assign player manager to reference the overclock mechanics on the player.
     }
@@ -127,26 +131,26 @@ public class OverclockManager : MonoBehaviour
         {
             // Indivisual OVC abilities are directly handled in here.
             case OverclockType.Hardener:
-                pm.DoHardenerAbility(ovc);
+                pm.DoHardenerAbility(ovc); // Non Complete!
                 break;
             case OverclockType.MassiveEMPBlast:
-                pm.DoEMPAbility(ovc);
+                pm.DoEMPAbility(ovc); // Complete
                 break;
             case OverclockType.SelfTune_up:
-                pm.DoSelfTuneUpAbility(ovc);
+                pm.DoSelfTuneUpAbility(ovc); // Complete!
                 break;
             case OverclockType.SquadTune_up:
                 // Should do this for the player AND the turrets.
-                pm.DoSquadTuneUpAbility(ovc);
+                pm.DoSquadTuneUpAbility(ovc); // Non Complete!
                 break;
             case OverclockType.MoveSpeedBoost:
-                pm.DoSpeedAbility(ovc);
+                pm.DoSpeedAbility(ovc); // Non Complete!
                 break;
             case OverclockType.EmergencyRepairKit:
-                pm.DoHealAbility(ovc);
+                pm.DoHealAbility(ovc); // Complete!
                 break;
             case OverclockType.Berserk:
-                pm.DoBerzerkAbility(ovc);
+                pm.DoBerzerkAbility(ovc); // Complete!
                 break;
         }
         
@@ -183,10 +187,12 @@ public class OverclockManagerEditor : Editor
             // normal, this means its manual mode 
             EditorGUILayout.HelpBox("[EXPERIMENTAL] Current overclock ability was MANUALLY assigned. This is an experimental feature!", MessageType.Info);
         }
-            EditorGUILayout.Space(6);
+        EditorGUILayout.Space(6);
         
         EditorGUILayout.PropertyField(serializedObject.FindProperty("OverclockHotkey"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("doubleClickActivate"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("OverclockLocation"));
+
 
         // warnings for double click bool
         if (!overclockManager.doubleClickActivate)

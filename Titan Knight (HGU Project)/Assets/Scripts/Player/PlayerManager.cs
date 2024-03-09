@@ -140,7 +140,7 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Pressing R will reload the scene. Might need to be discontinued soon.
+        // if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Pressing R will reload the scene. Might need to be discontinued soon.
 
         float zInput = Input.GetAxis("Vertical");    // Forward/Backward Movement
         float xInput = Input.GetAxis("Horizontal");  // Left/Right Movement
@@ -384,31 +384,96 @@ public class PlayerManager : MonoBehaviour
 
         switch (stats.overclockType)
         {
-            case OverclockType.Hardener:
+            case OverclockType.Hardener: // COMPLETE
                 playerHealth.resistance = 0;
+
+                // Disable VFX
+                OverclockVFXHolder VFX_ = TemporaryVFXCache.GetComponent<OverclockVFXHolder>();
+
+                VFX_.StoredVFX[0].SetActive(false);
+                yield return new WaitForSeconds(0.1f);
+                VFX_.StoredVFX[0].SetActive(true);
+                VFX_.StoredVFX[1].SetActive(false);
+                VFX_.StoredVFX[2].SetActive(false);
+                Destroy(TemporaryVFXCache.gameObject, 2);
+
                 break;
             case OverclockType.MassiveEMPBlast:
                 // No special cooldown disablers here..
                 break;
-            case OverclockType.SelfTune_up:
+            case OverclockType.SelfTune_up: // COMPLETE
                 FindObjectOfType<Gun>().overrideDamageBoost = 0;
                 FindObjectOfType<Gun>().overrideFireRate = 0;
+
+                // Disable VFX
+                OverclockVFXHolder VFX = TemporaryVFXCache.GetComponent<OverclockVFXHolder>();
+
+                VFX.StoredVFX[0].SetActive(false);
+                yield return new WaitForSeconds(0.1f);
+                VFX.StoredVFX[0].SetActive(true);
+                VFX.StoredVFX[1].SetActive(false);
+
+                Destroy(TemporaryVFXCache.gameObject,2);
                 break;
-            case OverclockType.SquadTune_up:
+            case OverclockType.SquadTune_up: // COMPLETE
                 FindObjectOfType<Gun>().overrideDamageBoost = 0;
                 FindObjectOfType<Gun>().overrideFireRate = 0;
                 foreach (TurretManager turret in FindObjectsOfType<TurretManager>()) turret.overrideFireRate = 0;
 
-                break;
-            case OverclockType.MoveSpeedBoost:
-                speed = stats.originalSpeed;
-                break;
-            case OverclockType.EmergencyRepairKit:
+
+                // Disable VFX
+                OverclockVFXHolder ___VFX = TemporaryVFXCache.GetComponent<OverclockVFXHolder>();
+
+                ___VFX.StoredVFX[0].SetActive(false);
+                yield return new WaitForSeconds(0.1f);
+                ___VFX.StoredVFX[0].SetActive(true);
+                ___VFX.StoredVFX[1].SetActive(false);
+
+                foreach (OverclockVFXHolder overclockVFX in FindObjectsOfType<OverclockVFXHolder>()) Destroy(overclockVFX.gameObject,1);
+
 
                 break;
-            case OverclockType.Berserk:
-                meleeDamage =   Mathf.RoundToInt( stats.originalDamage);
+            case OverclockType.MoveSpeedBoost: // NOT COMPLETE
+                speed = stats.originalSpeed;
+
+                // Disable VFX
+                OverclockVFXHolder ____VFX = TemporaryVFXCache.GetComponent<OverclockVFXHolder>();
+
+                ____VFX.StoredVFX[0].SetActive(false);
+                yield return new WaitForSeconds(0.1f);
+                ____VFX.StoredVFX[0].SetActive(true);
+                ____VFX.StoredVFX[1].SetActive(false);
+                ____VFX.StoredVFX[2].SetActive(false);
+                Destroy(TemporaryVFXCache.gameObject, 2);
+
+                break;
+            case OverclockType.EmergencyRepairKit: // COMPLETE
+
+
+                // Disable VFX
+                OverclockVFXHolder _VFX = TemporaryVFXCache.GetComponent<OverclockVFXHolder>();
+
+                _VFX.StoredVFX[0].SetActive(false);
+                yield return new WaitForSeconds(0.1f);
+                _VFX.StoredVFX[0].SetActive(true);
+                _VFX.StoredVFX[1].SetActive(false);
+                _VFX.StoredVFX[2].SetActive(false);
+                Destroy(TemporaryVFXCache.gameObject, 2);
+
+                break;
+            case OverclockType.Berserk: // COMPLETE
+                meleeDamage =  Mathf.RoundToInt( stats.originalDamage);
                 meleeAttackDelay = stats.originalFirerate;
+
+                // Disable VFX
+                OverclockVFXHolder __VFX = TemporaryVFXCache.GetComponent<OverclockVFXHolder>();
+
+                __VFX.StoredVFX[0].SetActive(false);
+                yield return new WaitForSeconds(0.1f);
+                __VFX.StoredVFX[0].SetActive(true);
+                __VFX.StoredVFX[1].SetActive(false);
+                Destroy(TemporaryVFXCache.gameObject, 2);
+
                 break;
         }
 
@@ -424,10 +489,20 @@ public class PlayerManager : MonoBehaviour
 
         /// Preform overclock
         playerHealth.resistance = stats.damageReductionPercent;
-        
+
+        // Display VFX/Sfx, proprietary
+        TemporaryVFXCache = Instantiate(stats.vfx_hrd, FindObjectOfType<OverclockManager>().OverclockLocation);
+        OverclockVFXHolder VFX = TemporaryVFXCache.GetComponent<OverclockVFXHolder>();
+
+        VFX.StoredVFX[0].SetActive(true);
+        VFX.StoredVFX[1].SetActive(true);
+        VFX.StoredVFX[2].SetActive(true);
+
         /// Begin cooldown
         StartCoroutine(AbilityDisable(stats));
     }
+
+    private GameObject TemporaryVFXCache; // Temporarily holds the Overclock VFX Object.
 
     public void DoEMPAbility(OverclockAbility stats)
     {
@@ -481,6 +556,13 @@ public class PlayerManager : MonoBehaviour
         FindObjectOfType<Gun>().overrideDamageBoost = stats.damageBoostMultiplier_stu;
         FindObjectOfType<Gun>().overrideFireRate = stats.newFireRate_stu;
 
+        // Display VFX/Sfx, proprietary
+        TemporaryVFXCache = Instantiate(stats.vfx_stu, FindObjectOfType<OverclockManager>().OverclockLocation);
+        OverclockVFXHolder VFX = TemporaryVFXCache.GetComponent<OverclockVFXHolder>();
+
+        VFX.StoredVFX[0].SetActive(true);
+        VFX.StoredVFX[1].SetActive(true);
+
         /// Begin cooldown
         StartCoroutine(AbilityDisable(stats));
     }
@@ -494,6 +576,33 @@ public class PlayerManager : MonoBehaviour
         FindObjectOfType<Gun>().overrideFireRate = stats.newFireRate_squ;
         foreach (TurretManager turret in FindObjectsOfType<TurretManager>()) turret.overrideFireRate = 999; // Not the real firerate. just tells the turret that it is in overclock mode (Disabled for explosive turrets.)
 
+        /// Display VFX/Sfx, proprietary
+        // The turrets
+        foreach (TurretManager turret in FindObjectsOfType<TurretManager>())
+        {
+            GameObject tTransform = Instantiate(stats.tVfx, turret.transform);
+            OverclockVFXHolder tVfx = tTransform.GetComponent<OverclockVFXHolder>();
+
+            // Set up position, activate children
+            // Note: offset -0.8812901 fast 
+            // offset 0.08 slow turret
+            // -0.6326929 for Healing one
+            tTransform.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+            tTransform.transform.localPosition = new Vector3(0, turret.debug_VFXOffset, 0);
+
+         
+            tVfx.StoredVFX[0].SetActive(true);
+            tVfx.StoredVFX[1].SetActive(true);
+
+        }
+ 
+        // The Mech
+        TemporaryVFXCache = Instantiate(stats.vfx_squ, FindObjectOfType<OverclockManager>().OverclockLocation);
+        OverclockVFXHolder VFX = TemporaryVFXCache.GetComponent<OverclockVFXHolder>();
+
+        VFX.StoredVFX[0].SetActive(true);
+        VFX.StoredVFX[1].SetActive(true);
+
 
         /// Begin cooldown
         StartCoroutine(AbilityDisable(stats));
@@ -502,6 +611,14 @@ public class PlayerManager : MonoBehaviour
     public void DoSpeedAbility(OverclockAbility stats)
     {
         if (DisablingCoroutine != null) StopCoroutine(DisablingCoroutine); // Stop the disable coroutine first to prevent overlapping
+
+        // Display VFX/Sfx, proprietary
+        TemporaryVFXCache = Instantiate(stats.vfx_msb, FindObjectOfType<OverclockManager>().OverclockLocation);
+        OverclockVFXHolder VFX = TemporaryVFXCache.GetComponent<OverclockVFXHolder>();
+
+        VFX.StoredVFX[0].SetActive(true);
+        VFX.StoredVFX[1].SetActive(true);
+        VFX.StoredVFX[2].SetActive(true);
 
         /// Preform overclock
         stats.originalSpeed = speed;
@@ -519,6 +636,14 @@ public class PlayerManager : MonoBehaviour
         if (stats.lowerPlayerHealth) playerHealth.currentHealth -= 92; // [DEBUG ONLY] Read lowerPlayerHealth tooltip for details.
         StartCoroutine(HealingCoroutine(stats));
 
+        // Display VFX/Sfx, proprietary
+        TemporaryVFXCache = Instantiate(stats.vfx_heal, FindObjectOfType<OverclockManager>().OverclockLocation);
+        OverclockVFXHolder VFX = TemporaryVFXCache.GetComponent<OverclockVFXHolder>();
+
+        VFX.StoredVFX[0].SetActive(true);
+        VFX.StoredVFX[1].SetActive(true);
+        VFX.StoredVFX[2].SetActive(true);
+
         /// Begin cooldown
         // Note: This already automatically happens after the heal is done, so no worries about coroutine overlapping.
         StartCoroutine(AbilityDisable(stats));
@@ -532,7 +657,7 @@ public class PlayerManager : MonoBehaviour
     {
         // Do math to handle the timed healing stuff (why did they make it so complex)
         int timeIncrements = stats.healTime;
-        int healAmtPerIncrement = Mathf.RoundToInt(50/timeIncrements) ;
+        int healAmtPerIncrement = Mathf.RoundToInt((Mathf.RoundToInt(playerHealth.maximumHealth/2))/timeIncrements) ;
 
         /// Handle the time increments, which basically just heals the player every single (time increment) seconds, and does calculations to ensure that it gets to about 50 percent healed no matter what.
         yield return new WaitForSeconds(1);
@@ -552,6 +677,13 @@ public class PlayerManager : MonoBehaviour
         stats.originalDamage = meleeDamage;
         meleeDamage = Mathf.RoundToInt(meleeDamage * stats.damageBoostMultiplier_bzk);
         meleeAttackDelay = stats.newMeleeAttackDelay;
+
+        // Display VFX/Sfx, proprietary
+        TemporaryVFXCache = Instantiate(stats.vfx_bzk, FindObjectOfType<OverclockManager>().OverclockLocation);
+        OverclockVFXHolder VFX = TemporaryVFXCache.GetComponent<OverclockVFXHolder>();
+
+        VFX.StoredVFX[0].SetActive(true);
+        VFX.StoredVFX[1].SetActive(true);
 
         /// Begin cooldown
         StartCoroutine(AbilityDisable(stats));
