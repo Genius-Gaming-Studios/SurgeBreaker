@@ -3,9 +3,26 @@ using UnityEngine;
 [Tooltip("This should always be attatched to the Build Menu")]
 public class BuildMenu : MonoBehaviour
 {
+    public static BuildMenu Instance {get; private set;}
+
     public string nodeID;
 
     public AudioClip purchase_FX, notEnoughMoneyPress_FX;
+
+    private void Awake()
+    {
+        // Check if there is already an Instance of this in the scene
+        if (Instance != null)
+        {   
+            // Destroy this extra copy if this is
+            Destroy(gameObject);
+            Debug.LogError("Cannot Have More Than One Instance of [BuildMenu] In The Scene!");
+            return;
+        } 
+
+        Instance = this;
+    }
+
     private void Start()
     {
         if (purchase_FX == null || notEnoughMoneyPress_FX == null) Debug.Log("<color=cyan>Notice! You have not assigned the audio clips for the build menu in this scene!</color> The build menu will not function properly. If you are unaware of how to add an audio clip to the Build Menu's script, please contact Mark in the Hidden Genius Slack.");
@@ -75,5 +92,10 @@ public class BuildMenu : MonoBehaviour
                 Node.HidePreview();
             }
         }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Mouse1)) gameObject.SetActive(false);
     }
 }
