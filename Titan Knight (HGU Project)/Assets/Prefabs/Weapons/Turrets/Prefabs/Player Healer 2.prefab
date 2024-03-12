@@ -621,6 +621,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TurretType: 0
   doHealingMode: 0
+  CurrentTurretPrioritization: 1
+  debug_VFXOffset: -1.604885
   turretCost: 665
   range: 36
   firePoint: {fileID: 2286588783664628280}
@@ -639,6 +641,10 @@ MonoBehaviour:
   laserRenderer: {fileID: 0}
   damageRate: 1
   laserPower: 1
+  target: {fileID: 0}
+  overrideFireRate: 0
+  overrideDamageBoost: 0
+  TargetTest: {fileID: 0}
 --- !u!1 &5043928851876205057
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,6 +727,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TurretType: 1
   doHealingMode: 1
+  CurrentTurretPrioritization: 1
+  debug_VFXOffset: -0.95
   turretCost: 200
   range: 35
   firePoint: {fileID: 7495481606383900626}
@@ -739,6 +747,10 @@ MonoBehaviour:
   laserRenderer: {fileID: 8179456706785814619}
   damageRate: 0.87
   laserPower: 3
+  target: {fileID: 0}
+  overrideFireRate: 0
+  overrideDamageBoost: 0
+  TargetTest: {fileID: 0}
 --- !u!1 &5665103076430028018
 GameObject:
   m_ObjectHideFlags: 0
