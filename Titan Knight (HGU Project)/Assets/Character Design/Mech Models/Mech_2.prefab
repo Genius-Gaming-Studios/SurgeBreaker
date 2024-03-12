@@ -122,9 +122,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 713428817365290392}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.4760604, y: 0, z: 2.0086002}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 302626639584192379}
   - {fileID: 6380398251528481018}
@@ -2313,6 +2313,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FX_Shield_Cells
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c4467cecf168dd048bfba7c99ffa76c4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6792345642148187087, guid: c4467cecf168dd048bfba7c99ffa76c4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4467cecf168dd048bfba7c99ffa76c4, type: 3}

@@ -411,6 +411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TurretType: 1
   doHealingMode: 0
+  CurrentTurretPrioritization: 1
   turretCost: 800
   range: 28
   firePoint: {fileID: 3442637926758989086}
@@ -427,8 +428,12 @@ MonoBehaviour:
   fireSound: {fileID: 8300000, guid: 61e01e7c3fc844f4398008e97930af62, type: 3}
   muzzleFlash: {fileID: 100000, guid: e442820ce8072c54aabffe29e4cd72e3, type: 3}
   laserRenderer: {fileID: 826986962733050117}
-  damageRate: 14.47
+  damageRate: 14.5
   laserPower: 20
+  target: {fileID: 0}
+  overrideFireRate: 0
+  overrideDamageBoost: 0
+  TargetTest: {fileID: 0}
 --- !u!1 &3057832591907087375
 GameObject:
   m_ObjectHideFlags: 0

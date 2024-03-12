@@ -584,7 +584,7 @@ GameObject:
   - component: {fileID: 5645677824414783082}
   - component: {fileID: 1935322456651027119}
   m_Layer: 0
-  m_Name: Rapid Turret
+  m_Name: Heavy Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -620,6 +620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TurretType: 0
   doHealingMode: 0
+  CurrentTurretPrioritization: 1
   turretCost: 575
   range: 35
   firePoint: {fileID: 4834591139213341190}
@@ -630,7 +631,7 @@ MonoBehaviour:
   Hinge: {fileID: 775067335441546246}
   BulletPrefab: {fileID: 5890929398850381768, guid: 4326dfbf1691cc84e977e86fb90f7ed8,
     type: 3}
-  fireRate: 3.5
+  fireRate: 1.5
   FxObject: {fileID: 5857432720347368802, guid: 7e74c4160dbb641468e4f7b540463203,
     type: 3}
   fireSound: {fileID: 8300000, guid: 61e01e7c3fc844f4398008e97930af62, type: 3}
@@ -638,6 +639,10 @@ MonoBehaviour:
   laserRenderer: {fileID: 0}
   damageRate: 1
   laserPower: 1
+  target: {fileID: 0}
+  overrideFireRate: 0
+  overrideDamageBoost: 0
+  TargetTest: {fileID: 0}
 --- !u!1 &5886710889456104837
 GameObject:
   m_ObjectHideFlags: 0
