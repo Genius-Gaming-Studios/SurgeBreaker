@@ -80,7 +80,7 @@ public class StartMenu_Controller : MonoBehaviour
         LevelScreen.SetActive(false);
         LoadoutScreen.SetActive(true);
 
-        LoadoutUI.Instance.CreateLoadoutUI();
+        LoadoutUI.Instance.OpenEquippedLoadoutMenu();
    }
 
     /// <summary>

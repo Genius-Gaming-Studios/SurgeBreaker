@@ -7,6 +7,12 @@ public class LoadoutUI : MonoBehaviour
 {
     public static LoadoutUI Instance {get; private set;}
 
+    [SerializeField] private GameObject _equippedLoadoutMenu;
+
+    [SerializeField] private GameObject _mechSelectMenu;
+
+    [Header("EQUIPPED LOADOUT MENU")]
+
     [Header("Mech")]
     [SerializeField][Tooltip("The prefab of the mech button")] private Transform _mechButton;
     [SerializeField][Tooltip("The transform the mech model will be spawned a child of in the loadout menu")] private Transform _mechModelTransform;
@@ -20,6 +26,9 @@ public class LoadoutUI : MonoBehaviour
     [Header("Overclock Ability")]
     [SerializeField][Tooltip("The prefab of the overclock ability button")] private Transform _overclockAbilityButton;
 
+
+
+
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -32,7 +41,7 @@ public class LoadoutUI : MonoBehaviour
     }
 
     // When this UI is loaded, it accesses the current player loadout, then populates the loadout UI with the respective mech, turrets, and overclock abilities
-    public void CreateLoadoutUI()
+    private void UpdateEquipedLoadoutUI()
     {
         // Populate the Mech UI
         MechButtonUI mechButtonUI = _mechButton.GetComponent<MechButtonUI>();
@@ -57,5 +66,18 @@ public class LoadoutUI : MonoBehaviour
         overclockButtonUI.SetupOverclockButton(StartMenu_Controller.Instance.GetLoadout().selectedAbility);
     }
 
+    public void OpenMechSelectMenu()
+    {
+        _equippedLoadoutMenu.SetActive(false);
+        _mechSelectMenu.SetActive(true); 
 
+        MechSelectMenu.Instance.UpdateMechUI();
+    }
+
+    public void OpenEquippedLoadoutMenu()
+    {
+        _equippedLoadoutMenu.SetActive(true);
+        _mechSelectMenu.SetActive(false); 
+        UpdateEquipedLoadoutUI();
+    }
 }
