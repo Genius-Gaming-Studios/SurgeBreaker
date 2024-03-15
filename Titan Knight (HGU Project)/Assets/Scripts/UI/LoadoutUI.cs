@@ -8,10 +8,10 @@ public class LoadoutUI : MonoBehaviour
     public static LoadoutUI Instance {get; private set;}
 
     [SerializeField] private GameObject _equippedLoadoutMenu;
-
     [SerializeField] private GameObject _mechSelectMenu;
+    [SerializeField] private GameObject _weaponSelectMenu;
 
-    [Header("EQUIPPED LOADOUT MENU")]
+    [Header("EQUIPPED LOADOUT MENU")]  
 
     [Header("Mech")]
     [SerializeField][Tooltip("The prefab of the mech button")] private Transform _mechButton;
@@ -43,6 +43,10 @@ public class LoadoutUI : MonoBehaviour
     // When this UI is loaded, it accesses the current player loadout, then populates the loadout UI with the respective mech, turrets, and overclock abilities
     private void UpdateEquipedLoadoutUI()
     {
+        // Hide all other loadout submenus
+        _mechSelectMenu.SetActive(false);
+        _weaponSelectMenu.SetActive(false);
+
         //Clear the old mech model & instantiate the model that is currently equipped
         if (_mechModelTransform.childCount > 0) Destroy(_mechModelTransform.GetChild(0).gameObject);
         Instantiate(StartMenu_Controller.Instance.GetEquippedLoadout().selectedMech.prefab, _mechModelTransform, false);
@@ -73,8 +77,18 @@ public class LoadoutUI : MonoBehaviour
     {
         _equippedLoadoutMenu.SetActive(false);
         _mechSelectMenu.SetActive(true); 
+        _weaponSelectMenu.SetActive(false);
 
         MechSelectMenu.Instance.UpdateMechUI();
+    }
+
+    public void OpenWeaponSelectMenu()
+    {
+        _equippedLoadoutMenu.SetActive(false);
+        _mechSelectMenu.SetActive(false); 
+        _weaponSelectMenu.SetActive(true);
+
+        WeaponSelectMenu.Instance.UpdateWeaponUI();
     }
 
     public void OpenEquippedLoadoutMenu()

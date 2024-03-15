@@ -24,7 +24,6 @@ public class StartMenu_Controller : MonoBehaviour
     [SerializeField][Tooltip("The transform component of the turret button container")] private Transform _mechButtonContainerTransform;
 
     [SerializeField] private List<Turret> fullTurretList = new List<Turret>();
-    [SerializeField] private Loadout _defaultLoadout;
     [SerializeField] private Loadout _EquippedLoadout;
 
     [Header("References")]

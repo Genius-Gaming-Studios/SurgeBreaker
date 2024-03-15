@@ -83,6 +83,5 @@ public class MechSelectMenu : MonoBehaviour
     {
         // Updates the equipped mech of the loadout scriptable with the currently queued mech
         StartMenu_Controller.Instance.GetEquippedLoadout().selectedMech = _queuedMech;
-        Debug.Log("Equipped " + StartMenu_Controller.Instance.GetEquippedLoadout().selectedMech);
     }
 }

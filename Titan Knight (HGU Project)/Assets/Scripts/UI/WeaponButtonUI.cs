@@ -8,11 +8,12 @@ public class WeaponButtonUI : MonoBehaviour
 {
 
     [SerializeField] private Button _button;
-    [SerializeField] private TextMeshProUGUI _nameText;
+    [SerializeField] private TMP_Text _nameText;
     [SerializeField] private Image _Icon;
 
     public void SetupWeaponButton(GunSettings gun)
     { 
+
         _nameText.text = gun.gunName;
         //_mechIcon.sprite = ADD SPRITES FOR OVERCLOCK ABILITIES
 
