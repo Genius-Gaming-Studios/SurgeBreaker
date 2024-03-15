@@ -25,6 +25,7 @@ public class StartMenu_Controller : MonoBehaviour
 
     [SerializeField] private List<Turret> fullTurretList = new List<Turret>();
     [SerializeField] private Loadout _defaultLoadout;
+    [SerializeField] private Loadout _EquippedLoadout;
 
     [Header("References")]
     public GameObject MainScreen;
@@ -137,9 +138,9 @@ public class StartMenu_Controller : MonoBehaviour
         Application.Quit();
    }
 
-   public Loadout GetLoadout()
+   public Loadout GetEquippedLoadout()
    {
-        return _defaultLoadout;
+        return _EquippedLoadout;
    }
 
     private bool ctrlPressed = false;

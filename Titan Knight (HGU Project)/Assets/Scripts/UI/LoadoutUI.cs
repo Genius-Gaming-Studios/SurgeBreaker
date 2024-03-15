@@ -43,27 +43,30 @@ public class LoadoutUI : MonoBehaviour
     // When this UI is loaded, it accesses the current player loadout, then populates the loadout UI with the respective mech, turrets, and overclock abilities
     private void UpdateEquipedLoadoutUI()
     {
+        //Clear the old mech model & instantiate the model that is currently equipped
+        if (_mechModelTransform.childCount > 0) Destroy(_mechModelTransform.GetChild(0).gameObject);
+        Instantiate(StartMenu_Controller.Instance.GetEquippedLoadout().selectedMech.prefab, _mechModelTransform, false);
+
         // Populate the Mech UI
         MechButtonUI mechButtonUI = _mechButton.GetComponent<MechButtonUI>();
-        mechButtonUI.SetupMechButton(StartMenu_Controller.Instance.GetLoadout().selectedMech);
-        Instantiate(StartMenu_Controller.Instance.GetLoadout().selectedMech.prefab, _mechModelTransform, false);
+        mechButtonUI.SetupMechButton(StartMenu_Controller.Instance.GetEquippedLoadout().selectedMech);
 
         // Populate the Weapon UI
         WeaponButtonUI weaponButtonUI = _weaponButton.GetComponent<WeaponButtonUI>();
-        weaponButtonUI.SetupWeaponButton(StartMenu_Controller.Instance.GetLoadout().selectedWeapon);
+        weaponButtonUI.SetupWeaponButton(StartMenu_Controller.Instance.GetEquippedLoadout().selectedWeapon);
 
         int index = 0;
         //Populate the turret UI
         foreach (Transform button in _turretUIContainerTransform)
         {
             TurretButtonUI turretButtonUI = button.GetComponent<TurretButtonUI>();
-            turretButtonUI.SetBaseTurret(StartMenu_Controller.Instance.GetLoadout().selectedTurrets[index], false);
+            turretButtonUI.SetBaseTurret(StartMenu_Controller.Instance.GetEquippedLoadout().selectedTurrets[index], false);
             index++; 
         }
 
         // Populate Overclock UI
         OverclockButtonUI overclockButtonUI = _overclockAbilityButton.GetComponent<OverclockButtonUI>();
-        overclockButtonUI.SetupOverclockButton(StartMenu_Controller.Instance.GetLoadout().selectedAbility);
+        overclockButtonUI.SetupOverclockButton(StartMenu_Controller.Instance.GetEquippedLoadout().selectedAbility);
     }
 
     public void OpenMechSelectMenu()

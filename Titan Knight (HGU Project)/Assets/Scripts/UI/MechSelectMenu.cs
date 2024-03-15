@@ -40,6 +40,9 @@ public class MechSelectMenu : MonoBehaviour
 
     public void UpdateMechUI()
     {
+        // Clear all previously existing buttons
+        foreach (Transform button in _mechUIContainer) Destroy(button.gameObject);
+
         // Creates & assigns the buttons in the select mech menu with each mech 
         foreach (Mech mech in _fullMechList)
         {
@@ -51,6 +54,9 @@ public class MechSelectMenu : MonoBehaviour
                 QueueMech(mech);
             });
         }
+
+        // Automatically queue the first mech in the menu when opening this menu loads
+        _mechUIContainer.GetChild(0).GetComponent<Button>().onClick.Invoke();
     }
 
     private void UpdateMechStatsMenu()
@@ -71,5 +77,12 @@ public class MechSelectMenu : MonoBehaviour
         //Queues a mech to display its stats in the stats menu
         _queuedMech = mech;
         UpdateMechStatsMenu();
+    }
+
+    public void EquipMech()
+    {
+        // Updates the equipped mech of the loadout scriptable with the currently queued mech
+        StartMenu_Controller.Instance.GetEquippedLoadout().selectedMech = _queuedMech;
+        Debug.Log("Equipped " + StartMenu_Controller.Instance.GetEquippedLoadout().selectedMech);
     }
 }
