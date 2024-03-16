@@ -10,6 +10,7 @@ public class LoadoutUI : MonoBehaviour
     [SerializeField] private GameObject _equippedLoadoutMenu;
     [SerializeField] private GameObject _mechSelectMenu;
     [SerializeField] private GameObject _weaponSelectMenu;
+    [SerializeField] private GameObject _overclockSelectMenu;
 
     [Header("EQUIPPED LOADOUT MENU")]  
 
@@ -78,6 +79,7 @@ public class LoadoutUI : MonoBehaviour
         _equippedLoadoutMenu.SetActive(false);
         _mechSelectMenu.SetActive(true); 
         _weaponSelectMenu.SetActive(false);
+        _overclockSelectMenu.SetActive(false);
 
         MechSelectMenu.Instance.UpdateMechUI();
     }
@@ -87,8 +89,19 @@ public class LoadoutUI : MonoBehaviour
         _equippedLoadoutMenu.SetActive(false);
         _mechSelectMenu.SetActive(false); 
         _weaponSelectMenu.SetActive(true);
+        _overclockSelectMenu.SetActive(false);
 
         WeaponSelectMenu.Instance.UpdateWeaponUI();
+    }
+
+    public void OpenOverclockSelectMenu()
+    {
+        _equippedLoadoutMenu.SetActive(false);
+        _mechSelectMenu.SetActive(false); 
+        _weaponSelectMenu.SetActive(false);
+        _overclockSelectMenu.SetActive(true);
+
+        //OverclockSelectMenu.Instance.UpdateOverclockUI();
     }
 
     public void OpenEquippedLoadoutMenu()
