@@ -47,6 +47,9 @@ public class OverclockManager : MonoBehaviour
 
     private void Awake()
     {
+        // Assign the current overclock
+        CurrentOverclockAbility = GameManager.Instance.loadout.selectedAbility;
+
         // Check if there is already an Instance of this in the scene
         if (Instance != null)
         {   
