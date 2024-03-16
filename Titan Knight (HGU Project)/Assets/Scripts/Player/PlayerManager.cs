@@ -95,6 +95,9 @@ public class PlayerManager : MonoBehaviour
         generatorsDestroyed = false;
         AudioListener.pause = false;
 
+        meleeAttackDelay = GameManager.Instance.loadout.selectedMech.meleeSpeed;
+        meleeDamage = GameManager.Instance.loadout.selectedMech.meleeDamage;
+
         currentMeleeDelay = meleeAttackDelay;
 
     }
