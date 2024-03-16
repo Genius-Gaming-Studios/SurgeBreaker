@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cc290236086f04eb44ff57e9657c73, type: 3}
   m_Name: Hardener Sample
   m_EditorClassIdentifier: 
-  abilityName: Hardener Sample
-  cooldownTime: 3
+  abilityName: Kinetic Plating
+  cooldownTime: 10
+  abilityStatsMenu: {fileID: 6737085555270314676, guid: bccc058cccdca5a4eb8c8332edf52143,
+    type: 3}
   overclockType: 0
   duration_hrd: 8
   vfx_hrd: {fileID: 8443926031748424104, guid: d01d832e5dce445479c8147c9c9558c4, type: 3}
@@ -30,6 +32,7 @@ MonoBehaviour:
   damageBoostMultiplier_stu: 1.167
   duration_squ: 15
   vfx_squ: {fileID: 0}
+  tVfx: {fileID: 0}
   newFireRate_squ: 1
   damageBoostMultiplier_squ: 1.5
   duration_msb: 15

@@ -101,13 +101,14 @@ public class LoadoutUI : MonoBehaviour
         _weaponSelectMenu.SetActive(false);
         _overclockSelectMenu.SetActive(true);
 
-        //OverclockSelectMenu.Instance.UpdateOverclockUI();
+        OverclockSelectMenu.Instance.UpdateOverclockUI();
     }
 
     public void OpenEquippedLoadoutMenu()
     {
         _equippedLoadoutMenu.SetActive(true);
         _mechSelectMenu.SetActive(false); 
+        _overclockSelectMenu.SetActive(false);
         UpdateEquipedLoadoutUI();
     }
 }

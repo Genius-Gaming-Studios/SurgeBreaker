@@ -26,6 +26,8 @@ public class OverclockAbility : ScriptableObject
         [Header("General Fields")]
         [Tooltip("The name of this ability.")] public string abilityName = "Sample Overclock";
         [Tooltip("How long does it take for this ability to recharge? (seconds)")] [Range(0,90)] public int cooldownTime = 10;
+        public GameObject abilityStatsMenu;
+
 
         [Space(2)]
         [Header("Type-Specific Attributes")]
@@ -34,6 +36,7 @@ public class OverclockAbility : ScriptableObject
         [DrawIf("overclockType", OverclockType.Hardener)] [Range(1, 60)] [Tooltip("Duration of the overclock ability.")] public int duration_hrd = 15;
         [DrawIf("overclockType", OverclockType.Hardener), Tooltip("The packaged prefab which contain the vfx package for this overclock.")] public GameObject vfx_hrd;
         [DrawIf("overclockType", OverclockType.Hardener)] [Range(5, 100)] [Tooltip("This is the amount of damage that is reduced during the attack.")] public int damageReductionPercent = 80;
+         
         #endregion
         #region EMP blast fields
         [DrawIf("overclockType", OverclockType.MassiveEMPBlast)] [Tooltip("The explosion vfx, spawns at the center of the player.")] public GameObject ExplosionVFX;
@@ -97,7 +100,9 @@ public class HelpBoxes : Editor
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("abilityName"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("cooldownTime"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("abilityStatsMenu"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("overclockType"));
+        
 
         bool itsDefaultLol = false; // why is it default lol whos making this game 
         switch (overclockAbility.overclockType)
@@ -105,6 +110,7 @@ public class HelpBoxes : Editor
             case OverclockType.Hardener:
                 itsDefaultLol = true; //dBro what? who is even making the ability right now who is this hello?
                 //  (I will be so surprised if anyone ever reads this mess)
+                // Mark, I read this mess
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("duration_hrd"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("vfx_hrd"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("damageReductionPercent"));

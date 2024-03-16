@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cc290236086f04eb44ff57e9657c73, type: 3}
   m_Name: Melee Boost Sample
   m_EditorClassIdentifier: 
-  abilityName: Berserk
-  cooldownTime: 1
+  abilityName: Ionize Blades
+  cooldownTime: 10
+  abilityStatsMenu: {fileID: 3527846609531271096, guid: 58945d68832dc8c4ca28b4b57f4de29d,
+    type: 3}
   overclockType: 6
   duration_hrd: 15
   vfx_hrd: {fileID: 0}
@@ -30,6 +32,7 @@ MonoBehaviour:
   damageBoostMultiplier_stu: 1.5
   duration_squ: 15
   vfx_squ: {fileID: 0}
+  tVfx: {fileID: 0}
   newFireRate_squ: 0.15
   damageBoostMultiplier_squ: 1.5
   duration_msb: 2
@@ -39,7 +42,7 @@ MonoBehaviour:
   healTime: 10
   vfx_heal: {fileID: 0}
   lowerPlayerHealth: 0
-  duration_bzk: 8
+  duration_bzk: 10
   vfx_bzk: {fileID: 5676336062222740647, guid: 6e54050523c8adc4188a11a4705a7d70, type: 3}
   newMeleeAttackDelay: 0.04
   damageBoostMultiplier_bzk: 1.5

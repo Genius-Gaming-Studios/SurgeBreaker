@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cc290236086f04eb44ff57e9657c73, type: 3}
   m_Name: Self Tune-Up Sample
   m_EditorClassIdentifier: 
-  abilityName: Self Tune-Up Sample
-  cooldownTime: 3
+  abilityName: Overclock Combat Module
+  cooldownTime: 12
+  abilityStatsMenu: {fileID: 4569074291846849740, guid: 512b270179ede9a46aeb4529cfa3fd67,
+    type: 3}
   overclockType: 2
   duration_hrd: 15
   vfx_hrd: {fileID: 0}
@@ -27,9 +29,10 @@ MonoBehaviour:
   duration_stu: 5
   vfx_stu: {fileID: 3148369741059609223, guid: 251e1537a985b3d4f8169900ea1992ef, type: 3}
   newFireRate_stu: 0.1
-  damageBoostMultiplier_stu: 1.167
+  damageBoostMultiplier_stu: 1.25
   duration_squ: 15
   vfx_squ: {fileID: 0}
+  tVfx: {fileID: 0}
   newFireRate_squ: 1
   damageBoostMultiplier_squ: 1.5
   duration_msb: 15
