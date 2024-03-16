@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,21 +7,46 @@ using TMPro;
 
 public class StartMenu_Controller : MonoBehaviour
 {
+    public static StartMenu_Controller Instance {get; private set;}
+
     [Header("[DEBUG]")]
     public bool doUnlockAllLevels;
-    [Header("UI")]
+    [Header("Level Select Screen")]
 
     [SerializeField] Button Level2_Button;
     [SerializeField] Button Level3_Button, Level4_Button, Level5_Button, Level6_Button, Level7_Button, Level8_Button, Level9_Button, Level10_Button;
     [SerializeField] GameObject Level1Hint, Level2Hint, Level3Hint, Level4Hint, Level5Hint;
+
+    [Header("Loadout Screen")]
+
+    [SerializeField][Tooltip("The prefab of the turret button")] private Transform _mechButtonPrefab;
+
+    [SerializeField][Tooltip("The transform component of the turret button container")] private Transform _mechButtonContainerTransform;
+
+    [SerializeField] private List<Turret> fullTurretList = new List<Turret>();
+    [SerializeField] private Loadout _EquippedLoadout;
+
+    [Header("References")]
     public GameObject MainScreen;
     public GameObject LevelScreen;
     public GameObject OptionsScreen;
-
+    public GameObject LoadoutScreen;
 
     private void Awake()
     {
+        if (Instance == null) Instance = this;
+        else 
+        {
+            Debug.LogError("Only one instance of [StartMenu_Controller] can exist in the scene!");
+            Destroy(this.gameObject);
+            return;
+        }
+
         AudioListener.pause = false;
+
+        MainScreen.SetActive(true);
+        LevelScreen.SetActive(false);
+        LoadoutScreen.SetActive(false);
     }
 
     public void OptionsButton()
@@ -35,6 +60,7 @@ public class StartMenu_Controller : MonoBehaviour
         MainScreen.SetActive(true);
         OptionsScreen.SetActive(false);
         LevelScreen.SetActive(false);
+        LoadoutScreen.SetActive(false);
     }
 
     public void LevelsButton()
@@ -45,7 +71,16 @@ public class StartMenu_Controller : MonoBehaviour
 
    public void LoadLevel(string levelName) 
    {
-        SceneManager.LoadScene(levelName) ;
+        SceneManager.LoadScene(levelName);
+   }
+
+   public void LoadoutButton()
+   {
+        MainScreen.SetActive(false);
+        LevelScreen.SetActive(false);
+        LoadoutScreen.SetActive(true);
+
+        LoadoutUI.Instance.OpenEquippedLoadoutMenu();
    }
 
     /// <summary>
@@ -59,6 +94,7 @@ public class StartMenu_Controller : MonoBehaviour
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
     private void Update()
     {
         CheckForResetData();
@@ -99,6 +135,11 @@ public class StartMenu_Controller : MonoBehaviour
     public void ExitGame()
    {
         Application.Quit();
+   }
+
+   public Loadout GetEquippedLoadout()
+   {
+        return _EquippedLoadout;
    }
 
     private bool ctrlPressed = false;

@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour
             // Create an instance of the turret button UI for this turret & cache the Transform of the button 
             Transform turretButtonTransform = Instantiate(_turretButtonPrefab, _turretButtonContainerTransform);
             TurretButtonUI turretButtonUI = turretButtonTransform.GetComponent<TurretButtonUI>();
-            turretButtonUI.SetBaseTurret(turret); 
+            turretButtonUI.SetBaseTurret(turret, true); 
         }
     }
 

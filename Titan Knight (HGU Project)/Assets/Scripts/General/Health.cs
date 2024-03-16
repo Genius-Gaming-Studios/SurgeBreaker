@@ -66,7 +66,12 @@ public class Health : MonoBehaviour
             GeneratorHealthBar.minValue = 0;
         }
        
-        
+        if (HealthType == ObjectType.Player) 
+        {
+            startHealth = GameManager.Instance.loadout.selectedMech.maximumHealth;
+            maximumHealth = GameManager.Instance.loadout.selectedMech.maximumHealth;
+        }
+    
         currentHealth = startHealth; // Initialize current health for things that are not Generators
     }
 
