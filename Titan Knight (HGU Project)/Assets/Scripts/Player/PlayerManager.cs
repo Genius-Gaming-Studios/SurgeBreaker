@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(CharacterController))]
@@ -122,7 +123,7 @@ public class PlayerManager : MonoBehaviour
         //pAnimator = GetComponent<Animator>();
         gm = FindObjectOfType<GameManager>();
 
-        Camera.main.fieldOfView = normalFOV;
+        foreach (CinemachineVirtualCamera cam in FindObjectsOfType<CinemachineVirtualCamera>()) cam.m_Lens.FieldOfView = normalFOV;
 
         currentCurrency = startCurrency;
     }
@@ -293,16 +294,23 @@ public class PlayerManager : MonoBehaviour
         // Handle sprinting 
         if (!isRunning) // Not sprinting
         {
-            if (doSprintingFOV && Camera.main.fieldOfView > normalFOV) // Smoothly transition back to normal FOV, at smoothFOVSpeed speed
-                Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, normalFOV, smoothFOVSpeed * Time.deltaTime);
+            foreach (CinemachineVirtualCamera cam in FindObjectsOfType<CinemachineVirtualCamera>())
+            {
+
+                if (doSprintingFOV && cam.m_Lens.FieldOfView > normalFOV) // Smoothly transition back to normal FOV, at smoothFOVSpeed speed
+                    cam.m_Lens.FieldOfView = Mathf.Lerp(cam.m_Lens.FieldOfView, normalFOV, smoothFOVSpeed * Time.deltaTime);
+            }
 
             controller.Move(movementVelocity * Time.deltaTime);
 
         }
         else // Sprinting 
         {
-            if (doSprintingFOV && Camera.main.fieldOfView < sprintingFOV) // Smoothly transition to sprinting FOV, at smoothFOVSpeed speed
-                Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, sprintingFOV, smoothFOVSpeed * Time.deltaTime);
+            foreach (CinemachineVirtualCamera cam in FindObjectsOfType<CinemachineVirtualCamera>())
+            {
+                if (doSprintingFOV && cam.m_Lens.FieldOfView < sprintingFOV) // Smoothly transition to sprinting FOV, at smoothFOVSpeed speed
+                    cam.m_Lens.FieldOfView = Mathf.Lerp(cam.m_Lens.FieldOfView, sprintingFOV, smoothFOVSpeed * Time.deltaTime);
+            }
 
 
             controller.Move(new Vector3(

@@ -8704,7 +8704,7 @@ Camera:
     height: 1
   near clip plane: 1.5
   far clip plane: 1000
-  field of view: 80
+  field of view: 64.6
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -8729,7 +8729,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.4742199, y: 0.31810433, z: -0.18881924, w: 0.79891956}
+  m_LocalRotation: {x: 0.47421992, y: 0.31810436, z: -0.18881927, w: 0.79891956}
   m_LocalPosition: {x: 69.4, y: 24.533, z: -51.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -31183,7 +31183,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 1517094452}
   m_Follow: {fileID: 1517094452}
   m_Lens:
-    FieldOfView: 80
+    FieldOfView: 64.6
     OrthographicSize: 5
     NearClipPlane: 1.5
     FarClipPlane: 1000
@@ -31207,7 +31207,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1111106249}
-  m_LocalRotation: {x: 0.4742199, y: 0.31810433, z: -0.18881924, w: 0.79891956}
+  m_LocalRotation: {x: 0.47421992, y: 0.31810436, z: -0.18881927, w: 0.79891956}
   m_LocalPosition: {x: 69.4, y: 24.533, z: -51.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -37436,6 +37436,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2773478834311592854, guid: 6e2f774e2e9bc6e439174318c6344236,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773478834311592854, guid: 6e2f774e2e9bc6e439174318c6344236,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773478834311592854, guid: 6e2f774e2e9bc6e439174318c6344236,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2773478834311592854, guid: 6e2f774e2e9bc6e439174318c6344236,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -43434,8 +43449,8 @@ MonoBehaviour:
   - {fileID: 1490685905}
   - {fileID: 1490685902}
   pModelMaterial: {fileID: 0}
-  startHealth: 40
-  currentHealth: 1
+  startHealth: 100
+  currentHealth: 100
   maximumHealth: 100
   autoAssignMaxHealth: 1
   resistance: 0
@@ -43494,7 +43509,7 @@ MonoBehaviour:
   runSpeedMultiplier: 1.7
   doSprintingFOV: 1
   sprintingFOV: 100
-  normalFOV: 90
+  normalFOV: 64.6
   smoothFOVSpeed: 10
   pModelRotation: {fileID: 1134834444}
   pAnimator: {fileID: 1490685904}
@@ -63038,7 +63053,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doInfiniteMoney: 1
-  doRemoveWaitTimes: 1
+  doRemoveWaitTimes: 0
   doAllowTabToggling: 1
   BossCycles: 02000000
   BossWaveBosses:
@@ -63053,7 +63068,7 @@ MonoBehaviour:
   timeInCombatMode: 10
   timeInWaveOneBuild: 10
   currentMode: 1
-  loadout: {fileID: 0}
+  loadout: {fileID: 11400000, guid: ba28817cdfbfaf04ebe7f1847178678d, type: 2}
   CombatCanvas: {fileID: 504224380}
   BuildCanvas: {fileID: 2301580472290593975}
   MainCanvas: {fileID: 1406897258}
@@ -63126,7 +63141,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 1275706226}
   m_Follow: {fileID: 1275706226}
   m_Lens:
-    FieldOfView: 80
+    FieldOfView: 64.6
     OrthographicSize: 5
     NearClipPlane: 1.5
     FarClipPlane: 1000
