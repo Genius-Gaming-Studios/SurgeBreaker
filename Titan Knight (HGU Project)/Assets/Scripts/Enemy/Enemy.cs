@@ -15,7 +15,7 @@ public enum EnemyFollowMode
     FollowPlayer // Follows player. This can be manually placed, or spawned by an EnemySpawner.
 }
 
-[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent)), RequireComponent(typeof(AudioSource)), RequireComponent(typeof(AudioReverbFilter)), RequireComponent(typeof(FXPlayer))]
 public class Enemy : MonoBehaviour
 {
     [Header("Options")]
@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
 
 
     [Header("Important References")]
+    [Tooltip("Make sure this is assigned.")] public EnemyJuice enemyJuice;
     [Tooltip("Ensure that these are assigned at all times.")] [SerializeField] LayerMask GroundLayer;
     [Tooltip("Ensure that these are assigned at all times.")] [SerializeField] LayerMask PlayerLayer;
     [Tooltip("Ensure that these are assigned at all times.")] public Animator eAnimator;
@@ -40,6 +41,7 @@ public class Enemy : MonoBehaviour
     private GameManager gm;
     private Health enemyHealth;
     private Transform player;
+    [HideInInspector] public AudioSource PrivateAudioPlayer;
 
     private Vector3 walkPoint; // Patrolling destination
     private bool walkPointSet; // (Is there a patrol destination currently set)
@@ -49,16 +51,19 @@ public class Enemy : MonoBehaviour
 
     private float originalSpeed; 
 
-    private void Awake() // Initialize all vaues
+    private void Awake() 
     {
+        // Initialize all values
+        PrivateAudioPlayer = GetComponent<AudioSource>();
         gm = FindObjectOfType<GameManager>();
         player = FindObjectOfType<PlayerManager>().transform;
         agent = GetComponent<NavMeshAgent>();
         enemyHealth = GetComponent<Health>();
         eAnimator = transform.GetChild(0).GetChild(0).GetComponent<Animator>();
         originalSpeed = agent.speed;
-        // if (FollowMode == EnemyFollowMode.FollowPath) target = assignedPath.points[0];  // If the enemy prefab does not start with 'enabled' to false, a bug will come from this line of code.
-    
+
+        // ENEMY JUICE SFX ~~~
+        PrivateAudioPlayer.PlayOneShot(enemyJuice.spawnSound);
     }
 
 
@@ -165,6 +170,13 @@ public class Enemy : MonoBehaviour
         if (!hasAttacked) 
         {
             hasAttacked = true;
+
+            /// ENEMY JUICE ~~~~
+            // Handle randomness of playing audio, as to not play all the time
+            int doPlayFX = Random.Range(-1, GetComponent<Enemy>().enemyJuice.loudness);
+            if (doPlayFX == 0) PrivateAudioPlayer.PlayOneShot(GetComponent<Enemy>().enemyJuice.attackSound);
+
+
 
             eAnimator.SetTrigger("Attack");
             Attack();

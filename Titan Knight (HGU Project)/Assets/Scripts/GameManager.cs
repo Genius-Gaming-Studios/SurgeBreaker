@@ -177,7 +177,7 @@ public class GameManager : MonoBehaviour
     {
         float timer = time;
 
-        while (timer > 0 && shouldWait)
+        while (timer >= 0 && shouldWait)
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
@@ -188,6 +188,9 @@ public class GameManager : MonoBehaviour
             timer -= Time.deltaTime;
             yield return null;
         }
+        
+        shouldWait = false;
+
     }
     private IEnumerator GameCycleSequence() 
     {

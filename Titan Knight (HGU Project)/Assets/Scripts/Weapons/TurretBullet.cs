@@ -18,6 +18,7 @@ public class TurretBullet : MonoBehaviour
     [Tooltip("The damage that the bullet does.")] [SerializeField] [Range(2, 1000)] public int power = 50;
     [Tooltip("The tag of the walls, or any object that the bullet can not go through.")] [SerializeField] string _solidObjectTag = "Can Stop Bullets";
     [Tooltip("The radius of the object collision checking.")] [SerializeField] float checkingRange = 1.0f;
+    [Tooltip("The SFX that will play when the bullet hits.")] [SerializeField] GameObject hitSFX; // Yes, Super lazy way of doing it but whatever
 
     [Header("Power ups")]
     [Tooltip("Should this bullet do slowing on enemies?")] [SerializeField] public bool doSlowing;
@@ -58,14 +59,28 @@ public class TurretBullet : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, checkingRange);
         foreach (var hitCollider in hitColliders)
         {
-            if (hitCollider.CompareTag(_solidObjectTag)) Destroy(this.gameObject);
+            if (hitCollider.CompareTag(_solidObjectTag))
+            {
+                // BULLET JUICE ~~
+                GameObject FX = Instantiate(hitSFX);
+                FX.transform.position = this.transform.position;
+                Destroy(FX, .9f);
+
+                Destroy(this.gameObject);
+            }
         }
 
     }
 
     private void HitTarget()
     {
+        // BULLET JUICE ~~
+        GameObject FX = Instantiate(hitSFX);
+        FX.transform.position = this.transform.position;
+        Destroy(FX, .9f);
+
         Damage(target);
+        Destroy(target.gameObject, 0.3f);
     }
 
     void Damage(Transform enemy)
