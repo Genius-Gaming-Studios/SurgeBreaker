@@ -6833,6 +6833,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_04_Wall_01_Left (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 595527458547677762, guid: 223bb8bd2d2716041b35181701e01a89,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
+      objectReference: {fileID: 0}
     - target: {fileID: 4474577784201496657, guid: 223bb8bd2d2716041b35181701e01a89,
         type: 3}
       propertyPath: m_RootOrder
@@ -7360,6 +7365,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_04_Wall_03_Left
       objectReference: {fileID: 0}
+    - target: {fileID: 8459083300219581985, guid: d2b5cc44adb860348b30b5c54142d932,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2b5cc44adb860348b30b5c54142d932, type: 3}
 --- !u!4 &293814918 stripped
@@ -7579,7 +7589,7 @@ Camera:
     height: 1
   near clip plane: 1.5
   far clip plane: 1000
-  field of view: 80
+  field of view: 90.00002
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -7604,7 +7614,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.50999206, y: 0.31909546, z: -0.21124566, w: 0.7703645}
+  m_LocalRotation: {x: 0.50999206, y: 0.3190954, z: -0.21124561, w: 0.7703645}
   m_LocalPosition: {x: -18.240545, y: 29.7, z: -44.60446}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8073,6 +8083,21 @@ PrefabInstance:
       propertyPath: ArmorIcons.Array.data[2]
       value: 
       objectReference: {fileID: 479479674}
+    - target: {fileID: 4948931540303665285, guid: 625ee2818612d2849b4dfe0f5e642080,
+        type: 3}
+      propertyPath: m_Height
+      value: 3.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948931540303665285, guid: 625ee2818612d2849b4dfe0f5e642080,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948931540303665285, guid: 625ee2818612d2849b4dfe0f5e642080,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 2.26
+      objectReference: {fileID: 0}
     - target: {fileID: 4948931540303665304, guid: 625ee2818612d2849b4dfe0f5e642080,
         type: 3}
       propertyPath: m_Name
@@ -8288,6 +8313,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Billboard_Reactor1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6018698988331953094, guid: d69ecad59151d6b4586d67950ec1f03d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d69ecad59151d6b4586d67950ec1f03d, type: 3}
@@ -9382,6 +9412,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_vents_06
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812018271809832776, guid: f9c19cc116a019b4782199abc3594540,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     - target: {fileID: 2812018271809832781, guid: f9c19cc116a019b4782199abc3594540,
         type: 3}
@@ -14424,6 +14459,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_04_Wall_03_Left
       objectReference: {fileID: 0}
+    - target: {fileID: 8459083300219581985, guid: d2b5cc44adb860348b30b5c54142d932,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2b5cc44adb860348b30b5c54142d932, type: 3}
 --- !u!4 &505005685 stripped
@@ -14642,6 +14682,103 @@ Transform:
   m_Children: []
   m_Father: {fileID: 588079742}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &523087561
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 523087565}
+  - component: {fileID: 523087564}
+  - component: {fileID: 523087563}
+  - component: {fileID: 523087562}
+  m_Layer: 0
+  m_Name: Bullet Stopper (2)
+  m_TagString: Can Stop Bullets
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &523087562
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523087561}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &523087563
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523087561}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &523087564
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523087561}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &523087565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523087561}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 40.2792, y: 13.9236, z: -3.465025}
+  m_LocalScale: {x: 14.098785, y: 12.21448, z: 11.662981}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 45
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &533744438
 PrefabInstance:
@@ -15061,6 +15198,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Building_04_Corner_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 496059803448718010, guid: 11b08e93f1afc9f49b1550935fcb427e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     - target: {fileID: 3510839702661873833, guid: 11b08e93f1afc9f49b1550935fcb427e,
         type: 3}
@@ -15733,7 +15875,7 @@ GameObject:
   - component: {fileID: 640327509}
   m_Layer: 0
   m_Name: 'South Wall   '
-  m_TagString: Untagged
+  m_TagString: Can Stop Bullets
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15864,6 +16006,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Building_04_Wall_01_Left (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 595527458547677762, guid: 223bb8bd2d2716041b35181701e01a89,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     - target: {fileID: 4474577784201496657, guid: 223bb8bd2d2716041b35181701e01a89,
         type: 3}
@@ -16159,6 +16306,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Building_04_Wall_01_Left (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 595527458547677762, guid: 223bb8bd2d2716041b35181701e01a89,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     - target: {fileID: 4474577784201496657, guid: 223bb8bd2d2716041b35181701e01a89,
         type: 3}
@@ -21569,6 +21721,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_04_Wall_03_Right
       objectReference: {fileID: 0}
+    - target: {fileID: 6943867043350396269, guid: 132f1bee4f447e9408e6ebb722efd923,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 132f1bee4f447e9408e6ebb722efd923, type: 3}
 --- !u!4 &728547530 stripped
@@ -21723,6 +21880,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Building_04_Wall_01_Left (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 595527458547677762, guid: 223bb8bd2d2716041b35181701e01a89,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     - target: {fileID: 4474577784201496657, guid: 223bb8bd2d2716041b35181701e01a89,
         type: 3}
@@ -21940,7 +22102,7 @@ GameObject:
   - component: {fileID: 788597988}
   m_Layer: 0
   m_Name: 'North Wall '
-  m_TagString: Untagged
+  m_TagString: Can Stop Bullets
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22022,7 +22184,7 @@ GameObject:
   - component: {fileID: 794342235}
   m_Layer: 0
   m_Name: 'East Wall  '
-  m_TagString: Untagged
+  m_TagString: Can Stop Bullets
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22252,6 +22414,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall3_Prop_07 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8930650975529249811, guid: 8a3a9561878d7f44593723ebe65f7e74,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     - target: {fileID: 8930650975529249838, guid: 8a3a9561878d7f44593723ebe65f7e74,
         type: 3}
@@ -23095,6 +23262,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_vents_06 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2812018271809832776, guid: f9c19cc116a019b4782199abc3594540,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
+      objectReference: {fileID: 0}
     - target: {fileID: 2812018271809832781, guid: f9c19cc116a019b4782199abc3594540,
         type: 3}
       propertyPath: m_RootOrder
@@ -23733,6 +23905,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Building_04_Wall_01_Left (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 595527458547677762, guid: 223bb8bd2d2716041b35181701e01a89,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     - target: {fileID: 4474577784201496657, guid: 223bb8bd2d2716041b35181701e01a89,
         type: 3}
@@ -24475,6 +24652,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Building_04_Wall_03_Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459083300219581985, guid: d2b5cc44adb860348b30b5c54142d932,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2b5cc44adb860348b30b5c54142d932, type: 3}
@@ -26454,6 +26636,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_04_Wall_01_Left
       objectReference: {fileID: 0}
+    - target: {fileID: 595527458547677762, guid: 223bb8bd2d2716041b35181701e01a89,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
+      objectReference: {fileID: 0}
     - target: {fileID: 4474577784201496657, guid: 223bb8bd2d2716041b35181701e01a89,
         type: 3}
       propertyPath: m_RootOrder
@@ -27037,6 +27224,103 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1244497932}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1248876339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1248876343}
+  - component: {fileID: 1248876342}
+  - component: {fileID: 1248876341}
+  - component: {fileID: 1248876340}
+  m_Layer: 0
+  m_Name: Bullet Stopper (1)
+  m_TagString: Can Stop Bullets
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1248876340
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248876339}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1248876341
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248876339}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1248876342
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248876339}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1248876343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248876339}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -19.1659, y: 10.0701, z: -3.2848358}
+  m_LocalScale: {x: 11.042281, y: 4.5073547, z: 11.662981}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 44
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1251728140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27807,6 +28091,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_04_Corner_01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 496059803448718010, guid: 11b08e93f1afc9f49b1550935fcb427e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
+      objectReference: {fileID: 0}
     - target: {fileID: 3510839702661873833, guid: 11b08e93f1afc9f49b1550935fcb427e,
         type: 3}
       propertyPath: m_RootOrder
@@ -27896,6 +28185,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Building_04_Wall_01_Left (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 595527458547677762, guid: 223bb8bd2d2716041b35181701e01a89,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     - target: {fileID: 4474577784201496657, guid: 223bb8bd2d2716041b35181701e01a89,
         type: 3}
@@ -29002,7 +29296,7 @@ GameObject:
   - component: {fileID: 1335886583}
   m_Layer: 0
   m_Name: Alarm Lights
-  m_TagString: Untagged
+  m_TagString: Can Stop Bullets
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30062,6 +30356,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_04_Wall_01_Left
       objectReference: {fileID: 0}
+    - target: {fileID: 595527458547677762, guid: 223bb8bd2d2716041b35181701e01a89,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
+      objectReference: {fileID: 0}
     - target: {fileID: 4474577784201496657, guid: 223bb8bd2d2716041b35181701e01a89,
         type: 3}
       propertyPath: m_RootOrder
@@ -30188,6 +30487,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall3_Prop_07 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8930650975529249811, guid: 8a3a9561878d7f44593723ebe65f7e74,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     - target: {fileID: 8930650975529249838, guid: 8a3a9561878d7f44593723ebe65f7e74,
         type: 3}
@@ -30343,6 +30647,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_04_Wall_03_Left
       objectReference: {fileID: 0}
+    - target: {fileID: 8459083300219581985, guid: d2b5cc44adb860348b30b5c54142d932,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2b5cc44adb860348b30b5c54142d932, type: 3}
 --- !u!4 &1418975718 stripped
@@ -30432,6 +30741,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Building_04_Wall_03_Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 6943867043350396269, guid: 132f1bee4f447e9408e6ebb722efd923,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 132f1bee4f447e9408e6ebb722efd923, type: 3}
@@ -31975,6 +32289,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_vents_06 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2812018271809832776, guid: f9c19cc116a019b4782199abc3594540,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     - target: {fileID: 2812018271809832781, guid: f9c19cc116a019b4782199abc3594540,
         type: 3}
@@ -37629,6 +37948,103 @@ Transform:
   m_Father: {fileID: 1559877521}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1543305605
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1543305609}
+  - component: {fileID: 1543305608}
+  - component: {fileID: 1543305607}
+  - component: {fileID: 1543305606}
+  m_Layer: 0
+  m_Name: Bullet Stopper
+  m_TagString: Can Stop Bullets
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1543305606
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543305605}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1543305607
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543305605}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1543305608
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543305605}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1543305609
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543305605}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -14.3342, y: 10.0701, z: -16.218678}
+  m_LocalScale: {x: 20.705572, y: 4.5073547, z: 11.662981}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 43
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1546935703
 GameObject:
   m_ObjectHideFlags: 0
@@ -37767,6 +38183,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Building_04_Corner_01 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 496059803448718010, guid: 11b08e93f1afc9f49b1550935fcb427e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     - target: {fileID: 1337556094122964929, guid: 11b08e93f1afc9f49b1550935fcb427e,
         type: 3}
@@ -38825,7 +39246,7 @@ GameObject:
   - component: {fileID: 1592792509}
   m_Layer: 0
   m_Name: Alarm Lights
-  m_TagString: Untagged
+  m_TagString: Can Stop Bullets
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38929,6 +39350,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Building_04_Wall_03_Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 6943867043350396269, guid: 132f1bee4f447e9408e6ebb722efd923,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 132f1bee4f447e9408e6ebb722efd923, type: 3}
@@ -39331,7 +39757,7 @@ GameObject:
   - component: {fileID: 1633896917}
   m_Layer: 0
   m_Name: Alarm Lights
-  m_TagString: Untagged
+  m_TagString: Can Stop Bullets
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39397,6 +39823,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Building_04_Wall_01_Left (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 595527458547677762, guid: 223bb8bd2d2716041b35181701e01a89,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     - target: {fileID: 4474577784201496657, guid: 223bb8bd2d2716041b35181701e01a89,
         type: 3}
@@ -46444,6 +46875,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_04_Wall_03_Right
       objectReference: {fileID: 0}
+    - target: {fileID: 6943867043350396269, guid: 132f1bee4f447e9408e6ebb722efd923,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 132f1bee4f447e9408e6ebb722efd923, type: 3}
 --- !u!4 &1857954751 stripped
@@ -46560,6 +46996,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_04_Corner_01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 496059803448718010, guid: 11b08e93f1afc9f49b1550935fcb427e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
+      objectReference: {fileID: 0}
     - target: {fileID: 3510839702661873833, guid: 11b08e93f1afc9f49b1550935fcb427e,
         type: 3}
       propertyPath: m_RootOrder
@@ -46643,6 +47084,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Building_04_Wall_01_Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 595527458547677762, guid: 223bb8bd2d2716041b35181701e01a89,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     - target: {fileID: 4474577784201496657, guid: 223bb8bd2d2716041b35181701e01a89,
         type: 3}
@@ -46901,6 +47347,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Building_04_Wall_01_Left (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 595527458547677762, guid: 223bb8bd2d2716041b35181701e01a89,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     - target: {fileID: 4474577784201496657, guid: 223bb8bd2d2716041b35181701e01a89,
         type: 3}
@@ -52957,6 +53408,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_04_Wall_01_Left (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 595527458547677762, guid: 223bb8bd2d2716041b35181701e01a89,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
+      objectReference: {fileID: 0}
     - target: {fileID: 4474577784201496657, guid: 223bb8bd2d2716041b35181701e01a89,
         type: 3}
       propertyPath: m_RootOrder
@@ -54517,6 +54973,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_04_Wall_01_Left
       objectReference: {fileID: 0}
+    - target: {fileID: 595527458547677762, guid: 223bb8bd2d2716041b35181701e01a89,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
+      objectReference: {fileID: 0}
     - target: {fileID: 4474577784201496657, guid: 223bb8bd2d2716041b35181701e01a89,
         type: 3}
       propertyPath: m_RootOrder
@@ -55142,6 +55603,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall3_Prop_07 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8930650975529249811, guid: 8a3a9561878d7f44593723ebe65f7e74,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
+      objectReference: {fileID: 0}
     - target: {fileID: 8930650975529249838, guid: 8a3a9561878d7f44593723ebe65f7e74,
         type: 3}
       propertyPath: m_RootOrder
@@ -55721,6 +56187,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall3_Prop_07
       objectReference: {fileID: 0}
+    - target: {fileID: 8930650975529249811, guid: 8a3a9561878d7f44593723ebe65f7e74,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
+      objectReference: {fileID: 0}
     - target: {fileID: 8930650975529249838, guid: 8a3a9561878d7f44593723ebe65f7e74,
         type: 3}
       propertyPath: m_RootOrder
@@ -55839,6 +56310,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Building_04_Wall_01_Left (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 595527458547677762, guid: 223bb8bd2d2716041b35181701e01a89,
+        type: 3}
+      propertyPath: m_TagString
+      value: Can Stop Bullets
       objectReference: {fileID: 0}
     - target: {fileID: 4474577784201496657, guid: 223bb8bd2d2716041b35181701e01a89,
         type: 3}
@@ -56424,13 +56900,28 @@ PrefabInstance:
       objectReference: {fileID: 1724199922}
     - target: {fileID: 5163799450177284412, guid: d065aaa80f776c34d88e5bda122945ae,
         type: 3}
+      propertyPath: doInfiniteMoney
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5163799450177284412, guid: d065aaa80f776c34d88e5bda122945ae,
+        type: 3}
       propertyPath: EnemiesAliveText
       value: 
       objectReference: {fileID: 615848603}
     - target: {fileID: 5163799450177284412, guid: d065aaa80f776c34d88e5bda122945ae,
         type: 3}
       propertyPath: doRemoveWaitTimes
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5163799450177284412, guid: d065aaa80f776c34d88e5bda122945ae,
+        type: 3}
+      propertyPath: doAllowTabToggling
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5163799450177284412, guid: d065aaa80f776c34d88e5bda122945ae,
+        type: 3}
+      propertyPath: timeInWaveOneBuild
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5163799450177284412, guid: d065aaa80f776c34d88e5bda122945ae,
         type: 3}
@@ -56635,6 +57126,11 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 359124426}
+    - target: {fileID: 8158781135130321238, guid: 7140c0516a6b75045a0c2873a9c4b173,
+        type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 90.00002
+      objectReference: {fileID: 0}
     - target: {fileID: 8158781135130321239, guid: 7140c0516a6b75045a0c2873a9c4b173,
         type: 3}
       propertyPath: m_RootOrder
@@ -56668,12 +57164,12 @@ PrefabInstance:
     - target: {fileID: 8158781135130321239, guid: 7140c0516a6b75045a0c2873a9c4b173,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.31909546
+      value: 0.3190954
       objectReference: {fileID: 0}
     - target: {fileID: 8158781135130321239, guid: 7140c0516a6b75045a0c2873a9c4b173,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.21124566
+      value: -0.21124561
       objectReference: {fileID: 0}
     - target: {fileID: 8158781135130321239, guid: 7140c0516a6b75045a0c2873a9c4b173,
         type: 3}
