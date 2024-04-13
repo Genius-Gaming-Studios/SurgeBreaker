@@ -70,6 +70,7 @@ public class Gun : MonoBehaviour
 
 
         firedBullet.GetComponent<Bullet>().target = target.transform; // Assign the despawn target of the bullet
+        firedBullet.GetComponent<Bullet>().speed = GameManager.Instance.loadout.selectedWeapon.projectileSpeed; // Assign the despawn target of the bullet
         firedBullet.GetComponent<Bullet>().damage = Mathf.RoundToInt(GameManager.Instance.loadout.selectedWeapon.damage); // Assign the damage which the bullet does as the one from the loadout
 
         // Instantiate a sound object in order to give it a custom pitch
