@@ -109,7 +109,6 @@ public class OverclockManager : MonoBehaviour
         {
             canOverclock = true;
             doRunTimer = false;
-            Debug.Log("[Overclock Manager] Cooldown completed. Overclock ability interactable.");
            
             if (DEBUG_COOLDOWN_TEXT != null) DEBUG_COOLDOWN_TEXT.text = string.Empty; // debug
         }
@@ -119,6 +118,9 @@ public class OverclockManager : MonoBehaviour
 
             if (DEBUG_COOLDOWN_TEXT != null)  DEBUG_COOLDOWN_TEXT.text = $"ovc cooldown: {cooldownTimer:F2}"; // debug
         }
+
+        if (pm == null) pm = FindObjectOfType<PlayerManager>(); // Assign player manager to reference the overclock mechanics on the player.
+
     }
 
     public bool doRunTimer = true; // Debug only.
