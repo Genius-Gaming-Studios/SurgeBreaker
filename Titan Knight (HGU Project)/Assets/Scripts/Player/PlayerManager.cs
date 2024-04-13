@@ -162,6 +162,9 @@ public class PlayerManager : MonoBehaviour
         if (FindObjectOfType<GameManager>().doInfiniteMoney) { currencyText.text = "inf."; currentCurrency = 99999999; }
         else currencyText.text = $"${currentCurrency}";
 
+
+        GetComponent<OverclockManager>().enabled = true;
+
     }
 
     bool canAttack = false;
