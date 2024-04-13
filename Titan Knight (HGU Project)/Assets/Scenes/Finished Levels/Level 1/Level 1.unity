@@ -7271,12 +7271,6 @@ Transform:
   m_Father: {fileID: 2108762406}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &268378078 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4948931540319007484, guid: 625ee2818612d2849b4dfe0f5e642080,
-    type: 3}
-  m_PrefabInstance: {fileID: 359124425}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &271600760 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9163305541290990685, guid: 96b8915bd93cbdb46bc4c231045ea8fb,
@@ -7589,7 +7583,7 @@ Camera:
     height: 1
   near clip plane: 1.5
   far clip plane: 1000
-  field of view: 90.00002
+  field of view: 90.35184
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -8083,21 +8077,6 @@ PrefabInstance:
       propertyPath: ArmorIcons.Array.data[2]
       value: 
       objectReference: {fileID: 479479674}
-    - target: {fileID: 4948931540303665285, guid: 625ee2818612d2849b4dfe0f5e642080,
-        type: 3}
-      propertyPath: m_Height
-      value: 3.55
-      objectReference: {fileID: 0}
-    - target: {fileID: 4948931540303665285, guid: 625ee2818612d2849b4dfe0f5e642080,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4948931540303665285, guid: 625ee2818612d2849b4dfe0f5e642080,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 2.26
-      objectReference: {fileID: 0}
     - target: {fileID: 4948931540303665304, guid: 625ee2818612d2849b4dfe0f5e642080,
         type: 3}
       propertyPath: m_Name
@@ -8105,12 +8084,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 625ee2818612d2849b4dfe0f5e642080, type: 3}
---- !u!4 &359124426 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4948931540303665283, guid: 625ee2818612d2849b4dfe0f5e642080,
-    type: 3}
-  m_PrefabInstance: {fileID: 359124425}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &374132284
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56809,6 +56782,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae9ee29364e4ddc4abea2bb96fcaa28e, type: 3}
+--- !u!4 &4948931540494128458 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4948931540303665283, guid: 625ee2818612d2849b4dfe0f5e642080,
+    type: 3}
+  m_PrefabInstance: {fileID: 359124425}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4948931540531232565 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4948931540319007484, guid: 625ee2818612d2849b4dfe0f5e642080,
+    type: 3}
+  m_PrefabInstance: {fileID: 359124425}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5016296274184620657 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8172549335678160583, guid: bd85b00e41896994bb826928fd9c6104,
@@ -56872,7 +56857,7 @@ PrefabInstance:
         type: 3}
       propertyPath: WeaponsParent
       value: 
-      objectReference: {fileID: 268378078}
+      objectReference: {fileID: 4948931540531232565}
     - target: {fileID: 5163799450177284412, guid: d065aaa80f776c34d88e5bda122945ae,
         type: 3}
       propertyPath: EnemyBoostText
@@ -57120,16 +57105,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 359124426}
+      objectReference: {fileID: 4948931540494128458}
     - target: {fileID: 8158781135130321238, guid: 7140c0516a6b75045a0c2873a9c4b173,
         type: 3}
       propertyPath: m_LookAt
       value: 
-      objectReference: {fileID: 359124426}
+      objectReference: {fileID: 4948931540494128458}
     - target: {fileID: 8158781135130321238, guid: 7140c0516a6b75045a0c2873a9c4b173,
         type: 3}
       propertyPath: m_Lens.FieldOfView
-      value: 90.00002
+      value: 90.35184
       objectReference: {fileID: 0}
     - target: {fileID: 8158781135130321239, guid: 7140c0516a6b75045a0c2873a9c4b173,
         type: 3}

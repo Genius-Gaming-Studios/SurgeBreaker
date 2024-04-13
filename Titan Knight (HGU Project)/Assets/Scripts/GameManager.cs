@@ -213,6 +213,8 @@ public class GameManager : MonoBehaviour
                 timerTime = timeInWaveOneBuild;
             }
 
+            shouldWait = true;
+
             // Start the timer coroutine
             Coroutine timerCoroutine = StartCoroutine(TimerCoroutine(timerTime));
 

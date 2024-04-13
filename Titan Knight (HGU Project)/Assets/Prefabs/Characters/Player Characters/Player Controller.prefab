@@ -655,6 +655,37 @@ Transform:
   m_Father: {fileID: 208568921222636537}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1579113677194367145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5973630762021612262}
+  m_Layer: 6
+  m_Name: $ Overlock Location $
+  m_TagString: Untagged
+  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5973630762021612262
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579113677194367145}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 87.64055, y: -2.1669989, z: -6.29554}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4948931540303665283}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1673496086969497486
 GameObject:
   m_ObjectHideFlags: 0
@@ -2246,6 +2277,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4948931540417506747}
+  - {fileID: 5973630762021612262}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2307,6 +2339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f81f67eeb05aec040b782fefac777e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OverclockLocation: {fileID: 5973630762021612262}
   CurrentOverclockAbility: {fileID: 11400000, guid: 05027aff3089ae44e934ecbd7cc89520,
     type: 2}
   OverclockHotkey: 32
@@ -2326,13 +2359,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.92
-  m_Radius: 0.5
+  m_Height: 3.55
+  m_Radius: 0.15
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 2.26, z: 0}
 --- !u!33 &4948931540303665286
 MeshFilter:
   m_ObjectHideFlags: 0
