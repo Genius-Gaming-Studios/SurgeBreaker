@@ -1,5 +1,5 @@
 # Surge Breaker (1.10.X alpha)
- *Surge Breaker - Genius Studios Project*
+ *Surge Breaker - Gaming Studios Project*
  
 *This is the Unity Project for the Surge Breaker Genius Studios Project.*
 
