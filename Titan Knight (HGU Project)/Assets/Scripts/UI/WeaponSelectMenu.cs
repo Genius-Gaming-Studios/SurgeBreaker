@@ -24,6 +24,7 @@ public class WeaponSelectMenu : MonoBehaviour
     [SerializeField] private TMP_Text _dmgText;
     [SerializeField] private TMP_Text _projectileSpeedText;
     [SerializeField] private TMP_Text _fireRateText;
+    [SerializeField] private TMP_Text _rangeText;
     
 
     void Awake()

@@ -10,7 +10,9 @@ public class LoadoutUI : MonoBehaviour
     [SerializeField] private GameObject _equippedLoadoutMenu;
     [SerializeField] private GameObject _mechSelectMenu;
     [SerializeField] private GameObject _weaponSelectMenu;
+    [SerializeField] private GameObject _turretSelectMenu;
     [SerializeField] private GameObject _overclockSelectMenu;
+
 
     [Header("EQUIPPED LOADOUT MENU")]  
 
@@ -23,9 +25,11 @@ public class LoadoutUI : MonoBehaviour
 
     [Header("Turrets")]
     [SerializeField][Tooltip("")] private Transform _turretUIContainerTransform;
+    [SerializeField][Tooltip("")] public TurretButtonUI queuedTurretButtonSlot;
 
     [Header("Overclock Ability")]
     [SerializeField][Tooltip("The prefab of the overclock ability button")] private Transform _overclockAbilityButton;
+
 
 
 
@@ -80,6 +84,7 @@ public class LoadoutUI : MonoBehaviour
         _mechSelectMenu.SetActive(true); 
         _weaponSelectMenu.SetActive(false);
         _overclockSelectMenu.SetActive(false);
+        _turretSelectMenu.SetActive(false);
 
         MechSelectMenu.Instance.UpdateMechUI();
     }
@@ -90,6 +95,7 @@ public class LoadoutUI : MonoBehaviour
         _mechSelectMenu.SetActive(false); 
         _weaponSelectMenu.SetActive(true);
         _overclockSelectMenu.SetActive(false);
+        _turretSelectMenu.SetActive(false);
 
         WeaponSelectMenu.Instance.UpdateWeaponUI();
     }
@@ -100,8 +106,20 @@ public class LoadoutUI : MonoBehaviour
         _mechSelectMenu.SetActive(false); 
         _weaponSelectMenu.SetActive(false);
         _overclockSelectMenu.SetActive(true);
+        _turretSelectMenu.SetActive(false);
 
         OverclockSelectMenu.Instance.UpdateOverclockUI();
+    }
+
+    public void OpenTurretSelectMenu()
+    {
+        _equippedLoadoutMenu.SetActive(false);
+        _mechSelectMenu.SetActive(false); 
+        _weaponSelectMenu.SetActive(false);
+        _turretSelectMenu.SetActive(true);
+        _overclockSelectMenu.SetActive(false);
+
+        TurretSelectMenu.Instance.UpdateTurretUI();
     }
 
     public void OpenEquippedLoadoutMenu()
@@ -109,6 +127,12 @@ public class LoadoutUI : MonoBehaviour
         _equippedLoadoutMenu.SetActive(true);
         _mechSelectMenu.SetActive(false); 
         _overclockSelectMenu.SetActive(false);
+        _turretSelectMenu.SetActive(false);
         UpdateEquipedLoadoutUI();
+    }
+
+    public void QueueTurretButton(TurretButtonUI button)
+    {
+        queuedTurretButtonSlot = button;
     }
 }
