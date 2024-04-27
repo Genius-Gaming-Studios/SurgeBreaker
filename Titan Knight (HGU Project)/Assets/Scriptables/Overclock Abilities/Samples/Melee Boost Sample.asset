@@ -16,6 +16,7 @@ MonoBehaviour:
   cooldownTime: 1
   overclockType: 6
   duration_hrd: 15
+  vfx_hrd: {fileID: 0}
   damageReductionPercent: 80
   ExplosionVFX: {fileID: 0}
   ExplosionSFX: {fileID: 0}
@@ -24,18 +25,23 @@ MonoBehaviour:
   slowTo: 4
   slowTime: 2
   duration_stu: 15
+  vfx_stu: {fileID: 0}
   newFireRate_stu: 0.15
   damageBoostMultiplier_stu: 1.5
   duration_squ: 15
+  vfx_squ: {fileID: 0}
   newFireRate_squ: 0.15
   damageBoostMultiplier_squ: 1.5
   duration_msb: 2
+  vfx_msb: {fileID: 0}
   speedBoost: 2.107
   originalSpeed: 10
   healTime: 10
+  vfx_heal: {fileID: 0}
   lowerPlayerHealth: 0
-  duration_bzk: 4
-  newMeleeAttackDelay: 0.1
+  duration_bzk: 8
+  vfx_bzk: {fileID: 5676336062222740647, guid: 6e54050523c8adc4188a11a4705a7d70, type: 3}
+  newMeleeAttackDelay: 0.04
   damageBoostMultiplier_bzk: 1.5
   originalFirerate: 0.5
   originalDamage: 15

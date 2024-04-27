@@ -32,11 +32,12 @@ public class Gun : MonoBehaviour
         if (doOverrideFirePos) fireDis.localPosition = __fireDisPos;
 
          __fireDisPos = new Vector3(-8f, 1.1f, 72.8f);
+
     }
     private void FixedUpdate()
     {
         
-        if (timeToFire >= 0) timeToFire -= Time.deltaTime * (1 / (overrideFireRate == 0 ? gunSettings.fireRate: overrideFireRate)); // Automatically reduce the time till the next bullet even though the gun is being spammed
+        if (timeToFire >= 0) timeToFire -= Time.deltaTime * (1 / (overrideFireRate == 0 ? GameManager.Instance.loadout.selectedWeapon.fireRate : overrideFireRate)); // Automatically reduce the time till the next bullet even though the gun is being spammed
 
         if (doFire && timeToFire <= 0) Fire();
 
@@ -63,12 +64,14 @@ public class Gun : MonoBehaviour
         GameObject firedBullet = (GameObject)Instantiate(gunSettings.bulletToFire, firePoint.position, Quaternion.identity); // Spawn the bullet
 
         // OVERRIDE DAMAGE BOOST (OVC)
-        if (overrideDamageBoost != 0) firedBullet.GetComponent<Bullet>().damage = Mathf.RoundToInt(firedBullet.GetComponent<Bullet>().damage * overrideDamageBoost);
+        if (overrideDamageBoost != 0) firedBullet.GetComponent<Bullet>().damage = Mathf.RoundToInt(GameManager.Instance.loadout.selectedWeapon.damage * overrideDamageBoost);
 
         GameObject target = Instantiate(bulletTargetPrefab, fireDis.position, Quaternion.identity); // Spawn the despawn target of the bullet
 
 
         firedBullet.GetComponent<Bullet>().target = target.transform; // Assign the despawn target of the bullet
+        firedBullet.GetComponent<Bullet>().speed = GameManager.Instance.loadout.selectedWeapon.projectileSpeed; // Assign the despawn target of the bullet
+        firedBullet.GetComponent<Bullet>().damage = Mathf.RoundToInt(GameManager.Instance.loadout.selectedWeapon.damage); // Assign the damage which the bullet does as the one from the loadout
 
         // Instantiate a sound object in order to give it a custom pitch
         GameObject soundObject = Instantiate(FxObject, this.gameObject.transform);

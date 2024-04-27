@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cc290236086f04eb44ff57e9657c73, type: 3}
   m_Name: Healing Sample
   m_EditorClassIdentifier: 
-  abilityName: Healer
+  abilityName: Healing Sample
   cooldownTime: 4
   overclockType: 5
   duration_hrd: 15
+  vfx_hrd: {fileID: 0}
   damageReductionPercent: 80
   ExplosionVFX: {fileID: 0}
   ExplosionSFX: {fileID: 0}
@@ -24,15 +25,24 @@ MonoBehaviour:
   slowTo: 4
   slowTime: 2
   duration_stu: 15
+  vfx_stu: {fileID: 0}
   newFireRate_stu: 0.15
   damageBoostMultiplier_stu: 1.5
   duration_squ: 15
+  vfx_squ: {fileID: 0}
   newFireRate_squ: 0.15
   damageBoostMultiplier_squ: 1.5
   duration_msb: 2
+  vfx_msb: {fileID: 0}
   speedBoost: 2.107
   originalSpeed: 10
-  healTime: 10
+  healTime: 6
+  vfx_heal: {fileID: 8443926031748424104, guid: 3b2ce4f9fd9d6cd448bc73659204eed0,
+    type: 3}
+  lowerPlayerHealth: 0
   duration_bzk: 15
+  vfx_bzk: {fileID: 0}
   newMeleeAttackDelay: 0.15
   damageBoostMultiplier_bzk: 1.5
+  originalFirerate: 0
+  originalDamage: 0

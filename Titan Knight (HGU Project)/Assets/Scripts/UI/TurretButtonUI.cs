@@ -13,17 +13,20 @@ public class TurretButtonUI : MonoBehaviour
     [SerializeField] private Image _turretIcon;
     
 
-    public void SetBaseTurret(Turret turret)
+    public void SetBaseTurret(Turret turret, bool assignBuildMenuFunctionailty)
     {
         //Assigns this button to the type of turret it is for
         _nameText.text = turret.turretName;
-        _costText.text = turret.cost.ToString();
+         if (_costText != null) _costText.text = turret.cost.ToString();
         _turretIcon.sprite = turret.menuIcon;
 
-        // Assign this button the proper onClick functionality
-        _button.onClick.AddListener(() => {
-            BuildMenu.Instance.BuildButtonPressed(turret);
-        });
+        if (assignBuildMenuFunctionailty)
+        {
+            // Assign this button the proper onClick functionality
+            _button.onClick.AddListener(() => {
+                BuildMenu.Instance.BuildButtonPressed(turret);
+            });
+        }
 
     }
 }

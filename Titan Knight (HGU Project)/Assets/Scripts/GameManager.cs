@@ -172,31 +172,66 @@ public class GameManager : MonoBehaviour
     bool bossCheckComplete = false;
     bool isBossRound = false;
     int bossToSpawn = 0;
-
-    private IEnumerator GameCycleSequence()
+    bool shouldWait = true;
+    IEnumerator TimerCoroutine(float time)
     {
+        float timer = time;
+
+        while (timer >= 0 && shouldWait)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Debug.Log("<b>[Game Manager]</b> Skip wait time.");
+                shouldWait = false;
+            }
+
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        
+        shouldWait = false;
+
+    }
+    private IEnumerator GameCycleSequence() 
+    {
+
         for (int i = 1; i < amountOfCycles + 1; i++)
         {
             Debug.Log($"<color=cyan>[Game Manager]</color> Begin Cycle {i}/{amountOfCycles}.");
             GameCycleText.text = $"{i}/{amountOfCycles}";
             enemiesAlive = 0;
 
-            /// Starts in build mode
+            // Your main code where you start the timer coroutine
             SwitchGamemode(GameMode.Build);
+
             if (i > 1)
             {
                 timerTime = timeInBuildMode;
-                yield return new WaitForSeconds(timeInBuildMode);
             }
-            else // Distinction between wave one difficulty and all of the other difficulties
+            else
             {
                 timerTime = timeInWaveOneBuild;
-                yield return new WaitForSeconds(timeInWaveOneBuild);
             }
-            /// Provide 2 seconds between cycles. Do not show on the game timer. This is invisible time.
+
+            shouldWait = true;
+
+            // Start the timer coroutine
+            Coroutine timerCoroutine = StartCoroutine(TimerCoroutine(timerTime));
+
+            // Wait for the user to press Return or for the timer to finish
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return) || !shouldWait);
+
+            // Stop the timer coroutine if it's still running
+            if (timerCoroutine != null)
+            {
+                StopCoroutine(timerCoroutine);
+            }
+
+            // Provide 2 seconds between cycles. Do not show on the game timer. This is invisible time.
             timerTime = 0;
             yield return new WaitForSeconds(2);
-            /// Switch to combat mode
+
+            // Switch to combat mode
             SwitchGamemode(GameMode.Combat);
             /// Initiate the combat mode
             foreach (EnemySpawner spawner in FindObjectsOfType<EnemySpawner>())
@@ -242,7 +277,7 @@ public class GameManager : MonoBehaviour
                 while (enemiesAlive > 0) yield return null;
             }
 
-
+            // August was here
             /// Win Delay ------------------------
             /// Provide 5 seconds between cycles. Do not show on the game timer. This is invisible time.
             timerTime = 0;

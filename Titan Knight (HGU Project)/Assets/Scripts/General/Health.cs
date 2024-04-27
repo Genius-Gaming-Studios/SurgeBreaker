@@ -66,7 +66,12 @@ public class Health : MonoBehaviour
             GeneratorHealthBar.minValue = 0;
         }
        
-        
+        if (HealthType == ObjectType.Player) 
+        {
+            startHealth = GameManager.Instance.loadout.selectedMech.maximumHealth;
+            maximumHealth = GameManager.Instance.loadout.selectedMech.maximumHealth;
+        }
+    
         currentHealth = startHealth; // Initialize current health for things that are not Generators
     }
 
@@ -118,13 +123,14 @@ public class Health : MonoBehaviour
         {
             DamageCoroutine = StartCoroutine(DamageRenderer(Color.red));
 
+
             // Handle audio voice line
             if (HealthType == ObjectType.Player)
             {
                 // Handle Voice Line Randomization
                 int displayLine = 0;
-                displayLine = Random.Range(0, 4); // Fair chance
-                if (displayLine == 0)
+                displayLine = Random.Range(0,2); // Fair chance
+                if (displayLine == 1)
                 {
                     // Trigger a voice line. This is a player spoken voice line so 'true' is enabled.
                     FindObjectOfType<VoicesManager>().TriggerVoiceLine(TriggerCode.PlayerHurtCode, true);
@@ -132,10 +138,42 @@ public class Health : MonoBehaviour
 
             }
 
-            if (resistance == 0) currentHealth -= amount;
+            if (resistance == 0)
+            {
+                currentHealth -= amount;
+
+                
+                // Handle Hurt Sound
+                if (HealthType == ObjectType.Enemy)
+                {
+                    // Handle randomness of playing audio, as to not play all the time
+                    int doPlayFX = Random.Range(-1, GetComponent<Enemy>().enemyJuice.loudness);
+                    // doPlayFX = 0; // [DEBUG ONLY!]
+                    if (doPlayFX != 0) return;
+
+                    int fxToPlay = Random.Range(0, 2);
+
+                    if (fxToPlay == 0) GetComponent<Enemy>().PrivateAudioPlayer.PlayOneShot(GetComponent<Enemy>().enemyJuice.hurtVariation1);
+                    if (fxToPlay == 1) GetComponent<Enemy>().PrivateAudioPlayer.PlayOneShot(GetComponent<Enemy>().enemyJuice.hurtVariation2);
+                }
+            }
             else
             {
                 currentHealth = Mathf.RoundToInt(currentHealth -= amount / resistance); // This just divides the damage by the resistance. It's a simple feature, but it works.
+
+                // Handle Hurt Sound
+                if (HealthType == ObjectType.Enemy)
+                {
+                    // Handle randomness of playing audio, as to not play all the time
+                    int doPlayFX = Random.Range(-1, GetComponent<Enemy>().enemyJuice.loudness);
+                    //doPlayFX = 0; // [DEBUG ONLY!]
+                    if (doPlayFX != 0) return;
+
+                    int fxToPlay = Random.Range(0, 2);
+
+                    if (fxToPlay == 0) GetComponent<Enemy>().PrivateAudioPlayer.PlayOneShot(GetComponent<Enemy>().enemyJuice.hurtVariation1);
+                    if (fxToPlay == 1) GetComponent<Enemy>().PrivateAudioPlayer.PlayOneShot(GetComponent<Enemy>().enemyJuice.hurtVariation2);
+                }
             }
 
         }
@@ -147,12 +185,17 @@ public class Health : MonoBehaviour
 
             if (currentHealth < maximumHealth) currentHealth -= amount;
         }
+        else
+        {
+            Debug.Log("Failure to damage entity. Amount to damage is 0.");
+        }
     }
 
     private Color standardColor;
 
     public IEnumerator DamageRenderer(Color colorUpdate) // This simply makes the renderer appear red for a tenth of a second when it gets damaged. Sounds can be added later.
     {
+
         if (!beingSlowed)
         {
 
@@ -176,13 +219,25 @@ public class Health : MonoBehaviour
 
         // Send the voice trigger
         int displayLine = 0;
-        displayLine = Random.Range(0, 8); // Low chance
+        displayLine = Random.Range(0, 5); // Low chance
         if (displayLine == 0)
         {
             // Trigger a voice line. This is a player spoken voice line so 'true' is enabled.
             FindObjectOfType<VoicesManager>().TriggerVoiceLine(TriggerCode.EnemyDieCode, true);
         }
 
+        /// ENEMY JUICE ~~~~
+        // Handle randomness of playing audio, as to not play all the time
+        int doPlayFX = Random.Range(-1, GetComponent<Enemy>().enemyJuice.loudness);
+
+        // doPlayFX = 0; // [DEBUG ONLY!]
+        if (doPlayFX == 0)
+        {
+            int fxToPlay = Random.Range(0, 2);
+
+            if (fxToPlay == 0) GetComponent<Enemy>().PrivateAudioPlayer.PlayOneShot(GetComponent<Enemy>().enemyJuice.deathVariation1);
+            if (fxToPlay == 1) GetComponent<Enemy>().PrivateAudioPlayer.PlayOneShot(GetComponent<Enemy>().enemyJuice.deathVariation2);
+        }
 
         this.enabled = false;
 
