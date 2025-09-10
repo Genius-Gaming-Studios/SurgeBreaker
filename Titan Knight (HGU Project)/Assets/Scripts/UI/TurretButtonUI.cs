@@ -11,7 +11,15 @@ public class TurretButtonUI : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _costText;
     [SerializeField] private Image _turretIcon;
+
+    [Tooltip("Internal tracker for the index of the turret within the list of turrets in the loadout; currently used for UI pruposes")] private static int loadoutIndex = 0;
+    public int index;
     
+    void Awake()
+    {
+        index = loadoutIndex;
+        loadoutIndex++;
+    }
 
     public void SetBaseTurret(Turret turret, bool assignBuildMenuFunctionailty)
     {

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28cc290236086f04eb44ff57e9657c73, type: 3}
   m_Name: Speed Boost Sample
   m_EditorClassIdentifier: 
-  abilityName: Move Speed Boost
-  cooldownTime: 4
+  abilityName: Overclock Servo Module
+  cooldownTime: 10
+  abilityStatsMenu: {fileID: 3958235619366423440, guid: 564a60f86b945ea4f9d870ae1ca199ca,
+    type: 3}
   overclockType: 4
   duration_hrd: 15
   vfx_hrd: {fileID: 0}
@@ -30,11 +32,12 @@ MonoBehaviour:
   damageBoostMultiplier_stu: 1.5
   duration_squ: 15
   vfx_squ: {fileID: 0}
+  tVfx: {fileID: 0}
   newFireRate_squ: 0.15
   damageBoostMultiplier_squ: 1.5
-  duration_msb: 3
+  duration_msb: 10
   vfx_msb: {fileID: 869674859513312774, guid: 65b8dcd8547fdf148b342328c9ff5b39, type: 3}
-  speedBoost: 2.107
+  speedBoost: 2
   originalSpeed: 10
   healTime: 10
   vfx_heal: {fileID: 0}
